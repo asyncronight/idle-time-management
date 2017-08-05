@@ -1,8 +1,10 @@
 package me.momarija.bioui.bootstrap;
 
+import me.momarija.bioui.domains.User;
 import me.momarija.bioui.repos.ChantierRepo;
 import me.momarija.bioui.repos.DonneeRepo;
 import me.momarija.bioui.repos.EnginRepo;
+import me.momarija.bioui.repos.UserRepo;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +25,16 @@ public class BootstrapTest {
 	@Autowired
 	private DonneeRepo donneeRepo;
 
+	@Autowired
+	private UserRepo userRepo;
+
 	@Test
 	public void dataInsertTest(){
-		assertEquals(1,chantierRepo.findAll().size());
-		assertEquals(1,enginRepo.findAll().size());
-		assertEquals(100,donneeRepo.findAll().size());
+		assertEquals(2,chantierRepo.findAll().size());
+		assertEquals(10,enginRepo.findAll().size());
+		assertEquals(1000,donneeRepo.findAll().size());
+		assertEquals(3,userRepo.findAll().size());
+
+		assertEquals("Admin",userRepo.findOne(1).getRoles().get(0).getRole());
 	}
 }
