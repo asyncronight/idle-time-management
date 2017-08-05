@@ -1,7 +1,7 @@
 package me.momarija.bioui.algo;
 
 import me.momarija.bioui.repos.DonneeRepo;
-import me.momarija.bioui.services.TraitementService;
+import me.momarija.bioui.services.algo.TraitementService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ public class TraitementServiceTest {
 	@Test
 	public void test(){
 		TraitementService serviceTest = new TraitementService();
-		Map<String,Integer> map = serviceTest.MyFunction(donneeRepo.findAll(),10,6,1.9f,0.7f);
+		Map<String,Integer> map = serviceTest.calcule(donneeRepo.findAll(),10,6,1.9f,0.7f);
 		assertEquals(map.size() , 3);
 		assertEquals( map.get("production"),new Integer(580));
 		assertEquals( map.get("ralenti"),new Integer(100));

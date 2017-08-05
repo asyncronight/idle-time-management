@@ -1,4 +1,4 @@
-package me.momarija.bioui.services;
+package me.momarija.bioui.services.algo;
 
 import me.momarija.bioui.domains.Donnee;
 
@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class TraitementService {
 
-        public Map<String,Integer> MyFunction(List<Donnee> l , int temps , int interval , float seuilP, float seuilR){
+        public Map<String,Integer> calcule(List<Donnee> l , int temps , int interval , float seuilP, float seuilR){
 
             System.out.println("Ready");
 
@@ -67,24 +67,4 @@ public class TraitementService {
             return map;
 
         }
-        //******************************************************************************
-        // convert seconde to date
-        //******************************************************************************
-        public String convertToDate(int time){
-            int nbH=0;
-            int nbM=0;
-            while(time-3600 >= 0){
-                nbH++;
-                time-=3600;
-            }
-            while(time-60 >= 0){
-                nbM++;
-                time-=60;
-            }
-            return nbH + " h" + nbM +" min" + time +" s";
-        }
-
-
-
-
 }
