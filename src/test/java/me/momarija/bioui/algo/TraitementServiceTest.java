@@ -2,6 +2,7 @@ package me.momarija.bioui.algo;
 
 import me.momarija.bioui.repos.DonneeRepo;
 import me.momarija.bioui.services.algo.TraitementService;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ public class TraitementServiceTest {
 	private DonneeRepo donneeRepo;
 
 	@Test
+	@Ignore
 	public void test(){
 		TraitementService serviceTest = new TraitementService();
 		Map<String,Integer> map = serviceTest.calcule(donneeRepo.findAll(),10,6,1.9f,0.7f);
