@@ -1,5 +1,8 @@
 package me.momarija.bioui.domains;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -10,8 +13,12 @@ public class User {
     @GeneratedValue
     private int id;
 
+    @NotEmpty(message = "Le nom d'utilisateur ne peut pas être vide")
+    @Length(min = 3, max = 20, message = "Le nom d'utilisateur entre 3 et 20 caractères")
     private String username;
 
+    @NotEmpty(message = "Le mot de passe ne peut pas être vide")
+    @Length(min = 6, max = 30, message = "Le mot de passe entre 3 et 20 caractères")
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
