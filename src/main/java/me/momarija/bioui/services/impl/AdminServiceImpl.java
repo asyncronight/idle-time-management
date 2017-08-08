@@ -6,9 +6,11 @@ import me.momarija.bioui.repos.ChantierRepo;
 import me.momarija.bioui.repos.EnginRepo;
 import me.momarija.bioui.services.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class AdminServiceImpl implements AdminService {
 
 	@Autowired

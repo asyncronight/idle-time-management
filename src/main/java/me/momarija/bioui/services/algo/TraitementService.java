@@ -1,12 +1,14 @@
 package me.momarija.bioui.services.algo;
 
 import me.momarija.bioui.domains.Donnee;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Component
 public class TraitementService {
 
         public Map<String,Integer> calcule(List<Donnee> l , int temps , int interval , float seuilP, float seuilR){

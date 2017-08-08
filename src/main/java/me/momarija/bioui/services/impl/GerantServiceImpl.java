@@ -4,7 +4,9 @@ import me.momarija.bioui.domains.Engin;
 import me.momarija.bioui.repos.EnginRepo;
 import me.momarija.bioui.services.GerantService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class GerantServiceImpl implements GerantService {
 
 	@Autowired
