@@ -1,6 +1,7 @@
 package me.momarija.bioui.domains;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 public class Donnee {
@@ -9,11 +10,11 @@ public class Donnee {
     @GeneratedValue
     private int id;
 
-    private String date;
-
-    private String heure;
+    private Date date;
 
     private float x;
+
+    private float x2;
 
     private int enginId;
 
@@ -25,20 +26,12 @@ public class Donnee {
         this.id = id;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
-    }
-
-    public String getHeure() {
-        return heure;
-    }
-
-    public void setHeure(String heure) {
-        this.heure = heure;
     }
 
     public float getX() {
@@ -47,6 +40,14 @@ public class Donnee {
 
     public void setX(float x) {
         this.x = x;
+    }
+
+    public float getX2() {
+        return x2;
+    }
+
+    public void setX2(float x2) {
+        this.x2 = x2;
     }
 
     public int getEnginId() {

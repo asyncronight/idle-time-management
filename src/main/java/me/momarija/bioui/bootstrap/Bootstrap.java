@@ -3,13 +3,14 @@ package me.momarija.bioui.bootstrap;
 import com.github.javafaker.Faker;
 import me.momarija.bioui.domains.*;
 import me.momarija.bioui.repos.*;
+import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
 import java.util.Random;
 
 @Component
@@ -68,34 +69,46 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
     //e : engin number
     // i : donnee number
     private void loadDonnee(){
+    	Date date;
         Random random = new Random();
-		int min = 19;
 		for (int e = 0; e<10;e++){
-			min=19;
+			date = new Date();
             for (int i = 0; i<100 ;i++){
                 Donnee donnee = new Donnee();
                 donnee.setEnginId(e+1);
-                donnee.setDate("24.04.2017");
-                String sec = i%6==0 ?"00" : (i*10)%60+"";
-                if(i%6==0)
-                	min++;
-                donnee.setHeure("14:"+min+":"+sec);
-                if(i<30+random.nextInt(10))
+                donnee.setDate(date = DateUtils.addSeconds(date, 10));
+
+                if(i<30+random.nextInt(10)){
+                	donnee.setX(random.nextFloat()*(2.5f-1.9f)+1.9f);
+                	donnee.setX2(random.nextFloat()*(2.5f-1.9f)+1.9f);
+				}
+                else if (i<35+random.nextInt(10)){
+                    donnee.setX(random.nextFloat()*(1.9f-0.7f)+0.7f);
+                    donnee.setX2(random.nextFloat()*(1.9f-0.7f)+0.7f);
+				}
+                else if (i<55+random.nextInt(10)){
                     donnee.setX(random.nextFloat()*(2.5f-1.9f)+1.9f);
-                else if (i<35+random.nextInt(10))
-                    donnee.setX(random.nextFloat()*(1.9f-0.7f)+0.7f);
-                else if (i<55+random.nextInt(10))
-                    donnee.setX(random.nextFloat()*(2.5f-1.9f)+1.9f);
-                else if (i<75+random.nextInt(10))
+                    donnee.setX2(random.nextFloat()*(2.5f-1.9f)+1.9f);
+				}
+                else if (i<75+random.nextInt(10)){
                     donnee.setX(random.nextFloat()*0.7f);
-                else if (i<85+random.nextInt(10))
+                    donnee.setX2(random.nextFloat()*0.7f);
+				}
+                else if (i<85+random.nextInt(10)){
                     donnee.setX(random.nextFloat()*(1.9f-0.7f)+0.7f);
-                else if (i<95+random.nextInt(5))
+                    donnee.setX2(random.nextFloat()*(1.9f-0.7f)+0.7f);
+				}
+                else if (i<95+random.nextInt(5)){
                     donnee.setX(random.nextFloat()*0.7f);
-                else if (i<98+random.nextInt(3))
+                    donnee.setX2(random.nextFloat()*0.7f);
+				}
+                else if (i<98+random.nextInt(3)){
                     donnee.setX(random.nextFloat()*(1.9f-0.7f)+0.7f);
-                else
+                    donnee.setX2(random.nextFloat()*(1.9f-0.7f)+0.7f);
+				}
+                else{
                     donnee.setX(random.nextFloat()*0.7f);
+				}
                 donneeRepo.save(donnee);
             }
         }

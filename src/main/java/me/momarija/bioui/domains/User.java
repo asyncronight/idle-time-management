@@ -18,7 +18,7 @@ public class User {
     private String username;
 
     @NotEmpty(message = "Le mot de passe ne peut pas être vide")
-    @Length(min = 6, max = 30, message = "Le mot de passe entre 3 et 20 caractères")
+    @Length(min = 3, max = 30, message = "Le mot de passe entre 3 et 20 caractères")
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
