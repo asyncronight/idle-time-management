@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head"></head>
+<body>
+<div class="container">
+	<img th:src="@{/img/header.png}" width="100%">
+	<h1>Liste des chantier :</h1>
+	<a href="/admin/chantier/add" class="btn btn-primary">Ajouter un chantier</a>
+	<table class="table table-stripped">
+		<tr>
+			<th>Nom</th>
+			<th>Adresse</th>
+			<th>N° des engins</th>
+			<th>Supprimer chantier</th>
+		</tr>
+		<tr th:each="chantier : ${chantiers}">
+			<td><a th:text="${chantier.nom}" th:href="@{'/admin/chantier/' + ${chantier.id}}"></a></td>
+			<td th:text="${chantier.adresse}"></td>
+			<td th:text="${#lists.size(chantier.engins)}"></td>
+			<td><a th:href="@{'/admin/chantier/' + ${chantier.id} + '/delete'}">Supprimer</a></td>
+		</tr>
+	</table>
+</div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head"></head>
+<body>
+<div class="container">
+	<img th:src="@{/img/header.png}" width="100%">
+	<h1>Ajouter un chantier</h1>
+
+	<form class="form-horizontal" method="post" th:object="${chantier}">
+
+		<div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+			<p th:text="#{chantier.hasErrors}">Erreur</p>
+			<ul>
+				<li th:each="err : ${#fields.errors('nom')}" th:text="${err}" />
+			</ul>
+			<ul>
+				<li th:each="err : ${#fields.errors('adresse')}" th:text="${err}" />
+			</ul>
+		</div>
+
+		<div class="form-group" th:class="${#fields.hasErrors('nom')} ? 'form-group has-error' : 'form-group'">
+			<label class="col-sm-2 control-label">Nom:</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" th:field="*{nom}" th:errorclass="has-error"/>
+			</div>
+		</div>
+
+		<div class="form-group" th:class="${#fields.hasErrors('adresse')} ? 'form-group has-error' : 'form-group'">
+			<label class="col-sm-2 control-label">Adresse:</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" th:field="*{adresse}" th:errorclass="has-error"/>
+			</div>
+		</div>
+		<button type="submit" class="btn btn-primary">Ajouter</button>
+		<a href="/admin/" class="btn btn-warning">Annuler</a>
+	</form>
+
+</div>
+</body>
+</html>
