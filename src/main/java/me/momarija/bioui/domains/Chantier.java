@@ -1,12 +1,12 @@
 package me.momarija.bioui.domains;
 
-import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -16,11 +16,12 @@ public class Chantier {
     @GeneratedValue
     private int id;
 
-    @NotEmpty(message = "Le nom ne peut pas être vide")
-    @Length(min = 3,max = 20,message = "Le nom entre 3 et 20 caractères")
+    @NotEmpty
+    @Size(min = 3,max = 20)
     private String nom;
 
-    @Length(max = 400, message = "L'adresse ne peut pas dépasser 400 caractères")
+    @NotEmpty
+    @Size(max = 100)
     private String adresse;
 
     @OneToMany(mappedBy = "chantier")
