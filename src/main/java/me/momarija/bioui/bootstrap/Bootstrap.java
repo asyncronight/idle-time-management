@@ -56,6 +56,9 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
     	Random random = new Random();
         for (int i=0; i<10; i++){
             Engin engin = new Engin();
+            engin.setMarque(faker.company().name());
+            engin.setChauffeur(faker.name().fullName());
+            engin.setAnnee("2017");
             engin.setSeuilP(1.9f+(random.nextFloat()*0.6f-0.3f));
             engin.setSeuilR(0.7f+(random.nextFloat()*0.8f-0.4f));
             engin.setPhoto("photo1.jpg");

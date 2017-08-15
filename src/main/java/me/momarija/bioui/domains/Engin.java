@@ -10,6 +10,12 @@ public class Engin {
     @GeneratedValue
     private int id;
 
+    private String marque;
+
+    private String chauffeur;
+
+    private String annee;
+
     private float seuilP;
 
     private float seuilR;
@@ -30,6 +36,30 @@ public class Engin {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getMarque() {
+        return marque;
+    }
+
+    public void setMarque(String marque) {
+        this.marque = marque;
+    }
+
+    public String getChauffeur() {
+        return chauffeur;
+    }
+
+    public void setChauffeur(String chauffeur) {
+        this.chauffeur = chauffeur;
+    }
+
+    public String getAnnee() {
+        return annee;
+    }
+
+    public void setAnnee(String annee) {
+        this.annee = annee;
     }
 
     public float getSeuilP() {
