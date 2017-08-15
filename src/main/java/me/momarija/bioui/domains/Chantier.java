@@ -2,10 +2,7 @@ package me.momarija.bioui.domains;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.List;
 
@@ -24,7 +21,7 @@ public class Chantier {
     @Size(max = 100)
     private String adresse;
 
-    @OneToMany(mappedBy = "chantier")
+    @OneToMany(mappedBy = "chantier", cascade = CascadeType.ALL)
     private List<Engin> engins;
 
     public int getId() {
