@@ -10,10 +10,7 @@ import me.momarija.bioui.services.algo.TraitementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -37,13 +34,19 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<Map<String, Integer>> getChantierStatistics(int chantierId, Date from, Date to) {
+	public Map<String, Integer> getChantierStatistics(int chantierId, Date from, Date to) {
 		List<Engin> list = chantierRepo.findOne(chantierId).getEngins();
-		List<Map<String, Integer>> mapList = new ArrayList<Map<String, Integer>>();
-		for(Engin engin : list){
-			mapList.add(doWork(engin, from, to));
+		int p=0,r=0,a=0;
+		Map<String, Integer> mapLista = new HashMap<>();
+		for(Engin engin:list){
+			p = p+ doWork(engin,from,to).get("production");
+			r = r+ doWork(engin,from,to).get("ralenti");
+			a = a+ doWork(engin,from,to).get("arret");
 		}
-		return mapList;
+		mapLista.put("production",p/list.size());
+		mapLista.put("ralenti",r/list.size());
+		mapLista.put("arret",a/list.size());
+		return mapLista;
 	}
 
 	private Map<String, Integer> doWork(Engin engin,Date from, Date to){

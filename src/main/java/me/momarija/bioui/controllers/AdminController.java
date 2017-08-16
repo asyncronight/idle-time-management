@@ -29,7 +29,7 @@ public class AdminController {
 
 	@RequestMapping(value = "chantier/add", method = RequestMethod.GET)
 	public String addChantierGet(Model model){
-		model.addAttribute("title" , "Aouter un chantier");
+		model.addAttribute("title" , "Ajouter un chantier");
 		model.addAttribute("chantier", new Chantier());
 		return "admin/chantierForm";
 	}
