@@ -1,7 +1,6 @@
 package me.momarija.bioui.domains;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 public class Engin {
@@ -22,7 +21,7 @@ public class Engin {
 
     private String photo;
 
-    private int interval;
+    private int intervale;
 
     private int temps;
 
@@ -86,12 +85,12 @@ public class Engin {
         this.photo = photo;
     }
 
-    public int getInterval() {
-        return interval;
+    public int getIntervale() {
+        return intervale;
     }
 
-    public void setInterval(int interval) {
-        this.interval = interval;
+    public void setIntervale(int intervale) {
+        this.intervale = intervale;
     }
 
     public int getTemps() {
