@@ -37,16 +37,18 @@ public class UserServiceImpl implements UserService {
 	public Map<String, Integer> getChantierStatistics(int chantierId, Date from, Date to) {
 		List<Engin> list = chantierRepo.findOne(chantierId).getEngins();
 		int p=0,r=0,a=0;
-		Map<String, Integer> mapLista = new HashMap<>();
+		Map<String, Integer> mapEngin= new HashMap<>();
+		Map<String, Integer> map;
 		for(Engin engin:list){
-			p = p+ doWork(engin,from,to).get("production");
-			r = r+ doWork(engin,from,to).get("ralenti");
-			a = a+ doWork(engin,from,to).get("arret");
+			map = doWork(engin,from,to);
+			p = p+ map.get("production");
+			r = r+ map.get("ralenti");
+			a = a+ map.get("arret");
 		}
-		mapLista.put("production",p/list.size());
-		mapLista.put("ralenti",r/list.size());
-		mapLista.put("arret",a/list.size());
-		return mapLista;
+		mapEngin.put("production",p/list.size());
+		mapEngin.put("ralenti",r/list.size());
+		mapEngin.put("arret",a/list.size());
+		return mapEngin;
 	}
 
 	private Map<String, Integer> doWork(Engin engin,Date from, Date to){
