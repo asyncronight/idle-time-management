@@ -48,6 +48,6 @@ public class UserServiceImpl implements UserService {
 
 	private Map<String, Integer> doWork(Engin engin,Date from, Date to){
 		List<Donnee> donneeList = donneeRepo.findBetween(engin.getId(), from, to);
-		return traitementService.calcule(donneeList, engin.getTemps(), engin.getInterval(), engin.getSeuilP(), engin.getSeuilR());
+		return traitementService.calcule(donneeList, engin.getTemps(), engin.getIntervale(), engin.getSeuilP(), engin.getSeuilR());
 	}
 }
