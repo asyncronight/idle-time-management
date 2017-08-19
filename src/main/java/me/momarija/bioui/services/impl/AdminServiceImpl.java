@@ -51,6 +51,8 @@ public class AdminServiceImpl implements AdminService {
 
 
 	@Override
-	public Chantier getChantier(int id) {
-		return chantierRepo.findOne(id);}
+	public Chantier getChantier(int id) { return chantierRepo.findOne(id);}
+
+	@Override
+	public  Engin getEngin(int id){ return enginRepo.findOne(id); }
 }

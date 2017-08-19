@@ -51,19 +51,31 @@
 
 	</form>
 
+	<table class="table table-stripped">
+		<tr>
+			<th>Temps de production</th>
+			<th>Temps de ralenti</th>
+			<th>Temps d'arret</th>
+		</tr>
+		<tr>
+			<td th:text="${statistics.get('production')}"> </td>
+			<td th:text="${statistics.get('ralenti')}"></td>
+			<td th:text="${statistics.get('arret')}"></td>
+		</tr>
+	</table>
 	<h1>Liste des engins :</h1>
 
 	<table class="table table-stripped">
 		<tr>
+			<th>Photo</th>
 			<th>Marque</th>
 			<th>Chauffeur</th>
-			<th>Photo</th>
 			<th>Inspecter</th>
 		</tr>
 		<tr th:each="engin : ${engins}">
+			<td><img th:src="@{'/files/' + ${engin.photo}}" th:alt="${engin.photo}" width="35%"></td>
 			<td th:text="${engin.marque}"></td>
 			<td th:text="${engin.chauffeur}"></td>
-			<td><img th:src="@{${engin.photo}}"></td>
 			<td><a th:text="Acceder" th:href="@{'/user/chantier/' + ${chantier.id} +'/engin/'+ ${engin.id}}"></a></td>
 		</tr>
 	</table>

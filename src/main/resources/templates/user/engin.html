@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head"></head>
+<body>
+<div class="container">
+	<img th:src="@{/img/header.png}" width="100%">
+	<h1>Statistiques de l'engin :</h1>
+
+
+	<table class="table table-stripped">
+		<tr>
+
+			<th>Photo</th>
+
+		</tr>
+		<tr>
+			<td><img th:src="@{'/files/' + ${engin.photo}}" th:alt="${engin.photo}" width="30%"></td>
+
+		</tr>
+		<tr>
+
+			<th>Marque</th>
+
+		</tr>
+		<tr>
+			<td th:text="${engin.marque}"> </td>
+		</tr>
+		<tr>
+
+			<th>Chauffeur</th>
+
+		</tr>
+		<tr>
+			<td th:text="${engin.chauffeur}"></td>
+		</tr>
+
+
+
+	</table>
+</div>
+</body>
+</html>

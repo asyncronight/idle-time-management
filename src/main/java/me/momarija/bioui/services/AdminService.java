@@ -21,4 +21,5 @@ public interface AdminService {
 
 	List<Engin> getEnginList(int chantierId);
 
+	Engin getEngin(int id);
 }

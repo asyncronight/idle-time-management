@@ -41,20 +41,21 @@ public class UserController {
 		model.addAttribute("engins", adminService.getEnginList(id));
 		model.addAttribute("chantier",adminService.getChantier(id));
 		model.addAttribute("statistic",new Statistic());
+		model.addAttribute("statistics",new HashMap<String,Integer>());
 
 		return "user/enginsList";
 	}
 
 	@RequestMapping(value = "chantier/{id}", method = RequestMethod.POST)
-	public String addChantierPost(Model model, @Valid Statistic statistic,@PathVariable int id){
+	public String getChantierStatistics(Model model, @Valid Statistic statistic,@PathVariable int id){
 		model.addAttribute("statistics",userService.getChantierStatistics(id,statistic.getDateFrom(),statistic.getDateTo()));
-
-		return "user/statisticsChantier";
+		return "user/enginList";
 	}
-
-
-
-
-
+	@RequestMapping(value = "chantier/{idC}/engin/{id}")
+	public String showEnginChantier(@PathVariable int id,@PathVariable int idC,@Valid Statistic statistic, Model model) {
+		model.addAttribute("engin",adminService.getEngin(id));
+		model.addAttribute("statistic",new Statistic());
+		return  "user/engin";
+	}
 
 }
