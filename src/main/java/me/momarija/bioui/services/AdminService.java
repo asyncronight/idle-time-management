@@ -13,11 +13,12 @@ public interface AdminService {
 
 	Chantier addChantier(Chantier chantier);
 
+	Chantier getChantier(int id);
+
 	void deleteChantier(int id);
 
 	List<Chantier> getChantierList();
 
 	List<Engin> getEnginList(int chantierId);
 
-	Chantier getChantier(int id);
 }
