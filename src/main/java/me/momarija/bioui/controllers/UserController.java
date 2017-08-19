@@ -57,5 +57,4 @@ public class UserController {
 		model.addAttribute("statistic",new Statistic());
 		return  "user/engin";
 	}
-
 }
