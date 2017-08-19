@@ -1,6 +1,10 @@
 package me.momarija.bioui.domains;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Engin {
@@ -9,10 +13,16 @@ public class Engin {
     @GeneratedValue
     private int id;
 
+    @NotEmpty
+    @Size(min = 3, max = 40)
     private String marque;
 
+    @NotEmpty
+    @Size(min = 3, max = 30)
     private String chauffeur;
 
+    @NotEmpty
+    @Pattern(regexp = "[12][0-9]{3}")
     private String annee;
 
     private float seuilP;
