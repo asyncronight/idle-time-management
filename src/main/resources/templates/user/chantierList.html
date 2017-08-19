@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head"></head>
+<body>
+<div class="container">
+	<img th:src="@{/img/header.png}" width="100%">
+	<h1>Liste des chantiers :</h1>
+	<table class="table table-stripped">
+		<tr>
+			<th>Nom</th>
+			<th>Adresse</th>
+			<th>N° des engins</th>
+
+		</tr>
+		<tr th:each="chantier : ${chantiers}">
+			<td><a th:text="${chantier.nom}" th:href="@{'/user/chantier/' + ${chantier.id}}"></a></td>
+			<td th:text="${chantier.adresse}"></td>
+			<td th:text="${#lists.size(chantier.engins)}"></td>
+		</tr>
+	</table>
+</div>
+</body>
+</html>
