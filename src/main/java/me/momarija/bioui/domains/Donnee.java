@@ -1,5 +1,7 @@
 package me.momarija.bioui.domains;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -10,6 +12,7 @@ public class Donnee {
     @GeneratedValue
     private int id;
 
+    @DateTimeFormat(pattern="dd-MMM-YYYY hh:mm:ss")
     private Date date;
 
     private float x;
