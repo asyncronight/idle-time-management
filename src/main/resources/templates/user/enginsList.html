@@ -62,12 +62,14 @@
 	<table class="table table-striped">
 		<tr>
 			<th>Photo</th>
+			<th>Numero</th>
 			<th>Marque</th>
 			<th>Chauffeur</th>
 			<th>Inspecter</th>
 		</tr>
 		<tr th:each="engin : ${engins}">
 			<td><img th:src="@{'/files/' + ${engin.photo}}" th:alt="${engin.photo}" width="35%"></td>
+			<td th:text="${engin.id}"></td>
 			<td th:text="${engin.marque}"></td>
 			<td th:text="${engin.chauffeur}"></td>
 			<td><a th:text="Acceder" th:href="@{'/user/chantier/' + ${chantier.id} +'/engin/'+ ${engin.id}}"></a></td>
