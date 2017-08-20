@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
-@Component
+//@Component
 public class DonneeFaker {
 
 	private DonneeRepo donneeRepo;
