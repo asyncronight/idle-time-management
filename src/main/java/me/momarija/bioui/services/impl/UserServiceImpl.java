@@ -6,6 +6,7 @@ import me.momarija.bioui.repos.ChantierRepo;
 import me.momarija.bioui.repos.DonneeRepo;
 import me.momarija.bioui.repos.EnginRepo;
 import me.momarija.bioui.services.UserService;
+import me.momarija.bioui.services.algo.DateUtility;
 import me.momarija.bioui.services.algo.TraitementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,14 +28,22 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private TraitementService traitementService;
 
+	private DateUtility dateUtility = new DateUtility();
+
 	@Override
-	public Map<String, Integer> getEnginStatistics(int enginId, Date from, Date to) {
+	public Map<String, String> getEnginStatistics(int enginId, Date from, Date to) {
 		Engin engin = enginRepo.findOne(enginId);
-		return doWork(engin, from, to);
+		Map<String, Integer> map = doWork(engin, from, to);
+
+		Map<String, String> map2 = new HashMap<>();
+		map2.put("production", dateUtility.convertToDate(map.get("production")));
+		map2.put("ralenti", dateUtility.convertToDate(map.get("ralenti")));
+		map2.put("arret", dateUtility.convertToDate(map.get("arret")));
+		return map2;
 	}
 
 	@Override
-	public Map<String, Integer> getChantierStatistics(int chantierId, Date from, Date to) {
+	public Map<String, String> getChantierStatistics(int chantierId, Date from, Date to) {
 		List<Engin> list = chantierRepo.findOne(chantierId).getEngins();
 		int p=0,r=0,a=0;
 		Map<String, Integer> mapEngin= new HashMap<>();
@@ -48,7 +57,12 @@ public class UserServiceImpl implements UserService {
 		mapEngin.put("production",p/list.size());
 		mapEngin.put("ralenti",r/list.size());
 		mapEngin.put("arret",a/list.size());
-		return mapEngin;
+
+		Map<String, String> map2 = new HashMap<>();
+		map2.put("production", dateUtility.convertToDate(mapEngin.get("production")));
+		map2.put("ralenti", dateUtility.convertToDate(mapEngin.get("ralenti")));
+		map2.put("arret", dateUtility.convertToDate(mapEngin.get("arret")));
+		return map2;
 	}
 
 	private Map<String, Integer> doWork(Engin engin,Date from, Date to){

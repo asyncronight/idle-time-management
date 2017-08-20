@@ -9,8 +9,8 @@ import java.util.Map;
 
 public interface UserService {
 
-	Map<String, Integer> getEnginStatistics(int enginId, Date from, Date to);
+	Map<String, String> getEnginStatistics(int enginId, Date from, Date to);
 
-	Map<String, Integer> getChantierStatistics(int chantierId, Date from, Date to);
+	Map<String, String> getChantierStatistics(int chantierId, Date from, Date to);
 
 }
