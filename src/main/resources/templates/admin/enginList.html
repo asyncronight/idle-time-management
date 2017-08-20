@@ -5,8 +5,11 @@
 <div class="container">
 	<img th:src="@{/img/header.png}">
 	<h1>La liste des engins du chantier : <span th:text="${chantier.nom}"></span></h1>
-	<a th:href="@{'/admin/chantier/'+${chantier.id}+'/add'}" class="btn btn-primary">Ajouter un engin</a>
-	<table class="table table-stripped">
+	<div class="row" style="padding: 2%">
+		<a th:href="@{'/admin/chantier/'+${chantier.id}+'/add'}" class="btn btn-primary col-sm-3">Ajouter un engin</a>
+		<a href="/admin/" class="btn btn-warning col-sm-3">Liste des chantiers</a>
+	</div>
+	<table class="table table-striped">
 		<tr>
 			<th></th>
 			<th>Marque</th>

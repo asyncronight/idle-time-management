@@ -89,8 +89,11 @@
 			</div>
 		</div>
 
-		<button type="submit" class="btn btn-primary">Ajouter</button>
-		<a href="/admin/" class="btn btn-warning">Annuler</a>
+		<div class="row">
+			<div class="col-sm-2"></div>
+			<button type="submit" class="btn btn-primary col-sm-3">Ajouter</button>
+			<a th:href="@{'/admin/chantier/'+${id}}" class="btn btn-warning col-sm-3">Annuler</a>
+		</div>
 	</form>
 
 </div>

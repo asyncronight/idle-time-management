@@ -77,6 +77,7 @@ public class AdminController {
 	public String addEnginPost(@PathVariable int idC, Model model, @RequestParam("file") MultipartFile file, @Valid Engin engin, BindingResult bindingResult){
 		if(bindingResult.hasErrors()){
 			model.addAttribute("title", "Erreur");
+			model.addAttribute("id", idC);
 			return "admin/enginForm";
 		}
 		if (!file.isEmpty()){
