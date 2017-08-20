@@ -4,8 +4,13 @@ package me.momarija.bioui.services.algo;
 public class DateUtility {
 
 	public String convertToDate(int time){
+		int nbJ=0;
 		int nbH=0;
 		int nbM=0;
+		while(time-3600*24 >= 0){
+			nbJ++;
+			time-=3600*24;
+		}
 		while(time-3600 >= 0){
 			nbH++;
 			time-=3600;
@@ -14,6 +19,6 @@ public class DateUtility {
 			nbM++;
 			time-=60;
 		}
-		return nbH + " h" + nbM +" min" + time +" s";
+		return nbJ+" jours "+nbH + " h:" + nbM +" min:" + time +" s";
 	}
 }
