@@ -19,6 +19,6 @@ public class DateUtility {
 			nbM++;
 			time-=60;
 		}
-		return nbJ+" jours "+nbH + " h:" + nbM +" min:" + time +" s";
+		return ((nbJ==0)? "":nbJ+" jours ") +((nbH==0)? "": nbH + " h " )+ ((nbM==0)? "":nbM +" min " )+ time +" s";
 	}
 }
