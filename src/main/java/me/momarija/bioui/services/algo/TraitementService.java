@@ -13,7 +13,17 @@ public class TraitementService {
 
         public Map<String,Integer> calcule(List<Donnee> l , int temps , int interval , float seuilP, float seuilR){
 
-            System.out.println("Ready");
+            System.out.println("Executing algo for "+l.size()+" unit of data.");
+
+            //Check if there is no data
+            //return 0 for all results
+            if (l.isEmpty()){
+                Map<String, Integer> map =  new HashMap<String, Integer>();
+                map.put("production",0);
+                map.put("ralenti",0);
+                map.put("arret",0);
+                return map;
+            }
 
             int a=0,r=0,p=0;
             int k=1,i,somme=0;

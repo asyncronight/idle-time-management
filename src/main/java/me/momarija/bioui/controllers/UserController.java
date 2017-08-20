@@ -40,7 +40,9 @@ public class UserController {
 		model.addAttribute("title", "La liste des chantiers");
 		model.addAttribute("engins", adminService.getEnginList(id));
 		model.addAttribute("chantier",adminService.getChantier(id));
-		model.addAttribute("statistic",new Statistic());
+		Statistic statistic = new Statistic();
+		statistic.setDateTo(new Date());
+		model.addAttribute("statistic",statistic);
 		return "user/enginsList";
 	}
 
@@ -63,7 +65,9 @@ public class UserController {
 		model.addAttribute("title","Engin n° "+engin.getId());
 		model.addAttribute("engin",engin);
 		model.addAttribute("id",idC);
-		model.addAttribute("statistic",new Statistic());
+		Statistic statistic = new Statistic();
+		statistic.setDateTo(new Date());
+		model.addAttribute("statistic",statistic);
 		return  "user/engin";
 	}
 
