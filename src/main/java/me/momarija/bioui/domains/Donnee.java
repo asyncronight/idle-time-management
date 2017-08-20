@@ -12,7 +12,6 @@ public class Donnee {
     @GeneratedValue
     private int id;
 
-    @DateTimeFormat(pattern="dd-MMM-YYYY hh:mm:ss")
     private Date date;
 
     private float x;

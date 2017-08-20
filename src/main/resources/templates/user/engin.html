@@ -4,39 +4,78 @@
 <body>
 <div class="container">
 	<img th:src="@{/img/header.png}" width="100%">
-	<h1>Statistiques de l'engin :</h1>
+	<h1>Engin N° <span th:text="${engin.id}"></span></h1>
+	<a th:href="@{'/user/chantier/'+${engin.chantier.id}}" class="btn btn-warning" style="margin: 1%">Retour au
+		chantier</a>
+	<div style="background-color: antiquewhite;padding: 2%">
+		<form method="post" class="form-horizontal" th:object="${statistic}">
+
+			<div class="form-group form-group-sm row">
+				<label class="control-label col-sm-2 requiredField" for="dateFrom">
+					De :
+				</label>
+				<div class="col-sm-10">
+					<div class="input-group">
+						<input class="form-control" id="dateFrom" th:field="*{dateFrom}" placeholder="jj/mm/aaaa hh:mm"
+							   type="text" required/>
+					</div>
+				</div>
+			</div>
 
 
-	<table class="table table-stripped">
-		<tr>
+			<div class="form-group form-group-sm row">
+				<label class="control-label col-sm-2 requiredField" for="dateTo">
+					Jusqu'à
+				</label>
+				<div class="col-sm-10">
+					<div class="input-group">
+						<input class="form-control" id="dateTo" th:field="*{dateTo}" placeholder="jj/mm/aaaa hh:mm"
+							   type="text" required/>
+					</div>
+				</div>
+			</div>
+			<div class="form-group row">
+				<div class="col-sm-10 col-sm-offset-2">
+					<button class="btn btn-success btn-sm outline" name="submit" type="submit">
+						Inspecter
+					</button>
+				</div>
+			</div>
 
-			<th>Photo</th>
+		</form>
 
-		</tr>
-		<tr>
-			<td><img th:src="@{'/files/' + ${engin.photo}}" th:alt="${engin.photo}" width="30%"></td>
-
-		</tr>
-		<tr>
-
-			<th>Marque</th>
-
-		</tr>
-		<tr>
-			<td th:text="${engin.marque}"> </td>
-		</tr>
-		<tr>
-
-			<th>Chauffeur</th>
-
-		</tr>
-		<tr>
-			<td th:text="${engin.chauffeur}"></td>
-		</tr>
-
-
-
-	</table>
+		<table class="table table-striped" th:if="${statistics}">
+			<tr>
+				<th>Temps de production</th>
+				<th>Temps de ralenti</th>
+				<th>Temps d'arret</th>
+			</tr>
+			<tr>
+				<td th:text="${statistics.get('production') + ' s'}"></td>
+				<td th:text="${statistics.get('ralenti') + ' s'}"></td>
+				<td th:text="${statistics.get('arret') + ' s'}"></td>
+			</tr>
+		</table>
+	</div>
+	<hr>
+	<div class="row jumbotron">
+		<div class="col-sm-6">Numero d'engin :</div>
+		<div class="col-sm-6" th:text="${engin.id}"></div>
+	</div>
+	<div class="row jumbotron">
+		<div class="col-sm-6">Image :</div>
+		<div class="col-sm-6">
+			<img th:src="@{'/files/' + ${engin.photo}}" th:alt="${engin.photo}" width="50%">
+		</div>
+	</div>
+	<div class="row jumbotron">
+		<div class="col-sm-6">Marque :</div>
+		<div class="col-sm-6" th:text="${engin.marque}"></div>
+	</div>
+	<div class="row jumbotron">
+		<div class="col-sm-6">Chauffeur :</div>
+		<div class="col-sm-6" th:text="${engin.chauffeur}"></div>
+	</div>
 </div>
 </body>
 </html>

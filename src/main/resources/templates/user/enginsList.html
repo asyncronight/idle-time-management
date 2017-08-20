@@ -5,67 +5,61 @@
 
 <div class="container">
 	<img th:src="@{/img/header.png}" width="100%">
-	<form method="post" class="form-horizontal" th:object="${statistic}">
+	<a href="/user/" class="btn btn-warning" style="margin: 1%">Retour à  la liste des chantiers</a>
+	<div style="background-color: antiquewhite;padding: 2%">
+		<form method="post" class="form-horizontal" th:object="${statistic}">
 
-		<div class="form-group form-group-sm" >
-			<label class="control-label col-sm-2 requiredField" for="date2">
-				De :
-
-			</label>
-			<div class="col-sm-10">
-				<div class="input-group">
-					<input class="form-control" id="date1" th:field="*{dateFrom}" placeholder="Date From"
-						   type="date"/>
-					<div class="input-group-addon">
-						<i class="fa fa-calendar-check-o">
-						</i>
+			<div class="form-group form-group-sm row" >
+				<label class="control-label col-sm-2 requiredField" for="dateFrom">
+					De :
+				</label>
+				<div class="col-sm-10">
+					<div class="input-group">
+						<input class="form-control" id="dateFrom" th:field="*{dateFrom}" placeholder="jj/mm/aaaa hh:mm"
+							   type="text" required/>
 					</div>
 				</div>
 			</div>
-		</div>
 
 
-		<div class="form-group form-group-sm">
-			<label class="control-label col-sm-2 requiredField" for="date2">
-				Jusqu'à
-
-			</label>
-			<div class="col-sm-10">
-				<div class="input-group">
-					<input class="form-control" id="date2" th:field="*{dateTo}" placeholder="Date From"
-						    type="date"/>
-					<div class="input-group-addon">
-						<i class="fa fa-calendar-check-o">
-						</i>
+			<div class="form-group form-group-sm row">
+				<label class="control-label col-sm-2 requiredField" for="dateTo">
+					Jusqu'à
+				</label>
+				<div class="col-sm-10">
+					<div class="input-group">
+						<input class="form-control" id="dateTo" th:field="*{dateTo}" placeholder="jj/mm/aaaa hh:mm"
+								type="text" required/>
 					</div>
 				</div>
 			</div>
-		</div>
-		<div class="form-group">
-			<div class="col-sm-10 col-sm-offset-2">
-				<button class="btn btn-success btn-sm outline" name="submit" type="submit">
-					Inspecter
-				</button>
+			<div class="form-group row">
+				<div class="col-sm-10 col-sm-offset-2">
+					<button class="btn btn-success btn-sm outline" name="submit" type="submit">
+						Inspecter
+					</button>
+				</div>
 			</div>
-		</div>
 
-	</form>
+		</form>
 
-	<table class="table table-stripped">
-		<tr>
-			<th>Temps de production</th>
-			<th>Temps de ralenti</th>
-			<th>Temps d'arret</th>
-		</tr>
-		<tr>
-			<td th:text="${statistics.get('production')}"> </td>
-			<td th:text="${statistics.get('ralenti')}"></td>
-			<td th:text="${statistics.get('arret')}"></td>
-		</tr>
-	</table>
-	<h1>Liste des engins :</h1>
+		<table class="table table-striped" th:if="${statistics}">
+			<tr>
+				<th>Temps de production</th>
+				<th>Temps de ralenti</th>
+				<th>Temps d'arret</th>
+			</tr>
+			<tr>
+				<td th:text="${statistics.get('production') + ' s'}"> </td>
+				<td th:text="${statistics.get('ralenti') + ' s'}"></td>
+				<td th:text="${statistics.get('arret') + ' s'}"></td>
+			</tr>
+		</table>
+	</div>
+	<br>
+	<h1>La liste des engins du chantier : <span th:text="${chantier.nom}"></span></h1>
 
-	<table class="table table-stripped">
+	<table class="table table-striped">
 		<tr>
 			<th>Photo</th>
 			<th>Marque</th>

@@ -1,6 +1,7 @@
 package me.momarija.bioui.controllers;
 
 import me.momarija.bioui.domains.Chantier;
+import me.momarija.bioui.domains.Engin;
 import me.momarija.bioui.domains.Statistic;
 import me.momarija.bioui.services.AdminService;
 import me.momarija.bioui.services.UserService;
@@ -34,27 +35,49 @@ public class UserController {
 		return "user/chantierList";
 	}
 
-	@RequestMapping(value = "chantier/{id}")
+	@RequestMapping(value = "chantier/{id}", method = RequestMethod.GET)
 	public String showEnginsChantier(@PathVariable int id,Model model) {
-
 		model.addAttribute("title", "La liste des chantiers");
 		model.addAttribute("engins", adminService.getEnginList(id));
 		model.addAttribute("chantier",adminService.getChantier(id));
 		model.addAttribute("statistic",new Statistic());
-		model.addAttribute("statistics",new HashMap<String,Integer>());
-
 		return "user/enginsList";
 	}
 
 	@RequestMapping(value = "chantier/{id}", method = RequestMethod.POST)
-	public String getChantierStatistics(Model model, @Valid Statistic statistic,@PathVariable int id){
+	public String getChantierStatistics(Model model, @Valid Statistic statistic,@PathVariable int id, BindingResult bindingResult){
+		if (bindingResult.hasErrors()){
+			model.addAttribute("title", "Erreur");
+			return "user/enginsList";
+		}
+		model.addAttribute("title", "La liste des chantiers");
+		model.addAttribute("engins", adminService.getEnginList(id));
+		model.addAttribute("chantier",adminService.getChantier(id));
 		model.addAttribute("statistics",userService.getChantierStatistics(id,statistic.getDateFrom(),statistic.getDateTo()));
-		return "user/enginList";
+		return "user/enginsList";
 	}
-	@RequestMapping(value = "chantier/{idC}/engin/{id}")
-	public String showEnginChantier(@PathVariable int id,@PathVariable int idC,@Valid Statistic statistic, Model model) {
-		model.addAttribute("engin",adminService.getEngin(id));
+
+	@RequestMapping(value = "chantier/{idC}/engin/{id}", method = RequestMethod.GET)
+	public String showEnginChantier(@PathVariable int id,@PathVariable int idC, Model model) {
+		Engin engin = adminService.getEngin(id);
+		model.addAttribute("title","Engin n° "+engin.getId());
+		model.addAttribute("engin",engin);
+		model.addAttribute("id",idC);
 		model.addAttribute("statistic",new Statistic());
+		return  "user/engin";
+	}
+
+	@RequestMapping(value = "chantier/{idC}/engin/{id}", method = RequestMethod.POST)
+	public String getEnginStatistics(@PathVariable int id,@PathVariable int idC, Model model, @Valid Statistic statistic,BindingResult bindingResult){
+		if (bindingResult.hasErrors()){
+			model.addAttribute("title", "Erreur");
+			return "user/engin";
+		}
+		Engin engin = adminService.getEngin(id);
+		model.addAttribute("title","Engin n° "+engin.getId());
+		model.addAttribute("engin",engin);
+		model.addAttribute("id",idC);
+		model.addAttribute("statistics",userService.getEnginStatistics(id,statistic.getDateFrom(),statistic.getDateTo()));
 		return  "user/engin";
 	}
 }

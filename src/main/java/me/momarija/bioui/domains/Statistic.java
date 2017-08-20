@@ -1,16 +1,18 @@
 package me.momarija.bioui.domains;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Temporal;
 import java.util.Date;
 
 public class Statistic {
-    @DateTimeFormat(pattern="dd-MMM-YYYY HH:mm:ss")
-    private Date dateFrom;
-    @DateTimeFormat (pattern="dd-MMM-YYYY  HH:mm:ss")
-    private Date dateTo;
 
+    @DateTimeFormat(pattern="dd/MM/yyyy HH:mm")
+    private Date dateFrom;
+
+    @DateTimeFormat(pattern="dd/MM/yyyy HH:mm")
+    private Date dateTo;
 
     public Date getDateFrom() {
         return dateFrom;
