@@ -82,6 +82,7 @@ public class UserController {
 		model.addAttribute("engin",engin);
 		model.addAttribute("id",idC);
 		model.addAttribute("statistics",userService.getEnginStatistics(id,statistic.getDateFrom(),statistic.getDateTo()));
+
 		return  "user/engin";
 	}
 }

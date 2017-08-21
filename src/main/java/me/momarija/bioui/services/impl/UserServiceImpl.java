@@ -35,18 +35,25 @@ public class UserServiceImpl implements UserService {
 		Engin engin = enginRepo.findOne(enginId);
 		Map<String, Integer> map = doWork(engin, from, to);
 		Map<String, String> map2 = new HashMap<>();
+		double p = 0.0,r=0.0,a=0.0;
 
+		long fullTime  = dateUtility.convertToTime(from,to);
+		long arret  = fullTime/1000 - map.get("arret") - map.get("production") - map.get("ralenti");
+
+		p =(double) map.get("production") * 100 / (fullTime/1000) ;
+		r= (double) map.get("ralenti") * 100 / (fullTime/1000);
+		a= (double) arret * 100 / (fullTime/1000) ;
 
 		//because the time ( arret ) cannot be saved when the <engin> is not in travel
-		long a  = dateUtility.convertToTime(from,to);
-
-		System.out.println(a);
-		long arret  = a/1000 - map.get("arret") - map.get("production") - map.get("ralenti");
 
 
 		map2.put("production", dateUtility.convertToDate(map.get("production")));
 		map2.put("ralenti", dateUtility.convertToDate(map.get("ralenti")));
 		map2.put("arret", dateUtility.convertToDate((int)arret));
+		map2.put("productionPercent",p+"");
+		map2.put("ralentiPercent",r+"");
+		map2.put("arretPercent",a+"");
+
 
 		return map2;
 	}

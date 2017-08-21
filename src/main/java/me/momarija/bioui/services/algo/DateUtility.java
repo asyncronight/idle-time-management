@@ -30,8 +30,6 @@ public class DateUtility {
 		//returning the difference between two dates
 		long d1 = date1.getTime();
 		long d2 = date2.getTime();
-
-        System.out.println(d1+" and"+d2);
         return d2 - d1 ;
 	}
 }
