@@ -1,6 +1,8 @@
 package me.momarija.bioui.services.algo;
 
 
+import java.util.Date;
+
 public class DateUtility {
 
 	public String convertToDate(int time){
@@ -20,5 +22,15 @@ public class DateUtility {
 			time-=60;
 		}
 		return ((nbJ==0)? "":nbJ+" jours ") +((nbH==0)? "": nbH + " h " )+ ((nbM==0)? "":nbM +" min " )+ time +" s";
+	}
+
+
+
+	public int convertToTime(Date date1,Date date2){
+		//returning the difference between two dates
+		int d1 = date1.getSeconds();
+		int d2 = date2.getSeconds();
+
+		return d2 - d1 ;
 	}
 }

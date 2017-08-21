@@ -34,11 +34,17 @@ public class UserServiceImpl implements UserService {
 	public Map<String, String> getEnginStatistics(int enginId, Date from, Date to) {
 		Engin engin = enginRepo.findOne(enginId);
 		Map<String, Integer> map = doWork(engin, from, to);
-
 		Map<String, String> map2 = new HashMap<>();
+
+
+		//because the time ( arret ) cannot be saved when the <engin> is not in travel
+		int a  = dateUtility.convertToTime(from,to);
+		int arret  = a - map.get("arret") - map.get("production") - map.get("ralenti");
+
+
 		map2.put("production", dateUtility.convertToDate(map.get("production")));
 		map2.put("ralenti", dateUtility.convertToDate(map.get("ralenti")));
-		map2.put("arret", dateUtility.convertToDate(map.get("arret")));
+		map2.put("arret", dateUtility.convertToDate(arret));
 		return map2;
 	}
 
