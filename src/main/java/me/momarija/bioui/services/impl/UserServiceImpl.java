@@ -44,8 +44,6 @@ public class UserServiceImpl implements UserService {
 		r= (double) map.get("ralenti") * 100 / (fullTime/1000);
 		a= (double) arret * 100 / (fullTime/1000) ;
 
-		double rendement =(double) map.get("production")/(map.get("production") + map.get("ralenti")+arret );
-		rendement = rendement * 100 ;
 		//because the time ( arret ) cannot be saved when the <engin> is not in travel
 
 
@@ -55,7 +53,7 @@ public class UserServiceImpl implements UserService {
 		map2.put("productionPercent",p+"");
 		map2.put("ralentiPercent",r+"");
 		map2.put("arretPercent",a+"");
-		map2.put("rendement",rendement+"");
+		map2.put("rendement",p+"");
 
 		return map2;
 	}
@@ -68,7 +66,6 @@ public class UserServiceImpl implements UserService {
 		Map<String, Integer> map;
         double p_percent = 0.0,r_percent=0.0,a_percent=0.0;
         int arret ;
-
 
         for(Engin engin:list){
 			map = doWork(engin,from,to);
@@ -88,8 +85,6 @@ public class UserServiceImpl implements UserService {
         r_percent= (double) mapEngin.get("ralenti") * 100 / (fullTime/1000);
         a_percent= (double) mapEngin.get("arret") * 100 / (fullTime/1000) ;
 
-        double rendement =(double) mapEngin.get("production")/(mapEngin.get("production") + mapEngin.get("ralenti")+arret );
-        rendement = rendement * 100 ;
 
         Map<String, String> map2 = new HashMap<>();
 		map2.put("production", dateUtility.convertToDate(mapEngin.get("production")));
@@ -98,7 +93,7 @@ public class UserServiceImpl implements UserService {
         map2.put("productionPercent",p_percent+"");
         map2.put("ralentiPercent",r_percent+"");
         map2.put("arretPercent",a_percent+"");
-        map2.put("rendement",rendement+"");
+        map2.put("rendement",p_percent+"");
 
         return map2;
 	}
