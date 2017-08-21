@@ -66,21 +66,41 @@ public class UserServiceImpl implements UserService {
 		int p=0,r=0,a=0;
 		Map<String, Integer> mapEngin= new HashMap<>();
 		Map<String, Integer> map;
-		for(Engin engin:list){
+        double p_percent = 0.0,r_percent=0.0,a_percent=0.0;
+        int arret ;
+
+
+        for(Engin engin:list){
 			map = doWork(engin,from,to);
 			p = p+ map.get("production");
 			r = r+ map.get("ralenti");
 			a = a+ map.get("arret");
 		}
-		mapEngin.put("production",p/list.size());
-		mapEngin.put("ralenti",r/list.size());
-		mapEngin.put("arret",a/list.size());
 
-		Map<String, String> map2 = new HashMap<>();
+        long fullTime  = dateUtility.convertToTime(from,to);
+        arret = (int)(fullTime/1000 - p - a - r);
+
+        mapEngin.put("production",p/list.size());
+		mapEngin.put("ralenti",r/list.size());
+		mapEngin.put("arret",arret/list.size());
+
+        p_percent =(double) mapEngin.get("production") * 100 / (fullTime/1000) ;
+        r_percent= (double) mapEngin.get("ralenti") * 100 / (fullTime/1000);
+        a_percent= (double) mapEngin.get("arret") * 100 / (fullTime/1000) ;
+
+        double rendement =(double) mapEngin.get("production")/(mapEngin.get("production") + mapEngin.get("ralenti")+arret );
+        rendement = rendement * 100 ;
+
+        Map<String, String> map2 = new HashMap<>();
 		map2.put("production", dateUtility.convertToDate(mapEngin.get("production")));
 		map2.put("ralenti", dateUtility.convertToDate(mapEngin.get("ralenti")));
 		map2.put("arret", dateUtility.convertToDate(mapEngin.get("arret")));
-		return map2;
+        map2.put("productionPercent",p_percent+"");
+        map2.put("ralentiPercent",r_percent+"");
+        map2.put("arretPercent",a_percent+"");
+        map2.put("rendement",rendement+"");
+
+        return map2;
 	}
 
 	private Map<String, Integer> doWork(Engin engin,Date from, Date to){
