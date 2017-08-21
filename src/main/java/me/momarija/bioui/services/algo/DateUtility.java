@@ -26,11 +26,12 @@ public class DateUtility {
 
 
 
-	public int convertToTime(Date date1,Date date2){
+	public long convertToTime(Date date1,Date date2){
 		//returning the difference between two dates
-		int d1 = date1.getSeconds();
-		int d2 = date2.getSeconds();
+		long d1 = date1.getTime();
+		long d2 = date2.getTime();
 
-		return d2 - d1 ;
+        System.out.println(d1+" and"+d2);
+        return d2 - d1 ;
 	}
 }

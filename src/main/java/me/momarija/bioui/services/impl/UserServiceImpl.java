@@ -38,13 +38,16 @@ public class UserServiceImpl implements UserService {
 
 
 		//because the time ( arret ) cannot be saved when the <engin> is not in travel
-		int a  = dateUtility.convertToTime(from,to);
-		int arret  = a - map.get("arret") - map.get("production") - map.get("ralenti");
+		long a  = dateUtility.convertToTime(from,to);
+
+		System.out.println(a);
+		long arret  = a/1000 - map.get("arret") - map.get("production") - map.get("ralenti");
 
 
 		map2.put("production", dateUtility.convertToDate(map.get("production")));
 		map2.put("ralenti", dateUtility.convertToDate(map.get("ralenti")));
-		map2.put("arret", dateUtility.convertToDate(arret));
+		map2.put("arret", dateUtility.convertToDate((int)arret));
+
 		return map2;
 	}
 
