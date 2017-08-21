@@ -44,6 +44,8 @@ public class UserServiceImpl implements UserService {
 		r= (double) map.get("ralenti") * 100 / (fullTime/1000);
 		a= (double) arret * 100 / (fullTime/1000) ;
 
+		double rendement =(double) map.get("production")/(map.get("production") + map.get("ralenti")+arret );
+		rendement = rendement * 100 ;
 		//because the time ( arret ) cannot be saved when the <engin> is not in travel
 
 
@@ -53,7 +55,7 @@ public class UserServiceImpl implements UserService {
 		map2.put("productionPercent",p+"");
 		map2.put("ralentiPercent",r+"");
 		map2.put("arretPercent",a+"");
-
+		map2.put("rendement",rendement+"");
 
 		return map2;
 	}
