@@ -55,6 +55,19 @@
 				<td th:text="${statistics.get('arret') }"></td>
 			</tr>
 		</table>
+		<h3>Statistiques de la semaine :</h3>
+		<table class="table table-striped" th:if="${statisticsWeek}">
+			<tr>
+				<th>Temps de production</th>
+				<th>Temps de ralenti</th>
+				<th>Temps d'arret</th>
+			</tr>
+			<tr>
+				<td th:text="${statisticsWeek.get('production')}"> </td>
+				<td th:text="${statisticsWeek.get('ralenti')}"></td>
+				<td th:text="${statisticsWeek.get('arret') }"></td>
+			</tr>
+		</table>
 
 	</div>
 

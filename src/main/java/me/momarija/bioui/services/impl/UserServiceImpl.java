@@ -2,6 +2,7 @@ package me.momarija.bioui.services.impl;
 
 import me.momarija.bioui.domains.Donnee;
 import me.momarija.bioui.domains.Engin;
+import me.momarija.bioui.domains.Statistic;
 import me.momarija.bioui.repos.ChantierRepo;
 import me.momarija.bioui.repos.DonneeRepo;
 import me.momarija.bioui.repos.EnginRepo;
@@ -101,4 +102,21 @@ public class UserServiceImpl implements UserService {
 		List<Donnee> donneeList = donneeRepo.findBetween(engin.getId(), from, to);
 		return traitementService.calcule(donneeList, engin.getTemps(), engin.getIntervale(), engin.getSeuilP(), engin.getSeuilR());
 	}
+
+	@Override
+	public Map<String, String> getChantierStatisticsWeek(int chantierId) {
+		Statistic s = new Statistic();
+		s.setDateFrom(new Date(System.currentTimeMillis() - 604800*1000));
+		s.setDateTo(new Date());
+		return getChantierStatistics(chantierId,s.getDateFrom(),s.getDateTo());
+	}
+
+	@Override
+	public Map<String, String> getEnginStatisticsWeek(int enginId) {
+		Statistic s = new Statistic();
+		s.setDateFrom(new Date(System.currentTimeMillis() - 604800*1000));
+		s.setDateTo(new Date());
+		return getEnginStatistics(enginId,s.getDateFrom(),s.getDateTo());
+	}
+
 }

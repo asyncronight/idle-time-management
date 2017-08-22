@@ -43,6 +43,8 @@ public class UserController {
 		Statistic statistic = new Statistic();
 		statistic.setDateTo(new Date());
 		model.addAttribute("statistic",statistic);
+		model.addAttribute("statisticsWeek",userService.getChantierStatisticsWeek(id));
+
 		return "user/enginsList";
 	}
 
@@ -56,6 +58,9 @@ public class UserController {
 		model.addAttribute("engins", adminService.getEnginList(id));
 		model.addAttribute("chantier",adminService.getChantier(id));
 		model.addAttribute("statistics",userService.getChantierStatistics(id,statistic.getDateFrom(),statistic.getDateTo()));
+
+		model.addAttribute("statisticsWeek",userService.getChantierStatisticsWeek(id));
+
 		return "user/enginsList";
 	}
 
@@ -68,6 +73,9 @@ public class UserController {
 		Statistic statistic = new Statistic();
 		statistic.setDateTo(new Date());
 		model.addAttribute("statistic",statistic);
+
+		model.addAttribute("statisticsWeek",userService.getEnginStatisticsWeek(id));
+
 		return  "user/engin";
 	}
 
@@ -82,6 +90,7 @@ public class UserController {
 		model.addAttribute("engin",engin);
 		model.addAttribute("id",idC);
 		model.addAttribute("statistics",userService.getEnginStatistics(id,statistic.getDateFrom(),statistic.getDateTo()));
+		model.addAttribute("statisticsWeek",userService.getEnginStatisticsWeek(id));
 
 		return  "user/engin";
 	}
