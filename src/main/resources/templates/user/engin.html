@@ -56,25 +56,31 @@
 				<td th:text="${statistics.get('arret') }"></td>
 			</tr>
 		</table>
-		<div id="chart" th:if="${statistics}">
-			<ul id="numbers">
-				<li><span>100%</span></li>
-				<li><span>90%</span></li>
-				<li><span>80%</span></li>
-				<li><span>70%</span></li>
-				<li><span>60%</span></li>
-				<li><span>50%</span></li>
-				<li><span>40%</span></li>
-				<li><span>30%</span></li>
-				<li><span>20%</span></li>
-				<li><span>10%</span></li>
-				<li><span>0%</span></li>
-			</ul>
-			<ul class="bars">
-				<li><div th:attr="data-percentage=${statistics.get('productionPercent')}" class="bar"></div><span>% Production</span></li>
-				<li><div th:attr="data-percentage=${statistics.get('ralentiPercent')}" class="bar"></div><span>% Ralentie</span></li>
-				<li><div th:attr="data-percentage=${statistics.get('arretPercent')}" class="bar"></div><span>% Arret</span></li>
-			</ul>
+		<div class="row" th:if="${statistics}">
+			<div id="chart" class="col-sm-8">
+				<ul id="numbers">
+					<li><span>100%</span></li>
+					<li><span>90%</span></li>
+					<li><span>80%</span></li>
+					<li><span>70%</span></li>
+					<li><span>60%</span></li>
+					<li><span>50%</span></li>
+					<li><span>40%</span></li>
+					<li><span>30%</span></li>
+					<li><span>20%</span></li>
+					<li><span>10%</span></li>
+					<li><span>0%</span></li>
+				</ul>
+				<ul class="bars">
+					<li><div th:attr="data-percentage=${statistics.get('productionPercent')}" class="bar"></div><span>% Production</span></li>
+					<li><div th:attr="data-percentage=${statistics.get('ralentiPercent')}" class="bar"></div><span>% Ralentie</span></li>
+					<li><div th:attr="data-percentage=${statistics.get('arretPercent')}" class="bar"></div><span>% Arret</span></li>
+				</ul>
+			</div>
+			<div class=" col-sm-4" style="margin-top: 100px;padding-left: 100px">
+				<div class="circle-graph" th:attr="data-percent=${statistics.get('rendement')}"></div>
+				<p th:text="'Rendement : '+${statistics.get('rendement')}+'%'">Rendement</p>
+			</div>
 		</div>
 
 		<br><hr>
@@ -92,25 +98,31 @@
 				<td th:text="${statisticsWeek.get('arret') }"></td>
 			</tr>
 		</table>
-		<div id="chart">
-			<ul id="numbers">
-				<li><span>100%</span></li>
-				<li><span>90%</span></li>
-				<li><span>80%</span></li>
-				<li><span>70%</span></li>
-				<li><span>60%</span></li>
-				<li><span>50%</span></li>
-				<li><span>40%</span></li>
-				<li><span>30%</span></li>
-				<li><span>20%</span></li>
-				<li><span>10%</span></li>
-				<li><span>0%</span></li>
-			</ul>
-			<ul class="bars">
-				<li><div th:attr="data-percentage=${statisticsWeek.get('productionPercent')}" class="bar"></div><span>% Production</span></li>
-				<li><div th:attr="data-percentage=${statisticsWeek.get('ralentiPercent')}" class="bar"></div><span>% Ralentie</span></li>
-				<li><div th:attr="data-percentage=${statisticsWeek.get('arretPercent')}" class="bar"></div><span>% Arret</span></li>
-			</ul>
+		<div class="row">
+			<div id="chart">
+				<ul id="numbers">
+					<li><span>100%</span></li>
+					<li><span>90%</span></li>
+					<li><span>80%</span></li>
+					<li><span>70%</span></li>
+					<li><span>60%</span></li>
+					<li><span>50%</span></li>
+					<li><span>40%</span></li>
+					<li><span>30%</span></li>
+					<li><span>20%</span></li>
+					<li><span>10%</span></li>
+					<li><span>0%</span></li>
+				</ul>
+				<ul class="bars">
+					<li><div th:attr="data-percentage=${statisticsWeek.get('productionPercent')}" class="bar"></div><span>% Production</span></li>
+					<li><div th:attr="data-percentage=${statisticsWeek.get('ralentiPercent')}" class="bar"></div><span>% Ralentie</span></li>
+					<li><div th:attr="data-percentage=${statisticsWeek.get('arretPercent')}" class="bar"></div><span>% Arret</span></li>
+				</ul>
+			</div>
+			<div class=" col-sm-4" style="margin-top: 100px;padding-left: 100px">
+				<div class="circle-graph" th:attr="data-percent=${statisticsWeek.get('rendement')}"></div>
+				<p th:text="'Rendement : '+${statisticsWeek.get('rendement')}+'%'">Rendement</p>
+			</div>
 		</div>
 		<br>
 	</div>
