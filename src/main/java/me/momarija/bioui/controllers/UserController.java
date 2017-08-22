@@ -14,11 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.SimpleTimeZone;
 
 @Controller
 @RequestMapping(value = "/user/")
@@ -59,8 +57,7 @@ public class UserController {
 		model.addAttribute("title", "La liste des chantiers");
 		model.addAttribute("engins", adminService.getEnginList(id));
 		model.addAttribute("chantier",adminService.getChantier(id));
-
-        model.addAttribute("statistics",userService.getChantierStatistics(id,statistic.getDateFrom(),statistic.getDateTo()));
+		model.addAttribute("statistics",userService.getChantierStatistics(id,statistic.getDateFrom(),statistic.getDateTo()));
 
 		model.addAttribute("statisticsWeek",userService.getChantierStatisticsWeek(id));
 
@@ -74,8 +71,11 @@ public class UserController {
 		model.addAttribute("engin",engin);
 		model.addAttribute("id",idC);
 		Statistic statistic = new Statistic();
+		statistic.setDateTo(new Date());
 		model.addAttribute("statistic",statistic);
-        return  "user/enginInfo";
+
+		model.addAttribute("statisticsWeek",userService.getEnginStatisticsWeek(id));
+		return  "user/enginInfo";
 	}
 
 	@RequestMapping(value = "chantier/{idC}/engin/{id}", method = RequestMethod.POST)
@@ -85,8 +85,8 @@ public class UserController {
 		model.addAttribute("title","Engin n° "+engin.getId());
 		model.addAttribute("engin",engin);
 		model.addAttribute("id",idC);
-		model.addAttribute("statisticos",userService.getEnginStatistic(id,statistic));
 
+		model.addAttribute("statisticos",userService.getEnginStatistic(id,statistic));
         return  "user/enginInfo";
 	}
 }

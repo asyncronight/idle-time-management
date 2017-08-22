@@ -150,9 +150,10 @@ public class UserServiceImpl implements UserService {
             d3= new Date(dayFrom+" "+hourTo);
             y = d1.getTime()+24*3600*1000;
             d2 = new Date(y);
+            long z =d3.getTime()-d1.getTime();
             map2 = new HashMap<>();
             map = doWork(engin,d1,d3);
-            int arret = 24*3600 - map.get("production") - map.get("ralenti");
+            int arret = (int)z/1000 - map.get("production") - map.get("ralenti");
 
             map2.put("production", dateUtility.convertToDate(map.get("production")));
             map2.put("ralenti", dateUtility.convertToDate(map.get("ralenti")));
