@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService {
 		double p = 0.0,r=0.0,a=0.0;
 
 		long fullTime  = dateUtility.convertToTime(from,to);
-		long arret  = fullTime/1000 - map.get("arret") - map.get("production") - map.get("ralenti");
+		long arret  = fullTime/1000  - map.get("production") - map.get("ralenti");
 
 		p =(double) map.get("production") * 100 / (fullTime/1000) ;
 		r= (double) map.get("ralenti") * 100 / (fullTime/1000);
@@ -73,9 +73,8 @@ public class UserServiceImpl implements UserService {
 			r = r+ map.get("ralenti");
 			a = a+ map.get("arret");
 		}
-
         long fullTime  = dateUtility.convertToTime(from,to);
-        arret = (int)(fullTime/1000 - p - a - r);
+        arret = (int)(fullTime/1000 - p - r);
 
         mapEngin.put("production",p/list.size());
 		mapEngin.put("ralenti",r/list.size());
