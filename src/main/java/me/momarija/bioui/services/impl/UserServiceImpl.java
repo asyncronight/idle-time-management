@@ -74,7 +74,7 @@ public class UserServiceImpl implements UserService {
 			a = a+ map.get("arret");
 		}
         long fullTime  = dateUtility.convertToTime(from,to);
-        arret = (int)(fullTime/1000 - p - r);
+        arret = (int)(fullTime/1000 -p - r);
 
         mapEngin.put("production",p/list.size());
 		mapEngin.put("ralenti",r/list.size());
