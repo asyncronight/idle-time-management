@@ -158,6 +158,7 @@ public class UserServiceImpl implements UserService {
             map2.put("production", dateUtility.convertToDate(map.get("production")));
             map2.put("ralenti", dateUtility.convertToDate(map.get("ralenti")));
             map2.put("arret", dateUtility.convertToDate(arret));
+            map2.put("date", dayFrom);
 
             list.add(map2);
 

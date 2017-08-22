@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
 import java.util.Date;
@@ -88,5 +89,11 @@ public class UserController {
 
 		model.addAttribute("statisticos",userService.getEnginStatistic(id,statistic));
         return  "user/enginInfo";
+	}
+
+	@RequestMapping(value = "chantier/{idC}/engin/{id}/{d}/{m}/{y}", method = RequestMethod.GET)
+	public String statisticsByDate(@PathVariable int id,@PathVariable int idC, @PathVariable String d, @PathVariable String m, @PathVariable String y, Model model){
+		String date = d+"/"+m+"/"+y;
+		return "redirect:/"+date;
 	}
 }
