@@ -55,8 +55,31 @@
 				<td th:text="${statistics.get('arret') }"></td>
 			</tr>
 		</table>
+		<div id="chart" th:if="${statistics}">
+			<ul id="numbers">
+				<li><span>100%</span></li>
+				<li><span>90%</span></li>
+				<li><span>80%</span></li>
+				<li><span>70%</span></li>
+				<li><span>60%</span></li>
+				<li><span>50%</span></li>
+				<li><span>40%</span></li>
+				<li><span>30%</span></li>
+				<li><span>20%</span></li>
+				<li><span>10%</span></li>
+				<li><span>0%</span></li>
+			</ul>
+			<ul class="bars">
+				<li><div th:attr="data-percentage=${statistics.get('productionPercent')}" class="bar"></div><span>% Production</span></li>
+				<li><div th:attr="data-percentage=${statistics.get('ralentiPercent')}" class="bar"></div><span>% Ralentie</span></li>
+				<li><div th:attr="data-percentage=${statistics.get('arretPercent')}" class="bar"></div><span>% Arret</span></li>
+			</ul>
+		</div>
+
+		<br><hr>
+
 		<h3>Statistiques de la semaine :</h3>
-		<table class="table table-striped" th:if="${statisticsWeek}">
+		<table class="table table-striped">
 			<tr>
 				<th>Temps de production</th>
 				<th>Temps de ralenti</th>
@@ -68,7 +91,27 @@
 				<td th:text="${statisticsWeek.get('arret') }"></td>
 			</tr>
 		</table>
-
+		<div id="chart">
+			<ul id="numbers">
+				<li><span>100%</span></li>
+				<li><span>90%</span></li>
+				<li><span>80%</span></li>
+				<li><span>70%</span></li>
+				<li><span>60%</span></li>
+				<li><span>50%</span></li>
+				<li><span>40%</span></li>
+				<li><span>30%</span></li>
+				<li><span>20%</span></li>
+				<li><span>10%</span></li>
+				<li><span>0%</span></li>
+			</ul>
+			<ul class="bars">
+				<li><div th:attr="data-percentage=${statisticsWeek.get('productionPercent')}" class="bar"></div><span>% Production</span></li>
+				<li><div th:attr="data-percentage=${statisticsWeek.get('ralentiPercent')}" class="bar"></div><span>% Ralentie</span></li>
+				<li><div th:attr="data-percentage=${statisticsWeek.get('arretPercent')}" class="bar"></div><span>% Arret</span></li>
+			</ul>
+		</div>
+		<br>
 	</div>
 
 	<br>
