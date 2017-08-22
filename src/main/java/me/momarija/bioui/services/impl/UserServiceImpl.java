@@ -72,14 +72,14 @@ public class UserServiceImpl implements UserService {
 			map = doWork(engin,from,to);
 			p = p+ map.get("production");
 			r = r+ map.get("ralenti");
-			a = a+ map.get("arret");
 		}
-        long fullTime  = dateUtility.convertToTime(from,to);
-        arret = (int)(fullTime/1000 -p - r);
 
-        mapEngin.put("production",p/list.size());
-		mapEngin.put("ralenti",r/list.size());
-		mapEngin.put("arret",arret/list.size());
+        long fullTime  = dateUtility.convertToTime(from,to);
+        arret = (int)(fullTime/1000 - p - r);
+
+		mapEngin.put("production",p);
+		mapEngin.put("ralenti",r);
+		mapEngin.put("arret",arret);
 
         p_percent =(double) mapEngin.get("production") * 100 / (fullTime/1000) ;
         r_percent= (double) mapEngin.get("ralenti") * 100 / (fullTime/1000);
