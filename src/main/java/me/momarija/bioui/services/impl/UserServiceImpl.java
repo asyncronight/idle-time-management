@@ -12,6 +12,7 @@ import me.momarija.bioui.services.algo.TraitementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Service
@@ -33,6 +34,8 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public Map<String, String> getEnginStatistics(int enginId, Date from, Date to) {
+
+
 		Engin engin = enginRepo.findOne(enginId);
 		Map<String, Integer> map = doWork(engin, from, to);
 		Map<String, String> map2 = new HashMap<>();
@@ -119,4 +122,49 @@ public class UserServiceImpl implements UserService {
 		return getEnginStatistics(enginId,s.getDateFrom(),s.getDateTo());
 	}
 
-}
+    public List<Map<String, String>> getEnginStatistic(int enginId, Statistic statistic) {
+        List<Map<String,String>> list = new ArrayList<>();
+        int nbJours = statistic.calculNbJours();
+        System.out.println(nbJours);
+        int i;Date d1,d2,d3 ;
+        long y;
+        Engin engin = enginRepo.findOne(enginId);
+
+
+        SimpleDateFormat stf = new SimpleDateFormat("MM/dd/yyyy");
+        SimpleDateFormat stimef = new SimpleDateFormat("HH:mm");
+
+        String dayFrom =stf.format(statistic.getDayFrom());
+        String hourFrom = stimef.format(statistic.getHourFrom());
+        String hourTo = stimef.format(statistic.getHourTo());
+
+        Map<String ,Integer> map;
+        Map<String ,String> map2 ;
+
+
+        for(i=0;i<=nbJours;i++){
+
+            System.out.println("From : "+dayFrom+" "+hourFrom);
+
+            d1= new Date(dayFrom+" "+hourFrom);
+            d3= new Date(dayFrom+" "+hourTo);
+            y = d1.getTime()+24*3600*1000;
+            d2 = new Date(y);
+            map2 = new HashMap<>();
+            map = doWork(engin,d1,d3);
+            int arret = 24*3600 - map.get("production") - map.get("ralenti");
+
+            map2.put("production", dateUtility.convertToDate(map.get("production")));
+            map2.put("ralenti", dateUtility.convertToDate(map.get("ralenti")));
+            map2.put("arret", dateUtility.convertToDate(arret));
+
+            list.add(map2);
+
+            dayFrom = stf.format(d2);
+
+        }
+        return list;
+
+    }
+
+    }

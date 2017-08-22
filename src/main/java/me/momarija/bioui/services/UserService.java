@@ -2,6 +2,7 @@ package me.momarija.bioui.services;
 
 import me.momarija.bioui.domains.Chantier;
 import me.momarija.bioui.domains.Engin;
+import me.momarija.bioui.domains.Statistic;
 
 import java.util.Date;
 import java.util.List;
@@ -16,5 +17,7 @@ public interface UserService {
 	Map<String, String> getChantierStatistics(int chantierId, Date from, Date to);
 
 	Map<String, String> getChantierStatisticsWeek(int chantierId);
+
+	List<Map<String, String>> getEnginStatistic(int enginId, Statistic statistic);
 
 }

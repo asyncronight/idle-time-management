@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.SimpleTimeZone;
 
 @Controller
 @RequestMapping(value = "/user/")
@@ -57,7 +59,8 @@ public class UserController {
 		model.addAttribute("title", "La liste des chantiers");
 		model.addAttribute("engins", adminService.getEnginList(id));
 		model.addAttribute("chantier",adminService.getChantier(id));
-		model.addAttribute("statistics",userService.getChantierStatistics(id,statistic.getDateFrom(),statistic.getDateTo()));
+
+        model.addAttribute("statistics",userService.getChantierStatistics(id,statistic.getDateFrom(),statistic.getDateTo()));
 
 		model.addAttribute("statisticsWeek",userService.getChantierStatisticsWeek(id));
 
@@ -71,27 +74,19 @@ public class UserController {
 		model.addAttribute("engin",engin);
 		model.addAttribute("id",idC);
 		Statistic statistic = new Statistic();
-		statistic.setDateTo(new Date());
 		model.addAttribute("statistic",statistic);
-
-		model.addAttribute("statisticsWeek",userService.getEnginStatisticsWeek(id));
-
-		return  "user/engin";
+        return  "user/enginInfo";
 	}
 
 	@RequestMapping(value = "chantier/{idC}/engin/{id}", method = RequestMethod.POST)
-	public String getEnginStatistics(@PathVariable int id,@PathVariable int idC, Model model, @Valid Statistic statistic,BindingResult bindingResult){
-		if (bindingResult.hasErrors()){
-			model.addAttribute("title", "Erreur");
-			return "user/engin";
-		}
+	public String getEnginStatistics(@PathVariable int id,@PathVariable int idC, Model model, @Valid Statistic statistic){
+
 		Engin engin = adminService.getEngin(id);
 		model.addAttribute("title","Engin n° "+engin.getId());
 		model.addAttribute("engin",engin);
 		model.addAttribute("id",idC);
-		model.addAttribute("statistics",userService.getEnginStatistics(id,statistic.getDateFrom(),statistic.getDateTo()));
-		model.addAttribute("statisticsWeek",userService.getEnginStatisticsWeek(id));
+		model.addAttribute("statisticos",userService.getEnginStatistic(id,statistic));
 
-		return  "user/engin";
+        return  "user/enginInfo";
 	}
 }
