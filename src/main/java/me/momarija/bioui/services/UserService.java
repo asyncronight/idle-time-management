@@ -20,4 +20,6 @@ public interface UserService {
 
 	List<Map<String, String>> getEnginStatistic(int enginId, Statistic statistic);
 
-}
+	List<Map<String, String>> getEnginStatisticHours(int enginId, Statistic statistic);
+
+	}

@@ -34,9 +34,7 @@ public class TraitementService {
                 if(xo <= seuilP && xo >= seuilR){
 
                     r=r+1;
-                }else if(xo < seuilR ) {
-                        a +=1;
-                    }
+                }
                 else if(xo > seuilP){
                         p+=1;
                     }
@@ -47,16 +45,11 @@ public class TraitementService {
 
             if(l.get(i).getX() <= seuilP && l.get(i).getX()  >= seuilR) r++;
 
-            if(l.get(i).getX() < seuilR) a++;
-
             p = p*temps;
             r = r*temps;
-            a = a*temps;
-
             Map<String,Integer> map = new HashMap<>();
             map.put("production",p);
             map.put("ralenti",r);
-            map.put("arret",a);
 
             return map;
 
