@@ -72,9 +72,7 @@ public class UserController {
 		model.addAttribute("engin",engin);
 		model.addAttribute("id",idC);
 		Statistic statistic = new Statistic();
-		statistic.setDateTo(new Date());
 		model.addAttribute("statistic",statistic);
-
 		model.addAttribute("statisticsWeek",userService.getEnginStatisticsWeek(id));
 		return  "user/enginInfo";
 	}
@@ -86,7 +84,7 @@ public class UserController {
 		model.addAttribute("title","Engin n° "+engin.getId());
 		model.addAttribute("engin",engin);
 		model.addAttribute("id",idC);
-
+        System.out.println(statistic.getNbHourRepos());
 		model.addAttribute("statisticos",userService.getEnginStatistic(id,statistic));
         return  "user/enginInfo";
 	}

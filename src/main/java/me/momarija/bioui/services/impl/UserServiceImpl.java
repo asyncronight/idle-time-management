@@ -150,7 +150,7 @@ public class UserServiceImpl implements UserService {
             d3= new Date(dayFrom+" "+hourTo);
             y = d1.getTime()+24*3600*1000;
             d2 = new Date(y);
-            long z =d3.getTime()-d1.getTime();
+            long z =d3.getTime()-d1.getTime()-statistic.getNbHourRepos()*3600*1000;
             map2 = new HashMap<>();
             map = doWork(engin,d1,d3);
             int arret = (int)z/1000 - map.get("production") - map.get("ralenti");
@@ -163,14 +163,13 @@ public class UserServiceImpl implements UserService {
             map2.put("ralenti", dateUtility.convertToDate(map.get("ralenti")));
             map2.put("arret", dateUtility.convertToDate(arret));
             map2.put("date", dayFrom);
-
+			map2.put("repos",statistic.getNbHourRepos()+" h");
             list.add(map2);
 
             dayFrom = stf.format(d2);
 
         }
         return list;
-
     }
 	public List<Map<String, String>> getEnginStatisticHours(int enginId, Statistic statistic) {
 		List<Map<String,String>> list = new ArrayList<>();
@@ -200,7 +199,7 @@ public class UserServiceImpl implements UserService {
 			d3= new Date(dayFrom+" "+hourTo);
 			y = d1.getTime()+24*3600*1000;
 			d2 = new Date(y);
-			long z =d3.getTime()-d1.getTime();
+			long z =d3.getTime()-d1.getTime()-statistic.getNbHourRepos()*3600*1000;
 			map2 = new HashMap<>();
 			map = doWork(engin,d1,d3);
 			int arret = (int)z/1000 - map.get("production") - map.get("ralenti");
@@ -215,7 +214,6 @@ public class UserServiceImpl implements UserService {
 
 		}
 		return list;
-
 	}
 
 

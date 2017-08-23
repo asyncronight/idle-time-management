@@ -1,14 +1,9 @@
 package me.momarija.bioui.domains;
 
-import me.momarija.bioui.services.algo.DateUtility;
-import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Temporal;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-
 public class Statistic {
 
 
@@ -34,6 +29,9 @@ public class Statistic {
 
     @DateTimeFormat(pattern="dd/MM/yyyy HH:mm")
     private Date date;
+
+
+    private int nbHourRepos;
 
     public Date getDateFrom() {
         return dateFrom;
@@ -78,6 +76,14 @@ public class Statistic {
     public Date getDayTo() { return dayTo;    }
 
     public void setDayTo(Date dayTo) { this.dayTo = dayTo;    }
+
+    public int getNbHourRepos() {
+        return nbHourRepos;
+    }
+
+    public void setNbHourRepos(int nbHourRepos) {
+        this.nbHourRepos = nbHourRepos;
+    }
 
     public int calculNbJours(){
         SimpleDateFormat stf = new SimpleDateFormat("MM/dd/yyyy");
