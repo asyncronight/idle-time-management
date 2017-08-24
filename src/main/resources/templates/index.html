@@ -3,26 +3,27 @@
 <head th:replace="fragments :: head"></head>
 <body>
 <div class="container">
+	<div th:replace="fragments :: header"></div>
+	<div class="row" style="margin-top: 20px">
+		<div class="col-sm-2"></div>
+		<div class="col-sm-8">
+			<form action="/login" method="post">
 
-	<img th:src="@{/img/header.png}" width="100%">
+				<div class="alert alert-danger" th:if="${param.error}">Informations non valide</div>
+				<div class="alert alert-success" th:if="${param.logout}">Vous avez deconnecté</div>
 
-	<div class="col-sm-8 col-sm-offset-2" style="margin-top:25px;">
-		<form action="/login" method="post">
+				<input id="login-username" type="text" class="form-control" name="username"
+					   placeholder="Username" required>
+				<hr>
+				<input id="login-password" type="password" class="form-control" name="password"
+					   placeholder="Password" required>
+				<hr>
+				<button class="btn btn-success col-sm-12" type="submit">Sign in</button>
 
-			<div class="alert alert-danger" th:if="${param.error}">Incorrect informations</div>
-			<div class="alert alert-success" th:if="${param.logout}">You have been logged out</div>
-
-			<input id="login-username" type="text" class="form-control" name="username"
-				   placeholder="Username" required>
-			<hr>
-			<input id="login-password" type="password" class="form-control" name="password"
-				   placeholder="Password" required>
-			<hr>
-			<button class="btn btn-success col-sm-12" type="submit">Sign in</button>
-
-		</form>
+			</form>
+		</div>
 	</div>
-	<img th:src="@{/img/footer.png}" width="100%">
+	<img th:src="@{/img/image.png}" width="100%">
 </div>
 
 </body>

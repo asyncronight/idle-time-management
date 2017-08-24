@@ -6,15 +6,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 public class Statistic {
 
-
-    @DateTimeFormat(pattern="dd/MM/yyyy HH:mm")
-    private Date dateFrom;
-
-
-    @DateTimeFormat(pattern="dd/MM/yyyy HH:mm")
-    private Date dateTo;
-
-
     @DateTimeFormat(pattern="dd/MM/yyyy")
     private Date dayFrom;
 
@@ -27,65 +18,49 @@ public class Statistic {
     @DateTimeFormat(pattern="HH:mm")
     private Date hourTo;
 
-    @DateTimeFormat(pattern="dd/MM/yyyy HH:mm")
-    private Date date;
-
-
     private int nbHourRepos;
 
-    public Date getDateFrom() {
-        return dateFrom;
-    }
+	public Date getDayFrom() {
+		return dayFrom;
+	}
 
-    public void setDateFrom(Date dateFrom) {
-        this.dateFrom = dateFrom;
-    }
+	public void setDayFrom(Date dayFrom) {
+		this.dayFrom = dayFrom;
+	}
 
-    public Date getDateTo() {
-        return dateTo;
-    }
+	public Date getDayTo() {
+		return dayTo;
+	}
 
-    public void setDateTo(Date dateTo) {
-        this.dateTo = dateTo;
-    }
+	public void setDayTo(Date dayTo) {
+		this.dayTo = dayTo;
+	}
 
-    public Date getHourFrom() {   return hourFrom;    }
+	public Date getHourFrom() {
+		return hourFrom;
+	}
 
-    public void setHourFrom(Date hourFrom) {this.hourFrom = hourFrom; }
+	public void setHourFrom(Date hourFrom) {
+		this.hourFrom = hourFrom;
+	}
 
-    public Date getHourTo() {  return hourTo;   }
+	public Date getHourTo() {
+		return hourTo;
+	}
 
-    public void setHourTo(Date hourTo) {  this.hourTo = hourTo;  }
+	public void setHourTo(Date hourTo) {
+		this.hourTo = hourTo;
+	}
 
-    public Date getDate() {
-        return date;
-    }
+	public int getNbHourRepos() {
+		return nbHourRepos;
+	}
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
+	public void setNbHourRepos(int nbHourRepos) {
+		this.nbHourRepos = nbHourRepos;
+	}
 
-    public Date getDayFrom() {
-        return dayFrom;
-    }
-
-    public void setDayFrom(Date dayFrom) {
-        this.dayFrom = dayFrom;
-    }
-
-    public Date getDayTo() { return dayTo;    }
-
-    public void setDayTo(Date dayTo) { this.dayTo = dayTo;    }
-
-    public int getNbHourRepos() {
-        return nbHourRepos;
-    }
-
-    public void setNbHourRepos(int nbHourRepos) {
-        this.nbHourRepos = nbHourRepos;
-    }
-
-    public int calculNbJours(){
+	public int calculNbJours(){
         SimpleDateFormat stf = new SimpleDateFormat("MM/dd/yyyy");
         SimpleDateFormat stimef = new SimpleDateFormat("HH:mm");
 

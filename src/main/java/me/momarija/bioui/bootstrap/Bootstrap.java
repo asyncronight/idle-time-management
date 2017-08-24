@@ -64,7 +64,6 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
             engin.setSeuilP(1.9f+(random.nextFloat()*0.6f-0.3f));
             engin.setSeuilR(0.7f+(random.nextFloat()*0.8f-0.4f));
             engin.setPhoto("photo1.jpg");
-            engin.setIntervale(5+random.nextInt(3));
             engin.setTemps(10);
             engin.setChantier(chantierRepo.findOne(i%2+1));
             enginRepo.save(engin);

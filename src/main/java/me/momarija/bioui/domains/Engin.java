@@ -31,8 +31,6 @@ public class Engin {
 
     private String photo;
 
-    private int intervale;
-
     private int temps;
 
     @ManyToOne
@@ -93,14 +91,6 @@ public class Engin {
 
     public void setPhoto(String photo) {
         this.photo = photo;
-    }
-
-    public int getIntervale() {
-        return intervale;
-    }
-
-    public void setIntervale(int intervale) {
-        this.intervale = intervale;
     }
 
     public int getTemps() {
