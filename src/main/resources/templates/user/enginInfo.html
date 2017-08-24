@@ -86,7 +86,8 @@
 				<th>Temps de production</th>
 				<th>Temps de ralenti</th>
 				<th>Temps d'arret</th>
-				<th>Repos</th>
+				<th>Pause</th>
+				<th>Rendement</th>
 			</tr>
 			<tr th:each="statistica : ${statisticos}">
 				<td><a th:text="${statistica.get('date')}"
@@ -94,7 +95,9 @@
 				<td th:text="${statistica.get('production')}"></td>
 				<td th:text="${statistica.get('ralenti')}"></td>
 				<td th:text="${statistica.get('arret') }"></td>
-				<td th:text="${statistica.get('repos') }"></td>
+				<td th:text="${statistica.get('pause') }"></td>
+				<td th:text="${statistica.get('rendement') }"></td>
+
 			</tr>
 		</table>
 	</div>

@@ -140,7 +140,7 @@ public class UserServiceImpl implements UserService {
 
         Map<String ,Integer> map;
         Map<String ,String> map2 ;
-
+		double p_percent;long z;float fullTime = 0.2f;
 
         for(i=0;i<=nbJours;i++){
 
@@ -150,7 +150,8 @@ public class UserServiceImpl implements UserService {
             d3= new Date(dayFrom+" "+hourTo);
             y = d1.getTime()+24*3600*1000;
             d2 = new Date(y);
-            long z =d3.getTime()-d1.getTime()-statistic.getNbHourRepos()*3600*1000;
+            z = d3.getTime()-d1.getTime()-statistic.getNbHourRepos()*3600*1000;
+			fullTime = z+statistic.getNbHourRepos()*3600*1000;
             map2 = new HashMap<>();
             map = doWork(engin,d1,d3);
             int arret = (int)z/1000 - map.get("production") - map.get("ralenti");
@@ -159,12 +160,18 @@ public class UserServiceImpl implements UserService {
             	map.put("ralenti",map.get("ralenti")+arret);
             	arret = 0 ;
 			}
-            map2.put("production", dateUtility.convertToDate(map.get("production")));
+			if(map.get("ralenti")<0) map.put("ralenti",0);
+
+			p_percent =(double) (map.get("production") * 100 / (fullTime/1000) ) ;
+
+
+			map2.put("production", dateUtility.convertToDate(map.get("production")));
             map2.put("ralenti", dateUtility.convertToDate(map.get("ralenti")));
             map2.put("arret", dateUtility.convertToDate(arret));
             map2.put("date", dayFrom);
-			map2.put("repos",statistic.getNbHourRepos()+" h");
-            list.add(map2);
+			map2.put("pause",statistic.getNbHourRepos()+" h");
+			map2.put("rendement",String.format("%.2f", p_percent) +" %");
+			list.add(map2);
 
             dayFrom = stf.format(d2);
 
