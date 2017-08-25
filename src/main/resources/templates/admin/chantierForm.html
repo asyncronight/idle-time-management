@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head"></head>
+<body>
+<div class="container">
+	<div th:replace="fragments :: header"></div>
+	<hr>
+	<a class="btn btn-success btn-lg" href="/admin/"><i class="fa fa-arrow-left"></i> Retour à la liste des chantiers</a>
+	<br>
+	<form class="form-horizontal" method="post" th:object="${chantier}" style="margin: 5%">
+
+		<div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+			<p th:text="#{formError}">Erreur</p>
+		</div>
+
+		<div th:class="${#fields.hasErrors('nom')} ? 'form-group row has-danger' : 'form-group row'">
+			<label class="col-sm-2 col-form-label" for="nom">Nom:</label>
+			<div class="col-sm-10">
+				<input id="nom" type="text" class="form-control" th:field="*{nom}" th:errorclass="form-control-danger"/>
+				<div class="form-control-feedback" th:if="${#fields.hasErrors('nom')}">
+					<ul>
+						<li th:each="err : ${#fields.errors('nom')}" th:text="${err}" />
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div th:class="${#fields.hasErrors('adresse')} ? 'form-group row has-danger' : 'form-group row'">
+			<label class="col-sm-2 col-form-label" for="adresse">Adresse:</label>
+			<div class="col-sm-10">
+				<textarea id="adresse" class="form-control" th:field="*{adresse}" th:errorclass="form-control-danger"/>
+				<div class="form-control-feedback" th:if="${#fields.hasErrors('adresse')}">
+					<ul>
+						<li th:each="err : ${#fields.errors('adresse')}" th:text="${err}" />
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-2"></div>
+			<div class="col-sm-10">
+				<button type="submit" class="btn btn-primary btn-block">Ajouter</button>
+			</div>
+		</div>
+	</form>
+
+</div>
+</body>
+</html>

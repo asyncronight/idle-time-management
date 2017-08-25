@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head"></head>
+<body>
+<div class="container">
+	<div th:replace="fragments :: header"></div>
+	<hr>
+	<div class="row">
+		<div class="ml-auto">
+			<a class="btn btn-success btn-lg" href="/admin/chantier/add"><i class="fa fa-plus"></i> Ajouter un chantier</a>
+		</div>
+	</div>
+	<br>
+	<h2><i class="fa fa-list"></i> La liste des chantiers :</h2>
+	<br>
+	<div class="row text-center">
+		<div class=" col-sm-4" th:each="chantier : ${chantiers}">
+			<div class="card text-center">
+				<div class="card-header">
+					<div class="row">
+						<h2 th:text="${chantier.nom}" class="col-sm-10">Chantier</h2>
+						<div class="col-sm-2">
+							<a class="btn btn-danger btn-sm" th:href="@{'/admin/chantier/'+${chantier.id}+'/delete'}"><i class="fa fa-remove"></i> </a>
+						</div>
+					</div>
+				</div>
+				<div class="card-block" style="margin: 5%">
+					<p class="card-title" style="margin-top: 10px" th:text="${chantier.adresse}">Addresse fedskmfsrgdvxcrdfvxcdgfvcgrwfxvbdfdlj grfdlkjnn</p>
+					<hr>
+					<small class="card-text" style="margin-bottom: 10px">Contient <span class="text-danger" th:text="${#lists.size(chantier.engins)}">8</span> engins</small>
+				</div>
+				<div class="card-footer">
+					<a class="btn btn-block" th:href="@{'/admin/chantier/'+${chantier.id}}">Voir la liste des engins</a>
+				</div>
+			</div>
+			<br>
+		</div>
+	</div>
+</div>
+</body>
+</html>
