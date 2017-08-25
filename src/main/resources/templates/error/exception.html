@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head"></head>
+<body>
+<div class="container">
+	<div th:replace="fragments :: header"></div>
+	<hr>
+	<div class="jumbotron alert alert-warning text-center">
+		<h2>Oops !</h2>
+		<p th:text="@{'Operation echouée pour le lien '+${url}}"></p>
+		<p th:text="@{'Message : '+${exception.message}}"></p>
+		<a href="/home/" class="btn btn-warning">Retourner à la page d'aceuil</a>
+	</div>
+</div>
+</body>
+</html>

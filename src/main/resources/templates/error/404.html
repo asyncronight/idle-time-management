@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body>
+<div class="container">
+	<div th:replace="fragments :: header"></div>
+	<hr>
+	<div class="jumbotron alert alert-warning text-center">
+		<h1>Page introuvable</h1>
+		<p>Vous avez essaier d'accéder à une page introuvable</p>
+		<p>Veuillez verifier le lien de la page.</p>
+		<a href="/home/" class="btn btn-warning">Retourner à la page d'aceuil</a>
+	</div>
+</div>
+</body>
+</html>
