@@ -20,6 +20,10 @@ public class Statistic {
 
     private int nbHourRepos;
 
+	public Statistic() {
+
+	}
+
 	public Date getDayFrom() {
 		return dayFrom;
 	}
