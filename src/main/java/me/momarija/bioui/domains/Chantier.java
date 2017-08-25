@@ -18,7 +18,7 @@ public class Chantier {
     private String nom;
 
     @NotEmpty
-    @Size(max = 100)
+    @Size(min = 10, max = 100)
     private String adresse;
 
     @OneToMany(mappedBy = "chantier", cascade = CascadeType.ALL)

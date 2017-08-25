@@ -3,8 +3,7 @@ package me.momarija.bioui.domains;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 @Entity
 public class Engin {
@@ -25,12 +24,21 @@ public class Engin {
     @Pattern(regexp = "[12][0-9]{3}")
     private String annee;
 
+    @Digits(integer = 2, fraction = 2, groups = Float.class)
+    @Min(0)
+    @Max(10)
     private float seuilP;
 
+    @Digits(integer = 2, fraction = 2, groups = Float.class)
+    @Min(0)
+    @Max(10)
     private float seuilR;
 
     private String photo;
 
+    @Digits(integer = 2, fraction = 0, groups = Integer.class)
+    @Min(0)
+    @Max(20)
     private int temps;
 
     @ManyToOne
