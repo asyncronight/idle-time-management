@@ -13,11 +13,21 @@ import java.util.Map;
 @Service
 public interface UserService{
 
+    List<Map<String, Object>> getChantiersRendementWeek();
+
     List<Map<String,Object>> getChantiersRendement(Statistic statistic);
 
     List<Map<String,String>> getChantierStatistics(int chantierId,Statistic statistic);
+
+    List<Map<String,String>> getChantierStatisticsWeek(int chantierId);
+
     List<Map<String,Object>> getEnginsRendement(int chantierId,Statistic statistic);
 
+    List<Map<String, Object>> getEnginsRendementWeek(int chantierId);
+
     List<Map<String,String>> getEnginStatistics(int enginId,Statistic statistic);
+
+    List<Map<String,String>> getEnginStatisticsWeek(int enginId);
+
 
 }

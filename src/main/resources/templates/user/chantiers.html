@@ -77,19 +77,94 @@
 			</div>
 
 		</form>
-		<table class="table table-striped" th:if="${chantiersRendement}">
-			<tr>
-				<th>Nom du Chantier</th>
-				<th>Adresse</th>
-				<th>Rendement</th>
-			</tr>
-			<tr th:each="ch : ${chantiersRendement}">
-				<td><a th:text="${ch.get('chantier').nom}" th:href="@{'/user/chantier/' + ${ch.get('chantier').id}}"></a></td>
-				<td th:text="${ch.get('chantier').adresse}"></td>
-				<td th:text="${ch.get('rendement')}"></td>
-			</tr>
-		</table>
 	</div>
+
+	<div style="background-color: antiquewhite;padding: 2%" th:if="${chantiersRendementWeek}">
+			<h2><i class="fa fa-list"></i> Rendement par semaine :</h2>
+			<br>
+			<div class="row text-center" >
+				<div class=" col-sm-4" th:each="ch : ${chantiersRendementWeek}">
+				<div class="card text-center">
+					<div class="card-header">
+						<div class="row">
+							<h2  class="col-sm-10"><a th:text="${ch.get('chantier').nom}" th:href="@{'/user/chantier/' + ${ch.get('chantier').id} +'/statistic'}"></a></h2>
+						</div>
+					</div>
+					<div class="card-block" style="margin: 5%">
+						<p class="card-title" style="margin-top: 10px" th:text="${ch.get('chantier').adresse}">Addresse fedskmfsrgdvxcrdfvxcdgfvcgrwfxvbdfdlj grfdlkjnn</p>
+					</div>
+					<div class="card-header">
+						<div class="row">
+							<h2 th:text="${ch.get('rendement')}" class="col-sm-10"> %</h2>
+						</div>
+					</div>
+
+					<div class="card-footer">
+						<a class="btn btn-block" th:href="@{'/user/chantier/'+${ch.get('chantier').id}}">Voir la liste des engins</a>
+					</div>
+				</div>
+				<br>
+			</div>
+		</div>
+		</div>
+	<div style="background-color: antiquewhite;padding: 2%" th:if="${chantiersRendement}">
+
+				<div class="row text-center">
+					<div class=" col-sm-4" th:each="ch : ${chantiersRendement}">
+						<div class="card text-center">
+							<div class="card-header">
+								<div class="row">
+									<h2  class="col-sm-10"><a th:text="${ch.get('chantier').nom}" th:href="@{'/user/chantier/' + ${ch.get('chantier').id}}"></a></h2>
+								</div>
+							</div>
+							<div class="card-block" style="margin: 5%">
+								<p class="card-title" style="margin-top: 10px" th:text="${ch.get('chantier').adresse}">Addresse fedskmfsrgdvxcrdfvxcdgfvcgrwfxvbdfdlj grfdlkjnn</p>
+							</div>
+							<div class="card-header">
+								<div class="row">
+									<h2 th:text="${ch.get('rendement')}" class="col-sm-10"> </h2>
+								</div>
+							</div>
+
+							<div class="card-footer">
+								<a class="btn btn-block" th:href="@{'/admin/chantier/'+${ch.get('chantier').id}}">Voir la liste des engins</a>
+							</div>
+						</div>
+						<br>
+					</div>
+				</div>
+			</div>
+	<div style="background-color: antiquewhite;padding: 2%" th:if="${chantiersRendementMonth}">
+				<h2><i class="fa fa-list"></i> Rendement par Mois :</h2>
+				<br>
+				<div class="row text-center" >
+
+					<div class=" col-sm-4" th:each="ch : ${chantiersRendementMonth}">
+						<div class="card text-center">
+							<div class="card-header">
+								<div class="row">
+									<h2  class="col-sm-10"><a th:text="${ch.get('chantier').nom}" th:href="@{'/user/chantier/' + ${ch.get('chantier').id}}"></a></h2>
+								</div>
+							</div>
+							<div class="card-block" style="margin: 5%">
+								<p class="card-title" style="margin-top: 10px" th:text="${ch.get('chantier').adresse}">Addresse fedskmfsrgdvxcrdfvxcdgfvcgrwfxvbdfdlj grfdlkjnn</p>
+							</div>
+							<div class="card-header">
+								<div class="row">
+									<h2 th:text="${ch.get('rendement')}" class="col-sm-10"></h2>
+								</div>
+							</div>
+
+							<div class="card-footer">
+								<a class="btn btn-block" th:href="@{'/admin/chantier/'+${ch.get('chantier').id}}">Voir la liste des engins</a>
+							</div>
+						</div>
+						<br>
+					</div>
+				</div>
+			</div>
+
+
 </div>
 
 </body>

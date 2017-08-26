@@ -80,35 +80,25 @@
 
 	</div>
 
-	<div style="background-color: antiquewhite;padding: 2%" th:if="${enginsRendementWeek}">
-
-		<div class="row text-center">
-			<div class=" col-sm-4" th:each="ch : ${enginsRendementWeek}">
-				<div class="card text-center">
-					<div class="card-header">
-						<div class="row">
-							<h2  class="col-sm-10"  th:text="${ch.get('engin').marque}"</h2>
-						</div>
-					</div>
-					<div class="card-block" style="margin: 5%">
-						<p class="card-title" style="margin-top: 10px" th:text="${ch.get('engin').chauffeur}">Addresse fedskmfsrgdvxcrdfvxcdgfvcgrwfxvbdfdlj grfdlkjnn</p>
-					</div>
-					<div class="card-block" style="width:50px;height:50px;">
-						<a th:href="@{'/user/chantier/' + ${ch.get('engin').chantier.id} +'/engin/' + ${ch.get('engin').id} }"> <img th:src="@{'/files/' +${ch.get('engin').photo} }" th:alt="${ch.get('engin').photo}"  width="75%"></a>
-
-					</div>
-					<div class="card-header">
-						<div class="row">
-							<h2 th:text="${ch.get('rendement')}" class="col-sm-10"> </h2>
-						</div>
-					</div>
-
-				</div>
-				<br>
-			</div>
-		</div>
-	</div>
-
+	<h2> Statistiques <span th:if="${par}"> de la semaine</span> :</h2>
+	<table class="table table-striped" th:if="${chantierStatisticsWeek}">
+		<tr>
+			<th>Le jour</th>
+			<th>Temps de production</th>
+			<th>Temps de ralenti</th>
+			<th>Temps d'arret</th>
+			<th>Pause</th>
+			<th>Rendement</th>
+		</tr>
+		<tr th:each="statistica : ${chantierStatisticsWeek}">
+			<td><a th:text="${statistica.get('date')}"></a></td>
+			<td th:text="${statistica.get('production')}"></td>
+			<td th:text="${statistica.get('ralenti')}"></td>
+			<td th:text="${statistica.get('arret') }"></td>
+			<td th:text="${statistica.get('pause') }"></td>
+			<td th:text="${statistica.get('rendement') }"></td>
+		</tr>
+	</table>
 </div>
 
 </body>

@@ -24,6 +24,7 @@ public class UserController {
 	@RequestMapping(value = {""}, method = RequestMethod.GET)
 	public String chantiersList(Model model){
 		model.addAttribute("title", "Liste des chantiers");
+		model.addAttribute("chantiersRendementWeek",userService.getChantiersRendementWeek());
 		model.addAttribute("statistic",new Statistic());
 		return "user/chantiers";
 	}
@@ -41,16 +42,49 @@ public class UserController {
 	public String enginsList(Model model, @PathVariable int id){
 		model.addAttribute("title", "Liste des engins");
 		model.addAttribute("statistic",new Statistic());
-
+		model.addAttribute("enginsRendementWeek",userService.getEnginsRendementWeek(id));
 		return "user/engins";
 	}
+
 	@RequestMapping(value = {"chantier/{id}"},method = RequestMethod.POST)
 	public String enginsList(Model model, @PathVariable int id,@Valid Statistic statistic){
-		model.addAttribute("title", "Liste des chantiers");
+		model.addAttribute("title", "Liste des engins");
 		model.addAttribute("statistic",statistic);
-		model.addAttribute("chantierStatistics", userService.getChantierStatistics(id,statistic));
-		model.addAttribute("enginsRendement", userService.getEnginsRendement(id,statistic));
-
-		return "user/chantiers";
+		model.addAttribute("enginsRendementWeek", userService.getEnginsRendement(id,statistic));
+		return "user/engins";
 	}
+
+	@RequestMapping(value = {"chantier/{id}/statistic"}, method = RequestMethod.GET)
+	public String chantierStatisticWeek(Model model, @PathVariable int id){
+		model.addAttribute("title", "Statistique du chantier");
+		model.addAttribute("statistic",new Statistic());
+		model.addAttribute("par","de la semaine");
+		model.addAttribute("chantierStatisticsWeek",userService.getChantierStatisticsWeek(id));
+		return "user/chantierStatistics";
+	}
+
+	@RequestMapping(value = {"chantier/{id}/statistic"},method = RequestMethod.POST)
+	public String chantierStatistic(Model model, @PathVariable int id,@Valid Statistic statistic){
+		model.addAttribute("title", "Statistique du chantier");
+		model.addAttribute("statistic",statistic);
+		model.addAttribute("chantierStatisticsWeek", userService.getChantierStatistics(id,statistic));
+		return "user/chantierStatistics";
+	}
+	@RequestMapping(value = {"chantier/{id}/engin/{idE}"}, method = RequestMethod.GET)
+	public String enginStatisticWeek(Model model, @PathVariable int id,@PathVariable int idE){
+		model.addAttribute("title", "Statistique de l'engin");
+		model.addAttribute("statistic",new Statistic());
+		model.addAttribute("par","de la semaine");
+		model.addAttribute("enginStatisticsWeek",userService.getEnginStatisticsWeek(idE));
+		return "user/enginStatistics";
+	}
+
+	@RequestMapping(value = {"chantier/{id}/engin/{idE}"},method = RequestMethod.POST)
+	public String enginStatistic(Model model, @PathVariable int id,@PathVariable int idE,@Valid Statistic statistic){
+		model.addAttribute("title", "Statistique de l'engin");
+		model.addAttribute("statistic",statistic);
+		model.addAttribute("enginStatisticsWeek", userService.getEnginStatistics(idE,statistic));
+		return "user/enginStatistics";
+	}
+
 }
