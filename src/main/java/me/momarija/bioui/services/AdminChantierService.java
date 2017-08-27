@@ -5,7 +5,7 @@ import me.momarija.bioui.domains.Engin;
 
 import java.util.List;
 
-public interface AdminService {
+public interface AdminChantierService {
 
 	List<Chantier> getChantierList();
 
@@ -14,6 +14,4 @@ public interface AdminService {
 	void deleteChantier(int idC, boolean deleteEngins, int idTo);
 
 	Chantier getChantier(int chantierId);
-
-	Engin addEngin(Engin engin, int chantierId);
 }

@@ -1,7 +1,7 @@
 package me.momarija.bioui.controllers.admin;
 
 import me.momarija.bioui.domains.Chantier;
-import me.momarija.bioui.services.AdminService;
+import me.momarija.bioui.services.AdminChantierService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,12 +18,12 @@ import javax.validation.Valid;
 public class AdminChantierController {
 
 	@Autowired
-	private AdminService adminService;
+	private AdminChantierService adminChantierService;
 
 	@RequestMapping(value = "")
 	public String chantierLis(Model model){
 		model.addAttribute("title", "Liste des chantier");
-		model.addAttribute("chantiers", adminService.getChantierList());
+		model.addAttribute("chantiers", adminChantierService.getChantierList());
 		return "admin/chantierList";
 	}
 
@@ -40,7 +40,7 @@ public class AdminChantierController {
 			model.addAttribute("title", "Erreur");
 			return "admin/chantierForm";
 		}
-		chantier = adminService.addChantier(chantier);
+		chantier = adminChantierService.addChantier(chantier);
 		return "redirect:/admin/chantier/"+chantier.getId();
 	}
 
@@ -48,7 +48,7 @@ public class AdminChantierController {
 	public String deleteChantier(@PathVariable int idC, @RequestParam(defaultValue = "true") boolean deleteEngins, @RequestParam(defaultValue = "0") int chantierId){
 		if (!deleteEngins && chantierId==0)
 			throw new RuntimeException("Impossible de transferer les engins, veuillez selectionner un chantier valid.");
-		adminService.deleteChantier(idC, deleteEngins, chantierId);
+		adminChantierService.deleteChantier(idC, deleteEngins, chantierId);
 		return "redirect:/admin/";
 	}
 }
