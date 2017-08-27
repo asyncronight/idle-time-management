@@ -1,4 +1,4 @@
-package me.momarija.bioui.services;
+package me.momarija.bioui.service;
 
 import me.momarija.bioui.domains.Chantier;
 import me.momarija.bioui.domains.Engin;

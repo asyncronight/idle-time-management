@@ -1,7 +1,7 @@
 package me.momarija.bioui.controllers.admin;
 
 import me.momarija.bioui.domains.Chantier;
-import me.momarija.bioui.services.AdminChantierService;
+import me.momarija.bioui.service.AdminChantierService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

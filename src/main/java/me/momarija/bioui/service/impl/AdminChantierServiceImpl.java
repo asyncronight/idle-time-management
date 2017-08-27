@@ -1,10 +1,10 @@
-package me.momarija.bioui.services.impl;
+package me.momarija.bioui.service.impl;
 
 import me.momarija.bioui.domains.Chantier;
-import me.momarija.bioui.domains.Engin;
 import me.momarija.bioui.repos.ChantierRepo;
 import me.momarija.bioui.repos.EnginRepo;
-import me.momarija.bioui.services.AdminService;
+import me.momarija.bioui.service.AdminChantierService;
+import me.momarija.bioui.service.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,13 +14,16 @@ import java.util.List;
 
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class AdminServiceImpl implements AdminService {
+public class AdminChantierServiceImpl implements AdminChantierService {
 
 	@Autowired
 	private ChantierRepo chantierRepo;
 
 	@Autowired
 	private EnginRepo enginRepo;
+
+	@Autowired
+	private StorageService storageService;
 
 	@Override
 	public List<Chantier> getChantierList() {
@@ -39,7 +42,9 @@ public class AdminServiceImpl implements AdminService {
 	public void deleteChantier(int idC, boolean deleteEngins, int idTo) {
 		if (deleteEngins) {
 			try {
-				chantierRepo.delete(idC);
+				Chantier chantier = chantierRepo.findOne(idC);
+				chantier.getEngins().forEach(engin -> storageService.deleteFile(engin.getPhoto()));
+				chantierRepo.delete(chantier);
 				return;
 			}catch (Exception ex){
 				throw new RuntimeException("Chantier introuvable, suppression échouée.");
@@ -65,19 +70,6 @@ public class AdminServiceImpl implements AdminService {
 		Chantier chantier = chantierRepo.findOne(chantierId);
 		if (chantier == null)
 			throw new RuntimeException("Chantier introuvable, récuperation des informations échouée.");
-//		if (chantier.getEngins() == null)
-//			chantier.setEngins(new ArrayList<Engin>());
 		return chantier;
-	}
-
-	@Override
-	public Engin addEngin(Engin engin, int chantierId) {
-		Chantier chantier = chantierRepo.findOne(chantierId);
-		if (chantier == null){
-			//delete engin's saved photo
-			throw new RuntimeException("Chantier introuvable, impossible d'ajouter l'engin.");
-		}
-		engin.setChantier(chantier);
-		return enginRepo.save(engin);
 	}
 }

@@ -2,12 +2,13 @@ package me.momarija.bioui.controllers.admin;
 
 import me.momarija.bioui.domains.Chantier;
 import me.momarija.bioui.domains.Engin;
-import me.momarija.bioui.services.AdminService;
+import me.momarija.bioui.service.AdminEnginService;
+import me.momarija.bioui.service.AdminChantierService;
+import me.momarija.bioui.service.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,11 +23,17 @@ import javax.validation.Valid;
 public class AdminEnginController {
 
 	@Autowired
-	private AdminService adminService;
+	private AdminChantierService adminCantierService;
+
+	@Autowired
+	private AdminEnginService adminEnginService;
+
+	@Autowired
+	private StorageService storageService;
 
 	@RequestMapping(value = "")
 	public String enginList(@PathVariable int idC, Model model){
-		Chantier chantier = adminService.getChantier(idC);
+		Chantier chantier = adminCantierService.getChantier(idC);
 		model.addAttribute("title", chantier.getNom());
 		model.addAttribute("chantier", chantier);
 		return "admin/enginList";
@@ -48,9 +55,14 @@ public class AdminEnginController {
 			model.addAttribute("title", "Erreur");
 			return "admin/enginForm";
 		}
-		//save file
-		//set enngin's photo
-		adminService.addEngin(engin, idC);
+		engin.setPhoto(storageService.store(file));
+		adminEnginService.addEngin(engin, idC);
+		return "redirect:/admin/chantier/"+idC;
+	}
+
+	@RequestMapping(value = "delete/{id}", method = RequestMethod.POST)
+	public String deleteEngin(@PathVariable int id, @PathVariable int idC, @RequestParam(defaultValue = "false") boolean deleteData){
+		adminEnginService.deleteEngin(id, deleteData);
 		return "redirect:/admin/chantier/"+idC;
 	}
 }
