@@ -40,22 +40,24 @@ public class AdminEnginController {
 	}
 
 	@RequestMapping(value = "/addEngin", method = RequestMethod.GET)
-	public String addEnginGet(Model model){
+	public String addEnginGet(@PathVariable int idC, Model model){
 		model.addAttribute("title", "Ajouter un engin");
 		model.addAttribute("engin", new Engin());
+		model.addAttribute("idC", idC);
 		return "admin/enginForm";
 	}
 
 	@RequestMapping(value = "/addEngin", method = RequestMethod.POST)
 	public String addEnginPost(@PathVariable int idC, Model model, @Valid Engin engin, BindingResult bindingResult,
-								@RequestParam("file") MultipartFile file){
-		if (file == null)
-			bindingResult.addError(new ObjectError("file", "Ajouter une image"));
+							   @RequestParam(value = "file", required = false) MultipartFile file){
 		if (bindingResult.hasErrors()){
 			model.addAttribute("title", "Erreur");
 			return "admin/enginForm";
 		}
-		engin.setPhoto(storageService.store(file));
+		if (file == null)
+			engin.setPhoto("photo1.jpg");
+		else
+			engin.setPhoto(storageService.store(file));
 		adminEnginService.addEngin(engin, idC);
 		return "redirect:/admin/chantier/"+idC;
 	}

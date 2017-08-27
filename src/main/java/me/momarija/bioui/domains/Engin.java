@@ -24,19 +24,16 @@ public class Engin {
     @Pattern(regexp = "[12][0-9]{3}")
     private String annee;
 
-    @Digits(integer = 2, fraction = 2, groups = Float.class)
     @Min(0)
     @Max(10)
     private float seuilP;
 
-    @Digits(integer = 2, fraction = 2, groups = Float.class)
     @Min(0)
     @Max(10)
     private float seuilR;
 
     private String photo;
 
-    @Digits(integer = 2, fraction = 0, groups = Integer.class)
     @Min(0)
     @Max(20)
     private int temps;

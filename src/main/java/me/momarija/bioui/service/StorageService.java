@@ -47,6 +47,8 @@ public class StorageService {
 	}
 
 	public void deleteFile(String filename){
+		if (filename.equals("photo1.jpg"))
+			return;
 		try {
 			Files.deleteIfExists(rootLocation.resolve(filename));
 		} catch (IOException e) {
