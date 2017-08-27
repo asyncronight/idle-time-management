@@ -31,10 +31,10 @@
 					<li class="list-group-item" th:text="'Seuil de ralentie : '+${engin.seuilR}">Cras justo odio</li>
 					<li class="list-group-item bg-faded" th:text="'Temps : '+${engin.temps}">Cras justo odio</li>
 				</ul>
-				<button type="button" class="card-block btn btn-danger" data-toggle="modal" th:attr="data-target='#modal'+${chantier.id}">
+				<button type="button" class="card-block btn btn-danger" data-toggle="modal" th:attr="data-target='#modal'+${engin.id}">
 					<i class="fa fa-remove"></i>Supprimer
 				</button>
-				<div class="modal fade" th:id="@{'modal'+${chantier.id}}" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+				<div class="modal fade" th:id="@{'modal'+${engin.id}}" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
 					<div class="modal-dialog" role="document">
 						<div class="modal-content">
 							<div class="modal-header">
