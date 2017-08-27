@@ -36,11 +36,27 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public void deleteChantier(int chantierId) {
-		try {
-			chantierRepo.delete(chantierId);
-		}catch (Exception ex){
-			throw new RuntimeException("Chantier introuvable, suppression échouée.");
+	public void deleteChantier(int idC, boolean deleteEngins, int idTo) {
+		if (deleteEngins) {
+			try {
+				chantierRepo.delete(idC);
+				return;
+			}catch (Exception ex){
+				throw new RuntimeException("Chantier introuvable, suppression échouée.");
+			}
+		}else {
+			Chantier chantier = chantierRepo.findOne(idC);
+			if (chantier == null)
+				throw new RuntimeException("Chantier introuvable, suppression échouée.");
+			Chantier chantierTo = chantierRepo.findOne(idTo);
+			if (chantierTo == null)
+				throw new RuntimeException("Impossible de transferer les engins, chantier introuvable.");
+			chantier.getEngins().forEach(engin -> {
+				engin.setChantier(chantierTo);
+				enginRepo.save(engin);
+			});
+			chantier.setEngins(null);
+			chantierRepo.delete(chantier);
 		}
 	}
 

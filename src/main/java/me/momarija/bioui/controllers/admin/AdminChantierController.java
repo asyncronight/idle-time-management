@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 
@@ -43,9 +44,11 @@ public class AdminChantierController {
 		return "redirect:/admin/chantier/"+chantier.getId();
 	}
 
-	@RequestMapping(value = "chantier/{idC}/delete")
-	public String deleteChantier(@PathVariable int idC){
-		adminService.deleteChantier(idC);
+	@RequestMapping(value = "chantier/{idC}/delete", method = RequestMethod.POST)
+	public String deleteChantier(@PathVariable int idC, @RequestParam(defaultValue = "true") boolean deleteEngins, @RequestParam(defaultValue = "0") int chantierId){
+		if (!deleteEngins && chantierId==0)
+			throw new RuntimeException("Impossible de transferer les engins, veuillez selectionner un chantier valid.");
+		adminService.deleteChantier(idC, deleteEngins, chantierId);
 		return "redirect:/admin/";
 	}
 }

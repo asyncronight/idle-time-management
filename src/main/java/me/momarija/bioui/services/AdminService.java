@@ -11,7 +11,7 @@ public interface AdminService {
 
 	Chantier addChantier(Chantier chantier);
 
-	void deleteChantier(int chantierId);
+	void deleteChantier(int idC, boolean deleteEngins, int idTo);
 
 	Chantier getChantier(int chantierId);
 

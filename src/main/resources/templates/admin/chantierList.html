@@ -14,20 +14,57 @@
 	<h2><i class="fa fa-list"></i> La liste des chantiers :</h2>
 	<br>
 	<div class="row text-center">
-		<div class=" col-sm-4" th:each="chantier : ${chantiers}">
+		<div class=" col-sm-6 col-md-4" th:each="chantier : ${chantiers}">
 			<div class="card text-center">
 				<div class="card-header">
 					<div class="row">
 						<h2 th:text="${chantier.nom}" class="col-sm-10">Chantier</h2>
-						<div class="col-sm-2">
-							<a class="btn btn-danger btn-sm" th:href="@{'/admin/chantier/'+${chantier.id}+'/delete'}"><i class="fa fa-remove"></i> </a>
+						<div class="col-sm-2 pull-sm-1">
+							<button type="button" class="btn btn-danger" data-toggle="modal" th:attr="data-target='#modal'+${chantier.id}">
+								<i class="fa fa-remove"></i>
+							</button>
+							<div class="modal fade" th:id="@{'modal'+${chantier.id}}" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="modalLabel">Confirmer la suppression</h5>
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<form method="post" th:action="@{'/admin/chantier/'+${chantier.id}+'/delete'}">
+											<div class="modal-body" th:if="${#lists.size(chantier.engins)} != 0">
+												<div class="form-check">
+													<label class="form-check-label">
+														<input class="form-check-input" type="radio" name="deleteEngins" value="true" checked>
+														Supprimer les <span th:text="${#lists.size(chantier.engins)}">x</span> engins.
+													</label>
+												</div>
+												<div class="form-check" th:if="${#lists.size(chantiers)} > 1">
+													<label class="form-check-label">
+														<input class="form-check-input" type="radio" name="deleteEngins" value="false">
+														Transferer les <span th:text="${#lists.size(chantier.engins)}">x</span> engins vers un autre chantier :
+													</label>
+													<select class="custom-select mb-2 mr-sm-2 mb-sm-0" name="chantierId">
+														<option th:each="chantierTo : ${chantiers}" th:value="${chantierTo.id}" th:unless="${chantier} == ${chantierTo}" th:text="${chantierTo.nom}">One</option>
+													</select>
+												</div>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+												<input type="Submit" class="btn btn-danger" value="Supprimer" />
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
 				<div class="card-block" style="margin: 5%">
 					<p class="card-title" style="margin-top: 10px" th:text="${chantier.adresse}">Addresse fedskmfsrgdvxcrdfvxcdgfvcgrwfxvbdfdlj grfdlkjnn</p>
 					<hr>
-					<small class="card-text" style="margin-bottom: 10px">Contient <span class="text-danger" th:text="${#lists.size(chantier.engins)}">8</span> engins</small>
+					<small class="card-text" style="margin-bottom: 10px">Contient <span class="text-danger" th:text="${#lists.size(chantier.engins)}">x</span> engins</small>
 				</div>
 				<div class="card-footer">
 					<a class="btn btn-block" th:href="@{'/admin/chantier/'+${chantier.id}}">Voir la liste des engins</a>
