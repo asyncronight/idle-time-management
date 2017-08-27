@@ -54,7 +54,7 @@ public class AdminEnginController {
 			model.addAttribute("title", "Erreur");
 			return "admin/enginForm";
 		}
-		if (file == null)
+		if (file.isEmpty())
 			engin.setPhoto("photo1.jpg");
 		else
 			engin.setPhoto(storageService.store(file));
