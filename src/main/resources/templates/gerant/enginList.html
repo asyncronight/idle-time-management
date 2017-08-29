@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="fragments :: head"></head>
+<body>
+<div class="container">
+	<div th:replace="fragments :: header"></div>
+	<hr>
+	<div class="mr-auto">
+		<a class="btn btn-success btn-lg" href="/gerant/"><i class="fa fa-arrow-left"></i> Retour à la liste des
+			chantier</a>
+	</div>
+	<br>
+	<h2><i class="fa fa-list"></i> La liste des engins du chantier : <span th:text="${chantier.nom}"></span></h2>
+	<br>
+	<div class="row">
+		<div class=" col-sm-6 col-md-4" th:each="engin : ${chantier.engins}">
+			<div class="card text-center" style="border: solid 2px #636363">
+				<img class="card-img-top img-fluid" th:src="@{'/files/'+${engin.photo}}" th:alt="${engin.photo}">
+				<div class="card-block bg-faded">
+					<h4 class="card-title" th:text="'Engin N° '+${engin.id}"></h4>
+				</div>
+				<ul class="list-group list-group-flush">
+					<li class="list-group-item" th:text="'Marque : '+${engin.marque}"></li>
+					<li class="list-group-item bg-faded" th:text="'Chauffeur : '+${engin.chauffeur}"></li>
+					<li class="list-group-item" th:text="'Annee : '+${engin.annee}"></li>
+					<li class="list-group-item bg-faded" th:text="'Seuil de production : '+${engin.seuilP}"
+					</li>
+					<li class="list-group-item" th:text="'Seuil de ralentie : '+${engin.seuilR}"></li>
+					<li class="list-group-item bg-faded" th:text="'Temps : '+${engin.temps}"></li>
+				</ul>
+				<button type="button" class="card-block btn btn-success" data-toggle="modal"
+						th:attr="data-target='#modal'+${engin.id}">
+					Transferer <i class="fa fa-reply"></i>
+				</button>
+				<div class="modal fade" th:id="@{'modal'+${engin.id}}" tabindex="-1" role="dialog"
+					 aria-labelledby="modalLabel" aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="modalLabel">Transferer l'engin N° <span
+										th:text="${engin.id}"></span></h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<form method="post"
+								  th:action="@{'/gerant/chantier/'+${engin.chantier.id}+'/engin/'+${engin.id}+'/trans'}">
+								<div class="row modal-body">
+									<p class="col-sm-6">Nouveau chantier :</p>
+									<select class="custom-select mb-2 mr-sm-2 mb-sm-0" name="chantierId">
+										<option th:each="chantierTo : ${chantiers}" th:value="${chantierTo.id}"
+												th:unless="${chantier} == ${chantierTo}" th:text="${chantierTo.nom}">One
+										</option>
+									</select>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler
+									</button>
+									<input type="Submit" class="btn btn-success" value="Transferer"/>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			<br>
+		</div>
+	</div>
+</div>
+</body>
+</html>
