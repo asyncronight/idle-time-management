@@ -12,4 +12,10 @@ public class IndexController {
 		model.addAttribute("title", "Bioui Analyzer");
 		return "index";
 	}
+
+	@RequestMapping(value = "/home")
+	public String home(Model model) {
+		model.addAttribute("title", "Bioui Analyzer | Acceuil");
+		return "home";
+	}
 }

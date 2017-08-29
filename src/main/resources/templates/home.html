@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="fragments :: head"></head>
+<body>
+<div class="container">
+	<div th:replace="fragments :: header"></div>
+	<div class="jumbotron">
+		<div class="row">
+			<div class="col-sm-4">
+				<a href="/admin/" class="btn btn-primary btn-block" style="padding: 20%">Administrateur <i
+						class="fa fa-gears"></i></a>
+			</div>
+			<div class="col-sm-4">
+				<a href="/user/" class="btn btn-success btn-block" style="padding: 20%">Utilisateur <i
+						class="fa fa-pie-chart"></i></a>
+			</div>
+			<div class="col-sm-4">
+				<a href="/gerant/" class="btn btn-warning btn-block" style="padding: 20%">Gérant <i
+						class="fa fa-user"></i></a>
+			</div>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>
