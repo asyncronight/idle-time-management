@@ -6,7 +6,7 @@
 	<div th:replace="fragments :: header"></div>
 	<div class="row" style="margin-top: 20px">
 		<div class="col-sm-8 offset-sm-2">
-			<form action="/login" method="post">
+			<form th:action="@{/login}" method="post">
 
 				<div class="alert alert-danger" th:if="${param.error}">Informations non valide</div>
 				<div class="alert alert-success" th:if="${param.logout}">Vous êtes déconnectés</div>
