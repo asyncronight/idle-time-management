@@ -21,7 +21,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User user = userRepo.findByUsername(username);
-		if (user.equals(null)) {
+		if (user == null) {
 			throw new UsernameNotFoundException("Utilisateur n'existe pas :" + username);
 		}
 		return userUserDetailsConverter.convert(user);

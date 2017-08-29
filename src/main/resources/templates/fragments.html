@@ -29,7 +29,11 @@
 				</div>
 			</div>
 			<div class="ml-auto">
-				<a href="/logout" class="btn btn-secondary"><i class="fa fa-sign-out"></i> Se déconnécter</a>
+				<form th:action="@{/logout}" method="post">
+					<button type="submit" class="btn btn-secondary">
+						Se déconnécter <i class="fa fa-sign-out"></i>
+					</button>
+				</form>
 			</div>
 		</div>
 	</div>
