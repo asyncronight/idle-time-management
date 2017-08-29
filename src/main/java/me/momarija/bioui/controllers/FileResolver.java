@@ -21,7 +21,7 @@ public class FileResolver {
 	public ResponseEntity<Resource> getFile(@PathVariable String filename) {
 		Resource file = storageService.loadFile(filename);
 		return ResponseEntity.ok()
-				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"")
+//				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"")
 				.body(file);
 	}
 }

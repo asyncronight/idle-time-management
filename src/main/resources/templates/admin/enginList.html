@@ -19,7 +19,7 @@
 	<div class="row">
 		<div class=" col-sm-6 col-md-4" th:each="engin : ${chantier.engins}">
 			<div class="card text-center" style="border: solid 2px #636363">
-				<img class="card-img-top" th:src="@{'/files/'+${engin.photo}}" th:alt="${engin.photo}">
+				<img class="card-img-top img-fluid" th:src="@{'/files/'+${engin.photo}}" th:alt="${engin.photo}">
 				<div class="card-block bg-faded">
 					<h4 class="card-title" th:text="'Engin N° '+${engin.id}">Card title</h4>
 				</div>
