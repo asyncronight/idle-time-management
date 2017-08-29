@@ -5,10 +5,10 @@
 <div class="container">
 	<div th:replace="fragments :: header"></div>
 	<hr>
-	<div class="jumbotron alert alert-warning text-center">
-		<h1>Accée refusé</h1>
-		<p>Vous n'avez pas le droit d'éffectuer cette opération</p>
-		<a href="/home/" class="btn btn-warning">Retourner à la page d'aceuil</a>
+	<div class="jumbotron alert alert-danger text-center">
+		<h1>Accée refusé (403)</h1>
+		<p>Vous n'avez pas la permission d'éffectuer cette opération</p>
+		<a href="/" class="btn btn-danger">Retourner à la page d'aceuil</a>
 	</div>
 </div>
 </body>

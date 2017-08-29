@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class IndexController {
 
-	@RequestMapping(value = {"/", "/login" })
+	@RequestMapping(value = "/login")
 	public String index(Model model){
 		model.addAttribute("title", "Bioui Analyzer");
-		return "index";
+		return "login";
 	}
 
-	@RequestMapping(value = "/home")
+	@RequestMapping(value = "/")
 	public String home(Model model) {
 		model.addAttribute("title", "Bioui Analyzer | Acceuil");
 		return "home";
