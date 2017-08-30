@@ -7,10 +7,12 @@
 	<hr>
 	<div class="row">
 		<div class="mr-auto">
-			<a class="btn btn-success btn-lg" href="/admin/"><i class="fa fa-arrow-left"></i> Retour à la liste des chantier</a>
+			<a class="btn btn-primary btn-lg" href="/admin/"><i class="fa fa-arrow-left"></i> Retour à la liste des
+				chantier</a>
 		</div>
 		<div class="ml-auto">
-			<a class="btn btn-success btn-lg" th:href="@{'/admin/chantier/'+${chantier.id}+'/addEngin'}"><i class="fa fa-plus"></i> Ajouter un engin</a>
+			<a class="btn btn-primary btn-lg" th:href="@{'/admin/chantier/'+${chantier.id}+'/addEngin'}"><i
+					class="fa fa-plus"></i> Ajouter un engin</a>
 		</div>
 	</div>
 	<br>
@@ -44,6 +46,9 @@
 								</button>
 							</div>
 							<form method="post" th:action="@{'/admin/chantier/'+${engin.chantier.id}+'/delete/'+${engin.id}}">
+								<input type="hidden"
+									   th:name="${_csrf.parameterName}"
+									   th:value="${_csrf.token}"/>
 								<label class="custom-control custom-checkbox">
 									<input type="checkbox" class="custom-control-input" name="deleteData">
 									<span class="custom-control-indicator"></span>

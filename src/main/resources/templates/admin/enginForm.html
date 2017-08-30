@@ -5,13 +5,18 @@
 <div class="container">
 	<div th:replace="fragments :: header"></div>
 	<hr>
-	<a class="btn btn-success btn-lg" th:href="@{'/admin/chantier/'+${idC}}"><i class="fa fa-arrow-left"></i> Retour à la liste des engins</a>
+	<a class="btn btn-primary btn-lg" th:href="@{'/admin/chantier/'+${idC}}"><i class="fa fa-arrow-left"></i> Retour à
+		la liste des engins</a>
 	<br>
 	<form class="form-horizontal" method="post" th:object="${engin}" enctype="multipart/form-data" style="margin: 5%">
 
 		<div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
 			<p th:text="#{formError}">Erreur</p>
 		</div>
+
+		<input type="hidden"
+			   th:name="${_csrf.parameterName}"
+			   th:value="${_csrf.token}"/>
 
 		<div th:class="${#fields.hasErrors('marque')} ? 'form-group row has-danger' : 'form-group row'">
 			<label class="col-sm-2 col-form-label" for="marque">La marque :</label>

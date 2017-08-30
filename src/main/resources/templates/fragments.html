@@ -22,14 +22,19 @@
 			<div class="mr-auto">
 				<a href="/" class="btn btn-secondary">Aceuil</a>
 			</div>
-			<div class="ml-auto">
+			<div class="ml-auto btn btn-link">
 				<div class="row">
-					<p class="col"><span sec:authentication="name"></span></p>
+					<p class="col">
+						<i class="fa fa-user"></i> <span sec:authentication="name"></span>
+					</p>
 					<p class="col"><span sec:authentication="authorities"></span></p>
 				</div>
 			</div>
 			<div class="ml-auto">
 				<form th:action="@{/logout}" method="post">
+					<input type="hidden"
+						   th:name="${_csrf.parameterName}"
+						   th:value="${_csrf.token}"/>
 					<button type="submit" class="btn btn-secondary">
 						Se déconnécter <i class="fa fa-sign-out"></i>
 					</button>
