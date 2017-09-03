@@ -83,7 +83,7 @@ public class UserController {
 	public String enginStatistic(Model model, @PathVariable int id,@PathVariable int idE,@Valid Statistic statistic){
 		model.addAttribute("title", "Statistique de l'engin");
 		model.addAttribute("statistic",statistic);
-		model.addAttribute("enginStatisticsWeek", userService.getEnginStatistics(idE,statistic));
+		model.addAttribute("enginStatistics", userService.getEnginStatistics(idE,statistic));
 		return "user/enginStatistics";
 	}
 
