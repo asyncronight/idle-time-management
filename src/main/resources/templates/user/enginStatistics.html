@@ -100,7 +100,8 @@
 			<th>Rendement</th>
 		</tr>
 		<tr th:each="statistica : ${enginStatisticsWeek}">
-			<td><a th:text="${statistica.get('date')}"></a></td>
+			<td><a th:text="${statistica.get('date')}"
+				   th:href="@{'/user/chantier/' + ${id} +'/engin/'+ ${engin.id} + '/' + ${statistica.get('date')}}"></a></td>
 			<td th:text="${statistica.get('production')}"></td>
 			<td th:text="${statistica.get('ralenti')}"></td>
 			<td th:text="${statistica.get('arret') }"></td>

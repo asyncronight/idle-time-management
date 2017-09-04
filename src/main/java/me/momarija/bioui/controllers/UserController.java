@@ -80,10 +80,13 @@ public class UserController {
 	}
 	@RequestMapping(value = {"chantier/{id}/engin/{idE}"}, method = RequestMethod.GET)
 	public String enginStatisticWeek(Model model, @PathVariable int id,@PathVariable int idE){
+		Engin engin = adminEnginService.getEngin(idE);
 		model.addAttribute("title", "Statistique de l'engin");
 		model.addAttribute("statistic",new Statistic());
 		model.addAttribute("par","de la semaine");
 		model.addAttribute("enginStatisticsWeek",userService.getEnginStatisticsWeek(idE));
+		model.addAttribute("id",id);
+		model.addAttribute("engin",engin);
 		return "user/enginStatistics";
 	}
 
