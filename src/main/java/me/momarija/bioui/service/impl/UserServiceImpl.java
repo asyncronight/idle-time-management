@@ -363,63 +363,6 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<Map<String, String>> getEnginStatistics(int enginId, Statistic statistic) {
-		List<Map<String,String>> list = new ArrayList<>();
-		int nbJours = statistic.calculNbJours();
-		System.out.println(nbJours);
-		int i;Date d1,d2,d3 ;
-		long y;
-		Engin engin = enginRepo.findOne(enginId);
-
-
-		SimpleDateFormat stf = new SimpleDateFormat("MM/dd/yyyy");
-		SimpleDateFormat stimef = new SimpleDateFormat("HH:mm");
-
-		String dayFrom =stf.format(statistic.getDayFrom());
-		String hourFrom = stimef.format(statistic.getHourFrom());
-		String hourTo = stimef.format(statistic.getHourTo());
-
-		Map<String ,Integer> map;
-		Map<String ,String> map2 ;
-		double p_percent;long z;
-
-		for(i=0;i<=nbJours;i++){
-
-			System.out.println("From : "+dayFrom+" "+hourFrom);
-
-			d1= new Date(dayFrom+" "+hourFrom);
-			d3= new Date(dayFrom+" "+hourTo);
-			y = d1.getTime()+24*3600*1000;
-			d2 = new Date(y);
-			z = d3.getTime()-d1.getTime()-statistic.getNbHourRepos()*3600*1000;
-			map2 = new HashMap<>();
-			map = doWork(engin,d1,d3);
-			int arret = (int)z/1000 - map.get("production") - map.get("ralenti");
-
-			if(arret < 0){
-				map.put("ralenti",map.get("ralenti")+arret);
-				arret = 0 ;
-			}
-			if(map.get("ralenti")<0) map.put("ralenti",0);
-
-			p_percent =(double) (map.get("production") * 100 / (z/1000) ) ;
-
-
-			map2.put("production", dateUtility.convertToDate(map.get("production")));
-			map2.put("ralenti", dateUtility.convertToDate(map.get("ralenti")));
-			map2.put("arret", dateUtility.convertToDate(arret));
-			map2.put("date", dayFrom);
-			map2.put("pause",statistic.getNbHourRepos()+" h");
-			map2.put("rendement",String.format("%.2f", p_percent) +" %");
-			list.add(map2);
-
-			dayFrom = stf.format(d2);
-
-		}
-		return list;
-	}
-
-	@Override
 	public List<Map<String, String>> getEnginStatistic(int enginId, Statistic statistic) {
 		List<Map<String,String>> list = new ArrayList<>();
 		int nbJours = statistic.calculNbJours();
@@ -475,6 +418,7 @@ public class UserServiceImpl implements UserService {
 		}
 		return list;
 	}
+
 
 
 	private List<Engin> getEnginList(int chantierId) {
