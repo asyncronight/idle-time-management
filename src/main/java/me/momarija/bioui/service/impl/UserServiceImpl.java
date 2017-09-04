@@ -33,44 +33,118 @@ public class UserServiceImpl implements UserService {
 
 	private DateUtility dateUtility = new DateUtility();
 
-	@Override
-	public List<Map<String, Object>> getChantiersRendementWeek(){
-		List<Map<String,Object>> list = new ArrayList<>();
-		Statistic statistic = new Statistic();
-		Date d_to = new Date();
-		long week_Ms = d_to.getTime() - 518400*1000;
-		Date d_from = new Date(week_Ms);
+    @Override
+    public List<Map<String, Object>> getChantiersRendementWeek(){
+        List<Map<String,Object>> list = new ArrayList<>();
+        Statistic statistic = new Statistic();
+        Date d_to = new Date();
+        long week_Ms = d_to.getTime() - 518400*1000;
+        Date d_from = new Date(week_Ms);
 
-		Calendar cal = Calendar.getInstance();
-		cal.set(Calendar.HOUR_OF_DAY,6);
-		cal.set(Calendar.MINUTE,30);
-		cal.set(Calendar.SECOND,0);
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR_OF_DAY,6);
+        cal.set(Calendar.MINUTE,30);
+        cal.set(Calendar.SECOND,0);
 
-		Date time_from = cal.getTime();
+        Date time_from = cal.getTime();
 
-		cal.set(Calendar.HOUR_OF_DAY,19);
-		cal.set(Calendar.MINUTE,00);
-		cal.set(Calendar.SECOND,0);
-		Date time_to = cal.getTime();
+        cal.set(Calendar.HOUR_OF_DAY,19);
+        cal.set(Calendar.MINUTE,00);
+        cal.set(Calendar.SECOND,0);
+        Date time_to = cal.getTime();
 
-		statistic.setDayTo(d_to);
-		statistic.setDayFrom(d_from);
-		statistic.setHourFrom(time_from);
-		statistic.setHourTo(time_to);
-		statistic.setNbHourRepos(1);
-		Map<String,Object> mapChantierRendement = new HashMap<>();
+        statistic.setDayTo(d_to);
+        statistic.setDayFrom(d_from);
+        statistic.setHourFrom(time_from);
+        statistic.setHourTo(time_to);
+        statistic.setNbHourRepos(1);
+        Map<String,Object> mapChantierRendement = new HashMap<>();
 
-		for (Chantier c:chantierRepo.findAll()) {
-			mapChantierRendement.put("chantier",c);
-			mapChantierRendement.put("rendement",getChantierRendement(c.getId(),statistic));
-			list.add(mapChantierRendement);
-			mapChantierRendement=new HashMap<>();
-		}
+        for (Chantier c:chantierRepo.findAll()) {
+            mapChantierRendement.put("chantier",c);
+            mapChantierRendement.put("rendement",getChantierRendement(c.getId(),statistic));
+            list.add(mapChantierRendement);
+            mapChantierRendement=new HashMap<>();
+        }
 
-		return list;
-	}
+        return list;
+    }
 
-	@Override
+    @Override
+    public List<Map<String, Object>> getChantiersRendementTwoWeek(){
+        List<Map<String,Object>> list = new ArrayList<>();
+        Statistic statistic = new Statistic();
+        Date d_to = new Date();
+        long week_Ms = d_to.getTime() - 2592000*1000/2;
+        Date d_from = new Date(week_Ms);
+
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR_OF_DAY,6);
+        cal.set(Calendar.MINUTE,30);
+        cal.set(Calendar.SECOND,0);
+
+        Date time_from = cal.getTime();
+
+        cal.set(Calendar.HOUR_OF_DAY,19);
+        cal.set(Calendar.MINUTE,00);
+        cal.set(Calendar.SECOND,0);
+        Date time_to = cal.getTime();
+
+        statistic.setDayTo(d_to);
+        statistic.setDayFrom(d_from);
+        statistic.setHourFrom(time_from);
+        statistic.setHourTo(time_to);
+        statistic.setNbHourRepos(1);
+        Map<String,Object> mapChantierRendement = new HashMap<>();
+
+        for (Chantier c:chantierRepo.findAll()) {
+            mapChantierRendement.put("chantier",c);
+            mapChantierRendement.put("rendement",getChantierRendement(c.getId(),statistic));
+            list.add(mapChantierRendement);
+            mapChantierRendement=new HashMap<>();
+        }
+
+        return list;
+    }
+
+    @Override
+    public List<Map<String, Object>> getChantiersRendementMonth(){
+        List<Map<String,Object>> list = new ArrayList<>();
+        Statistic statistic = new Statistic();
+        Date d_to = new Date();
+        long week_Ms = d_to.getTime() - 2592000*1000;
+        Date d_from = new Date(week_Ms);
+
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR_OF_DAY,6);
+        cal.set(Calendar.MINUTE,30);
+        cal.set(Calendar.SECOND,0);
+
+        Date time_from = cal.getTime();
+
+        cal.set(Calendar.HOUR_OF_DAY,19);
+        cal.set(Calendar.MINUTE,00);
+        cal.set(Calendar.SECOND,0);
+        Date time_to = cal.getTime();
+
+        statistic.setDayTo(d_to);
+        statistic.setDayFrom(d_from);
+        statistic.setHourFrom(time_from);
+        statistic.setHourTo(time_to);
+        statistic.setNbHourRepos(1);
+        Map<String,Object> mapChantierRendement = new HashMap<>();
+
+        for (Chantier c:chantierRepo.findAll()) {
+            mapChantierRendement.put("chantier",c);
+            mapChantierRendement.put("rendement",getChantierRendement(c.getId(),statistic));
+            list.add(mapChantierRendement);
+            mapChantierRendement=new HashMap<>();
+        }
+
+        return list;
+    }
+
+    @Override
 	public List<Map<String, Object>> getChantiersRendement(Statistic statistic) {
 		List<Map<String,Object>> list = new ArrayList<>();
 
@@ -150,92 +224,262 @@ public class UserServiceImpl implements UserService {
 		return list;
 	}
 
-	@Override
-	public List<Map<String, String>> getChantierStatisticsWeek(int chantierId) {
-		List<Map<String,String>> list = new ArrayList<>();
-		int i;
-		Date d1,d2,d3 ;
-		long y;
-		SimpleDateFormat stf = new SimpleDateFormat("MM/dd/yyyy");
-		SimpleDateFormat stimef = new SimpleDateFormat("HH:mm");
+    @Override
+    public List<Map<String, String>> getChantierStatisticsWeek(int chantierId) {
+        List<Map<String,String>> list = new ArrayList<>();
+        int i;
+        Date d1,d2,d3 ;
+        long y;
+        SimpleDateFormat stf = new SimpleDateFormat("MM/dd/yyyy");
+        SimpleDateFormat stimef = new SimpleDateFormat("HH:mm");
 
-		Statistic statistic = new Statistic();
-		Date d_to = new Date();
-		long week_Ms = d_to.getTime() - 518400*1000;
-		Date d_from = new Date(week_Ms);
+        Statistic statistic = new Statistic();
+        Date d_to = new Date();
+        long week_Ms = d_to.getTime() - 518400*1000;
+        Date d_from = new Date(week_Ms);
 
-		Calendar cal = Calendar.getInstance();
-		cal.set(Calendar.HOUR_OF_DAY,6);
-		cal.set(Calendar.MINUTE,00);
-		cal.set(Calendar.SECOND,0);
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR_OF_DAY,6);
+        cal.set(Calendar.MINUTE,00);
+        cal.set(Calendar.SECOND,0);
 
-		Date time_from = cal.getTime();
+        Date time_from = cal.getTime();
 
-		cal.set(Calendar.HOUR_OF_DAY,20);
-		cal.set(Calendar.MINUTE,00);
-		cal.set(Calendar.SECOND,0);
-		Date time_to = cal.getTime();
+        cal.set(Calendar.HOUR_OF_DAY,20);
+        cal.set(Calendar.MINUTE,00);
+        cal.set(Calendar.SECOND,0);
+        Date time_to = cal.getTime();
 
-		statistic.setDayTo(d_to);
-		statistic.setDayFrom(d_from);
-		statistic.setHourFrom(time_from);
-		statistic.setHourTo(time_to);
-		statistic.setNbHourRepos(1);
+        statistic.setDayTo(d_to);
+        statistic.setDayFrom(d_from);
+        statistic.setHourFrom(time_from);
+        statistic.setHourTo(time_to);
+        statistic.setNbHourRepos(1);
 
 
-		int nbJours = statistic.calculNbJours();
+        int nbJours = statistic.calculNbJours();
 
-		String dayFrom =stf.format(statistic.getDayFrom());
-		String hourFrom = stimef.format(statistic.getHourFrom());
-		String hourTo = stimef.format(statistic.getHourTo());
+        String dayFrom =stf.format(statistic.getDayFrom());
+        String hourFrom = stimef.format(statistic.getHourFrom());
+        String hourTo = stimef.format(statistic.getHourTo());
 
-		Map<String ,Integer> map ;
-		Map<String ,String> map2 ;
-		double p_percent;long z;
-		int a=0,r=0,p=0;float perc =0.0f;
-		for(i=0;i<=nbJours;i++){
-			d1= new Date(dayFrom+" "+hourFrom);
-			d3= new Date(dayFrom+" "+hourTo);
-			y = d1.getTime()+24*3600*1000;
-			d2 = new Date(y);
-			z = d3.getTime()-d1.getTime()-statistic.getNbHourRepos()*3600*1000;
-			map2 = new HashMap<>();
-			List<Engin> listEngin = getEnginList(chantierId);
-			for (Engin engin :listEngin) {
-				map = doWork(engin,d1,d3);
-				int arret = (int)z/1000 - map.get("production") - map.get("ralenti");
-				if(arret < 0){
-					map.put("ralenti",map.get("ralenti")+arret);
-					arret = 0 ;
-				}
-				if(map.get("ralenti")<0) map.put("ralenti",0);
+        Map<String ,Integer> map ;
+        Map<String ,String> map2 ;
+        double p_percent;long z;
+        int a=0,r=0,p=0;float perc =0.0f;
+        for(i=0;i<=nbJours;i++){
+            d1= new Date(dayFrom+" "+hourFrom);
+            d3= new Date(dayFrom+" "+hourTo);
+            y = d1.getTime()+24*3600*1000;
+            d2 = new Date(y);
+            z = d3.getTime()-d1.getTime()-statistic.getNbHourRepos()*3600*1000;
+            map2 = new HashMap<>();
+            List<Engin> listEngin = getEnginList(chantierId);
+            for (Engin engin :listEngin) {
+                map = doWork(engin,d1,d3);
+                int arret = (int)z/1000 - map.get("production") - map.get("ralenti");
+                if(arret < 0){
+                    map.put("ralenti",map.get("ralenti")+arret);
+                    arret = 0 ;
+                }
+                if(map.get("ralenti")<0) map.put("ralenti",0);
 
-				p_percent =(double) (map.get("production") * 100 / (z/1000) ) ;
+                p_percent =(double) (map.get("production") * 100 / (z/1000) ) ;
 
-				a+=arret;
-				r+=map.get("ralenti");
-				p+=map.get("production");
-				perc+=p_percent;
+                a+=arret;
+                r+=map.get("ralenti");
+                p+=map.get("production");
+                perc+=p_percent;
 
-			}
+            }
 
-			map2.put("production",dateUtility.convertToDate(p/listEngin.size()));
-			map2.put("ralenti",dateUtility.convertToDate(r/listEngin.size()));
-			map2.put("arret", dateUtility.convertToDate(a/listEngin.size()));
-			map2.put("date", dayFrom);
-			map2.put("pause",statistic.getNbHourRepos()+" h");
-			map2.put("rendement",String.format("%.2f",perc/listEngin.size() )+" %" );
-			list.add(map2);
-			a=0;r=0;p=0;perc=0.0f;
-			map2= new HashMap<>();
-			dayFrom = stf.format(d2);
+            map2.put("production",dateUtility.convertToDate(p/listEngin.size()));
+            map2.put("ralenti",dateUtility.convertToDate(r/listEngin.size()));
+            map2.put("arret", dateUtility.convertToDate(a/listEngin.size()));
+            map2.put("date", dayFrom);
+            map2.put("pause",statistic.getNbHourRepos()+" h");
+            map2.put("rendement",String.format("%.2f",perc/listEngin.size() )+" %" );
+            list.add(map2);
+            a=0;r=0;p=0;perc=0.0f;
+            map2= new HashMap<>();
+            dayFrom = stf.format(d2);
 
-		}
+        }
 
-		return list;
-	}
+        return list;
+    }
 
-	@Override
+    @Override
+    public List<Map<String, String>> getChantierStatisticsTwoWeek(int chantierId) {
+        List<Map<String,String>> list = new ArrayList<>();
+        int i;
+        Date d1,d2,d3 ;
+        long y;
+        SimpleDateFormat stf = new SimpleDateFormat("MM/dd/yyyy");
+        SimpleDateFormat stimef = new SimpleDateFormat("HH:mm");
+
+        Statistic statistic = new Statistic();
+        Date d_to = new Date();
+        long week_Ms = d_to.getTime() - 2592000*1000/2;
+        Date d_from = new Date(week_Ms);
+
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR_OF_DAY,6);
+        cal.set(Calendar.MINUTE,00);
+        cal.set(Calendar.SECOND,0);
+
+        Date time_from = cal.getTime();
+
+        cal.set(Calendar.HOUR_OF_DAY,20);
+        cal.set(Calendar.MINUTE,00);
+        cal.set(Calendar.SECOND,0);
+        Date time_to = cal.getTime();
+
+        statistic.setDayTo(d_to);
+        statistic.setDayFrom(d_from);
+        statistic.setHourFrom(time_from);
+        statistic.setHourTo(time_to);
+        statistic.setNbHourRepos(1);
+
+
+        int nbJours = statistic.calculNbJours();
+
+        String dayFrom =stf.format(statistic.getDayFrom());
+        String hourFrom = stimef.format(statistic.getHourFrom());
+        String hourTo = stimef.format(statistic.getHourTo());
+
+        Map<String ,Integer> map ;
+        Map<String ,String> map2 ;
+        double p_percent;long z;
+        int a=0,r=0,p=0;float perc =0.0f;
+        for(i=0;i<=nbJours;i++){
+            d1= new Date(dayFrom+" "+hourFrom);
+            d3= new Date(dayFrom+" "+hourTo);
+            y = d1.getTime()+24*3600*1000;
+            d2 = new Date(y);
+            z = d3.getTime()-d1.getTime()-statistic.getNbHourRepos()*3600*1000;
+            map2 = new HashMap<>();
+            List<Engin> listEngin = getEnginList(chantierId);
+            for (Engin engin :listEngin) {
+                map = doWork(engin,d1,d3);
+                int arret = (int)z/1000 - map.get("production") - map.get("ralenti");
+                if(arret < 0){
+                    map.put("ralenti",map.get("ralenti")+arret);
+                    arret = 0 ;
+                }
+                if(map.get("ralenti")<0) map.put("ralenti",0);
+
+                p_percent =(double) (map.get("production") * 100 / (z/1000) ) ;
+
+                a+=arret;
+                r+=map.get("ralenti");
+                p+=map.get("production");
+                perc+=p_percent;
+
+            }
+
+            map2.put("production",dateUtility.convertToDate(p/listEngin.size()));
+            map2.put("ralenti",dateUtility.convertToDate(r/listEngin.size()));
+            map2.put("arret", dateUtility.convertToDate(a/listEngin.size()));
+            map2.put("date", dayFrom);
+            map2.put("pause",statistic.getNbHourRepos()+" h");
+            map2.put("rendement",String.format("%.2f",perc/listEngin.size() )+" %" );
+            list.add(map2);
+            a=0;r=0;p=0;perc=0.0f;
+            map2= new HashMap<>();
+            dayFrom = stf.format(d2);
+
+        }
+
+        return list;
+    }
+
+    @Override
+    public List<Map<String, String>> getChantierStatisticsMonth(int chantierId) {
+        List<Map<String,String>> list = new ArrayList<>();
+        int i;
+        Date d1,d2,d3 ;
+        long y;
+        SimpleDateFormat stf = new SimpleDateFormat("MM/dd/yyyy");
+        SimpleDateFormat stimef = new SimpleDateFormat("HH:mm");
+
+        Statistic statistic = new Statistic();
+        Date d_to = new Date();
+        long week_Ms = d_to.getTime() - 2592000*1000;
+        Date d_from = new Date(week_Ms);
+
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR_OF_DAY,6);
+        cal.set(Calendar.MINUTE,00);
+        cal.set(Calendar.SECOND,0);
+
+        Date time_from = cal.getTime();
+
+        cal.set(Calendar.HOUR_OF_DAY,20);
+        cal.set(Calendar.MINUTE,00);
+        cal.set(Calendar.SECOND,0);
+        Date time_to = cal.getTime();
+
+        statistic.setDayTo(d_to);
+        statistic.setDayFrom(d_from);
+        statistic.setHourFrom(time_from);
+        statistic.setHourTo(time_to);
+        statistic.setNbHourRepos(1);
+
+
+        int nbJours = statistic.calculNbJours();
+
+        String dayFrom =stf.format(statistic.getDayFrom());
+        String hourFrom = stimef.format(statistic.getHourFrom());
+        String hourTo = stimef.format(statistic.getHourTo());
+
+        Map<String ,Integer> map ;
+        Map<String ,String> map2 ;
+        double p_percent;long z;
+        int a=0,r=0,p=0;float perc =0.0f;
+        for(i=0;i<=nbJours;i++){
+            d1= new Date(dayFrom+" "+hourFrom);
+            d3= new Date(dayFrom+" "+hourTo);
+            y = d1.getTime()+24*3600*1000;
+            d2 = new Date(y);
+            z = d3.getTime()-d1.getTime()-statistic.getNbHourRepos()*3600*1000;
+            map2 = new HashMap<>();
+            List<Engin> listEngin = getEnginList(chantierId);
+            for (Engin engin :listEngin) {
+                map = doWork(engin,d1,d3);
+                int arret = (int)z/1000 - map.get("production") - map.get("ralenti");
+                if(arret < 0){
+                    map.put("ralenti",map.get("ralenti")+arret);
+                    arret = 0 ;
+                }
+                if(map.get("ralenti")<0) map.put("ralenti",0);
+
+                p_percent =(double) (map.get("production") * 100 / (z/1000) ) ;
+
+                a+=arret;
+                r+=map.get("ralenti");
+                p+=map.get("production");
+                perc+=p_percent;
+
+            }
+
+            map2.put("production",dateUtility.convertToDate(p/listEngin.size()));
+            map2.put("ralenti",dateUtility.convertToDate(r/listEngin.size()));
+            map2.put("arret", dateUtility.convertToDate(a/listEngin.size()));
+            map2.put("date", dayFrom);
+            map2.put("pause",statistic.getNbHourRepos()+" h");
+            map2.put("rendement",String.format("%.2f",perc/listEngin.size() )+" %" );
+            list.add(map2);
+            a=0;r=0;p=0;perc=0.0f;
+            map2= new HashMap<>();
+            dayFrom = stf.format(d2);
+
+        }
+
+        return list;
+    }
+
+    @Override
 	public List<Map<String, Object>> getEnginsRendementWeek(int chantierId) {
 		List<Map<String,Object>> list = new ArrayList<>();
 		Statistic statistic = new Statistic();
@@ -284,85 +528,313 @@ public class UserServiceImpl implements UserService {
 		return list;
 	}
 
-	@Override
-	public List<Map<String, String>> getEnginStatisticsWeek(int enginId) {
+    @Override
+    public List<Map<String, Object>> getEnginsRendementTwoWeek(int chantierId) {
+        List<Map<String,Object>> list = new ArrayList<>();
+        Statistic statistic = new Statistic();
+        Date d_to = new Date();
+        long week_Ms = d_to.getTime() - 2592000*1000/2;
+        Date d_from = new Date(week_Ms);
 
-		List<Map<String,String>> list = new ArrayList<>();
-		int i;Date d1,d2,d3 ;
-		long y;
-		Engin engin = enginRepo.findOne(enginId);
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR_OF_DAY,6);
+        cal.set(Calendar.MINUTE,30);
+        cal.set(Calendar.SECOND,0);
 
-		SimpleDateFormat stf = new SimpleDateFormat("MM/dd/yyyy");
-		SimpleDateFormat stimef = new SimpleDateFormat("HH:mm");
+        Date time_from = cal.getTime();
 
-		Statistic statistic = new Statistic();
-		Date d_to = new Date();
-		long week_Ms = d_to.getTime() - 518400*1000;
-		Date d_from = new Date(week_Ms);
+        cal.set(Calendar.HOUR_OF_DAY,19);
+        cal.set(Calendar.MINUTE,00);
+        cal.set(Calendar.SECOND,0);
+        Date time_to = cal.getTime();
 
-		Calendar cal = Calendar.getInstance();
-		cal.set(Calendar.HOUR_OF_DAY,6);
-		cal.set(Calendar.MINUTE,00);
-		cal.set(Calendar.SECOND,0);
+        statistic.setDayTo(d_to);
+        statistic.setDayFrom(d_from);
+        statistic.setHourFrom(time_from);
+        statistic.setHourTo(time_to);
+        statistic.setNbHourRepos(1);
 
-		Date time_from = cal.getTime();
+        Map<String,Object> mapEnginRendement = new HashMap<>();
+        for (Engin e:getEnginList(chantierId)) {
+            mapEnginRendement.put("engin",e);
+            mapEnginRendement.put("rendement",getEnginRendement(e.getId(),statistic));
+            list.add(mapEnginRendement);
+            mapEnginRendement=new HashMap<>();
+        }
+        return list;
+    }
 
-		cal.set(Calendar.HOUR_OF_DAY,19);
-		cal.set(Calendar.MINUTE,00);
-		cal.set(Calendar.SECOND,0);
-		Date time_to = cal.getTime();
+    @Override
+    public List<Map<String, Object>> getEnginsRendementMonth(int chantierId) {
+        List<Map<String,Object>> list = new ArrayList<>();
+        Statistic statistic = new Statistic();
+        Date d_to = new Date();
+        long week_Ms = d_to.getTime() - 2592000*1000;
+        Date d_from = new Date(week_Ms);
 
-		statistic.setDayTo(d_to);
-		statistic.setDayFrom(d_from);
-		statistic.setHourFrom(time_from);
-		statistic.setHourTo(time_to);
-		statistic.setNbHourRepos(1);
-		int nbJours = statistic.calculNbJours();
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR_OF_DAY,6);
+        cal.set(Calendar.MINUTE,30);
+        cal.set(Calendar.SECOND,0);
 
-		String dayFrom =stf.format(statistic.getDayFrom());
-		String hourFrom = stimef.format(statistic.getHourFrom());
-		String hourTo = stimef.format(statistic.getHourTo());
+        Date time_from = cal.getTime();
 
-		Map<String ,Integer> map;
-		Map<String ,String> map2 ;
-		double p_percent = new Double(0);long z;
+        cal.set(Calendar.HOUR_OF_DAY,19);
+        cal.set(Calendar.MINUTE,00);
+        cal.set(Calendar.SECOND,0);
+        Date time_to = cal.getTime();
 
-		for(i=0;i<=nbJours;i++){
+        statistic.setDayTo(d_to);
+        statistic.setDayFrom(d_from);
+        statistic.setHourFrom(time_from);
+        statistic.setHourTo(time_to);
+        statistic.setNbHourRepos(1);
 
-			System.out.println("From : "+dayFrom+" "+hourFrom);
+        Map<String,Object> mapEnginRendement = new HashMap<>();
+        for (Engin e:getEnginList(chantierId)) {
+            mapEnginRendement.put("engin",e);
+            mapEnginRendement.put("rendement",getEnginRendement(e.getId(),statistic));
+            list.add(mapEnginRendement);
+            mapEnginRendement=new HashMap<>();
+        }
+        return list;
+    }
 
-			d1= new Date(dayFrom+" "+hourFrom);
-			d3= new Date(dayFrom+" "+hourTo);
-			y = d1.getTime()+24*3600*1000;
-			d2 = new Date(y);
-			z = d3.getTime()-d1.getTime()-statistic.getNbHourRepos()*3600*1000;
-			map2 = new HashMap<>();
-			map = doWork(engin,d1,d3);
-			int arret = (int)z/1000 - map.get("production") - map.get("ralenti");
+    @Override
+    public List<Map<String, String>> getEnginStatisticsWeek(int enginId) {
 
-			if(arret < 0){
-				map.put("ralenti",map.get("ralenti")+arret);
-				arret = 0 ;
-			}
-			if(map.get("ralenti")<0) map.put("ralenti",0);
+        List<Map<String,String>> list = new ArrayList<>();
+        int i;Date d1,d2,d3 ;
+        long y;
+        Engin engin = enginRepo.findOne(enginId);
 
-			p_percent =(double) (map.get("production") * 100 / (z/1000) ) ;
+        SimpleDateFormat stf = new SimpleDateFormat("MM/dd/yyyy");
+        SimpleDateFormat stimef = new SimpleDateFormat("HH:mm");
 
-			map2.put("production", dateUtility.convertToDate(map.get("production")));
-			map2.put("ralenti", dateUtility.convertToDate(map.get("ralenti")));
-			map2.put("arret", dateUtility.convertToDate(arret));
-			map2.put("date", dayFrom);
-			map2.put("pause",statistic.getNbHourRepos()+" h");
-			map2.put("rendement",String.format("%.2f", p_percent) +" %");
-			list.add(map2);
+        Statistic statistic = new Statistic();
+        Date d_to = new Date();
+        long week_Ms = d_to.getTime() - 518400*1000;
+        Date d_from = new Date(week_Ms);
 
-			dayFrom = stf.format(d2);
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR_OF_DAY,6);
+        cal.set(Calendar.MINUTE,00);
+        cal.set(Calendar.SECOND,0);
 
-		}
-		return list;
-	}
+        Date time_from = cal.getTime();
 
-	@Override
+        cal.set(Calendar.HOUR_OF_DAY,19);
+        cal.set(Calendar.MINUTE,00);
+        cal.set(Calendar.SECOND,0);
+        Date time_to = cal.getTime();
+
+        statistic.setDayTo(d_to);
+        statistic.setDayFrom(d_from);
+        statistic.setHourFrom(time_from);
+        statistic.setHourTo(time_to);
+        statistic.setNbHourRepos(1);
+        int nbJours = statistic.calculNbJours();
+
+        String dayFrom =stf.format(statistic.getDayFrom());
+        String hourFrom = stimef.format(statistic.getHourFrom());
+        String hourTo = stimef.format(statistic.getHourTo());
+
+        Map<String ,Integer> map;
+        Map<String ,String> map2 ;
+        double p_percent = new Double(0);long z;
+
+        for(i=0;i<=nbJours;i++){
+
+            System.out.println("From : "+dayFrom+" "+hourFrom);
+
+            d1= new Date(dayFrom+" "+hourFrom);
+            d3= new Date(dayFrom+" "+hourTo);
+            y = d1.getTime()+24*3600*1000;
+            d2 = new Date(y);
+            z = d3.getTime()-d1.getTime()-statistic.getNbHourRepos()*3600*1000;
+            map2 = new HashMap<>();
+            map = doWork(engin,d1,d3);
+            int arret = (int)z/1000 - map.get("production") - map.get("ralenti");
+
+            if(arret < 0){
+                map.put("ralenti",map.get("ralenti")+arret);
+                arret = 0 ;
+            }
+            if(map.get("ralenti")<0) map.put("ralenti",0);
+
+            p_percent =(double) (map.get("production") * 100 / (z/1000) ) ;
+
+            map2.put("production", dateUtility.convertToDate(map.get("production")));
+            map2.put("ralenti", dateUtility.convertToDate(map.get("ralenti")));
+            map2.put("arret", dateUtility.convertToDate(arret));
+            map2.put("date", dayFrom);
+            map2.put("pause",statistic.getNbHourRepos()+" h");
+            map2.put("rendement",String.format("%.2f", p_percent) +" %");
+            list.add(map2);
+
+            dayFrom = stf.format(d2);
+
+        }
+        return list;
+    }
+
+    @Override
+    public List<Map<String, String>> getEnginStatisticsTwoWeek(int enginId) {
+
+        List<Map<String,String>> list = new ArrayList<>();
+        int i;Date d1,d2,d3 ;
+        long y;
+        Engin engin = enginRepo.findOne(enginId);
+
+        SimpleDateFormat stf = new SimpleDateFormat("MM/dd/yyyy");
+        SimpleDateFormat stimef = new SimpleDateFormat("HH:mm");
+
+        Statistic statistic = new Statistic();
+        Date d_to = new Date();
+        long week_Ms = d_to.getTime() - 2592000*1000/2;
+        Date d_from = new Date(week_Ms);
+
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR_OF_DAY,6);
+        cal.set(Calendar.MINUTE,00);
+        cal.set(Calendar.SECOND,0);
+
+        Date time_from = cal.getTime();
+
+        cal.set(Calendar.HOUR_OF_DAY,19);
+        cal.set(Calendar.MINUTE,00);
+        cal.set(Calendar.SECOND,0);
+        Date time_to = cal.getTime();
+
+        statistic.setDayTo(d_to);
+        statistic.setDayFrom(d_from);
+        statistic.setHourFrom(time_from);
+        statistic.setHourTo(time_to);
+        statistic.setNbHourRepos(1);
+        int nbJours = statistic.calculNbJours();
+
+        String dayFrom =stf.format(statistic.getDayFrom());
+        String hourFrom = stimef.format(statistic.getHourFrom());
+        String hourTo = stimef.format(statistic.getHourTo());
+
+        Map<String ,Integer> map;
+        Map<String ,String> map2 ;
+        double p_percent = new Double(0);long z;
+
+        for(i=0;i<=nbJours;i++){
+
+            System.out.println("From : "+dayFrom+" "+hourFrom);
+
+            d1= new Date(dayFrom+" "+hourFrom);
+            d3= new Date(dayFrom+" "+hourTo);
+            y = d1.getTime()+24*3600*1000;
+            d2 = new Date(y);
+            z = d3.getTime()-d1.getTime()-statistic.getNbHourRepos()*3600*1000;
+            map2 = new HashMap<>();
+            map = doWork(engin,d1,d3);
+            int arret = (int)z/1000 - map.get("production") - map.get("ralenti");
+
+            if(arret < 0){
+                map.put("ralenti",map.get("ralenti")+arret);
+                arret = 0 ;
+            }
+            if(map.get("ralenti")<0) map.put("ralenti",0);
+
+            p_percent =(double) (map.get("production") * 100 / (z/1000) ) ;
+
+            map2.put("production", dateUtility.convertToDate(map.get("production")));
+            map2.put("ralenti", dateUtility.convertToDate(map.get("ralenti")));
+            map2.put("arret", dateUtility.convertToDate(arret));
+            map2.put("date", dayFrom);
+            map2.put("pause",statistic.getNbHourRepos()+" h");
+            map2.put("rendement",String.format("%.2f", p_percent) +" %");
+            list.add(map2);
+
+            dayFrom = stf.format(d2);
+
+        }
+        return list;
+    }
+
+    @Override
+    public List<Map<String, String>> getEnginStatisticsMonth(int enginId) {
+
+        List<Map<String,String>> list = new ArrayList<>();
+        int i;Date d1,d2,d3 ;
+        long y;
+        Engin engin = enginRepo.findOne(enginId);
+
+        SimpleDateFormat stf = new SimpleDateFormat("MM/dd/yyyy");
+        SimpleDateFormat stimef = new SimpleDateFormat("HH:mm");
+
+        Statistic statistic = new Statistic();
+        Date d_to = new Date();
+        long week_Ms = d_to.getTime() - 2592000*1000;
+        Date d_from = new Date(week_Ms);
+
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR_OF_DAY,6);
+        cal.set(Calendar.MINUTE,00);
+        cal.set(Calendar.SECOND,0);
+
+        Date time_from = cal.getTime();
+
+        cal.set(Calendar.HOUR_OF_DAY,19);
+        cal.set(Calendar.MINUTE,00);
+        cal.set(Calendar.SECOND,0);
+        Date time_to = cal.getTime();
+
+        statistic.setDayTo(d_to);
+        statistic.setDayFrom(d_from);
+        statistic.setHourFrom(time_from);
+        statistic.setHourTo(time_to);
+        statistic.setNbHourRepos(1);
+        int nbJours = statistic.calculNbJours();
+
+        String dayFrom =stf.format(statistic.getDayFrom());
+        String hourFrom = stimef.format(statistic.getHourFrom());
+        String hourTo = stimef.format(statistic.getHourTo());
+
+        Map<String ,Integer> map;
+        Map<String ,String> map2 ;
+        double p_percent = new Double(0);long z;
+
+        for(i=0;i<=nbJours;i++){
+
+            System.out.println("From : "+dayFrom+" "+hourFrom);
+
+            d1= new Date(dayFrom+" "+hourFrom);
+            d3= new Date(dayFrom+" "+hourTo);
+            y = d1.getTime()+24*3600*1000;
+            d2 = new Date(y);
+            z = d3.getTime()-d1.getTime()-statistic.getNbHourRepos()*3600*1000;
+            map2 = new HashMap<>();
+            map = doWork(engin,d1,d3);
+            int arret = (int)z/1000 - map.get("production") - map.get("ralenti");
+
+            if(arret < 0){
+                map.put("ralenti",map.get("ralenti")+arret);
+                arret = 0 ;
+            }
+            if(map.get("ralenti")<0) map.put("ralenti",0);
+
+            p_percent =(double) (map.get("production") * 100 / (z/1000) ) ;
+
+            map2.put("production", dateUtility.convertToDate(map.get("production")));
+            map2.put("ralenti", dateUtility.convertToDate(map.get("ralenti")));
+            map2.put("arret", dateUtility.convertToDate(arret));
+            map2.put("date", dayFrom);
+            map2.put("pause",statistic.getNbHourRepos()+" h");
+            map2.put("rendement",String.format("%.2f", p_percent) +" %");
+            list.add(map2);
+
+            dayFrom = stf.format(d2);
+
+        }
+        return list;
+    }
+
+    @Override
 	public List<Map<String, String>> getEnginStatistic(int enginId, Statistic statistic) {
 		List<Map<String,String>> list = new ArrayList<>();
 		int nbJours = statistic.calculNbJours();
