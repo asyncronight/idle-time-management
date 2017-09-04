@@ -6,6 +6,18 @@
 <div class="container">
 	<div th:replace="fragments :: header"></div>
 	<hr>
+	<div class="btn-group pull-right">
+		<a class="btn btn-secondary" th:href="@{'/user/chantier/'+${chantier.id}}">
+			<i class="fa fa-bar-chart"></i> Semaine
+		</a>
+		<a class="btn btn-secondary" th:href="@{'/user/chantier/'+${chantier.id}+'/twoWeeks'}">
+			<i class="fa fa-bar-chart"></i> 15 Jours
+		</a>
+		<a class="btn btn-secondary" th:href="@{'/user/chantier/'+${chantier.id}+'/month'}">
+			<i class="fa fa-bar-chart"></i> Mois
+		</a>
+	</div>
+	<br><br>
 	<h1 class="text-center" th:text="${chantier.nom}"></h1>
 	<a class="btn btn-success btn-lg" href="/user/"><i class="fa fa-arrow-left"></i> Retour à la liste des chantiers</a>
 	<br><br>

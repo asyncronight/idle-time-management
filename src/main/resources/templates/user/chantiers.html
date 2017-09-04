@@ -6,6 +6,18 @@
 <div class="container">
 	<div th:replace="fragments :: header"></div>
 	<hr>
+	<div class="btn-group pull-right">
+		<a class="btn btn-secondary" href="/user/">
+			<i class="fa fa-bar-chart"></i> Semaine
+		</a>
+		<a class="btn btn-secondary" href="/user/twoWeeks">
+			<i class="fa fa-bar-chart"></i> 15 Jours
+		</a>
+		<a class="btn btn-secondary" href="/user/month">
+			<i class="fa fa-bar-chart"></i> Mois
+		</a>
+	</div>
+	<br><br>
 	<div th:replace="fragments :: statsForm"></div>
 	<br>
 
@@ -59,7 +71,7 @@
 										  th:attr="data=${element.get('rendement')}">this default text will be overwriten by th:text content</span>
 
 					</div>
-					<a class="btn btn-block btn-warning"
+					<a class="btn btn-block btn-success"
 					   th:href="@{'/user/chantier/'+${element.get('chantier').id}+'/statistic'}">
 						Voir les statistics du chantier
 					</a>
