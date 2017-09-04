@@ -4,113 +4,67 @@
 <body>
 
 <div class="container">
-	<img th:src="@{/img/header.png}" width="100%">
+	<div th:replace="fragments :: header"></div>
 	<hr>
-	<a class="btn btn-primary btn-lg" href="/user/"><i class="fa fa-arrow-left"></i> Retour à la liste des
-		chantiers</a>
+	<a class="btn btn-success btn-lg" href="/user/"><i class="fa fa-arrow-left"></i> Retour à la liste des chantiers</a>
+	<br><br>
+	<div th:replace="fragments :: statsForm"></div>
 	<br>
-	<br>
-	<div style="background-color: antiquewhite;padding: 2%">
-		<form method="post" class="form-horizontal" th:object="${statistic}">
-			<div>
-				<div class="form-group form-group-sm row d-inline-block ">
-					<label class="control-label col-sm-2 requiredField" for="dayFrom">
-						De
-					</label>
-					<div class="col-sm-10">
-						<div class="input-group">
-							<input class="form-control" id="dayFrom" th:field="*{dayFrom}" placeholder="jj/mm/aaaa"
-								   type="text" required/>
 
-						</div>
+	<div th:if="${enginsRendementWeek}">
+		<h2><i class="fa fa-list"></i> Rendement de la semaine :</h2><br>
+		<div class="row text-center">
+			<div class="col-sm-6 col-md-4" th:each="element : ${enginsRendementWeek}">
+				<div class="card">
+					<div class="card-header">
+						<h2 th:text="'Engin N° '+${element.get('engin').id}"></h2>
 					</div>
-				</div>
-				<input type="hidden"
-					   th:name="${_csrf.parameterName}"
-					   th:value="${_csrf.token}"/>
+					<div class="card-block">
+						<p th:text="'Chauffeur : '+${element.get('engin').chauffeur}"></p>
+						<p th:text="'Marque : '+${element.get('engin').marque}"></p>
+						<p th:text="'Année : '+${element.get('engin').annee}"></p>
 
-				<div class="form-group form-group-sm row d-inline-block ">
-					<label class="control-label col-sm-2 requiredField" for="dayTo">
-						Jusqu'à
-					</label>
-					<div class="col-sm-10">
-						<div class="input-group">
-							<input class="form-control" id="dayTo" th:field="*{dayTo}" placeholder="jj/mm/aaaa"
-								   type="text" required/>
-						</div>
+						<!-- Insert pie chart here ( here is an example on how to get rendement value for this chantier)
+						 th:text will print the text inside the span tag
+						 if u want to get the value in an attribute (data for example), it's possible using th:attr -->
+						rendement = <span th:text="${element.get('rendement')}"
+										  th:attr="data=${element.get('rendement')}">this default text will be overwriten by th:text content</span>
+
 					</div>
+					<a class="btn btn-block btn-success"
+					   th:href="@{'/user/chantier/'+${element.get('engin').chantier.id}+'/engin/'+${element.get('engin').id}}">
+						Voir les statistics de l'engin
+					</a>
 				</div>
+				<br>
 			</div>
-			<div>
-				<div class="form-group form-group-sm row d-inline-block">
-					<label class="control-label col-sm-2 requiredField" for="hourFrom">
-						Entre
-					</label>
-					<div class="col-sm-10">
-						<div class="input-group">
-							<input class="form-control" id="hourFrom" th:field="*{hourFrom}" placeholder="hh:mm"
-								   type="text" required/>
-						</div>
-					</div>
-				</div>
-				<div class="form-group form-group-sm row d-inline-block">
-					<label class="control-label col-sm-2 requiredField" for="hourTo">
-						Et
-					</label>
-					<div class="col-sm-10">
-						<div class="input-group">
-							<input class="form-control" id="hourTo" th:field="*{hourTo}" placeholder="hh:mm"
-								   type="text" required/>
-						</div>
-					</div>
-				</div>
-				<div class="form-group form-group-sm row d-inline-block">
-					<label class="control-label col-sm-14 requiredField" for="nbHourRepos">
-						Nombre d'heures de repos :
-					</label>
-					<div class="col-sm-10">
-						<div class="input-group">
-							<input class="form-control" id="nbHourRepos" th:field="*{nbHourRepos}" placeholder="1"
-								   type="number" required/>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="form-group row">
-				<div class="col-sm-10 col-sm-offset-2">
-					<button class="btn btn-success btn-sm outline" name="submit" type="submit">
-						Inspecter
-					</button>
-				</div>
-			</div>
-
-		</form>
-
+		</div>
 	</div>
 
-	<div style="background-color: antiquewhite;padding: 2%" th:if="${enginsRendementWeek}">
-
+	<div th:if="${enginsRendement}">
+		<h2><i class="fa fa-list"></i> Resultat de l'inspection :</h2><br>
 		<div class="row text-center">
-			<div class=" col-sm-4" th:each="ch : ${enginsRendementWeek}">
-				<div class="card text-center">
+			<div class="col-sm-6 col-md-4" th:each="element : ${enginsRendement}">
+				<div class="card">
 					<div class="card-header">
-						<div class="row">
-							<a th:href="@{'/user/chantier/' + ${ch.get('engin').chantier.id} +'/engin/' + ${ch.get('engin').id} }"><h2  class="col-sm-10"  th:text="${ch.get('engin').marque}"</h2></a>
-
-
-						</div>
+						<h2 th:text="'Engin N° '+${element.get('engin').id}"></h2>
 					</div>
+					<div class="card-block">
+						<p th:text="'Chauffeur : '+${element.get('engin').chauffeur}"></p>
+						<p th:text="'Marque : '+${element.get('engin').marque}"></p>
+						<p th:text="'Année : '+${element.get('engin').annee}"></p>
 
-					<div class="card-block" style="margin: 5%">
-						<p class="card-title" style="margin-top: 10px" th:text="${ch.get('engin').chauffeur}">Addresse fedskmfsrgdvxcrdfvxcdgfvcgrwfxvbdfdlj grfdlkjnn</p>
-					</div>
-					<a th:href="@{'/user/chantier/' + ${ch.get('engin').chantier.id} +'/engin/' + ${ch.get('engin').id} }"> <img th:src="@{'/files/' +${ch.get('engin').photo} }" th:alt="${ch.get('engin').photo}" width="76%"></a>
-					<div class="card-header">
-						<div class="row">
-							<h2 th:text="${ch.get('rendement')}" class="col-sm-10"> </h2>
-						</div>
-					</div>
+						<!-- Insert pie chart here ( here is an example on how to get rendement value for this chantier)
+						 th:text will print the text inside the span tag
+						 if u want to get the value in an attribute (data for example), it's possible using th:attr -->
+						rendement = <span th:text="${element.get('rendement')}"
+										  th:attr="data=${element.get('rendement')}">this default text will be overwriten by th:text content</span>
 
+					</div>
+					<a class="btn btn-block btn-success"
+					   th:href="@{'/user/chantier/'+${element.get('engin').chantier.id}+'/engin/'+${element.get('engin').id}}">
+						Voir les statistics de l'engin
+					</a>
 				</div>
 				<br>
 			</div>

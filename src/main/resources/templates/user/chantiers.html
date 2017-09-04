@@ -5,6 +5,7 @@
 
 <div class="container">
 	<div th:replace="fragments :: header"></div>
+	<hr>
 	<div th:replace="fragments :: statsForm"></div>
 	<br>
 
@@ -14,7 +15,9 @@
 			<div class="col-sm-6 col-md-4" th:each="element : ${chantiersRendementWeek}">
 				<div class="card">
 					<div class="card-header">
-						<h2 th:text="${element.get('chantier').nom}"></h2>
+						<a th:href="@{'/user/chantier/'+${element.get('chantier').id}}">
+							<h2 th:text="${element.get('chantier').nom}"></h2>
+						</a>
 					</div>
 					<div class="card-block">
 						<p th:text="${element.get('chantier').adresse}"></p>
@@ -26,6 +29,10 @@
 										  th:attr="data=${element.get('rendement')}">this default text will be overwriten by th:text content</span>
 
 					</div>
+					<a class="btn btn-block btn-success"
+					   th:href="@{'/user/chantier/'+${element.get('chantier').id}+'/statistic'}">
+						Voir les statistics du chantier
+					</a>
 				</div>
 				<br>
 			</div>
@@ -38,7 +45,9 @@
 			<div class="col-sm-6 col-md-4" th:each="element : ${chantiersRendement}">
 				<div class="card">
 					<div class="card-header">
-						<h2 th:text="${element.get('chantier').nom}"></h2>
+						<a th:href="@{'/user/chantier/'+${element.get('chantier').id}}">
+							<h2 th:text="${element.get('chantier').nom}"></h2>
+						</a>
 					</div>
 					<div class="card-block">
 						<p th:text="${element.get('chantier').adresse}"></p>
@@ -50,6 +59,10 @@
 										  th:attr="data=${element.get('rendement')}">this default text will be overwriten by th:text content</span>
 
 					</div>
+					<a class="btn btn-block btn-warning"
+					   th:href="@{'/user/chantier/'+${element.get('chantier').id}+'/statistic'}">
+						Voir les statistics du chantier
+					</a>
 				</div>
 				<br>
 			</div>

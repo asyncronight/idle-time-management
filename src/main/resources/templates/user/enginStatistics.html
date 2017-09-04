@@ -4,130 +4,41 @@
 <body>
 
 <div class="container">
-	<img th:src="@{/img/header.png}" width="100%">
+	<div th:replace="fragments :: header"></div>
 	<hr>
-	<a class="btn btn-primary btn-lg" href="/user/"><i class="fa fa-arrow-left"></i> Retour à la liste des
-		chantiers</a>
+	<a class="btn btn-success btn-lg" th:href="@{'/user/chantier/'+${engin.chantier.id}}">
+		<i class="fa fa-arrow-left"></i> Retour à la liste des chantiers
+	</a>
+	<br><br>
+	<div th:replace="fragments :: statsForm"></div>
+
 	<br>
-	<br>
-	<div style="background-color: antiquewhite;padding: 2%">
-		<form method="post" class="form-horizontal" th:object="${statistic}">
-			<input type="hidden"
-				   th:name="${_csrf.parameterName}"
-				   th:value="${_csrf.token}"/>
-
-			<div>
-				<div class="form-group form-group-sm row d-inline-block ">
-					<label class="control-label col-sm-2 requiredField" for="dayFrom">
-						De
-					</label>
-					<div class="col-sm-10">
-						<div class="input-group">
-							<input class="form-control" id="dayFrom" th:field="*{dayFrom}" placeholder="jj/mm/aaaa"
-								   type="text" required/>
-
-						</div>
-					</div>
-				</div>
-
-				<div class="form-group form-group-sm row d-inline-block ">
-					<label class="control-label col-sm-2 requiredField" for="dayTo">
-						Jusqu'à
-					</label>
-					<div class="col-sm-10">
-						<div class="input-group">
-							<input class="form-control" id="dayTo" th:field="*{dayTo}" placeholder="jj/mm/aaaa"
-								   type="text" required/>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div>
-				<div class="form-group form-group-sm row d-inline-block">
-					<label class="control-label col-sm-2 requiredField" for="hourFrom">
-						Entre
-					</label>
-					<div class="col-sm-10">
-						<div class="input-group">
-							<input class="form-control" id="hourFrom" th:field="*{hourFrom}" placeholder="hh:mm"
-								   type="text" required/>
-						</div>
-					</div>
-				</div>
-				<div class="form-group form-group-sm row d-inline-block">
-					<label class="control-label col-sm-2 requiredField" for="hourTo">
-						Et
-					</label>
-					<div class="col-sm-10">
-						<div class="input-group">
-							<input class="form-control" id="hourTo" th:field="*{hourTo}" placeholder="hh:mm"
-								   type="text" required/>
-						</div>
-					</div>
-				</div>
-				<div class="form-group form-group-sm row d-inline-block">
-					<label class="control-label col-sm-14 requiredField" for="nbHourRepos">
-						Nombre d'heures de repos :
-					</label>
-					<div class="col-sm-10">
-						<div class="input-group">
-							<input class="form-control" id="nbHourRepos" th:field="*{nbHourRepos}" placeholder="1"
-								   type="number" required/>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="form-group row">
-				<div class="col-sm-10 col-sm-offset-2">
-					<button class="btn btn-success btn-sm outline" name="submit" type="submit">
-						Inspecter
-					</button>
-				</div>
-			</div>
-
-		</form>
-
+	<div th:if="${enginStatistics}">
+		<h2 th:if="${semaine}"> Statistiques de la semaine :</h2>
+		<h2 th:if="!${semaine}"> Rsultat de l'inspection :</h2>
+		<table class="table table-striped">
+			<tr>
+				<th>Le jour</th>
+				<th>Temps de production</th>
+				<th>Temps de ralenti</th>
+				<th>Temps d'arret</th>
+				<th>Pause</th>
+				<th>Rendement</th>
+			</tr>
+			<tr th:each="statistica : ${enginStatistics}">
+				<td>
+					<a th:text="${statistica.get('date')}"
+					   th:href="@{'/user/chantier/' + ${engin.chantier.id} +'/engin/'+ ${engin.id} + '/' + ${statistica.get('date')}}">
+					</a>
+				</td>
+				<td th:text="${statistica.get('production')}"></td>
+				<td th:text="${statistica.get('ralenti')}"></td>
+				<td th:text="${statistica.get('arret') }"></td>
+				<td th:text="${statistica.get('pause') }"></td>
+				<td th:text="${statistica.get('rendement') }"></td>
+			</tr>
+		</table>
 	</div>
-
-	<h2> Statistiques <span th:if="${par}"> de la semaine</span> :</h2>
-	<table class="table table-striped" th:if="${enginStatisticsWeek}">
-		<tr>
-			<th>Le jour</th>
-			<th>Temps de production</th>
-			<th>Temps de ralenti</th>
-			<th>Temps d'arret</th>
-			<th>Pause</th>
-			<th>Rendement</th>
-		</tr>
-		<tr th:each="statistica : ${enginStatisticsWeek}">
-			<td><a th:text="${statistica.get('date')}"
-				   th:href="@{'/user/chantier/' + ${id} +'/engin/'+ ${engin.id} + '/' + ${statistica.get('date')}}"></a></td>
-			<td th:text="${statistica.get('production')}"></td>
-			<td th:text="${statistica.get('ralenti')}"></td>
-			<td th:text="${statistica.get('arret') }"></td>
-			<td th:text="${statistica.get('pause') }"></td>
-			<td th:text="${statistica.get('rendement') }"></td>
-		</tr>
-	</table>
-	<table class="table table-striped" th:if="${enginStatistics}">
-		<tr>
-			<th>Le jour</th>
-			<th>Temps de production</th>
-			<th>Temps de ralenti</th>
-			<th>Temps d'arret</th>
-			<th>Pause</th>
-			<th>Rendement</th>
-		</tr>
-		<tr th:each="statistica : ${enginStatistics}">
-			<td><a th:text="${statistica.get('date')}"
-				   th:href="@{'/user/chantier/' + ${id} +'/engin/'+ ${engin.id} + '/' + ${statistica.get('date')}}"></a></td>
-			<td th:text="${statistica.get('production')}"></td>
-			<td th:text="${statistica.get('ralenti')}"></td>
-			<td th:text="${statistica.get('arret') }"></td>
-			<td th:text="${statistica.get('pause') }"></td>
-			<td th:text="${statistica.get('rendement') }"></td>
-		</tr>
-	</table>
 </div>
 
 </body>

@@ -32,10 +32,6 @@
 			</div>
 			<div class="ml-auto">
 				<form th:action="@{/logout}" method="post">
-					<input type="hidden"
-						   th:name="${_csrf.parameterName}"
-						   th:value="${_csrf.token}"/>
-
 					<button type="submit" class="btn btn-secondary">
 						Se déconnécter <i class="fa fa-sign-out"></i>
 					</button>
@@ -44,7 +40,7 @@
 		</div>
 	</div>
 
-	<div style="background-color: rgba(255,255,0,0.3);padding: 2%" th:fragment="statsForm">
+	<div style="background-color: rgba(0,255,0,0.2);padding: 2%" th:fragment="statsForm">
 		<form method="post" th:object="${statistic}">
 			<input type="hidden"
 				   th:name="${_csrf.parameterName}"
@@ -132,7 +128,7 @@
 
 			<div class="row">
 				<div class="col-sm-6 push-sm-3 pull-sm-3">
-					<button type="submit" class="btn btn-warning btn-block btn-lg">Inspecter</button>
+					<button type="submit" class="btn btn-success btn-block btn-lg">Inspecter</button>
 				</div>
 			</div>
 		</form>
