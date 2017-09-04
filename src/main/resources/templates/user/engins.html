@@ -5,6 +5,11 @@
 
 <div class="container">
 	<img th:src="@{/img/header.png}" width="100%">
+	<hr>
+	<a class="btn btn-primary btn-lg" href="/user/"><i class="fa fa-arrow-left"></i> Retour à la liste des
+		chantiers</a>
+	<br>
+	<br>
 	<div style="background-color: antiquewhite;padding: 2%">
 		<form method="post" class="form-horizontal" th:object="${statistic}">
 			<div>
@@ -87,16 +92,16 @@
 				<div class="card text-center">
 					<div class="card-header">
 						<div class="row">
-							<h2  class="col-sm-10"  th:text="${ch.get('engin').marque}"</h2>
+							<a th:href="@{'/user/chantier/' + ${ch.get('engin').chantier.id} +'/engin/' + ${ch.get('engin').id} }"><h2  class="col-sm-10"  th:text="${ch.get('engin').marque}"</h2></a>
+
+
 						</div>
 					</div>
+
 					<div class="card-block" style="margin: 5%">
 						<p class="card-title" style="margin-top: 10px" th:text="${ch.get('engin').chauffeur}">Addresse fedskmfsrgdvxcrdfvxcdgfvcgrwfxvbdfdlj grfdlkjnn</p>
 					</div>
-					<div class="card-block" style="width:50px;height:50px;">
-						<a th:href="@{'/user/chantier/' + ${ch.get('engin').chantier.id} +'/engin/' + ${ch.get('engin').id} }"> <img th:src="@{'/files/' +${ch.get('engin').photo} }" th:alt="${ch.get('engin').photo}"  width="75%"></a>
-
-					</div>
+					<a th:href="@{'/user/chantier/' + ${ch.get('engin').chantier.id} +'/engin/' + ${ch.get('engin').id} }"> <img th:src="@{'/files/' +${ch.get('engin').photo} }" th:alt="${ch.get('engin').photo}" width="76%"></a>
 					<div class="card-header">
 						<div class="row">
 							<h2 th:text="${ch.get('rendement')}" class="col-sm-10"> </h2>

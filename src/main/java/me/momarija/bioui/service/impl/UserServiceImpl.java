@@ -78,7 +78,7 @@ public class UserServiceImpl implements UserService {
 
 		for (Chantier c:chantierRepo.findAll()) {
 			mapChantierRendement.put("chantier",c);
-			mapChantierRendement.put("rendement",getChantierRendement(c.getId(),statistic));
+			mapChantierRendement.put("rendement",String.format("%.2f", getChantierRendement(c.getId(),statistic)));
 			list.add(mapChantierRendement);
 			mapChantierRendement=new HashMap<>();
 		}
@@ -192,7 +192,7 @@ public class UserServiceImpl implements UserService {
 		Map<String ,Integer> map ;
 		Map<String ,String> map2 ;
 		double p_percent;long z;
-		int a=0,r=0,p=0;float perc =0.2f;
+		int a=0,r=0,p=0;float perc =0.0f;
 		for(i=0;i<=nbJours;i++){
 			d1= new Date(dayFrom+" "+hourFrom);
 			d3= new Date(dayFrom+" "+hourTo);
@@ -200,9 +200,7 @@ public class UserServiceImpl implements UserService {
 			d2 = new Date(y);
 			z = d3.getTime()-d1.getTime()-statistic.getNbHourRepos()*3600*1000;
 			map2 = new HashMap<>();
-			System.out.println(chantierId+" ***********");
 			List<Engin> listEngin = getEnginList(chantierId);
-			System.out.println(listEngin.size()+ "*-*-*-*-");
 			for (Engin engin :listEngin) {
 				map = doWork(engin,d1,d3);
 				int arret = (int)z/1000 - map.get("production") - map.get("ralenti");
@@ -228,7 +226,7 @@ public class UserServiceImpl implements UserService {
 			map2.put("pause",statistic.getNbHourRepos()+" h");
 			map2.put("rendement",String.format("%.2f",perc/listEngin.size() )+" %" );
 			list.add(map2);
-			a=0;r=0;p=0;perc=0.2f;
+			a=0;r=0;p=0;perc=0.0f;
 			map2= new HashMap<>();
 			dayFrom = stf.format(d2);
 
@@ -279,7 +277,7 @@ public class UserServiceImpl implements UserService {
 		Map<String,Object> mapEnginRendement = new HashMap<>();
 		for (Engin e:getEnginList(chantierId)) {
 			mapEnginRendement.put("engin",e);
-			mapEnginRendement.put("rendement",getEnginRendement(e.getId(),statistic));
+			mapEnginRendement.put("rendement",String.format("%.2f",getEnginRendement(e.getId(),statistic)) );
 			list.add(mapEnginRendement);
 			mapEnginRendement=new HashMap<>();
 		}
@@ -303,7 +301,7 @@ public class UserServiceImpl implements UserService {
 		Date d_from = new Date(week_Ms);
 
 		Calendar cal = Calendar.getInstance();
-		cal.set(Calendar.HOUR_OF_DAY,7);
+		cal.set(Calendar.HOUR_OF_DAY,6);
 		cal.set(Calendar.MINUTE,00);
 		cal.set(Calendar.SECOND,0);
 
@@ -327,7 +325,7 @@ public class UserServiceImpl implements UserService {
 
 		Map<String ,Integer> map;
 		Map<String ,String> map2 ;
-		double p_percent;long z;
+		double p_percent = new Double(0);long z;
 
 		for(i=0;i<=nbJours;i++){
 
@@ -365,7 +363,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<Map<String, String>> getEnginStatistics(int enginId, Statistic statistic) {
+	public List<Map<String, String>> getEnginStatistic(int enginId, Statistic statistic) {
 		List<Map<String,String>> list = new ArrayList<>();
 		int nbJours = statistic.calculNbJours();
 		System.out.println(nbJours);
@@ -383,7 +381,7 @@ public class UserServiceImpl implements UserService {
 
 		Map<String ,Integer> map;
 		Map<String ,String> map2 ;
-		double p_percent;long z;
+		double p_percent;long z;float fullTime = 0.2f;
 
 		for(i=0;i<=nbJours;i++){
 
@@ -421,52 +419,72 @@ public class UserServiceImpl implements UserService {
 		return list;
 	}
 
+
+
 	private List<Engin> getEnginList(int chantierId) {
 		return chantierRepo.findOne(chantierId).getEngins();
 	}
 	private float getChantierRendement(int chantierId, Statistic statistic){
-		float rendement = 0.2f;
+		float rendement = 0.0f;
 		List<Engin> listEngins = getEnginList(chantierId);
 		for (Engin e:listEngins) {
-			rendement += getEnginRendement(e.getId(),statistic);
+			rendement = getEnginRendement(e.getId(),statistic);
+			System.out.println(rendement+"*********** ok");
 		}
-		rendement = rendement/listEngins.size();
-		return rendement;
+
+		float x = rendement/listEngins.size();
+		return x;
+
+
 	}
 	private float getEnginRendement(int enginId,Statistic statistic){
-		float rendement = 0.2f;
-		int i;Date d1,d2,d3 ;
-		long y,z;
+
+		List<Map<String,String>> list = new ArrayList<>();
 		int nbJours = statistic.calculNbJours();
+		System.out.println(nbJours);
+		int i;Date d1,d2,d3 ;
+		long y;
+		Engin engin = enginRepo.findOne(enginId);
+
+
 		SimpleDateFormat stf = new SimpleDateFormat("MM/dd/yyyy");
 		SimpleDateFormat stimef = new SimpleDateFormat("HH:mm");
-		Engin engin = enginRepo.findOne(enginId);
+
 		String dayFrom =stf.format(statistic.getDayFrom());
 		String hourFrom = stimef.format(statistic.getHourFrom());
 		String hourTo = stimef.format(statistic.getHourTo());
-		Map<String ,Integer> map ;
 
-		for(i=0;i<=nbJours;i++){
-			d1= new Date(dayFrom+" "+hourFrom);
-			d3= new Date(dayFrom+" "+hourTo);
-			y = d1.getTime()+24*3600*1000;
+		Map<String ,Integer> map;
+		Map<String ,String> map2 ;
+		float p_percent = 0.0f;long z;float fullTime = 0.2f;
+		float x = 0.0f;
+		for(i=0;i<=nbJours;i++) {
+
+			System.out.println("From : " + dayFrom + " " + hourFrom);
+
+			d1 = new Date(dayFrom + " " + hourFrom);
+			d3 = new Date(dayFrom + " " + hourTo);
+			y = d1.getTime() + 24 * 3600 * 1000;
 			d2 = new Date(y);
+			z = d3.getTime() - d1.getTime() - statistic.getNbHourRepos() * 3600 * 1000;
+			map2 = new HashMap<>();
+			map = doWork(engin, d1, d3);
+			int arret = (int) z / 1000 - map.get("production") - map.get("ralenti");
 
-			//getting map from Algorithme (TraitementService)
-
-			map = doWork(engin,d1,d3);
-			z = d3.getTime()-d1.getTime()-statistic.getNbHourRepos()*3600*1000;
-			int arret = (int)z/1000 - map.get("production") - map.get("ralenti");
-
-			if(arret < 0){
-				map.put("ralenti",map.get("ralenti")+arret);
-				arret = 0 ;
+			if (arret < 0) {
+				map.put("ralenti", map.get("ralenti") + arret);
+				arret = 0;
 			}
-			if(map.get("ralenti")<0) map.put("ralenti",0);
-			rendement =(float) (map.get("production") * 100 / (z/1000) ) ;
+			if (map.get("ralenti") < 0) map.put("ralenti", 0);
+
+			p_percent += (float) (map.get("production") * 100 / (z / 1000));
+
+			dayFrom = stf.format(d2);
 		}
-		return rendement;
-	}
+
+		return  p_percent / (nbJours+1);
+
+		}
 	private Map<String, Integer> doWork(Engin engin,Date from, Date to){
 		List<Donnee> donneeList = donneeRepo.findBetween(engin.getId(), from, to);
 		return traitementService.calcule(donneeList, engin.getTemps(), engin.getSeuilP(), engin.getSeuilR());
