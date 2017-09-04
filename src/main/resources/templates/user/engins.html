@@ -15,7 +15,9 @@
 		<h2><i class="fa fa-list"></i> Rendement de la semaine :</h2><br>
 		<div class="row text-center">
 			<div class="col-sm-6 col-md-4" th:each="element : ${enginsRendementWeek}">
-				<div class="card">
+				<div class="card" style="border: solid 2px #636363">
+					<img class="card-img-top img-fluid" th:src="@{'/files/'+${element.get('engin').photo}}"
+						 th:alt="${element.get('engin').photo}"/>
 					<div class="card-header">
 						<h2 th:text="'Engin N° '+${element.get('engin').id}"></h2>
 					</div>
@@ -45,7 +47,9 @@
 		<h2><i class="fa fa-list"></i> Resultat de l'inspection :</h2><br>
 		<div class="row text-center">
 			<div class="col-sm-6 col-md-4" th:each="element : ${enginsRendement}">
-				<div class="card">
+				<div class="card" style="border: solid 2px #636363">
+					<img class="card-img-top img-fluid" th:src="@{'/files/'+${element.get('engin').photo}}"
+						 th:alt="${element.get('engin').photo}"/>
 					<div class="card-header">
 						<h2 th:text="'Engin N° '+${element.get('engin').id}"></h2>
 					</div>
