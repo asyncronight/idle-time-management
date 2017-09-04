@@ -54,10 +54,12 @@ public class SecConfig extends WebSecurityConfigurerAdapter {
 				.formLogin().loginPage("/login").successForwardUrl("/").permitAll()
 				.and()
 				.logout().permitAll();
-		//H2 Security Config [in development mode only]
+
+		//Configutations for dev mode (default profile)
+		//H2 Security Config
 		if (environment.getActiveProfiles().length == 0) {
 			http.authorizeRequests().antMatchers("/h2-console/**").permitAll();
-			http.csrf().ignoringAntMatchers("/h2-console/**").disable();
+			http.csrf().ignoringAntMatchers("/h2-console/**");
 			http.headers().frameOptions().disable();
 		}
 	}

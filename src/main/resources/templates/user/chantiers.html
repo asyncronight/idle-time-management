@@ -19,8 +19,11 @@
 					<div class="card-block">
 						<p th:text="${element.get('chantier').adresse}"></p>
 
-						<!-- Insert pie chart here ( here is an example on how to get rendement value for this chantier) -->
-						rendement = <span th:text="${element.get('rendement')}"></span>
+						<!-- Insert pie chart here ( here is an example on how to get rendement value for this chantier)
+						 th:text will print the text inside the span tag
+						 if u want to get the value in an attribute (data for example), it's possible using th:attr -->
+						rendement = <span th:text="${element.get('rendement')}"
+										  th:attr="data=${element.get('rendement')}">this default text will be overwriten by th:text content</span>
 
 					</div>
 				</div>
@@ -40,8 +43,11 @@
 					<div class="card-block">
 						<p th:text="${element.get('chantier').adresse}"></p>
 
-						<!-- Insert pie chart here ( here is an example on how to get rendement value for this chantier) -->
-						rendement = <span th:text="${element.get('rendement')}"></span>
+						<!-- Insert pie chart here ( here is an example on how to get rendement value for this chantier)
+						 th:text will print the text inside the span tag
+						 if u want to get the value in an attribute (data for example), it's possible using th:attr -->
+						rendement = <span th:text="${element.get('rendement')}"
+										  th:attr="data=${element.get('rendement')}">this default text will be overwriten by th:text content</span>
 
 					</div>
 				</div>

@@ -32,6 +32,10 @@
 			</div>
 			<div class="ml-auto">
 				<form th:action="@{/logout}" method="post">
+					<input type="hidden"
+						   th:name="${_csrf.parameterName}"
+						   th:value="${_csrf.token}"/>
+
 					<button type="submit" class="btn btn-secondary">
 						Se déconnécter <i class="fa fa-sign-out"></i>
 					</button>
