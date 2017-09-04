@@ -2,23 +2,30 @@ package me.momarija.bioui.domains;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 public class Statistic {
 
     @DateTimeFormat(pattern="dd/MM/yyyy")
-    private Date dayFrom;
+	@NotNull
+	private Date dayFrom;
 
     @DateTimeFormat(pattern="dd/MM/yyyy")
-    private Date dayTo;
+	@NotNull
+	private Date dayTo;
 
     @DateTimeFormat(pattern="HH:mm")
-    private Date hourFrom;
+	@NotNull
+	private Date hourFrom;
 
     @DateTimeFormat(pattern="HH:mm")
-    private Date hourTo;
+	@NotNull
+	private Date hourTo;
 
-    private int nbHourRepos;
+	@Min(0)
+	private int nbHourRepos;
 
 	public Statistic() {
 

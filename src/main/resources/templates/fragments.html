@@ -42,5 +42,99 @@
 			</div>
 		</div>
 	</div>
+
+	<div style="background-color: rgba(255,255,0,0.3);padding: 2%" th:fragment="statsForm">
+		<form method="post" th:object="${statistic}">
+			<input type="hidden"
+				   th:name="${_csrf.parameterName}"
+				   th:value="${_csrf.token}"/>
+
+			<div class="row">
+				<div class="col-sm-6">
+					<div th:class="${#fields.hasErrors('dayFrom')} ? 'form-group row has-danger' : 'form-group row'">
+						<label class="col-sm-2 col-form-label" for="dayFrom">De:</label>
+						<div class="col-sm-10">
+							<input id="dayFrom" type="text" class="form-control" th:field="*{dayFrom}"
+								   placeholder="dd/mm/aaaa" th:errorclass="form-control-danger"/>
+							<div class="form-control-feedback" th:if="${#fields.hasErrors('dayFrom')}">
+								<ul>
+									<li th:each="err : ${#fields.errors('dayFrom')}" th:text="${err}"/>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col">
+					<div th:class="${#fields.hasErrors('dayTo')} ? 'form-group row has-danger' : 'form-group row'">
+						<label class="col-sm-2 col-form-label" for="dayTo">Jusqu'à:</label>
+						<div class="col-sm-10">
+							<input id="dayTo" type="text" class="form-control" th:field="*{dayTo}"
+								   placeholder="dd/mm/aaaa" th:errorclass="form-control-danger"/>
+							<div class="form-control-feedback" th:if="${#fields.hasErrors('dayTo')}">
+								<ul>
+									<li th:each="err : ${#fields.errors('dayTo')}" th:text="${err}"/>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-6">
+					<div th:class="${#fields.hasErrors('hourFrom')} ? 'form-group row has-danger' : 'form-group row'">
+						<label class="col-sm-2 col-form-label" for="hourFrom">Entre:</label>
+						<div class="col-sm-10">
+							<input id="hourFrom" type="text" class="form-control" th:field="*{hourFrom}"
+								   placeholder="hh:mm" th:errorclass="form-control-danger"/>
+							<div class="form-control-feedback" th:if="${#fields.hasErrors('hourFrom')}">
+								<ul>
+									<li th:each="err : ${#fields.errors('hourFrom')}" th:text="${err}"/>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div th:class="${#fields.hasErrors('hourTo')} ? 'form-group row has-danger' : 'form-group row'">
+						<label class="col-sm-2 col-form-label" for="hourTo">Et:</label>
+						<div class="col-sm-10">
+							<input id="hourTo" type="text" class="form-control" th:field="*{hourTo}"
+								   placeholder="hh:mm" th:errorclass="form-control-danger"/>
+							<div class="form-control-feedback" th:if="${#fields.hasErrors('hourTo')}">
+								<ul>
+									<li th:each="err : ${#fields.errors('hourTo')}" th:text="${err}"/>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-6 push-sm-3 pull-sm-3">
+					<div th:class="${#fields.hasErrors('nbHourRepos')} ? 'form-group row has-danger' : 'form-group row'">
+						<label class="col-sm-6 col-form-label mr-auto" for="nbHourRepos">Nombre d'heures de
+							repos:</label>
+						<div class="col-sm-6">
+							<input id="nbHourRepos" type="number" class="form-control" th:field="*{nbHourRepos}"
+								   th:errorclass="form-control-danger"/>
+							<div class="form-control-feedback" th:if="${#fields.hasErrors('nbHourRepos')}">
+								<ul>
+									<li th:each="err : ${#fields.errors('nbHourRepos')}" th:text="${err}"/>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-6 push-sm-3 pull-sm-3">
+					<button type="submit" class="btn btn-warning btn-block btn-lg">Inspecter</button>
+				</div>
+			</div>
+		</form>
+	</div>
 </body>
 </html>

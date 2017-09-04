@@ -1,18 +1,16 @@
 package me.momarija.bioui.controllers;
 
-import me.momarija.bioui.domains.Chantier;
 import me.momarija.bioui.domains.Statistic;
 import me.momarija.bioui.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
-import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/user/")
@@ -30,11 +28,13 @@ public class UserController {
 	}
 
 	@RequestMapping(value = {""},method = RequestMethod.POST)
-	public String chantiersRendementList(Model model,@Valid Statistic statistic){
+	public String chantiersRendementList(Model model, @Valid Statistic statistic, BindingResult result) {
+		if (result.hasErrors()) {
+			model.addAttribute("title", "Erreur");
+			return "user/chantiers";
+		}
 		model.addAttribute("title", "Liste des chantiers");
-		model.addAttribute("statistic",statistic);
-		List<Map<String,Object>> list = userService.getChantiersRendement(statistic);
-		model.addAttribute("chantiersRendement",list);
+		model.addAttribute("chantiersRendement", userService.getChantiersRendement(statistic));
 		return "user/chantiers";
 	}
 
@@ -47,7 +47,11 @@ public class UserController {
 	}
 
 	@RequestMapping(value = {"chantier/{id}"},method = RequestMethod.POST)
-	public String enginsList(Model model, @PathVariable int id,@Valid Statistic statistic){
+	public String enginsList(Model model, @PathVariable int id, @Valid Statistic statistic, BindingResult result) {
+		if (result.hasErrors()) {
+			model.addAttribute("title", "Erreur");
+			return "user/chantiers";
+		}
 		model.addAttribute("title", "Liste des engins");
 		model.addAttribute("statistic",statistic);
 		model.addAttribute("enginsRendementWeek", userService.getEnginsRendement(id,statistic));

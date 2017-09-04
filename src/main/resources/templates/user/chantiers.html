@@ -4,165 +4,51 @@
 <body>
 
 <div class="container">
-	<img th:src="@{/img/header.png}" width="100%">
-	<div style="background-color: antiquewhite;padding: 2%">
-		<form method="post" class="form-horizontal" th:object="${statistic}">
-			<div>
-				<div class="form-group form-group-sm row d-inline-block ">
-					<label class="control-label col-sm-2 requiredField" for="dayFrom">
-						De
-					</label>
-					<div class="col-sm-10">
-						<div class="input-group">
-							<input class="form-control" id="dayFrom" th:field="*{dayFrom}" placeholder="jj/mm/aaaa"
-								   type="text" required/>
+	<div th:replace="fragments :: header"></div>
+	<div th:replace="fragments :: statsForm"></div>
+	<br>
 
-						</div>
+	<div th:if="${chantiersRendementWeek}">
+		<h2><i class="fa fa-list"></i> Rendement de la semaine :</h2><br>
+		<div class="row text-center">
+			<div class="col-sm-6 col-md-4" th:each="element : ${chantiersRendementWeek}">
+				<div class="card">
+					<div class="card-header">
+						<h2 th:text="${element.get('chantier').nom}"></h2>
 					</div>
-				</div>
+					<div class="card-block">
+						<p th:text="${element.get('chantier').adresse}"></p>
 
-				<div class="form-group form-group-sm row d-inline-block ">
-					<label class="control-label col-sm-2 requiredField" for="dayTo">
-						Jusqu'à
-					</label>
-					<div class="col-sm-10">
-						<div class="input-group">
-							<input class="form-control" id="dayTo" th:field="*{dayTo}" placeholder="jj/mm/aaaa"
-								   type="text" required/>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div>
-				<div class="form-group form-group-sm row d-inline-block">
-					<label class="control-label col-sm-2 requiredField" for="hourFrom">
-						Entre
-					</label>
-					<div class="col-sm-10">
-						<div class="input-group">
-							<input class="form-control" id="hourFrom" th:field="*{hourFrom}" placeholder="hh:mm"
-								   type="text" required/>
-						</div>
-					</div>
-				</div>
-				<div class="form-group form-group-sm row d-inline-block">
-					<label class="control-label col-sm-2 requiredField" for="hourTo">
-						Et
-					</label>
-					<div class="col-sm-10">
-						<div class="input-group">
-							<input class="form-control" id="hourTo" th:field="*{hourTo}" placeholder="hh:mm"
-								   type="text" required/>
-						</div>
-					</div>
-				</div>
-				<div class="form-group form-group-sm row d-inline-block">
-					<label class="control-label col-sm-14 requiredField" for="nbHourRepos">
-						Nombre d'heures de repos :
-					</label>
-					<div class="col-sm-10">
-						<div class="input-group">
-							<input class="form-control" id="nbHourRepos" th:field="*{nbHourRepos}" placeholder="1"
-								   type="number" required/>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="form-group row">
-				<div class="col-sm-10 col-sm-offset-2">
-					<button class="btn btn-success btn-sm outline" name="submit" type="submit">
-						Inspecter
-					</button>
-				</div>
-			</div>
+						<!-- Insert pie chart here ( here is an example on how to get rendement value for this chantier) -->
+						rendement = <span th:text="${element.get('rendement')}"></span>
 
-		</form>
+					</div>
+				</div>
+				<br>
+			</div>
+		</div>
 	</div>
 
-	<div style="background-color: antiquewhite;padding: 2%" th:if="${chantiersRendementWeek}">
-			<h2><i class="fa fa-list"></i> Rendement par semaine :</h2>
-			<br>
-			<div class="row text-center" >
-				<div class=" col-sm-4" th:each="ch : ${chantiersRendementWeek}">
-				<div class="card text-center">
+	<div th:if="${chantiersRendement}">
+		<h2><i class="fa fa-list"></i> Resultat de l'inspection :</h2><br>
+		<div class="row text-center">
+			<div class="col-sm-6 col-md-4" th:each="element : ${chantiersRendement}">
+				<div class="card">
 					<div class="card-header">
-						<div class="row">
-							<h2  class="col-sm-10"><a th:text="${ch.get('chantier').nom}" th:href="@{'/user/chantier/' + ${ch.get('chantier').id} +'/statistic'}"></a></h2>
-						</div>
+						<h2 th:text="${element.get('chantier').nom}"></h2>
 					</div>
-					<div class="card-block" style="margin: 5%">
-						<p class="card-title" style="margin-top: 10px" th:text="${ch.get('chantier').adresse}">Addresse fedskmfsrgdvxcrdfvxcdgfvcgrwfxvbdfdlj grfdlkjnn</p>
-					</div>
-					<div class="card-header">
-						<div class="row">
-							<h2 th:text="${ch.get('rendement')}" class="col-sm-10"> %</h2>
-						</div>
-					</div>
+					<div class="card-block">
+						<p th:text="${element.get('chantier').adresse}"></p>
 
-					<div class="card-footer">
-						<a class="btn btn-block" th:href="@{'/user/chantier/'+${ch.get('chantier').id}}">Voir la liste des engins</a>
+						<!-- Insert pie chart here ( here is an example on how to get rendement value for this chantier) -->
+						rendement = <span th:text="${element.get('rendement')}"></span>
+
 					</div>
 				</div>
 				<br>
 			</div>
 		</div>
-		</div>
-	<div style="background-color: antiquewhite;padding: 2%" th:if="${chantiersRendement}">
-
-				<div class="row text-center">
-					<div class=" col-sm-4" th:each="ch : ${chantiersRendement}">
-						<div class="card text-center">
-							<div class="card-header">
-								<div class="row">
-									<h2  class="col-sm-10"><a th:text="${ch.get('chantier').nom}" th:href="@{'/user/chantier/' + ${ch.get('chantier').id}}"></a></h2>
-								</div>
-							</div>
-							<div class="card-block" style="margin: 5%">
-								<p class="card-title" style="margin-top: 10px" th:text="${ch.get('chantier').adresse}">Addresse fedskmfsrgdvxcrdfvxcdgfvcgrwfxvbdfdlj grfdlkjnn</p>
-							</div>
-							<div class="card-header">
-								<div class="row">
-									<h2 th:text="${ch.get('rendement')}" class="col-sm-10"> </h2>
-								</div>
-							</div>
-
-							<div class="card-footer">
-								<a class="btn btn-block" th:href="@{'/admin/chantier/'+${ch.get('chantier').id}}">Voir la liste des engins</a>
-							</div>
-						</div>
-						<br>
-					</div>
-				</div>
-			</div>
-	<div style="background-color: antiquewhite;padding: 2%" th:if="${chantiersRendementMonth}">
-				<h2><i class="fa fa-list"></i> Rendement par Mois :</h2>
-				<br>
-				<div class="row text-center" >
-
-					<div class=" col-sm-4" th:each="ch : ${chantiersRendementMonth}">
-						<div class="card text-center">
-							<div class="card-header">
-								<div class="row">
-									<h2  class="col-sm-10"><a th:text="${ch.get('chantier').nom}" th:href="@{'/user/chantier/' + ${ch.get('chantier').id}}"></a></h2>
-								</div>
-							</div>
-							<div class="card-block" style="margin: 5%">
-								<p class="card-title" style="margin-top: 10px" th:text="${ch.get('chantier').adresse}">Addresse fedskmfsrgdvxcrdfvxcdgfvcgrwfxvbdfdlj grfdlkjnn</p>
-							</div>
-							<div class="card-header">
-								<div class="row">
-									<h2 th:text="${ch.get('rendement')}" class="col-sm-10"></h2>
-								</div>
-							</div>
-
-							<div class="card-footer">
-								<a class="btn btn-block" th:href="@{'/admin/chantier/'+${ch.get('chantier').id}}">Voir la liste des engins</a>
-							</div>
-						</div>
-						<br>
-					</div>
-				</div>
-			</div>
+	</div>
 
 
 </div>
