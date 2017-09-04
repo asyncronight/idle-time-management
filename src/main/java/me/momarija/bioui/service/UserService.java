@@ -26,6 +26,7 @@ public interface UserService{
     List<Map<String, Object>> getEnginsRendementWeek(int chantierId);
 
     List<Map<String,String>> getEnginStatistics(int enginId,Statistic statistic);
+    List<Map<String,String>> getEnginStatistic(int enginId,Statistic statistic);
 
     List<Map<String,String>> getEnginStatisticsWeek(int enginId);
 
