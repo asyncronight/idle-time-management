@@ -1,6 +1,7 @@
 package me.momarija.bioui.controllers;
 
 import me.momarija.bioui.domains.Statistic;
+import me.momarija.bioui.service.AdminChantierService;
 import me.momarija.bioui.service.AdminEnginService;
 import me.momarija.bioui.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,10 @@ public class UserController {
 
 	@Autowired
 	private AdminEnginService adminEnginService;
+
+	@Autowired
+	private AdminChantierService adminChantierService;
+
 	@RequestMapping(value = {""}, method = RequestMethod.GET)
 	public String chantiersList(Model model){
 		model.addAttribute("title", "Liste des chantiers");
@@ -46,6 +51,7 @@ public class UserController {
 		model.addAttribute("title", "Liste des engins");
 		model.addAttribute("statistic",new Statistic());
 		model.addAttribute("enginsRendementWeek",userService.getEnginsRendementWeek(id));
+		model.addAttribute("chantier", adminChantierService.getChantier(id));
 		return "user/engins";
 	}
 
@@ -56,6 +62,7 @@ public class UserController {
 			return "user/chantiers";
 		}
 		model.addAttribute("title", "Liste des engins");
+		model.addAttribute("chantier", adminChantierService.getChantier(id));
 		model.addAttribute("enginsRendement", userService.getEnginsRendement(id, statistic));
 		return "user/engins";
 	}
@@ -66,6 +73,7 @@ public class UserController {
 		model.addAttribute("statistic",new Statistic());
 		model.addAttribute("semaine", true);
 		model.addAttribute("chantierStatisticsWeek",userService.getChantierStatisticsWeek(id));
+		model.addAttribute("chantier", adminChantierService.getChantier(id));
 		return "user/chantierStatistics";
 	}
 
@@ -77,6 +85,7 @@ public class UserController {
 		}
 		model.addAttribute("title", "Statistique du chantier");
 		model.addAttribute("chantierStatisticsWeek", userService.getChantierStatistics(id,statistic));
+		model.addAttribute("chantier", adminChantierService.getChantier(id));
 		return "user/chantierStatistics";
 	}
 	@RequestMapping(value = {"chantier/{id}/engin/{idE}"}, method = RequestMethod.GET)
@@ -101,9 +110,17 @@ public class UserController {
 	public String statisticsByDate(@PathVariable int id,@PathVariable int idC, @PathVariable String d, @PathVariable String m, @PathVariable String y, Model model){
 		String date = m+"/"+d+"/"+y;
 		model.addAttribute("enginStatisticDay", userService.getEnginStatisticsDay(id,date));
-		model.addAttribute("jour", true);
-		model.addAttribute("day",date);
+		model.addAttribute("date", date);
 		model.addAttribute("engin", adminEnginService.getEngin(id));
 		return "user/enginStatisticsDay";
+	}
+
+	@RequestMapping(value = "chantier/{idC}/{m}/{d}/{y}", method = RequestMethod.GET)
+	public String statsByDate(@PathVariable int idC, @PathVariable String d, @PathVariable String m, @PathVariable String y, Model model) {
+		String date = m + "/" + d + "/" + y;
+		model.addAttribute("chantierStatisticDay", userService.getChantierStatisticsDay(idC, date));
+		model.addAttribute("date", date);
+		model.addAttribute("chantier", adminChantierService.getChantier(idC));
+		return "user/chantierStatisticsDay";
 	}
 }

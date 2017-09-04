@@ -6,6 +6,7 @@
 <div class="container">
 	<div th:replace="fragments :: header"></div>
 	<hr>
+	<h1 class="text-center" th:text="${chantier.nom}"></h1>
 	<a class="btn btn-success btn-lg" href="/user/"><i class="fa fa-arrow-left"></i> Retour à la liste des chantiers</a>
 	<br><br>
 	<div th:replace="fragments :: statsForm"></div>

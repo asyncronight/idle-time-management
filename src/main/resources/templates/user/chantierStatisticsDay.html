@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head th:replace="fragments :: head"></head>
 <body>
 
 <div class="container">
 	<div th:replace="fragments :: header"></div>
 	<hr>
-	<h1 class="text-center" th:text="'Engin N° '+${engin.id}"></h1>
+	<h1 class="text-center" th:text="'Chantier : '+${chantier.nom}"></h1>
 	<br>
-	<a class="btn btn-success btn-lg" th:href="@{'/user/chantier/'+${engin.chantier.id}+'/engin/'+${engin.id}}">
+	<a class="btn btn-success btn-lg" href="/user/chantier/">
 		<i class="fa fa-arrow-left"></i> Retour
 	</a>
 	<br><br>
@@ -27,7 +27,7 @@
 			<th>Temps d'arret</th>
 			<th>Rendement</th>
 		</tr>
-		<tr th:each="statistica : ${chantierStatisticDay}">
+		<tr th:each="statistica : ${enginStatisticDay}">
 			<td><a th:text="${statistica.get('date')}"></a></td>
 			<td th:text="${statistica.get('production')}"></td>
 			<td th:text="${statistica.get('ralenti')}"></td>
