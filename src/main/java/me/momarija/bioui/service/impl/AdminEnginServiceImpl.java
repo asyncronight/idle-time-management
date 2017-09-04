@@ -47,4 +47,12 @@ public class AdminEnginServiceImpl implements AdminEnginService {
 		if (deleteData)
 			donneeRepo.deleteByEnginId(enginId);
 	}
+
+	@Override
+	public Engin getEngin(int enginId) {
+		Engin engin = enginRepo.findOne(enginId);
+		if (engin == null)
+			throw new RuntimeException("Suppression échouée, engins introuvable");
+		return enginRepo.findOne(enginId);
+	}
 }

@@ -1,6 +1,8 @@
 package me.momarija.bioui.controllers;
 
+import me.momarija.bioui.domains.Engin;
 import me.momarija.bioui.domains.Statistic;
+import me.momarija.bioui.service.AdminEnginService;
 import me.momarija.bioui.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +21,8 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
+	@Autowired
+	private AdminEnginService adminEnginService;
 	@RequestMapping(value = {""}, method = RequestMethod.GET)
 	public String chantiersList(Model model){
 		model.addAttribute("title", "Liste des chantiers");
@@ -85,10 +89,26 @@ public class UserController {
 
 	@RequestMapping(value = {"chantier/{id}/engin/{idE}"},method = RequestMethod.POST)
 	public String enginStatistic(Model model, @PathVariable int id,@PathVariable int idE,@Valid Statistic statistic){
+
+		Engin engin = adminEnginService.getEngin(idE);
 		model.addAttribute("title", "Statistique de l'engin");
 		model.addAttribute("statistic",statistic);
 		model.addAttribute("enginStatistics", userService.getEnginStatistic(idE,statistic));
+		model.addAttribute("id",id);
+		model.addAttribute("engin",engin);
+
 		return "user/enginStatistics";
 	}
 
+	@RequestMapping(value = "chantier/{idC}/engin/{id}/{m}/{d}/{y}", method = RequestMethod.GET)
+	public String statisticsByDate(@PathVariable int id,@PathVariable int idC, @PathVariable String d, @PathVariable String m, @PathVariable String y, Model model){
+		Engin engin = adminEnginService.getEngin(id);
+		String date = m+"/"+d+"/"+y;
+		model.addAttribute("enginStatisticDay", userService.getEnginStatisticsDay(id,date));
+		model.addAttribute("par","du jour");
+		model.addAttribute("day",date);
+		model.addAttribute("engin",engin);
+
+		return "user/enginStatisticsDay";
+	}
 }

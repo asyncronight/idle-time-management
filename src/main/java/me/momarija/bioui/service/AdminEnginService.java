@@ -7,4 +7,6 @@ public interface AdminEnginService {
 	Engin addEngin(Engin engin, int chantierId);
 
 	void deleteEngin(int enginId, boolean deleteData);
+
+	Engin getEngin(int enginId);
 }

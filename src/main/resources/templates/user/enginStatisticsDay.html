@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head"></head>
+<body>
+
+<div class="container">
+	<img th:src="@{/img/header.png}" width="100%">
+
+	<h2> Engin  <span th:text="${engin.marque}"></span>:</h2>
+
+	<h2> Statistiques <span th:if="${par}"> du jour </span> <span th:text="${day}"></span>:</h2>
+	<table class="table table-striped" th:if="${enginStatisticDay}">
+		<tr>
+			<th>L'heure</th>
+			<th>Temps de production</th>
+			<th>Temps de ralenti</th>
+			<th>Temps d'arret</th>
+			<th>Rendement</th>
+		</tr>
+		<tr th:each="statistica : ${enginStatisticDay}">
+			<td><a th:text="${statistica.get('date')}"></a></td>
+			<td th:text="${statistica.get('production')}"></td>
+			<td th:text="${statistica.get('ralenti')}"></td>
+			<td th:text="${statistica.get('arret') }"></td>
+			<td th:text="${statistica.get('rendement') }"></td>
+		</tr>
+	</table>
+
+</div>
+
+</body>
+</html>

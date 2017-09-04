@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -28,5 +29,8 @@ public interface UserService{
     List<Map<String,String>> getEnginStatistic(int enginId,Statistic statistic);
 
     List<Map<String,String>> getEnginStatisticsWeek(int enginId);
+
+    List<Map<String,String>> getEnginStatisticsDay(int enginId,String day);
+
 
 }

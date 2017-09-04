@@ -25,6 +25,9 @@
 						</div>
 					</div>
 				</div>
+				<input type="hidden"
+					   th:name="${_csrf.parameterName}"
+					   th:value="${_csrf.token}"/>
 
 				<div class="form-group form-group-sm row d-inline-block ">
 					<label class="control-label col-sm-2 requiredField" for="dayTo">

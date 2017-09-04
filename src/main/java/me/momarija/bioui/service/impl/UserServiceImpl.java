@@ -419,7 +419,76 @@ public class UserServiceImpl implements UserService {
 		return list;
 	}
 
+	@Override
+	public List<Map<String, String>> getEnginStatisticsDay(int enginId,String day) {
+		List<Map<String,String>> list = new ArrayList<>();
+		Map<String ,Integer> map;
+		Map<String ,String> map2 ;
+		int i;Date d1,d3 ;
+		System.out.println(day);
+		Date dayInspection= new Date(day);
+		System.out.println(dayInspection+"____****___--->");
 
+		long y;
+		Engin engin = enginRepo.findOne(enginId);
+		String hourTo,hourFrom,dayFrom;
+
+		SimpleDateFormat stf = new SimpleDateFormat("MM/dd/yyyy");
+		SimpleDateFormat stimef = new SimpleDateFormat("HH:mm");
+
+
+		Calendar cal = Calendar.getInstance();
+		cal.set(Calendar.HOUR_OF_DAY,00);
+		cal.set(Calendar.MINUTE,00);
+		cal.set(Calendar.SECOND,0);
+
+		Date time_from = cal.getTime();
+
+		Statistic statistic = new Statistic();
+		statistic.setDayFrom(dayInspection);
+		statistic.setHourFrom(time_from);
+
+		 dayFrom =stf.format(statistic.getDayFrom());
+		 hourFrom = stimef.format(statistic.getHourFrom());
+
+		double p_percent = new Double(0);long z;
+
+		for(i=0;i<=23;i++){
+
+			d1= new Date(dayFrom+" "+hourFrom);
+			y = d1.getTime()+3600*1000;
+			hourTo = stimef.format(new Date(y));
+
+			System.out.println("From : "+dayFrom+" "+hourFrom);
+			System.out.println("To : "+dayFrom+" "+hourTo);
+
+			d3= new Date(dayFrom+" "+hourTo);
+			z = d3.getTime()-d1.getTime();
+			map2 = new HashMap<>();
+			map = doWork(engin,d1,d3);
+			int arret = (int)z/1000 - map.get("production") - map.get("ralenti");
+
+			if(arret < 0){
+				map.put("ralenti",map.get("ralenti")+arret);
+				arret = 0 ;
+			}
+			if(map.get("ralenti")<0) map.put("ralenti",0);
+
+			p_percent =(double) (map.get("production") * 100 / (z/1000) ) ;
+
+			map2.put("production", dateUtility.convertToDate(map.get("production")));
+			map2.put("ralenti", dateUtility.convertToDate(map.get("ralenti")));
+			map2.put("arret", dateUtility.convertToDate(arret));
+			map2.put("date", hourFrom);
+			map2.put("rendement",String.format("%.2f", p_percent) +" %");
+			list.add(map2);
+
+			hourFrom = stimef.format(new Date(y));
+
+
+		}
+		return list;
+	}
 
 	private List<Engin> getEnginList(int chantierId) {
 		return chantierRepo.findOne(chantierId).getEngins();
