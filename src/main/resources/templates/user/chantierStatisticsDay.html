@@ -27,8 +27,9 @@
 			<th>Temps d'arret</th>
 			<th>Rendement</th>
 		</tr>
-		<tr th:each="statistica : ${enginStatisticDay}">
+		<tr th:each="statistica : ${chantierStatisticDay}">
 			<td><a th:text="${statistica.get('date')}"></a></td>
+
 			<td th:text="${statistica.get('production')}"></td>
 			<td th:text="${statistica.get('ralenti')}"></td>
 			<td th:text="${statistica.get('arret') }"></td>

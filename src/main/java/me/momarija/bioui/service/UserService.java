@@ -32,5 +32,5 @@ public interface UserService{
 
     List<Map<String,String>> getEnginStatisticsDay(int enginId,String day);
 
-
+    List<Map<String,String>> getChantierStatisticsDay(int enginId,String day);
 }
