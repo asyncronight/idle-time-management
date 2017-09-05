@@ -187,7 +187,6 @@ public class UserServiceImpl implements UserService {
 			d2 = new Date(y);
 			z = d3.getTime()-d1.getTime()-statistic.getNbHourRepos()*3600*1000;
 			map2 = new HashMap<>();
-			System.out.println(chantierId+" ***********");
 			List<Engin> listEngin = getEnginList(chantierId);
 			for (Engin engin :listEngin) {
 
@@ -426,9 +425,6 @@ public class UserServiceImpl implements UserService {
         statistic.setHourTo(time_to);
         statistic.setNbHourRepos(1);
 
-        System.out.println(statistic.getDayFrom());
-        System.out.println(statistic.getDayTo());
-
 
         int nbJours = statistic.calculNbJours();
 
@@ -648,7 +644,6 @@ public class UserServiceImpl implements UserService {
 
         for(i=0;i<=nbJours;i++){
 
-            System.out.println("From : "+dayFrom+" "+hourFrom);
 
             d1= new Date(dayFrom+" "+hourFrom);
             d3= new Date(dayFrom+" "+hourTo);
@@ -726,7 +721,6 @@ public class UserServiceImpl implements UserService {
 
         for(i=0;i<=nbJours;i++){
 
-            System.out.println("From : "+dayFrom+" "+hourFrom);
 
             d1= new Date(dayFrom+" "+hourFrom);
             d3= new Date(dayFrom+" "+hourTo);
@@ -804,7 +798,6 @@ public class UserServiceImpl implements UserService {
 
         for(i=0;i<=nbJours;i++){
 
-            System.out.println("From : "+dayFrom+" "+hourFrom);
 
             d1= new Date(dayFrom+" "+hourFrom);
             d3= new Date(dayFrom+" "+hourTo);
@@ -841,7 +834,6 @@ public class UserServiceImpl implements UserService {
 	public List<Map<String, String>> getEnginStatistic(int enginId, Statistic statistic) {
 		List<Map<String,String>> list = new ArrayList<>();
 		int nbJours = statistic.calculNbJours();
-		System.out.println(nbJours);
 		int i;Date d1,d2,d3 ;
 		long y;
 		Engin engin = enginRepo.findOne(enginId);
@@ -859,8 +851,6 @@ public class UserServiceImpl implements UserService {
 		double p_percent;long z;float fullTime = 0.2f;
 
 		for(i=0;i<=nbJours;i++){
-
-			System.out.println("From : "+dayFrom+" "+hourFrom);
 
 			d1= new Date(dayFrom+" "+hourFrom);
 			d3= new Date(dayFrom+" "+hourTo);
@@ -927,8 +917,6 @@ public class UserServiceImpl implements UserService {
 			d1= new Date(dayFrom+" "+hourFrom);
 			y = d1.getTime()+3600*1000;
 			hourTo = stimef.format(new Date(y));
-            System.out.println(hourFrom);
-            System.out.println(hourTo);
 
             d3= new Date(dayFrom+" "+hourTo);
 			z = d3.getTime()-d1.getTime();
@@ -950,8 +938,7 @@ public class UserServiceImpl implements UserService {
 			map2.put("date", hourFrom+ " -> " +hourTo);
 			map2.put("rendement",String.format("%.2f", p_percent) +" %");
 			list.add(map2);
-            System.out.println(list.size());
-            hourFrom = stimef.format(new Date(y));
+           hourFrom = stimef.format(new Date(y));
 
 
 		}
@@ -993,9 +980,6 @@ public class UserServiceImpl implements UserService {
 			y = d1.getTime()+3600*1000;
 			hourTo = stimef.format(new Date(y));
 
-			System.out.println(dayFrom + " " + hourFrom);
-			System.out.println(dayFrom + " " + hourTo);
-
 			d3= new Date(dayFrom+" "+hourTo);
 			z = d3.getTime()-d1.getTime();
 			map2 = new HashMap<>();
@@ -1031,9 +1015,7 @@ public class UserServiceImpl implements UserService {
 
 
 		}
-
-		System.out.println(list.size());
-		return list;
+        return list;
 	}
 
 	private List<Engin> getEnginList(int chantierId) {
@@ -1044,7 +1026,6 @@ public class UserServiceImpl implements UserService {
 		List<Engin> listEngins = getEnginList(chantierId);
 		for (Engin e:listEngins) {
 			rendement = getEnginRendement(e.getId(),statistic);
-			System.out.println(rendement+"*********** ok");
 		}
 
 		float x = rendement/listEngins.size();
@@ -1056,7 +1037,6 @@ public class UserServiceImpl implements UserService {
 
 		List<Map<String,String>> list = new ArrayList<>();
 		int nbJours = statistic.calculNbJours();
-		System.out.println(nbJours);
 		int i;Date d1,d2,d3 ;
 		long y;
 		Engin engin = enginRepo.findOne(enginId);
@@ -1075,7 +1055,6 @@ public class UserServiceImpl implements UserService {
 		float x = 0.0f;
 		for(i=0;i<=nbJours;i++) {
 
-			System.out.println("From : " + dayFrom + " " + hourFrom);
 
 			d1 = new Date(dayFrom + " " + hourFrom);
 			d3 = new Date(dayFrom + " " + hourTo);
@@ -1107,7 +1086,6 @@ public class UserServiceImpl implements UserService {
 	private List<Map<String, Object>> getEnginStatistique(int enginId, Statistic statistic) {
 		List<Map<String,Object>> list = new ArrayList<>();
 		int nbJours = statistic.calculNbJours();
-		System.out.println(nbJours);
 		int i;Date d1,d2,d3 ;
 		long y;
 		Engin engin = enginRepo.findOne(enginId);
@@ -1126,7 +1104,6 @@ public class UserServiceImpl implements UserService {
 
 		for(i=0;i<=nbJours;i++){
 
-			System.out.println("From : "+dayFrom+" "+hourFrom);
 
 			d1= new Date(dayFrom+" "+hourFrom);
 			d3= new Date(dayFrom+" "+hourTo);
