@@ -48,7 +48,7 @@ public class SecConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 				.antMatchers("/").authenticated()
 				.antMatchers("/admin/**").hasAuthority("Admin")
-				.antMatchers("/gerant/**").hasAuthority("Gerant")
+				.antMatchers("/gerant/**").hasAnyAuthority("Gerant", "Admin")
 				.antMatchers("/user/**").hasAuthority("User")
 				.and()
 				.formLogin().loginPage("/login").successForwardUrl("/").permitAll()
