@@ -75,7 +75,7 @@ public class UserServiceImpl implements UserService {
         List<Map<String,Object>> list = new ArrayList<>();
         Statistic statistic = new Statistic();
         Date d_to = new Date();
-        long week_Ms = d_to.getTime() - 2592000*1000/2;
+        long week_Ms = d_to.getTime() - 1814400*1000 ;
         Date d_from = new Date(week_Ms);
 
         Calendar cal = Calendar.getInstance();
@@ -112,7 +112,7 @@ public class UserServiceImpl implements UserService {
         List<Map<String,Object>> list = new ArrayList<>();
         Statistic statistic = new Statistic();
         Date d_to = new Date();
-        long week_Ms = d_to.getTime() - 2592000*1000;
+        long week_Ms = d_to.getTime() - 1814400*1000 - 604800*1000 - 302400 * 1000;
         Date d_from = new Date(week_Ms);
 
         Calendar cal = Calendar.getInstance();
@@ -320,7 +320,7 @@ public class UserServiceImpl implements UserService {
 
         Statistic statistic = new Statistic();
         Date d_to = new Date();
-        long week_Ms = d_to.getTime() - 2592000*1000/2;
+        long week_Ms = d_to.getTime() - 1209600*1000;
         Date d_from = new Date(week_Ms);
 
         Calendar cal = Calendar.getInstance();
@@ -405,7 +405,7 @@ public class UserServiceImpl implements UserService {
 
         Statistic statistic = new Statistic();
         Date d_to = new Date();
-        long week_Ms = d_to.getTime() - 2592000*1000;
+        long week_Ms = d_to.getTime() - 1814400*1000 - 604800*1000 - 302400 * 1000;
         Date d_from = new Date(week_Ms);
 
         Calendar cal = Calendar.getInstance();
@@ -425,6 +425,9 @@ public class UserServiceImpl implements UserService {
         statistic.setHourFrom(time_from);
         statistic.setHourTo(time_to);
         statistic.setNbHourRepos(1);
+
+        System.out.println(statistic.getDayFrom());
+        System.out.println(statistic.getDayTo());
 
 
         int nbJours = statistic.calculNbJours();
@@ -533,7 +536,7 @@ public class UserServiceImpl implements UserService {
         List<Map<String,Object>> list = new ArrayList<>();
         Statistic statistic = new Statistic();
         Date d_to = new Date();
-        long week_Ms = d_to.getTime() - 2592000*1000/2;
+        long week_Ms = d_to.getTime() - 1814400*1000;
         Date d_from = new Date(week_Ms);
 
         Calendar cal = Calendar.getInstance();
@@ -569,7 +572,7 @@ public class UserServiceImpl implements UserService {
         List<Map<String,Object>> list = new ArrayList<>();
         Statistic statistic = new Statistic();
         Date d_to = new Date();
-        long week_Ms = d_to.getTime() - 2592000*1000;
+        long week_Ms = d_to.getTime() - 1814400*1000 - 604800*1000 - 302400 * 1000;
         Date d_from = new Date(week_Ms);
 
         Calendar cal = Calendar.getInstance();
@@ -691,7 +694,7 @@ public class UserServiceImpl implements UserService {
 
         Statistic statistic = new Statistic();
         Date d_to = new Date();
-        long week_Ms = d_to.getTime() - 2592000*1000/2;
+        long week_Ms = d_to.getTime() - 1814400*1000  ;
         Date d_from = new Date(week_Ms);
 
         Calendar cal = Calendar.getInstance();
@@ -769,7 +772,7 @@ public class UserServiceImpl implements UserService {
 
         Statistic statistic = new Statistic();
         Date d_to = new Date();
-        long week_Ms = d_to.getTime() - 2592000*1000;
+        long week_Ms = d_to.getTime() - 1814400*1000 - 604800*1000 - 302400 * 1000;
         Date d_from = new Date(week_Ms);
 
         Calendar cal = Calendar.getInstance();
@@ -924,9 +927,10 @@ public class UserServiceImpl implements UserService {
 			d1= new Date(dayFrom+" "+hourFrom);
 			y = d1.getTime()+3600*1000;
 			hourTo = stimef.format(new Date(y));
+            System.out.println(hourFrom);
+            System.out.println(hourTo);
 
-
-			d3= new Date(dayFrom+" "+hourTo);
+            d3= new Date(dayFrom+" "+hourTo);
 			z = d3.getTime()-d1.getTime();
 			map2 = new HashMap<>();
 			map = doWork(engin,d1,d3);
@@ -943,11 +947,11 @@ public class UserServiceImpl implements UserService {
 			map2.put("production", dateUtility.convertToDate(map.get("production")));
 			map2.put("ralenti", dateUtility.convertToDate(map.get("ralenti")));
 			map2.put("arret", dateUtility.convertToDate(arret));
-			map2.put("date", hourFrom);
+			map2.put("date", hourFrom+ " -> " +hourTo);
 			map2.put("rendement",String.format("%.2f", p_percent) +" %");
 			list.add(map2);
-
-			hourFrom = stimef.format(new Date(y));
+            System.out.println(list.size());
+            hourFrom = stimef.format(new Date(y));
 
 
 		}
