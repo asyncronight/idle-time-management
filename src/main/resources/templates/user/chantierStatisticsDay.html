@@ -8,7 +8,7 @@
 	<hr>
 	<h1 class="text-center" th:text="'Chantier : '+${chantier.nom}"></h1>
 	<br>
-	<a class="btn btn-success btn-lg" th:href="@{'/user/chantier/'+${chantier.id}}">
+	<a class="btn btn-success btn-lg" th:href="@{'/user/chantier/'+${chantier.id} +'/statistic'}">
 		<i class="fa fa-arrow-left"></i> Retour
 	</a>
 	<br><br>

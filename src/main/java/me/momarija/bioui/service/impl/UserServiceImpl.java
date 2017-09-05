@@ -163,11 +163,13 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<Map<String, String>> getChantierStatistics(int chantierId, Statistic statistic) {
 		List<Map<String,String>> list = new ArrayList<>();
-		int i;
+		int i; String dayView;
 		Date d1,d2,d3;
 		long y;
 		SimpleDateFormat stf = new SimpleDateFormat("MM/dd/yyyy");
 		SimpleDateFormat stimef = new SimpleDateFormat("HH:mm");
+        SimpleDateFormat stfDay = new SimpleDateFormat("dd/MM/yyyy");
+
 
 		int nbJours = statistic.calculNbJours();
 
@@ -206,11 +208,12 @@ public class UserServiceImpl implements UserService {
 				perc+=p_percent;
 
 			}
+            dayView = stfDay.format(d1);
 
 			map2.put("production",dateUtility.convertToDate(p/listEngin.size()));
 			map2.put("ralenti",dateUtility.convertToDate(r/listEngin.size()));
 			map2.put("arret", dateUtility.convertToDate(a/listEngin.size()));
-			map2.put("date", dayFrom);
+			map2.put("date", dayView);
 			map2.put("pause",statistic.getNbHourRepos()+" h");
 			map2.put("rendement",String.format("%.2f",perc/listEngin.size() )+" %" );
 			list.add(map2);
@@ -231,6 +234,8 @@ public class UserServiceImpl implements UserService {
         long y;
         SimpleDateFormat stf = new SimpleDateFormat("MM/dd/yyyy");
         SimpleDateFormat stimef = new SimpleDateFormat("HH:mm");
+        SimpleDateFormat stfDay = new SimpleDateFormat("dd/MM/yyyy");
+        String dayView;
 
         Statistic statistic = new Statistic();
         Date d_to = new Date();
@@ -285,17 +290,19 @@ public class UserServiceImpl implements UserService {
 
                 p_percent =(double) (map.get("production") * 100 / (z/1000) ) ;
 
+
                 a+=arret;
                 r+=map.get("ralenti");
                 p+=map.get("production");
                 perc+=p_percent;
 
             }
+            dayView = stfDay.format(d1);
 
             map2.put("production",dateUtility.convertToDate(p/listEngin.size()));
             map2.put("ralenti",dateUtility.convertToDate(r/listEngin.size()));
             map2.put("arret", dateUtility.convertToDate(a/listEngin.size()));
-            map2.put("date", dayFrom);
+            map2.put("date", dayView);
             map2.put("pause",statistic.getNbHourRepos()+" h");
             map2.put("rendement",String.format("%.2f",perc/listEngin.size() )+" %" );
             list.add(map2);
@@ -316,6 +323,8 @@ public class UserServiceImpl implements UserService {
         long y;
         SimpleDateFormat stf = new SimpleDateFormat("MM/dd/yyyy");
         SimpleDateFormat stimef = new SimpleDateFormat("HH:mm");
+        SimpleDateFormat stfDay = new SimpleDateFormat("dd/MM/yyyy");
+        String dayView;
 
         Statistic statistic = new Statistic();
         Date d_to = new Date();
@@ -376,11 +385,12 @@ public class UserServiceImpl implements UserService {
                 perc+=p_percent;
 
             }
+            dayView = stfDay.format(d1);
 
             map2.put("production",dateUtility.convertToDate(p/listEngin.size()));
             map2.put("ralenti",dateUtility.convertToDate(r/listEngin.size()));
             map2.put("arret", dateUtility.convertToDate(a/listEngin.size()));
-            map2.put("date", dayFrom);
+            map2.put("date", dayView);
             map2.put("pause",statistic.getNbHourRepos()+" h");
             map2.put("rendement",String.format("%.2f",perc/listEngin.size() )+" %" );
             list.add(map2);
@@ -401,6 +411,8 @@ public class UserServiceImpl implements UserService {
         long y;
         SimpleDateFormat stf = new SimpleDateFormat("MM/dd/yyyy");
         SimpleDateFormat stimef = new SimpleDateFormat("HH:mm");
+        SimpleDateFormat stfDay = new SimpleDateFormat("dd/MM/yyyy");
+        String dayView;
 
         Statistic statistic = new Statistic();
         Date d_to = new Date();
@@ -461,11 +473,12 @@ public class UserServiceImpl implements UserService {
                 perc+=p_percent;
 
             }
+            dayView = stfDay.format(d1);
 
             map2.put("production",dateUtility.convertToDate(p/listEngin.size()));
             map2.put("ralenti",dateUtility.convertToDate(r/listEngin.size()));
             map2.put("arret", dateUtility.convertToDate(a/listEngin.size()));
-            map2.put("date", dayFrom);
+            map2.put("date", dayView);
             map2.put("pause",statistic.getNbHourRepos()+" h");
             map2.put("rendement",String.format("%.2f",perc/listEngin.size() )+" %" );
             list.add(map2);
@@ -609,6 +622,8 @@ public class UserServiceImpl implements UserService {
 
         SimpleDateFormat stf = new SimpleDateFormat("MM/dd/yyyy");
         SimpleDateFormat stimef = new SimpleDateFormat("HH:mm");
+        SimpleDateFormat stfDay = new SimpleDateFormat("dd/MM/yyyy");
+        String dayView;
 
         Statistic statistic = new Statistic();
         Date d_to = new Date();
@@ -662,10 +677,12 @@ public class UserServiceImpl implements UserService {
 
             p_percent =(double) (map.get("production") * 100 / (z/1000) ) ;
 
+            dayView = stfDay.format(d1);
+
             map2.put("production", dateUtility.convertToDate(map.get("production")));
             map2.put("ralenti", dateUtility.convertToDate(map.get("ralenti")));
             map2.put("arret", dateUtility.convertToDate(arret));
-            map2.put("date", dayFrom);
+            map2.put("date", dayView);
             map2.put("pause",statistic.getNbHourRepos()+" h");
             map2.put("rendement",String.format("%.2f", p_percent) +" %");
             list.add(map2);
@@ -683,9 +700,11 @@ public class UserServiceImpl implements UserService {
         int i;Date d1,d2,d3 ;
         long y;
         Engin engin = enginRepo.findOne(enginId);
+        String dayView;
 
         SimpleDateFormat stf = new SimpleDateFormat("MM/dd/yyyy");
         SimpleDateFormat stimef = new SimpleDateFormat("HH:mm");
+        SimpleDateFormat stfDay = new SimpleDateFormat("dd/MM/yyyy");
 
         Statistic statistic = new Statistic();
         Date d_to = new Date();
@@ -739,10 +758,12 @@ public class UserServiceImpl implements UserService {
 
             p_percent =(double) (map.get("production") * 100 / (z/1000) ) ;
 
+            dayView = stfDay.format(d1);
+
             map2.put("production", dateUtility.convertToDate(map.get("production")));
             map2.put("ralenti", dateUtility.convertToDate(map.get("ralenti")));
             map2.put("arret", dateUtility.convertToDate(arret));
-            map2.put("date", dayFrom);
+            map2.put("date", dayView);
             map2.put("pause",statistic.getNbHourRepos()+" h");
             map2.put("rendement",String.format("%.2f", p_percent) +" %");
             list.add(map2);
@@ -763,6 +784,7 @@ public class UserServiceImpl implements UserService {
 
         SimpleDateFormat stf = new SimpleDateFormat("MM/dd/yyyy");
         SimpleDateFormat stimef = new SimpleDateFormat("HH:mm");
+        SimpleDateFormat stfDay = new SimpleDateFormat("dd/MM/yyyy");
 
         Statistic statistic = new Statistic();
         Date d_to = new Date();
@@ -792,6 +814,8 @@ public class UserServiceImpl implements UserService {
         String hourFrom = stimef.format(statistic.getHourFrom());
         String hourTo = stimef.format(statistic.getHourTo());
 
+        String dayView;
+
         Map<String ,Integer> map;
         Map<String ,String> map2 ;
         double p_percent = new Double(0);long z;
@@ -816,10 +840,12 @@ public class UserServiceImpl implements UserService {
 
             p_percent =(double) (map.get("production") * 100 / (z/1000) ) ;
 
+            dayView = stfDay.format(d1);
+
             map2.put("production", dateUtility.convertToDate(map.get("production")));
             map2.put("ralenti", dateUtility.convertToDate(map.get("ralenti")));
             map2.put("arret", dateUtility.convertToDate(arret));
-            map2.put("date", dayFrom);
+            map2.put("date", dayView);
             map2.put("pause",statistic.getNbHourRepos()+" h");
             map2.put("rendement",String.format("%.2f", p_percent) +" %");
             list.add(map2);
@@ -839,8 +865,9 @@ public class UserServiceImpl implements UserService {
 		Engin engin = enginRepo.findOne(enginId);
 
 
-		SimpleDateFormat stf = new SimpleDateFormat("MM/dd/yyyy");
-		SimpleDateFormat stimef = new SimpleDateFormat("HH:mm");
+        SimpleDateFormat stf = new SimpleDateFormat("MM/dd/yyyy");
+        SimpleDateFormat stimef = new SimpleDateFormat("HH:mm");
+        SimpleDateFormat stfDay = new SimpleDateFormat("dd/MM/yyyy");
 
 		String dayFrom =stf.format(statistic.getDayFrom());
 		String hourFrom = stimef.format(statistic.getHourFrom());
@@ -848,7 +875,7 @@ public class UserServiceImpl implements UserService {
 
 		Map<String ,Integer> map;
 		Map<String ,String> map2 ;
-		double p_percent;long z;float fullTime = 0.2f;
+		double p_percent;long z;
 
 		for(i=0;i<=nbJours;i++){
 
@@ -868,12 +895,11 @@ public class UserServiceImpl implements UserService {
 			if(map.get("ralenti")<0) map.put("ralenti",0);
 
 			p_percent =(double) (map.get("production") * 100 / (z/1000) ) ;
-
-
+            String dayView = stfDay.format(d1);
 			map2.put("production", dateUtility.convertToDate(map.get("production")));
 			map2.put("ralenti", dateUtility.convertToDate(map.get("ralenti")));
 			map2.put("arret", dateUtility.convertToDate(arret));
-			map2.put("date", dayFrom);
+			map2.put("date", dayView);
 			map2.put("pause",statistic.getNbHourRepos()+" h");
 			map2.put("rendement",String.format("%.2f", p_percent) +" %");
 			list.add(map2);
@@ -1005,7 +1031,7 @@ public class UserServiceImpl implements UserService {
 			map2.put("production",dateUtility.convertToDate(p/listEngin.size()));
 			map2.put("ralenti",dateUtility.convertToDate(r/listEngin.size()));
 			map2.put("arret", dateUtility.convertToDate(a/listEngin.size()));
-			map2.put("date", hourFrom);
+			map2.put("date", hourFrom+" -> "+ hourTo);
 			map2.put("rendement",String.format("%.2f",perc/listEngin.size() )+" %" );
 			list.add(map2);
 			a=0;r=0;p=0;perc=0.0f;

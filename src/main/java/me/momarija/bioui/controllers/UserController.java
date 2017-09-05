@@ -223,7 +223,7 @@ public class UserController {
 		return "forward:/user/chantier/" + id + "/engin/" + idE;
 	}
 
-	@RequestMapping(value = "chantier/{idC}/engin/{id}/{m}/{d}/{y}", method = RequestMethod.GET)
+	@RequestMapping(value = "chantier/{idC}/engin/{id}/{d}/{m}/{y}", method = RequestMethod.GET)
 	public String statisticsByDate(@PathVariable int id,@PathVariable int idC, @PathVariable String d, @PathVariable String m, @PathVariable String y, Model model){
 		String date = m+"/"+d+"/"+y;
 		model.addAttribute("enginStatisticDay", userService.getEnginStatisticsDay(id,date));
@@ -232,7 +232,7 @@ public class UserController {
 		return "user/enginStatisticsDay";
 	}
 
-	@RequestMapping(value = "chantier/{idC}/{m}/{d}/{y}", method = RequestMethod.GET)
+	@RequestMapping(value = "chantier/{idC}/{d}/{m}/{y}", method = RequestMethod.GET)
 	public String statsByDate(@PathVariable int idC, @PathVariable String d, @PathVariable String m, @PathVariable String y, Model model) {
 		String date = m + "/" + d + "/" + y;
 		model.addAttribute("chantierStatisticDay", userService.getChantierStatisticsDay(idC, date));
