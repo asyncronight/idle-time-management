@@ -62,6 +62,16 @@ public class UserController {
 		return "user/chantiers";
 	}
 
+	@RequestMapping(value = "twoWeeks", method = RequestMethod.POST)
+	public String chantierTwoWeeksPost() {
+		return "forward:/user/";
+	}
+
+	@RequestMapping(value = "month", method = RequestMethod.POST)
+	public String chantierMonthPost() {
+		return "forward:/user/";
+	}
+
 	@RequestMapping(value = {"chantier/{id}"}, method = RequestMethod.GET)
 	public String enginsList(Model model, @PathVariable int id){
 		model.addAttribute("title", "Liste des engins");
@@ -101,6 +111,16 @@ public class UserController {
 		return "user/engins";
 	}
 
+	@RequestMapping(value = {"chantier/{id}/twoWeeks"}, method = RequestMethod.POST)
+	public String enginsListTwoWeeksPost(@PathVariable int id) {
+		return "forward:/user/chantier/" + id;
+	}
+
+	@RequestMapping(value = {"chantier/{id}/month"}, method = RequestMethod.POST)
+	public String enginsListMonthPost(@PathVariable int id) {
+		return "forward:/user/chantier/" + id;
+	}
+
 	@RequestMapping(value = {"chantier/{id}/statistic"}, method = RequestMethod.GET)
 	public String chantierStatisticWeek(Model model, @PathVariable int id){
 		model.addAttribute("title", "Statistique du chantier");
@@ -113,13 +133,13 @@ public class UserController {
 
 	@RequestMapping(value = {"chantier/{id}/statistic"},method = RequestMethod.POST)
 	public String chantierStatistic(Model model, @PathVariable int id, @Valid Statistic statistic, BindingResult result) {
+		model.addAttribute("chantier", adminChantierService.getChantier(id));
 		if (result.hasErrors()) {
 			model.addAttribute("title", "Erreur");
 			return "user/chantierStatistics";
 		}
 		model.addAttribute("title", "Statistique du chantier");
 		model.addAttribute("chantierStatistics", userService.getChantierStatistics(id, statistic));
-		model.addAttribute("chantier", adminChantierService.getChantier(id));
 		return "user/chantierStatistics";
 	}
 
@@ -143,6 +163,16 @@ public class UserController {
 		return "user/chantierStatistics";
 	}
 
+	@RequestMapping(value = {"chantier/{id}/statistic/twoWeeks"}, method = RequestMethod.POST)
+	public String chantierStatisticTwoWeekPost(@PathVariable int id) {
+		return "forward:/user/chantier/" + id + "/statistic";
+	}
+
+	@RequestMapping(value = {"chantier/{id}/statistic/month"}, method = RequestMethod.POST)
+	public String chantierStatisticMonthPost(@PathVariable int id) {
+		return "forward:/user/chantier/" + id + "/statistic";
+	}
+
 	@RequestMapping(value = {"chantier/{id}/engin/{idE}"}, method = RequestMethod.GET)
 	public String enginStatisticWeek(Model model, @PathVariable int id,@PathVariable int idE){
 		model.addAttribute("title", "Statistique de l'engin " + id);
@@ -154,10 +184,14 @@ public class UserController {
 	}
 
 	@RequestMapping(value = {"chantier/{id}/engin/{idE}"},method = RequestMethod.POST)
-	public String enginStatistic(Model model, @PathVariable int id,@PathVariable int idE,@Valid Statistic statistic){
+	public String enginStatistic(Model model, @PathVariable int id, @PathVariable int idE, @Valid Statistic statistic, BindingResult result) {
+		model.addAttribute("engin", adminEnginService.getEngin(idE));
+		if (result.hasErrors()) {
+			model.addAttribute("title", "Erreur");
+			return "user/enginStatistics";
+		}
 		model.addAttribute("title", "Statistique de l'engin");
 		model.addAttribute("enginStatistics", userService.getEnginStatistic(idE,statistic));
-		model.addAttribute("engin", adminEnginService.getEngin(idE));
 		return "user/enginStatistics";
 	}
 
@@ -177,6 +211,16 @@ public class UserController {
 		model.addAttribute("enginStatistics", userService.getEnginStatisticsMonth(idE));
 		model.addAttribute("engin", adminEnginService.getEngin(idE));
 		return "user/enginStatistics";
+	}
+
+	@RequestMapping(value = {"chantier/{id}/engin/{idE}/twoWeeks"}, method = RequestMethod.POST)
+	public String enginStatisticTwoWeekPost(@PathVariable int id, @PathVariable int idE) {
+		return "forward:/user/chantier/" + id + "/engin/" + idE;
+	}
+
+	@RequestMapping(value = {"chantier/{id}/engin/{idE}/month"}, method = RequestMethod.POST)
+	public String enginStatisticMonthPost(@PathVariable int id, @PathVariable int idE) {
+		return "forward:/user/chantier/" + id + "/engin/" + idE;
 	}
 
 	@RequestMapping(value = "chantier/{idC}/engin/{id}/{m}/{d}/{y}", method = RequestMethod.GET)
