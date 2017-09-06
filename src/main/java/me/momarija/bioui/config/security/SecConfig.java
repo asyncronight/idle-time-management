@@ -40,7 +40,7 @@ public class SecConfig extends WebSecurityConfigurerAdapter {
 	public void configure(WebSecurity web) throws Exception {
 		web
 				.ignoring()
-				.antMatchers("/webjars/**", "/css/**", "/js/**", "/files/**", "/**/favicon.ico");
+				.antMatchers("/css/**", "/js/**", "/files/**", "/**/favicon.ico");
 	}
 
 	@Override
