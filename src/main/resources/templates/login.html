@@ -1,33 +1,43 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments :: head"></head>
-<body>
-<div class="container">
+<body class="gray-bg">
 	<div th:replace="fragments :: header"></div>
-	<div class="row" style="margin-top: 20px">
-		<div class="col-sm-8 offset-sm-2">
-			<form th:action="@{/login}" method="post">
+
+	<div class="middle-box text-center loginscreen animated fadeInDown">
+		<div>
+			<div>
+				<img th:src="@{/img/poclain-login.png}" class="logo-name" style="width : 80%">
+			</div>
+			<h3>Welcome to BIOUI</h3>
+			<p>
+				Perfectly designed and precisely prepared app with over stats and more features to manage engins.
+			</p>
+			<p>Login in. To see it in action.</p>
+			<form action="/login" method="post" class="m-t">
 
 				<div class="alert alert-danger" th:if="${param.error}">Informations non valide</div>
-				<div class="alert alert-success" th:if="${param.logout}">Vous êtes déconnectés</div>
+				<div class="alert alert-success" th:if="${param.logout}">Vous avez deconnecté</div>
 
 				<input type="hidden"
 					   th:name="${_csrf.parameterName}"
-					   th:value="${_csrf.token}"/>
-
-				<input id="login-username" type="text" class="form-control" name="username"
-					   placeholder="Username" required>
-				<hr>
-				<input id="login-password" type="password" class="form-control" name="password"
-					   placeholder="Password" required>
-				<hr>
-				<button class="btn btn-success col-sm-12" type="submit">Sign in</button>
+					   th:value="${_csrf.token}"/> 
+					   
+				<div class="form-group">
+					<input id="login-username" type="text" class="form-control" name="username"
+						placeholder="Username" required>
+				</div>
+				<div class="form-group">
+					<input id="login-password" type="password" class="form-control" name="password"
+						placeholder="Password" required>
+				</div>
+				<button  class="btn btn-primary block full-width m-b" type="submit">Sign in</button>
 
 			</form>
+			<!--<img th:src="@{/img/image.png}" width="100%">-->
 		</div>
 	</div>
-	<img th:src="@{/img/image.png}" width="100%">
-</div>
 
+	<head th:replace="fragments :: footer"></head>
 </body>
 </html>

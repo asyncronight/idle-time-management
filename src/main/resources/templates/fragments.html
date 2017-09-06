@@ -5,42 +5,49 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title th:text="${title}">Title</title>
-
-	<link rel="stylesheet" th:href="@{/webjars/font-awesome/4.7.0/css/font-awesome.min.css}"/>
-	<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-alpha.6-1/css/bootstrap.min.css}"/>
+	<title th:text="${title}">BIUOI Analyser</title>
+	<link th:href="@{/css/mainly/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/mainly/font-awesome.css}" rel="stylesheet">
+    <link th:href="@{/css/mainly/animate.css}" rel="stylesheet">
+	<link th:href="@{/css/chart-doughnut.css}" rel="stylesheet">
+    <link th:href="@{/css/mainly/style.css}" rel="stylesheet">
 	<link rel="stylesheet" th:href="@{/css/main.css}"/>
-	<script th:src="@{/webjars/jquery/3.2.1/jquery.min.js}"></script>
-	<script th:src="@{/webjars/bootstrap/4.0.0-alpha.6-1//js/bootstrap.min.js}"></script>
 	<script th:src="@{/js/main.js}"></script>
 </head>
 
-<body>
+<body class="gray-bg">
 	<div th:fragment="header">
-		<img th:src="@{/img/header.png}" class="img-fluid" width="100%">
-		<div class="row" sec:authorize="isAuthenticated()">
-			<div class="mr-auto">
-				<a href="/" class="btn btn-secondary">Acceuil</a>
-			</div>
-			<div class="ml-auto btn btn-link">
-				<div class="row">
-					<p class="col">
-						<i class="fa fa-user"></i> <span sec:authentication="name"></span>
-					</p>
-					<p class="col"><span sec:authentication="authorities"></span></p>
-				</div>
-			</div>
-			<div class="ml-auto">
-				<form th:action="@{/logout}" method="post">
-					<button type="submit" class="btn btn-secondary">
-						Se déconnécter <i class="fa fa-sign-out"></i>
-					</button>
-				</form>
-			</div>
+		<div sec:authorize="!isAuthenticated()">
+			<img th:src="@{/img/left-logo.png}" class="img-fluid pull-left" style="width: auto;">
+			<img th:src="@{/img/right-logo.png}" class="img-fluid pull-right" style="width: auto;">
 		</div>
+		<nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0" sec:authorize="isAuthenticated()">
+			<div class="navbar-header">
+				<img th:src="@{/img/left-logo.png}" class="img-fluid pull-left" style="width: 65%;">
+			</div>
+			<ul class="nav navbar-top-links navbar-right">
+				<li>
+					<span class="m-r-sm text-muted welcome-message">
+						Welcome back Mr <span sec:authentication="name"> you are a <span class="col" sec:authentication="authorities">
+					</span>
+				</li>
+				<li>
+					<a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+						<i class="fa fa-bell"></i>  <span class="label label-primary">8</span>
+					</a>
+				</li>
+				<li>
+					<form th:action="@{/logout}" method="post">
+						<button type="submit" class="btn btn-link">
+							<i class="fa fa-sign-out"></i> Se déconnécter
+						</button>
+					</form>
+				</li>
+			</ul>
+		</nav>
 	</div>
 
-	<div style="background-color: rgba(0,255,0,0.2);padding: 2%" th:fragment="statsForm">
+	<div class="stats-forms" th:fragment="statsForm">
 		<form method="post" th:object="${statistic}">
 			<input type="hidden"
 				   th:name="${_csrf.parameterName}"
@@ -61,7 +68,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col">
+				<div class="col-sm-6">
 					<div th:class="${#fields.hasErrors('dayTo')} ? 'form-group row has-danger' : 'form-group row'">
 						<label class="col-sm-2 col-form-label" for="dayTo">Jusqu'à:</label>
 						<div class="col-sm-10">
@@ -127,11 +134,22 @@
 			</div>
 
 			<div class="row">
-				<div class="col-sm-6 push-sm-3 pull-sm-3">
-					<button type="submit" class="btn btn-success btn-block btn-lg">Inspecter</button>
+				<div class="col-sm-6 col-sm-offset-3">
+					<button type="submit" class="btn btn-success btn-block btn-rounded">Inspecter</button>
 				</div>
 			</div>
 		</form>
+	</div>
+	<div th:fragment="footer">
+		<!-- Mainly scripts -->
+		<script th:src="@{/js/mainly/jquery-3.1.1.min.js}"></script>
+		<script th:src="@{/js/mainly/bootstrap.min.js}"></script>
+		<script th:src="@{/js/mainly/jquery.metisMenu.js}"></script>
+		<script th:src="@{/js/mainly/jquery.slimscroll.min.js}"></script>
+	</div>
+	
+	<div th:fragment="chart-plugin">
+		<script th:src="@{/js/mainly/chart-plugins/chart-doughnut.js}"></script>>
 	</div>
 </body>
 </html>

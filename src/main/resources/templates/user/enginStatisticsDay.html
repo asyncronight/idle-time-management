@@ -2,15 +2,32 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments :: head"></head>
 <body>
-
+<div th:replace="fragments :: header"></div>
 <div class="container">
-	<div th:replace="fragments :: header"></div>
-	<hr>
-	<h1 class="text-center" th:text="'Engin N° '+${engin.id}"></h1>
-	<br>
-	<a class="btn btn-success btn-lg" th:href="@{'/user/chantier/'+${engin.chantier.id}+'/engin/'+${engin.id}}">
-		<i class="fa fa-arrow-left"></i> Retour
-	</a>
+	<div class="row wrapper border-bottom white-bg page-heading">
+		<div class="col-sm-6">
+			<div style="display: -webkit-inline-box;">
+				<a class="btn btn-success btn-rounded" th:href="@{'/user/chantier/'+${engin.chantier.id}}" style="margin-top:30%;"><i class="fa fa-reply"></i></a>
+				<h2 class="text-center" th:text="Engin N° '+${engin.id}"></h2>
+			</div>
+			
+			<ol class="breadcrumb">
+				<li>
+					<a href="/">Accueil</a>
+				</li>
+				<li>
+					<a href="/user/">chantiers</a>
+				</li>
+				<li>
+					<a th:href="@{'/user/chantier/'+${engin.chantier.id}}">chantier name</a>
+				</li>
+				<li class="active">
+					<strong th:text="'Engin N° '+${engin.id}">Engine</strong>
+				</li>
+			</ol>
+		</div>
+		<div class="col-sm-6"></div>
+	</div>
 	<br><br>
 	<h2> Statistiques du jour <span th:text="${date}"></span>:</h2>
 	<br>
@@ -36,6 +53,6 @@
 		</tr>
 	</table>
 </div>
-
+<div th:replace="fragments :: footer"></div>
 </body>
 </html>

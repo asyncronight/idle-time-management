@@ -2,33 +2,60 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments :: head"></head>
 <body>
-
+<div th:replace="fragments :: header"></div>
 <div class="container">
-	<div th:replace="fragments :: header"></div>
-	<hr>
-	<div class="btn-group pull-right">
-		<a class="btn btn-secondary" th:href="@{'/user/chantier/'+${engin.chantier.id}+'/engin/'+${engin.id}}">
-			<i class="fa fa-bar-chart"></i> Semaine
-		</a>
-		<a class="btn btn-secondary"
-		   th:href="@{'/user/chantier/'+${engin.chantier.id}+'/engin/'+${engin.id}+'/twoWeeks'}">
-			<i class="fa fa-bar-chart"></i> 15 Jours
-		</a>
-		<a class="btn btn-secondary" th:href="@{'/user/chantier/'+${engin.chantier.id}+'/engin/'+${engin.id}+'/month'}">
-			<i class="fa fa-bar-chart"></i> Mois
-		</a>
+	<div class="row wrapper border-bottom white-bg page-heading">
+		<div class="col-sm-6">
+			<div style="display: -webkit-inline-box;">
+				<a class="btn btn-success btn-rounded" th:href="@{'/user/chantier/'+${engin.chantier.id}}" style="margin-top:30%;"><i class="fa fa-reply"></i></a>
+				<h2 class="text-center"> {{Engine N²}}</h2>
+			</div>
+			
+			<ol class="breadcrumb">
+				<li>
+					<a href="/">Accueil</a>
+				</li>
+				<li>
+					<a href="/user/">chantiers</a>
+				</li>
+				<li>
+					<a th:href="@{'/user/chantier/'+${engin.chantier.id}}">chantier name</a>
+				</li>
+				<li class="active">
+					<strong >{{Engine N²}}<</strong>
+				</li>
+			</ol>
+		</div>
+		<div class="col-sm-6">
+				<br><br>
+				<div class="btn-group pull-right">
+					<a class="btn btn-secondary" th:href="@{'/user/chantier/'+${engin.chantier.id}+'/engin/'+${engin.id}}">
+						<i class="fa fa-bar-chart"></i> Semaine
+					</a>
+					<a class="btn btn-secondary"
+					th:href="@{'/user/chantier/'+${engin.chantier.id}+'/engin/'+${engin.id}+'/twoWeeks'}">
+						<i class="fa fa-bar-chart"></i> 15 Jours
+					</a>
+					<a class="btn btn-secondary" th:href="@{'/user/chantier/'+${engin.chantier.id}+'/engin/'+${engin.id}+'/month'}">
+						<i class="fa fa-bar-chart"></i> Mois
+					</a>
+				</div>
+		</div>
 	</div>
 	<br><br>
+<<<<<<< Updated upstream
 	<a class="btn btn-success btn-lg" th:href="@{'/user/chantier/'+${engin.chantier.id}}">
 		<i class="fa fa-arrow-left"></i> Retour à la liste des engins
 	</a>
 	<br><br>
+=======
+>>>>>>> Stashed changes
 	<div th:replace="fragments :: statsForm"></div>
 
 	<br>
 	<div th:if="${enginStatistics}">
 		<h2 th:if="${semaine}"> Statistiques de la semaine :</h2>
-		<h2 th:if="!${semaine}"> Rsultat de l'inspection :</h2>
+		<h2 th:if="!${semaine}"> Resultat de l'inspection :</h2>
 
 		<!-- Bar chart goes here -->
 
@@ -56,6 +83,6 @@
 		</table>
 	</div>
 </div>
-
+<div th:replace="fragments :: footer"></div>
 </body>
 </html>

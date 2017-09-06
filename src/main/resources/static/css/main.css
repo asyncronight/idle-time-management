@@ -1,3 +1,19 @@
-.jumbotron {
-    background-color: transparent;
+.login-logo{
+    width:50%;
 }
+.navbar{
+    border-bottom: 1px solid #0083ff;
+}
+.stats-forms{
+    background-color: #FFF ;
+    border-radius: 3px;
+    padding: 2%;
+}
+hr{
+    color: #2f4050;
+}
+.dates-btn-groupes{
+    margin: 0 !important;
+    margin-bottom: 5px;
+}
+

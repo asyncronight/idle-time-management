@@ -6,23 +6,41 @@
 <div class="container">
 	<div th:replace="fragments :: header"></div>
 	<hr>
-	<div class="btn-group pull-right">
-		<a class="btn btn-secondary" th:href="@{'/user/chantier/'+${chantier.id}}">
-			<i class="fa fa-bar-chart"></i> Semaine
-		</a>
-		<a class="btn btn-secondary" th:href="@{'/user/chantier/'+${chantier.id}+'/twoWeeks'}">
-			<i class="fa fa-bar-chart"></i> 15 Jours
-		</a>
-		<a class="btn btn-secondary" th:href="@{'/user/chantier/'+${chantier.id}+'/month'}">
-			<i class="fa fa-bar-chart"></i> Mois
-		</a>
+	<div class="row wrapper border-bottom white-bg page-heading">
+		<div class="col-sm-6">
+			<div style="display: -webkit-inline-box;">
+				<a class="btn btn-success btn-rounded" href="/user/" style="margin-top:30%;"><i class="fa fa-reply"></i></a>
+				<h2 class="text-center" th:text="${chantier.nom}"></h2>
+			</div>
+			
+			<ol class="breadcrumb">
+				<li>
+					<a href="/">Accueil</a>
+				</li>
+				<li>
+					<a href="/user/">chantiers</a>
+				</li>
+				<li class="active">
+					<strong th:text="${chantier.nom}"></strong>
+				</li>
+			</ol>
+		</div>
+		<div class="col-sm-6">
+			<br><br>
+			<div class="btn-group pull-right">
+				<a class="btn btn-secondary" th:href="@{'/user/chantier/'+${chantier.id}}">
+					<i class="fa fa-bar-chart"></i> Semaine
+				</a>
+				<a class="btn btn-secondary" th:href="@{'/user/chantier/'+${chantier.id}+'/twoWeeks'}">
+					<i class="fa fa-bar-chart"></i> 15 Jours
+				</a>
+				<a class="btn btn-secondary" th:href="@{'/user/chantier/'+${chantier.id}+'/month'}">
+					<i class="fa fa-bar-chart"></i> Mois
+				</a>
+			</div>
+		</div>
 	</div>
 	<br><br>
-	<h1 class="text-center" th:text="${chantier.nom}"></h1>
-	<a class="btn btn-success btn-lg" href="/user/"><i class="fa fa-arrow-left"></i> Retour à la liste des chantiers</a>
-	<br><br>
-	<div th:replace="fragments :: statsForm"></div>
-	<br>
 
 	<div th:if="${enginsRendementWeek}">
 		<h2><i class="fa fa-list"></i> Rendement de la semaine :</h2><br>
@@ -89,6 +107,6 @@
 	</div>
 
 </div>
-
+<div th:replace="fragments :: footer"></div>
 </body>
 </html>

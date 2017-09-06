@@ -3,19 +3,35 @@
 <head th:replace="fragments :: head"></head>
 <body>
 
-<div class="container">
 	<div th:replace="fragments :: header"></div>
+<div class="container">
 	<hr>
-	<div class="btn-group pull-right">
-		<a class="btn btn-secondary" href="/user/">
-			<i class="fa fa-bar-chart"></i> Semaine
-		</a>
-		<a class="btn btn-secondary" href="/user/twoWeeks">
-			<i class="fa fa-bar-chart"></i> 15 Jours
-		</a>
-		<a class="btn btn-secondary" href="/user/month">
-			<i class="fa fa-bar-chart"></i> Mois
-		</a>
+	<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-6">
+		<br>
+        <ol class="breadcrumb">
+            <li>
+                <a href="/">Accueil</a>
+            </li>
+            <li  class="active">
+                <a href="/user/"><strong>chantiers</strong></a>
+            </li>
+        </ol>
+    </div>
+    <div class="col-sm-6">
+		<br>
+		<div class="btn-group pull-right ">
+			<a class="btn btn-secondary" href="/user/">
+				<i class="fa fa-bar-chart"></i> Semaine
+			</a>
+			<a class="btn btn-secondary" href="/user/twoWeeks">
+				<i class="fa fa-bar-chart"></i> 15 Jours
+			</a>
+			<a class="btn btn-secondary" href="/user/month">
+				<i class="fa fa-bar-chart"></i> Mois
+			</a>
+		</div>
+    </div>
 	</div>
 	<br><br>
 	<div th:replace="fragments :: statsForm"></div>
@@ -25,26 +41,37 @@
 		<h2><i class="fa fa-list"></i> Rendement de la semaine :</h2><br>
 		<div class="row text-center">
 			<div class="col-sm-6 col-md-4" th:each="element : ${chantiersRendementWeek}">
-				<div class="card">
-					<div class="card-header">
-						<a th:href="@{'/user/chantier/'+${element.get('chantier').id}}">
-							<h2 th:text="${element.get('chantier').nom}"></h2>
-						</a>
-					</div>
-					<div class="card-block">
-						<p th:text="${element.get('chantier').adresse}"></p>
+				<div class="ibox float-e-margins">
+                            <div class="ibox-title">
+								<a class="label label-primary pull-right"
+									th:href="@{'/user/chantier/'+${element.get('chantier').id}+'/statistic'}">
+										statistic
+								</a>
+								<a th:href="@{'/user/chantier/'+${element.get('chantier').id}}">
+									<h5 th:text="${element.get('chantier').nom}"></h5>
+								</a>
+                            </div>
+                            <div class="ibox-content">
+								<p th:text="${element.get('chantier').adresse}"></p>
 
-						<!-- Insert pie chart here ( here is an example on how to get rendement value for this chantier)
-						 th:text will print the text inside the span tag
-						 if u want to get the value in an attribute (data for example), it's possible using th:attr -->
-						rendement = <span th:text="${element.get('rendement')}"
-										  th:attr="data=${element.get('rendement')}">this default text will be overwriten by th:text content</span>
+								<div class="text-center">
+                                	<div class="progress-pie-chart" th:attr="data-percent=${element.get('rendement')*100}">
+										<div class="ppc-progress">
+											<div class="ppc-progress-fill"></div>
+										</div>
+										<div class="ppc-percents">
+											<div class="pcc-percents-wrapper">
+											<span>%</span>
+											</div>
+										</div>
+									</div>
+									<h5>rendement</h5>
+                            	</div>
+								rendement = <span th:text="${element.get('rendement')}"
+												th:attr="data=${element.get('rendement')}">this default text will be overwriten by th:text content</span>
 
-					</div>
-					<a class="btn btn-block btn-success"
-					   th:href="@{'/user/chantier/'+${element.get('chantier').id}+'/statistic'}">
-						Voir les statistics du chantier
-					</a>
+					
+							</div>
 				</div>
 				<br>
 			</div>
@@ -55,34 +82,40 @@
 		<h2><i class="fa fa-list"></i> Resultat de l'inspection :</h2><br>
 		<div class="row text-center">
 			<div class="col-sm-6 col-md-4" th:each="element : ${chantiersRendement}">
-				<div class="card">
-					<div class="card-header">
-						<a th:href="@{'/user/chantier/'+${element.get('chantier').id}}">
-							<h2 th:text="${element.get('chantier').nom}"></h2>
-						</a>
-					</div>
-					<div class="card-block">
-						<p th:text="${element.get('chantier').adresse}"></p>
+                    <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+								<a class="label label-primary pull-right"
+									th:href="@{'/user/chantier/'+${element.get('chantier').id}+'/statistic'}">
+										statistic
+								</a>
+								<a th:href="@{'/user/chantier/'+${element.get('chantier').id}}">
+									<h5 th:text="${element.get('chantier').nom}"></h5>
+								</a>
+                            </div>
+                            <div class="ibox-content">
+								<p th:text="${element.get('chantier').adresse}"></p>
 
-						<!-- Insert pie chart here ( here is an example on how to get rendement value for this chantier)
-						 th:text will print the text inside the span tag
-						 if u want to get the value in an attribute (data for example), it's possible using th:attr -->
-						rendement = <span th:text="${element.get('rendement')}"
-										  th:attr="data=${element.get('rendement')}">this default text will be overwriten by th:text content</span>
+								<!-- Insert pie chart here ( here is an example on how to get rendement value for this chantier)
+								th:text will print the text inside the span tag
+								if u want to get the value in an attribute (data for example), it's possible using th:attr -->
 
+								rendement = <span th:text="${element.get('rendement')}"
+												th:attr="data=${element.get('rendement')}">this default text will be overwriten by th:text content</span>
+
+					
+							</div>
 					</div>
-					<a class="btn btn-block btn-success"
-					   th:href="@{'/user/chantier/'+${element.get('chantier').id}+'/statistic'}">
-						Voir les statistics du chantier
-					</a>
-				</div>
 				<br>
+			
 			</div>
 		</div>
 	</div>
 
 
 </div>
+<div th:replace="fragments :: footer"></div>
+<div th:replace="fragments :: chart-plugin"></div>
+
 
 </body>
 </html>
