@@ -8,7 +8,7 @@
 		<div class="col-sm-6">
 			<div style="display: -webkit-inline-box;">
 				<a class="btn btn-success btn-rounded" th:href="@{'/user/chantier/'+${engin.chantier.id}}" style="margin-top:30%;"><i class="fa fa-reply"></i></a>
-				<h2 class="text-center"> {{Engine N²}}</h2>
+				<h2 class="text-center" th:text="${engin.marque}"></h2>
 			</div>
 			
 			<ol class="breadcrumb">
@@ -19,10 +19,10 @@
 					<a href="/user/">chantiers</a>
 				</li>
 				<li>
-					<a th:href="@{'/user/chantier/'+${engin.chantier.id}}">chantier name</a>
+					<a th:href="@{'/user/chantier/'+${engin.chantier.id}}" th:text="${engin.chantier.nom}"></a>
 				</li>
 				<li class="active">
-					<strong >{{Engine N²}}<</strong>
+					<strong ></strong>
 				</li>
 			</ol>
 		</div>
@@ -43,13 +43,10 @@
 		</div>
 	</div>
 	<br><br>
-<<<<<<< Updated upstream
 	<a class="btn btn-success btn-lg" th:href="@{'/user/chantier/'+${engin.chantier.id}}">
 		<i class="fa fa-arrow-left"></i> Retour à la liste des engins
 	</a>
 	<br><br>
-=======
->>>>>>> Stashed changes
 	<div th:replace="fragments :: statsForm"></div>
 
 	<br>
