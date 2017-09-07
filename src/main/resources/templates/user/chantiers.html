@@ -3,114 +3,80 @@
 <head th:replace="fragments :: head"></head>
 <body>
 
-	<div th:replace="fragments :: header"></div>
+<div th:replace="fragments :: header"></div>
 <div class="container">
 	<hr>
 	<div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-sm-6">
-		<br>
-        <ol class="breadcrumb">
-            <li>
-                <a href="/">Accueil</a>
-            </li>
-            <li  class="active">
-                <a href="/user/"><strong>chantiers</strong></a>
-            </li>
-        </ol>
-    </div>
-    <div class="col-sm-6">
-		<br>
-		<div class="btn-group pull-right ">
-			<a class="btn btn-secondary" href="/user/">
-				<i class="fa fa-bar-chart"></i> Semaine
-			</a>
-			<a class="btn btn-secondary" href="/user/twoWeeks">
-				<i class="fa fa-bar-chart"></i> 15 Jours
-			</a>
-			<a class="btn btn-secondary" href="/user/month">
-				<i class="fa fa-bar-chart"></i> Mois
-			</a>
+		<div class="col-sm-6">
+			<br>
+			<ol class="breadcrumb">
+				<li>
+					<a href="/">Accueil</a>
+				</li>
+				<li  class="active">
+					<a href="/user/"><strong>chantiers</strong></a>
+				</li>
+			</ol>
 		</div>
-    </div>
+		<div class="col-sm-6">
+			<br>
+			<div class="btn-group pull-right ">
+				<a class="btn btn-secondary" href="/user/">
+					<i class="fa fa-bar-chart"></i> Semaine
+				</a>
+				<a class="btn btn-secondary" href="/user/twoWeeks">
+					<i class="fa fa-bar-chart"></i> 15 Jours
+				</a>
+				<a class="btn btn-secondary" href="/user/month">
+					<i class="fa fa-bar-chart"></i> Mois
+				</a>
+			</div>
+		</div>
 	</div>
 	<br><br>
 	<div th:replace="fragments :: statsForm"></div>
 	<br>
 
-	<div th:if="${chantiersRendementWeek}">
+
+	<div th:if="${chantiersRendement}">
 		<h2><i class="fa fa-list"></i> Rendement de la semaine :</h2><br>
 		<div class="row text-center">
-			<div class="col-sm-6 col-md-4" th:each="element : ${chantiersRendementWeek}">
+			<span id="list-size" th:text="${#lists.size(chantiersRendement)}" style="display:none"></span>
+			<div class="col-sm-6 col-md-4" th:each="element,iter : ${chantiersRendement}">
 				<div class="ibox float-e-margins">
-                            <div class="ibox-title">
-								<a class="label label-primary pull-right"
-									th:href="@{'/user/chantier/'+${element.get('chantier').id}+'/statistic'}">
-										statistic
-								</a>
-								<a th:href="@{'/user/chantier/'+${element.get('chantier').id}}">
-									<h5 th:text="${element.get('chantier').nom}"></h5>
-								</a>
-                            </div>
-                            <div class="ibox-content">
-								<p th:text="${element.get('chantier').adresse}"></p>
+					<div class="ibox-title">
+						<a class="label label-primary pull-right"
+						   th:href="@{'/user/chantier/'+${element.get('chantier').id}+'/statistic'}">
+							statistic
+						</a>
+						<a th:href="@{'/user/chantier/'+${element.get('chantier').id}}">
+							<h5 th:text="${element.get('chantier').nom}"></h5>
+						</a>
+					</div>
+					<div class="ibox-content">
+						<p th:text="${element.get('chantier').adresse}"></p>
 
-								<div class="text-center">
-                                	<div class="progress-pie-chart" th:attr="data-percent=${element.get('rendement')*100}">
-										<div class="ppc-progress">
-											<div class="ppc-progress-fill"></div>
-										</div>
-										<div class="ppc-percents">
-											<div class="pcc-percents-wrapper">
-											<span>%</span>
-											</div>
-										</div>
+						<div class="text-center">
+							<div th:class="'progress-pie-chart pie-chart-'+${(iter.index)}" th:attr="data-percent=${element.get('rendement')}">
+								<div class="ppc-progress">
+									<div th:class="'ppc-progress-fill ppc-progress-fill-'+${(iter.index)}"></div>
+								</div>
+								<div class="ppc-percents">
+									<div class="pcc-percents-wrapper">
+										<span th:class="'ppc-percents-span-'+${(iter.index)}">%</span>
 									</div>
-									<h5>rendement</h5>
-                            	</div>
-								rendement = <span th:text="${element.get('rendement')}"
-												th:attr="data=${element.get('rendement')}">this default text will be overwriten by th:text content</span>
-
-					
+								</div>
 							</div>
+							<h5>rendement</h5>
+						</div>
+						rendement = <span th:text="${element.get('rendement')}"
+										  th:attr="data=${element.get('rendement')}">this default text will be overwriten by th:text content</span>
+					</div>
 				</div>
 				<br>
 			</div>
 		</div>
 	</div>
-
-	<div th:if="${chantiersRendement}">
-		<h2><i class="fa fa-list"></i> Resultat de l'inspection :</h2><br>
-		<div class="row text-center">
-			<div class="col-sm-6 col-md-4" th:each="element : ${chantiersRendement}">
-                    <div class="ibox float-e-margins">
-                            <div class="ibox-title">
-								<a class="label label-primary pull-right"
-									th:href="@{'/user/chantier/'+${element.get('chantier').id}+'/statistic'}">
-										statistic
-								</a>
-								<a th:href="@{'/user/chantier/'+${element.get('chantier').id}}">
-									<h5 th:text="${element.get('chantier').nom}"></h5>
-								</a>
-                            </div>
-                            <div class="ibox-content">
-								<p th:text="${element.get('chantier').adresse}"></p>
-
-								<!-- Insert pie chart here ( here is an example on how to get rendement value for this chantier)
-								th:text will print the text inside the span tag
-								if u want to get the value in an attribute (data for example), it's possible using th:attr -->
-
-								rendement = <span th:text="${element.get('rendement')}"
-												th:attr="data=${element.get('rendement')}">this default text will be overwriten by th:text content</span>
-
-					
-							</div>
-					</div>
-				<br>
-			
-			</div>
-		</div>
-	</div>
-
 
 </div>
 <div th:replace="fragments :: footer"></div>

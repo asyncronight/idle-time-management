@@ -42,42 +42,14 @@
 	</div>
 	<br><br>
 
-	<div th:if="${enginsRendementWeek}">
-		<h2><i class="fa fa-list"></i> Rendement de la semaine :</h2><br>
-		<div class="row text-center">
-			<div class="col-sm-6 col-md-4" th:each="element : ${enginsRendementWeek}">
-				<div class="card" style="border: solid 2px #636363">
-					<img class="card-img-top img-fluid" th:src="@{'/files/'+${element.get('engin').photo}}"
-						 th:alt="${element.get('engin').photo}"/>
-					<div class="card-header">
-						<h2 th:text="'Engin N° '+${element.get('engin').id}"></h2>
-					</div>
-					<div class="card-block">
-						<p th:text="'Chauffeur : '+${element.get('engin').chauffeur}"></p>
-						<p th:text="'Marque : '+${element.get('engin').marque}"></p>
-						<p th:text="'Année : '+${element.get('engin').annee}"></p>
 
-						<!-- Insert pie chart here ( here is an example on how to get rendement value for this chantier)
-						 th:text will print the text inside the span tag
-						 if u want to get the value in an attribute (data for example), it's possible using th:attr -->
-						rendement = <span th:text="${element.get('rendement')}"
-										  th:attr="data=${element.get('rendement')}">this default text will be overwriten by th:text content</span>
-
-					</div>
-					<a class="btn btn-block btn-success"
-					   th:href="@{'/user/chantier/'+${element.get('engin').chantier.id}+'/engin/'+${element.get('engin').id}}">
-						Voir les statistics de l'engin
-					</a>
-				</div>
-				<br>
-			</div>
-		</div>
-	</div>
 
 	<div th:if="${enginsRendement}">
 		<h2><i class="fa fa-list"></i> Resultat de l'inspection :</h2><br>
 		<div class="row text-center">
-			<div class="col-sm-6 col-md-4" th:each="element : ${enginsRendement}">
+			<span id="list-size" th:text="${#lists.size(enginsRendement)}" style="display:none"></span>
+			<div class="col-sm-6 col-md-4" th:each="element,iter : ${enginsRendement}">
+
 				<div class="card" style="border: solid 2px #636363">
 					<img class="card-img-top img-fluid" th:src="@{'/files/'+${element.get('engin').photo}}"
 						 th:alt="${element.get('engin').photo}"/>
@@ -89,9 +61,22 @@
 						<p th:text="'Marque : '+${element.get('engin').marque}"></p>
 						<p th:text="'Année : '+${element.get('engin').annee}"></p>
 
-						<!-- Insert pie chart here ( here is an example on how to get rendement value for this chantier)
-						 th:text will print the text inside the span tag
-						 if u want to get the value in an attribute (data for example), it's possible using th:attr -->
+
+						<div class="text-center">
+							<div th:class="'progress-pie-chart pie-chart-'+${(iter.index)}" th:attr="data-percent=${element.get('rendement')}">
+								<div class="ppc-progress">
+									<div th:class="'ppc-progress-fill ppc-progress-fill-'+${(iter.index)}"></div>
+								</div>
+								<div class="ppc-percents">
+									<div class="pcc-percents-wrapper">
+										<span th:class="'ppc-percents-span-'+${(iter.index)}">%</span>
+									</div>
+								</div>
+							</div>
+							<h5>rendement</h5>
+						</div>
+
+
 						rendement = <span th:text="${element.get('rendement')}"
 										  th:attr="data=${element.get('rendement')}">this default text will be overwriten by th:text content</span>
 
@@ -108,5 +93,7 @@
 
 </div>
 <div th:replace="fragments :: footer"></div>
+<div th:replace="fragments :: chart-plugin"></div>
+
 </body>
 </html>

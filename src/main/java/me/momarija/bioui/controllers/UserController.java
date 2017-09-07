@@ -30,7 +30,7 @@ public class UserController {
 	@RequestMapping(value = {""}, method = RequestMethod.GET)
 	public String chantiersList(Model model){
 		model.addAttribute("title", "Liste des chantiers");
-		model.addAttribute("chantiersRendementWeek",userService.getChantiersRendementWeek());
+		model.addAttribute("chantiersRendement",userService.getChantiersRendementWeek());
 		model.addAttribute("statistic",new Statistic());
 		return "user/chantiers";
 	}
@@ -76,7 +76,7 @@ public class UserController {
 	public String enginsList(Model model, @PathVariable int id){
 		model.addAttribute("title", "Liste des engins");
 		model.addAttribute("statistic",new Statistic());
-		model.addAttribute("enginsRendementWeek",userService.getEnginsRendementWeek(id));
+		model.addAttribute("enginsRendement",userService.getEnginsRendementWeek(id));
 		model.addAttribute("chantier", adminChantierService.getChantier(id));
 		return "user/engins";
 	}

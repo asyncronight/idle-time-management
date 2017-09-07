@@ -33,6 +33,15 @@ public class UserServiceImpl implements UserService {
 
 	private DateUtility dateUtility = new DateUtility();
 
+
+    //********************************************************************************************
+    //*************************** Les chantiers et leurs rendements ******************************
+    //********************************************************************************************
+
+    /**
+     *
+     * @return la liste des chantiers et leurs rendements pour une semaine
+     */
     @Override
     public List<Map<String, Object>> getChantiersRendementWeek(){
         List<Map<String,Object>> list = new ArrayList<>();
@@ -62,7 +71,7 @@ public class UserServiceImpl implements UserService {
 
         for (Chantier c:chantierRepo.findAll()) {
             mapChantierRendement.put("chantier",c);
-            mapChantierRendement.put("rendement",getChantierRendement(c.getId(),statistic));
+            mapChantierRendement.put("rendement",String.format("%.2f", getChantierRendement(c.getId(),statistic)));
             list.add(mapChantierRendement);
             mapChantierRendement=new HashMap<>();
         }
@@ -70,6 +79,10 @@ public class UserServiceImpl implements UserService {
         return list;
     }
 
+    /**
+     *
+     * @return la liste des chantiers et leurs rendements pour 15 jours
+     */
     @Override
     public List<Map<String, Object>> getChantiersRendementTwoWeek(){
         List<Map<String,Object>> list = new ArrayList<>();
@@ -96,10 +109,10 @@ public class UserServiceImpl implements UserService {
         statistic.setHourTo(time_to);
         statistic.setNbHourRepos(1);
         Map<String,Object> mapChantierRendement = new HashMap<>();
-
         for (Chantier c:chantierRepo.findAll()) {
             mapChantierRendement.put("chantier",c);
-            mapChantierRendement.put("rendement",getChantierRendement(c.getId(),statistic));
+            mapChantierRendement.put("rendement",String.format("%.2f", getChantierRendement(c.getId(),statistic)));
+
             list.add(mapChantierRendement);
             mapChantierRendement=new HashMap<>();
         }
@@ -107,6 +120,10 @@ public class UserServiceImpl implements UserService {
         return list;
     }
 
+    /**
+     *
+     * @return la liste des chantiers et leurs rendements pour un mois
+     */
     @Override
     public List<Map<String, Object>> getChantiersRendementMonth(){
         List<Map<String,Object>> list = new ArrayList<>();
@@ -136,7 +153,7 @@ public class UserServiceImpl implements UserService {
 
         for (Chantier c:chantierRepo.findAll()) {
             mapChantierRendement.put("chantier",c);
-            mapChantierRendement.put("rendement",getChantierRendement(c.getId(),statistic));
+            mapChantierRendement.put("rendement",String.format("%.2f", getChantierRendement(c.getId(),statistic)));
             list.add(mapChantierRendement);
             mapChantierRendement=new HashMap<>();
         }
@@ -144,6 +161,11 @@ public class UserServiceImpl implements UserService {
         return list;
     }
 
+    /**
+     * @param statistic
+     * statistic est un objet contenant les dates et les heures d'inspection + le nombre d'heures de pause
+     * @return la liste des chantiers et leurs rendements pour une durée saisie par l'utilisateur
+     */
     @Override
 	public List<Map<String, Object>> getChantiersRendement(Statistic statistic) {
 		List<Map<String,Object>> list = new ArrayList<>();
@@ -160,72 +182,16 @@ public class UserServiceImpl implements UserService {
 		return list;
 	}
 
-	@Override
-	public List<Map<String, String>> getChantierStatistics(int chantierId, Statistic statistic) {
-		List<Map<String,String>> list = new ArrayList<>();
-		int i; String dayView;
-		Date d1,d2,d3;
-		long y;
-		SimpleDateFormat stf = new SimpleDateFormat("MM/dd/yyyy");
-		SimpleDateFormat stimef = new SimpleDateFormat("HH:mm");
-        SimpleDateFormat stfDay = new SimpleDateFormat("dd/MM/yyyy");
+    //********************************************************************************************
+    //*************************** Les statistiques d'un chantier  ********************************
+    //********************************************************************************************
 
-
-		int nbJours = statistic.calculNbJours();
-
-		String dayFrom =stf.format(statistic.getDayFrom());
-		String hourFrom = stimef.format(statistic.getHourFrom());
-		String hourTo = stimef.format(statistic.getHourTo());
-
-		Map<String ,Integer> map ;
-		Map<String ,String> map2 ;
-		double p_percent;long z;
-
-		int a=0,r=0,p=0;float perc =0.2f;
-		for(i=0;i<=nbJours;i++){
-			d1= new Date(dayFrom+" "+hourFrom);
-			d3= new Date(dayFrom+" "+hourTo);
-			y = d1.getTime()+24*3600*1000;
-			d2 = new Date(y);
-			z = d3.getTime()-d1.getTime()-statistic.getNbHourRepos()*3600*1000;
-			map2 = new HashMap<>();
-			List<Engin> listEngin = getEnginList(chantierId);
-			for (Engin engin :listEngin) {
-
-				map = doWork(engin,d1,d3);
-				int arret = (int)z/1000 - map.get("production") - map.get("ralenti");
-				if(arret < 0){
-					map.put("ralenti",map.get("ralenti")+arret);
-					arret = 0 ;
-				}
-				if(map.get("ralenti")<0) map.put("ralenti",0);
-
-				p_percent =(double) (map.get("production") * 100 / (z/1000) ) ;
-
-				a+=arret;
-				r+=map.get("ralenti");
-				p+=map.get("production");
-				perc+=p_percent;
-
-			}
-            dayView = stfDay.format(d1);
-
-			map2.put("production",dateUtility.convertToDate(p/listEngin.size()));
-			map2.put("ralenti",dateUtility.convertToDate(r/listEngin.size()));
-			map2.put("arret", dateUtility.convertToDate(a/listEngin.size()));
-			map2.put("date", dayView);
-			map2.put("pause",statistic.getNbHourRepos()+" h");
-			map2.put("rendement",String.format("%.2f",perc/listEngin.size() )+" %" );
-			list.add(map2);
-			a=0;r=0;p=0;perc=0.2f;
-			map2= new HashMap<>();
-			dayFrom = stf.format(d2);
-
-		}
-
-		return list;
-	}
-
+    /**
+     *
+     * @param  chantierId
+     * l'ID du chantier à inspecter
+     * @return la liste des jours de la semaine passée ,chacun son rendement ,les temps de production,de ralenti et d'arret
+     */
     @Override
     public List<Map<String, String>> getChantierStatisticsWeek(int chantierId) {
         List<Map<String,String>> list = new ArrayList<>();
@@ -315,6 +281,12 @@ public class UserServiceImpl implements UserService {
         return list;
     }
 
+    /**
+     *
+     * @param  chantierId
+     * l'ID du chantier à inspecter
+     * @return la liste des jours de 15 jours passés ,chacun son rendement ,les temps de production,de ralenti et d'arret
+     */
     @Override
     public List<Map<String, String>> getChantierStatisticsTwoWeek(int chantierId) {
         List<Map<String,String>> list = new ArrayList<>();
@@ -403,6 +375,12 @@ public class UserServiceImpl implements UserService {
         return list;
     }
 
+    /**
+     *
+     * @param  chantierId
+     * l'ID du chantier à inspecter
+     * @return la liste des jours du mois passé ,chacun son rendement ,les temps de production,de ralenti et d'arret
+     */
     @Override
     public List<Map<String, String>> getChantierStatisticsMonth(int chantierId) {
         List<Map<String,String>> list = new ArrayList<>();
@@ -491,6 +469,84 @@ public class UserServiceImpl implements UserService {
         return list;
     }
 
+    /**
+     *
+     * @param statistic
+     * statistic est un objet contenant les dates et les heures d'inspection + le nombre d'heures de pause
+     * @param  chantierId
+     * l'ID du chantier à inspecter
+     * @return la liste des jours selectionnés ,chacun son rendement ,les temps de production,de ralenti et d'arret
+     */
+    @Override
+    public List<Map<String, String>> getChantierStatistics(int chantierId, Statistic statistic) {
+        List<Map<String,String>> list = new ArrayList<>();
+        int i; String dayView;
+        Date d1,d2,d3;
+        long y;
+        SimpleDateFormat stf = new SimpleDateFormat("MM/dd/yyyy");
+        SimpleDateFormat stimef = new SimpleDateFormat("HH:mm");
+        SimpleDateFormat stfDay = new SimpleDateFormat("dd/MM/yyyy");
+
+
+        int nbJours = statistic.calculNbJours();
+
+        String dayFrom =stf.format(statistic.getDayFrom());
+        String hourFrom = stimef.format(statistic.getHourFrom());
+        String hourTo = stimef.format(statistic.getHourTo());
+
+        Map<String ,Integer> map ;
+        Map<String ,String> map2 ;
+        double p_percent;long z;
+
+        int a=0,r=0,p=0;float perc =0.2f;
+        for(i=0;i<=nbJours;i++){
+            d1= new Date(dayFrom+" "+hourFrom);
+            d3= new Date(dayFrom+" "+hourTo);
+            y = d1.getTime()+24*3600*1000;
+            d2 = new Date(y);
+            z = d3.getTime()-d1.getTime()-statistic.getNbHourRepos()*3600*1000;
+            map2 = new HashMap<>();
+            List<Engin> listEngin = getEnginList(chantierId);
+            for (Engin engin :listEngin) {
+
+                map = doWork(engin,d1,d3);
+                int arret = (int)z/1000 - map.get("production") - map.get("ralenti");
+                if(arret < 0){
+                    map.put("ralenti",map.get("ralenti")+arret);
+                    arret = 0 ;
+                }
+                if(map.get("ralenti")<0) map.put("ralenti",0);
+
+                p_percent =(double) (map.get("production") * 100 / (z/1000) ) ;
+
+                a+=arret;
+                r+=map.get("ralenti");
+                p+=map.get("production");
+                perc+=p_percent;
+
+            }
+            dayView = stfDay.format(d1);
+
+            map2.put("production",dateUtility.convertToDate(p/listEngin.size()));
+            map2.put("ralenti",dateUtility.convertToDate(r/listEngin.size()));
+            map2.put("arret", dateUtility.convertToDate(a/listEngin.size()));
+            map2.put("date", dayView);
+            map2.put("pause",statistic.getNbHourRepos()+" h");
+            map2.put("rendement",String.format("%.2f",perc/listEngin.size() )+" %" );
+            list.add(map2);
+            a=0;r=0;p=0;perc=0.2f;
+            map2= new HashMap<>();
+            dayFrom = stf.format(d2);
+
+        }
+
+        return list;
+    }
+
+    //********************************************************************************************
+    //*************************** Les engins et leurs rendements *********************************
+    //********************************************************************************************
+
     @Override
 	public List<Map<String, Object>> getEnginsRendementWeek(int chantierId) {
 		List<Map<String,Object>> list = new ArrayList<>();
@@ -520,8 +576,9 @@ public class UserServiceImpl implements UserService {
 		Map<String,Object> mapEnginRendement = new HashMap<>();
 		for (Engin e:getEnginList(chantierId)) {
 			mapEnginRendement.put("engin",e);
-			mapEnginRendement.put("rendement",getEnginRendement(e.getId(),statistic));
-			list.add(mapEnginRendement);
+			mapEnginRendement.put("rendement",String.format("%.2f",getEnginRendement(e.getId(),statistic)));
+
+            list.add(mapEnginRendement);
 			mapEnginRendement=new HashMap<>();
 		}
 		return list;
@@ -569,7 +626,7 @@ public class UserServiceImpl implements UserService {
         Map<String,Object> mapEnginRendement = new HashMap<>();
         for (Engin e:getEnginList(chantierId)) {
             mapEnginRendement.put("engin",e);
-            mapEnginRendement.put("rendement",getEnginRendement(e.getId(),statistic));
+            mapEnginRendement.put("rendement",String.format("%.2f",getEnginRendement(e.getId(),statistic)));
             list.add(mapEnginRendement);
             mapEnginRendement=new HashMap<>();
         }
@@ -605,12 +662,17 @@ public class UserServiceImpl implements UserService {
         Map<String,Object> mapEnginRendement = new HashMap<>();
         for (Engin e:getEnginList(chantierId)) {
             mapEnginRendement.put("engin",e);
-            mapEnginRendement.put("rendement",getEnginRendement(e.getId(),statistic));
+            mapEnginRendement.put("rendement",String.format("%.2f",getEnginRendement(e.getId(),statistic)));
             list.add(mapEnginRendement);
             mapEnginRendement=new HashMap<>();
         }
         return list;
     }
+
+
+    //********************************************************************************************
+    //*************************** Les statistiques d'un engin  ***********************************
+    //********************************************************************************************
 
     @Override
     public List<Map<String, String>> getEnginStatisticsWeek(int enginId) {
@@ -910,7 +972,11 @@ public class UserServiceImpl implements UserService {
 		return list;
 	}
 
-	@Override
+    //********************************************************************************************
+    //*************************** Les statistiques d'un chantier en un jour **********************
+    //********************************************************************************************
+
+    @Override
 	public List<Map<String, String>> getEnginStatisticsDay(int enginId,String day) {
 		List<Map<String,String>> list = new ArrayList<>();
 		Map<String ,Integer> map;
@@ -971,7 +1037,11 @@ public class UserServiceImpl implements UserService {
 		return list;
 	}
 
-	@Override
+    //********************************************************************************************
+    //*************************** Les statistiques d'un engin en un jour *************************
+    //********************************************************************************************
+
+    @Override
 	public List<Map<String, String>> getChantierStatisticsDay(int chantierId,String day) {
 		List<Map<String,String>> list = new ArrayList<>();
 		Map<String ,Integer> map;
@@ -1044,7 +1114,12 @@ public class UserServiceImpl implements UserService {
         return list;
 	}
 
-	private List<Engin> getEnginList(int chantierId) {
+
+    //********************************************************************************************
+    //*************************** Les methodes privées **********************
+    //********************************************************************************************
+
+    private List<Engin> getEnginList(int chantierId) {
 		return chantierRepo.findOne(chantierId).getEngins();
 	}
 	private float getChantierRendement(int chantierId, Statistic statistic){
