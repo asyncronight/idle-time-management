@@ -51,8 +51,8 @@ public class SecConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/gerant/**").hasAnyAuthority("Gerant", "Admin")
 				.antMatchers("/user/**").hasAuthority("User")
 				.and()
-				.formLogin().loginPage("/login").successForwardUrl("/").permitAll()
-				.and()
+                .formLogin().loginPage("/login").defaultSuccessUrl("/").permitAll()
+                .and()
 				.logout().permitAll();
 
 		//Configutations for dev mode (default profile)
