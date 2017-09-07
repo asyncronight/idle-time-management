@@ -8,6 +8,9 @@
     background-color: #FFF ;
     border-radius: 3px;
     padding: 2%;
+    margin:0% 20%;
+    box-shadow: 0 0 10px grey;
+
 }
 hr{
     color: #2f4050;
@@ -16,4 +19,6 @@ hr{
     margin: 0 !important;
     margin-bottom: 5px;
 }
-
+.shadow{
+    style=border: solid 0px #636363;box-shadow: 0 0 10px black;
+}

@@ -24,6 +24,7 @@ public class AdminChantierController {
 	public String chantierLis(Model model){
 		model.addAttribute("title", "Liste des chantier");
 		model.addAttribute("chantiers", adminChantierService.getChantierList());
+
 		return "admin/chantierList";
 	}
 

@@ -5,18 +5,11 @@
 <div th:replace="fragments :: header"></div>
 <div class="container">
 	<hr>
-	<h1 class="text-center" th:text="'Chantier : '+${chantier.nom}"></h1>
-	<br>
-	<a class="btn btn-success btn-lg" th:href="@{'/user/chantier/'+${chantier.id} +'/statistic'}">
-		<i class="fa fa-arrow-left"></i> Retour
-	</a>
-	<br><br>
-	<h2> Statistiques du jour <span th:text="${date}"></span>:</h2>
-	<br>
+
 	<div class="row wrapper border-bottom white-bg page-heading">
 		<div class="col-sm-6">
 			<div style="display: -webkit-inline-box;">
-				<a class="btn btn-success btn-rounded" href="@{'/user/chantier/'+${chantier.id}}" style="margin-top:30%;"><i class="fa fa-reply"></i></a>
+				<a class="btn btn-success btn-rounded" th:href="@{'/user/chantier/'+${chantier.id} +'/statistic'}" style="margin-top:30%;"><i class="fa fa-reply"></i></a>
 				<h2 class="text-center" th:text="${chantier.nom}"></h2>
 			</div>
 			
@@ -35,12 +28,8 @@
 				</li>
 			</ol>
 		</div>
-		<div class="col-sm-6">
-		</div>
 	</div>
->>>>>>> Stashed changes
-
-
+	<hr>
 	<!-- bar chart goes here -->
 
 

@@ -2,15 +2,30 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head th:replace="fragments :: head"></head>
 <body>
+<div th:replace="fragments :: header"></div>
+
 <div class="container">
-	<div th:replace="fragments :: header"></div>
 	<hr>
+	<div class="row wrapper border-bottom white-bg page-heading">
+		<div class="col-sm-6">
+			<br>
+			<ol class="breadcrumb">
+				<li>
+					<a href="/">Accueil</a>
+				</li>
+				<li  class="active">
+					<a href="/admin/"><strong>chantiers</strong></a>
+				</li>
+			</ol>
+		</div>
+	</div>
+	<br>
 	<h2><i class="fa fa-list"></i> La liste des chantiers :</h2>
 	<br>
 	<div class="row text-center">
 		<div class=" col-sm-6 col-md-4" th:each="chantier : ${chantiers}">
-			<div class="card text-center">
-				<div class="card-header">
+			<div class="card text-center shadow">
+				<div class="ibox-content">
 					<h2 th:text="${chantier.nom}">Chantier</h2>
 				</div>
 				<div class="card-block" style="margin: 5%">
@@ -21,7 +36,7 @@
 						engins
 					</small>
 				</div>
-				<div class="card-footer">
+				<div class="ibox-content">
 					<a class="btn btn-block" th:href="@{'/gerant/chantier/'+${chantier.id}}">Voir la liste des
 						engins</a>
 				</div>
@@ -30,5 +45,6 @@
 		</div>
 	</div>
 </div>
+
 </body>
 </html>

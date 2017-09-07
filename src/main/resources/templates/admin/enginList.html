@@ -2,70 +2,104 @@
 <html lang="en"  xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments :: head"></head>
 <body>
+<div th:replace="fragments :: header"></div>
+
 <div class="container">
-	<div th:replace="fragments :: header"></div>
 	<hr>
+	<div class="row wrapper border-bottom white-bg page-heading">
+		<div class="col-sm-6">
+			<br>
+			<ol class="breadcrumb">
+				<li>
+					<a href="/">Accueil</a>
+				</li>
+				<li  class="active">
+					<a href="/admin/">chantiers</a>
+				</li>
+				<li  class="active">
+					<strong>
+						<a th:href="'/admin/chantier/'+${chantier.id}" th:text="${chantier.nom}"></a>
+					</strong>
+				</li>
+			</ol>
+		</div>
+	</div>
+	<br>
 	<div class="row">
-		<div class="mr-auto">
-			<a class="btn btn-primary btn-lg" href="/admin/"><i class="fa fa-arrow-left"></i> Retour à la liste des
+		<div >
+			<a class="d-inline-block btn btn-primary btn-lg" href="/admin/"><i class="fa fa-arrow-left"></i> Retour à la liste des
 				chantier</a>
 		</div>
-		<div class="ml-auto">
-			<a class="btn btn-primary btn-lg" th:href="@{'/admin/chantier/'+${chantier.id}+'/addEngin'}"><i
+		<div >
+			<a class="d-inline-block btn btn-primary btn-lg pull-right" th:href="@{'/admin/chantier/'+${chantier.id}+'/addEngin'}"><i
 					class="fa fa-plus"></i> Ajouter un engin</a>
 		</div>
 	</div>
 	<br>
-	<h2><i class="fa fa-list"></i> La liste des engins du chantier : <span th:text="${chantier.nom}"></span></h2>
-	<br>
-	<div class="row">
-		<div class=" col-sm-6 col-md-4" th:each="engin : ${chantier.engins}">
-			<div class="card text-center" style="border: solid 2px #636363">
-				<img class="card-img-top img-fluid" th:src="@{'/files/'+${engin.photo}}" th:alt="${engin.photo}">
-				<div class="card-block bg-faded">
-					<h4 class="card-title" th:text="'Engin N° '+${engin.id}">Card title</h4>
-				</div>
-				<ul class="list-group list-group-flush">
-					<li class="list-group-item" th:text="'Marque : '+${engin.marque}">Cras justo odio</li>
-					<li class="list-group-item bg-faded" th:text="'Chauffeur : '+${engin.chauffeur}">Cras justo odio</li>
-					<li class="list-group-item" th:text="'Annee : '+${engin.annee}">Cras justo odio</li>
-					<li class="list-group-item bg-faded" th:text="'Seuil de production : '+${engin.seuilP}">Cras justo odio</li>
-					<li class="list-group-item" th:text="'Seuil de ralentie : '+${engin.seuilR}">Cras justo odio</li>
-					<li class="list-group-item bg-faded" th:text="'Temps : '+${engin.temps}">Cras justo odio</li>
-				</ul>
-				<button type="button" class="card-block btn btn-danger" data-toggle="modal" th:attr="data-target='#modal'+${engin.id}">
-					<i class="fa fa-remove"></i>Supprimer
-				</button>
-				<div class="modal fade" th:id="@{'modal'+${engin.id}}" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-					<div class="modal-dialog" role="document">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h5 class="modal-title" id="modalLabel">Confirmer la suppression</h5>
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-							</div>
-							<form method="post" th:action="@{'/admin/chantier/'+${engin.chantier.id}+'/delete/'+${engin.id}}">
-								<input type="hidden"
-									   th:name="${_csrf.parameterName}"
-									   th:value="${_csrf.token}"/>
-								<label class="custom-control custom-checkbox">
-									<input type="checkbox" class="custom-control-input" name="deleteData">
-									<span class="custom-control-indicator"></span>
-									<span class="custom-control-description">Supprimer les données associées à cet engin ?</span>
-								</label>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-									<input type="Submit" class="btn btn-danger" value="Supprimer" />
+	<h3><i class="fa fa-list"></i> La liste des engins du chantier : <span th:text="${chantier.nom}"></span></h3>
+
+<br>
+	<div th:if="${chantier.engins}" >
+		<div class="row text-center">
+			<div class="col-sm-6 col-md-4" th:each="engin : ${chantier.engins}">
+
+				<div class="card shadow" >
+					<div class="card-header">
+						<img class="card-img-top img-fluid" th:src="@{'/files/'+${engin.photo}}"
+							 th:alt="${engin.photo}"/>
+					</div>
+
+					<div class="card-header">
+						<h2 th:text="'Engin N° '+${engin.id}"></h2>
+					</div>
+					<div class="card-block">
+						<p th:text="'Chauffeur : '+${engin.chauffeur}"></p>
+						<p th:text="'Marque : '+${engin.marque}"></p>
+						<p th:text="'Année : '+${engin.annee}"></p>
+					</div>
+					<div class="ibox-content">
+						<button type="button" class="card-block btn btn-danger" data-toggle="modal" th:attr="data-target='#modal'+${engin.id}">
+							<i class="fa fa-remove"></i>Supprimer
+						</button>
+					</div>
+
+					<div class="modal fade" th:id="@{'modal'+${engin.id}}" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="modalLabel">Confirmer la suppression</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
 								</div>
-							</form>
+								<form method="post" th:action="@{'/admin/chantier/'+${engin.chantier.id}+'/delete/'+${engin.id}}">
+									<input type="hidden"
+										   th:name="${_csrf.parameterName}"
+										   th:value="${_csrf.token}"/>
+									<label class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input" name="deleteData">
+										<span class="custom-control-indicator"></span>
+										<span class="custom-control-description">Supprimer les données associées à cet engin ?</span>
+									</label>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+										<input type="Submit" class="btn btn-danger" value="Supprimer" />
+									</div>
+								</form>
+							</div>
 						</div>
 					</div>
 				</div>
+				<br>
 			</div>
-			<br>
 		</div>
 	</div>
+
+
+
+
 </div>
+<div th:replace="fragments :: footer"></div>
+
 </body>
 </html>

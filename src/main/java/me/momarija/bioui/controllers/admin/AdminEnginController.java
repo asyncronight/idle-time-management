@@ -41,9 +41,13 @@ public class AdminEnginController {
 
 	@RequestMapping(value = "/addEngin", method = RequestMethod.GET)
 	public String addEnginGet(@PathVariable int idC, Model model){
+		Chantier chantier = adminCantierService.getChantier(idC);
+
 		model.addAttribute("title", "Ajouter un engin");
 		model.addAttribute("engin", new Engin());
 		model.addAttribute("idC", idC);
+		model.addAttribute("chantier", chantier);
+
 		return "admin/enginForm";
 	}
 

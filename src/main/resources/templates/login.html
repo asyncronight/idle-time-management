@@ -9,15 +9,13 @@
 			<div>
 				<img th:src="@{/img/poclain-login.png}" class="logo-name" style="width : 80%">
 			</div>
-			<h3>Welcome to BIOUI</h3>
-			<p>
-				Perfectly designed and precisely prepared app with over stats and more features to manage engins.
-			</p>
-			<p>Login in. To see it in action.</p>
+			<h3>Bienvenu à Bioui</h3>
+
+			<p>Vos chantiers en surveillance</p>
 			<form action="/login" method="post" class="m-t">
 
-				<div class="alert alert-danger" th:if="${param.error}">Informations non valide</div>
-				<div class="alert alert-success" th:if="${param.logout}">Vous avez deconnecté</div>
+				<div class="alert alert-danger" th:if="${param.error}">Informations non valides</div>
+				<div class="alert alert-success" th:if="${param.logout}">Vous êtes deconnecté</div>
 
 				<input type="hidden"
 					   th:name="${_csrf.parameterName}"

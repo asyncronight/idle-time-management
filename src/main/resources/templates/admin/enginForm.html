@@ -2,9 +2,32 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments :: head"></head>
 <body>
+<div th:replace="fragments :: header"></div>
+
 <div class="container">
-	<div th:replace="fragments :: header"></div>
 	<hr>
+
+	<div class="row wrapper border-bottom white-bg page-heading">
+		<div class="col-sm-6">
+			<br>
+			<ol class="breadcrumb">
+				<li>
+					<a href="/">Accueil</a>
+				</li>
+				<li  class="active">
+					<a href="/admin/">chantiers</a>
+				</li>
+				<li  class="active">
+					<a th:href="'/admin/chantier/'+${chantier.id}" th:text="${chantier.nom}"></a>
+				</li>
+				<li  class="active">
+					<a href="#">Ajouter un engin</a>
+				</li>
+			</ol>
+		</div>
+	</div>
+	<br>
+
 	<a class="btn btn-primary btn-lg" th:href="@{'/admin/chantier/'+${idC}}"><i class="fa fa-arrow-left"></i> Retour à
 		la liste des engins</a>
 	<br>

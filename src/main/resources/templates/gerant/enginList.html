@@ -2,19 +2,35 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head th:replace="fragments :: head"></head>
 <body>
+<div th:replace="fragments :: header"></div>
+
 <div class="container">
-	<div th:replace="fragments :: header"></div>
 	<hr>
-	<div class="mr-auto">
-		<a class="btn btn-warning btn-lg" href="/gerant/"><i class="fa fa-arrow-left"></i> Retour à la liste des
-			chantier</a>
+	<div class="row wrapper border-bottom white-bg page-heading">
+		<div class="col-sm-6">
+			<br>
+			<ol class="breadcrumb">
+				<li>
+					<a href="/">Accueil</a>
+				</li>
+				<li  class="active">
+					<a href="/gerant/">chantiers</a>
+				</li>
+				<li  class="active">
+					<a th:href="'/gerant/chantier/'+${chantier.id}" th:text="${chantier.nom}"></a>
+				</li>
+				<li  class="active">
+					<a href="#" ><strong>engins</strong></a>
+				</li>
+
+			</ol>
+		</div>
 	</div>
-	<br>
-	<h2><i class="fa fa-list"></i> La liste des engins du chantier : <span th:text="${chantier.nom}"></span></h2>
+	<br><h2><i class="fa fa-list"></i> La liste des engins du chantier : <span th:text="${chantier.nom}"></span></h2>
 	<br>
 	<div class="row">
 		<div class=" col-sm-6 col-md-4" th:each="engin : ${chantier.engins}">
-			<div class="card text-center" style="border: solid 2px #636363">
+			<div class="card text-center shadow" >
 				<img class="card-img-top img-fluid" th:src="@{'/files/'+${engin.photo}}" th:alt="${engin.photo}">
 				<div class="card-block bg-faded">
 					<h4 class="card-title" th:text="'Engin N° '+${engin.id}"></h4>
@@ -23,15 +39,15 @@
 					<li class="list-group-item" th:text="'Marque : '+${engin.marque}"></li>
 					<li class="list-group-item bg-faded" th:text="'Chauffeur : '+${engin.chauffeur}"></li>
 					<li class="list-group-item" th:text="'Annee : '+${engin.annee}"></li>
-					<li class="list-group-item bg-faded" th:text="'Seuil de production : '+${engin.seuilP}"
-					</li>
-					<li class="list-group-item" th:text="'Seuil de ralentie : '+${engin.seuilR}"></li>
 					<li class="list-group-item bg-faded" th:text="'Temps : '+${engin.temps}"></li>
 				</ul>
-				<button type="button" class="card-block btn btn-warning" data-toggle="modal"
+				<div class="ibox-content">
+
+					<button type="button" class="card-block btn btn-warning" data-toggle="modal"
 						th:attr="data-target='#modal'+${engin.id}">
-					Transferer <i class="fa fa-reply"></i>
-				</button>
+						Transferer <i class="fa fa-reply"></i>
+					</button>
+				</div>
 				<div class="modal fade" th:id="@{'modal'+${engin.id}}" tabindex="-1" role="dialog"
 					 aria-labelledby="modalLabel" aria-hidden="true">
 					<div class="modal-dialog" role="document">
@@ -56,7 +72,7 @@
 										</option>
 									</select>
 								</div>
-								<div class="modal-footer">
+								<div class="ibox-content">
 									<button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler
 									</button>
 									<input type="Submit" class="btn btn-warning" value="Transferer"/>
@@ -70,5 +86,7 @@
 		</div>
 	</div>
 </div>
+<div th:replace="fragments :: footer"></div>
+
 </body>
 </html>

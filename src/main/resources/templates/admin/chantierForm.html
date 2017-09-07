@@ -2,9 +2,28 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments :: head"></head>
 <body>
+<div th:replace="fragments :: header"></div>
+
 <div class="container">
-	<div th:replace="fragments :: header"></div>
 	<hr>
+
+	<div class="row wrapper border-bottom white-bg page-heading">
+		<div class="col-sm-6">
+			<br>
+			<ol class="breadcrumb">
+				<li>
+					<a href="/">Accueil</a>
+				</li>
+				<li  class="active">
+					<a href="/admin/">chantiers</a>
+				</li>
+				<li  class="active">
+					<a href="#"><strong>Ajouter un chantier</strong></a>
+				</li>
+			</ol>
+		</div>
+	</div>
+	<br>
 	<a class="btn btn-primary btn-lg" href="/admin/"><i class="fa fa-arrow-left"></i> Retour à la liste des
 		chantiers</a>
 	<br>
