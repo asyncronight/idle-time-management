@@ -2,7 +2,7 @@
     width:50%;
 }
 .navbar{
-    border-bottom: 1px solid #0083ff;
+    border-bottom: 4.5px solid #1ab394;
 }
 .stats-forms{
     background-color: #FFF ;
@@ -95,4 +95,8 @@ hr{
   text-align: center;}
 .shadow{
     border: solid 0px #636363;box-shadow: 0 0 10px black;
+}
+.nav-bg{
+	background-color: #2f4050;
+    color: #ffffff;
 }
