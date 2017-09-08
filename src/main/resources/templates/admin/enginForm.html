@@ -10,6 +10,10 @@
 	<div class="row wrapper border-bottom white-bg page-heading">
 		<div class="col-sm-6">
 			<br>
+			<div style="display: -webkit-inline-box;">
+				<a class="btn btn-primary btn-rounded" href="@{'/admin/chantier/'+${idC}}" style="margin-top:30%;"><i class="fa fa-reply"></i></a>
+				<h2 class="text-center" th:text="${chantier.nom}"></h2>
+			</div>
 			<ol class="breadcrumb">
 				<li>
 					<a href="/">Accueil</a>

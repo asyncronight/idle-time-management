@@ -18,12 +18,9 @@
 				</li>
 			</ol>
 		</div>
-	</div>
-	<br>
-	<div class="row">
-
-		<div class="ml-auto">
-			<a class="btn btn-primary btn-lg" th:href="@{'/admin/chantier/add'}"><i
+		<div class="col-md-6 pull-right">
+		<br>
+			<a class="btn btn-primary pull-right" th:href="@{'/admin/chantier/add'}"><i
 					class="fa fa-plus"></i> Ajouter un chantier</a>
 		</div>
 	</div>
@@ -32,9 +29,9 @@
 	<div th:if="${chantiers}" >
 		<div class="row text-center">
 			<div class="col-sm-6 col-md-4" th:each="chantier : ${chantiers}">
-				<div class="card shadow">
+				<div class="ibox float-e-margins">
 					<div class="ibox-title">
-						<button  class="pull-right  btn btn-danger" data-toggle="modal" th:attr="data-target='#modal'+${chantier.id}">
+						<button  class="pull-right label label-danger btn" data-toggle="modal" th:attr="data-target='#modal'+${chantier.id}">
 							<i class="fa fa-remove"></i>
 						</button>
 						<a  th:href="@{'/admin/chantier/'+${chantier.id}}">
@@ -42,16 +39,19 @@
 						</a>
 					</div>
 					<div class="ibox-content">
-						<p th:text="${chantier.adresse}"></p>
+						<p  th:text="${chantier.adresse}"></p>
+						<div class="text-center">
+							<small class="card-text" style="margin-bottom: 10px">
+								Contient 
+								<span class="text-danger" th:text="${#lists.size(chantier.engins)}">x</span> 
+								engins
+							</small>
+							<hr>
+							<a class="btn btn-block" th:href="@{'/admin/chantier/'+${chantier.id}}">Voir la liste des
+									engins</a>
+						</div>
 					</div>
-					<div class="ibox-content">
-						<small class="card-text" style="margin-bottom: 10px">Contient <span class="text-danger" th:text="${#lists.size(chantier.engins)}">x</span> engins</small>
-
-					</div>
-					<div class="ibox-content">
-						<a class="btn btn-block" th:href="@{'/admin/chantier/'+${chantier.id}}">Voir la liste des
-							engins</a>
-					</div>
+				</div>
 					<div class="modal fade" th:id="@{'modal'+${chantier.id}}" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
 						<div class="modal-dialog" role="document">
 							<div class="modal-content">
