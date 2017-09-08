@@ -12,7 +12,7 @@
 			<br>
 			<div style="display: -webkit-inline-box;">
 				<a class="btn btn-primary btn-rounded" href="@{'/admin/chantier/'+${idC}}" style="margin-top:30%;"><i class="fa fa-reply"></i></a>
-				<h2 class="text-center" th:text="${chantier.nom}"></h2>
+				<h2 class="text-center" >Ajouter Engine à <span th:text="${chantier.nom}"></span></h2>
 			</div>
 			<ol class="breadcrumb">
 				<li>
@@ -31,10 +31,8 @@
 		</div>
 	</div>
 	<br>
-
-	<a class="btn btn-primary btn-lg" th:href="@{'/admin/chantier/'+${idC}}"><i class="fa fa-arrow-left"></i> Retour à
-		la liste des engins</a>
-	<br>
+	<div class="row">
+	<div class="col-md-8 col-md-offset-2 shadow">
 	<form class="form-horizontal" method="post" th:object="${engin}" enctype="multipart/form-data" style="margin: 5%">
 
 		<div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
@@ -137,6 +135,8 @@
 			</div>
 		</div>
 	</form>
+	</div>
+	</div>
 
 </div>
 </body>

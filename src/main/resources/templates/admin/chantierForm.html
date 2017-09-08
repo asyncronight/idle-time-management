@@ -11,7 +11,7 @@
 		<div class="col-sm-6">
 			<div style="display: -webkit-inline-box;">
 				<a class="btn btn-primary btn-rounded" href="/admin/" style="margin-top:30%;"><i class="fa fa-reply"></i></a>
-				<h2 class="text-center" th:text="${chantier.nom}"></h2>
+				<h2 class="text-center"> Ajouter Chantier</h2>
 			</div>
 			<ol class="breadcrumb">
 				<li>
@@ -27,6 +27,8 @@
 		</div>
 	</div>
 	<br>
+	<div class="row">
+	<div class="col-md-8 col-md-offset-2 shadow">
 	<form class="form-horizontal" method="post" th:object="${chantier}" style="margin: 5%">
 
 		<div th:if="${#fields.hasErrors('*')}" class="alert alert-danger offset-sm-2">
@@ -69,6 +71,10 @@
 			</div>
 		</div>
 	</form>
+	</div>
+	
+	</div>
+	
 
 </div>
 </body>
