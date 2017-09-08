@@ -57,7 +57,7 @@
 			<span id="list-size" th:text="${#lists.size(enginsRendement)}" style="display:none"></span>
 			<div class="col-sm-6 col-md-4" th:each="element,iter : ${enginsRendement}">
 
-				<div class="card" style="border: solid 2px #636363">
+				<div class="card shadow" >
 					<div class="card-header">
 						<img class="card-img-top img-fluid" th:src="@{'/files/'+${element.get('engin').photo}}"
 							 th:alt="${element.get('engin').photo}"/>					</div>

@@ -24,23 +24,23 @@
 	<br>
 	<div class="row text-center">
 		<div class=" col-sm-6 col-md-4" th:each="chantier : ${chantiers}">
-			<div class="card text-center shadow">
-				<div class="ibox-content">
+			<div class="ibox float-e-margins">
+				<div class="ibox-title">
 					<h2 th:text="${chantier.nom}">Chantier</h2>
 				</div>
-				<div class="card-block" style="margin: 5%">
-					<p class="card-title" style="margin-top: 10px" th:text="${chantier.adresse}"></p>
-					<hr>
+				<div class="ibox-content">
+					<p th:text="${chantier.adresse}"></p>
+					<br>
 					<small class="card-text" style="margin-bottom: 10px">Contient <span class="text-danger"
 																						th:text="${#lists.size(chantier.engins)}">x</span>
 						engins
 					</small>
+					<hr>
+					<a class="btn btn-block" th:href="@{'/gerant/chantier/'+${chantier.id}}">Voir la liste des engins</a>
 				</div>
-				<div class="ibox-content">
-					<a class="btn btn-block" th:href="@{'/gerant/chantier/'+${chantier.id}}">Voir la liste des
-						engins</a>
-				</div>
+					
 			</div>
+			
 			<br>
 		</div>
 	</div>
