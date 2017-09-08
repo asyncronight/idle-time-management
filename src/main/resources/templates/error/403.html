@@ -2,14 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 <body>
-<div class="container">
 	<div th:replace="fragments :: header"></div>
 	<hr>
-	<div class="jumbotron alert alert-danger text-center">
-		<h1>Accée refusé (403)</h1>
-		<p>Vous n'avez pas la permission d'éffectuer cette opération</p>
-		<a href="/" class="btn btn-danger">Retourner à la page d'aceuil</a>
+	<div class="middle-box text-center animated fadeInDown">
+		<h1>403</h1>
+		<h3>Accée refusé</h3>
+		<div class="error-desc">
+            Vous n'avez pas la permission d'éffectuer cette opération <br/><a href="/" class="btn btn-primary m-t">Retourner à la page d'aceuil</a>
+        </div>
 	</div>
-</div>
 </body>
 </html>
