@@ -270,7 +270,7 @@ public class UserServiceImpl implements UserService {
             map2.put("arret", dateUtility.convertToDate(a/listEngin.size()));
             map2.put("date", dayView);
             map2.put("pause",statistic.getNbHourRepos()+" h");
-            map2.put("rendement",String.format("%.2f",perc/listEngin.size() )+" %" );
+            map2.put("rendement",String.format("%.2f",perc/listEngin.size() ));
             list.add(map2);
             a=0;r=0;p=0;perc=0.0f;
             map2= new HashMap<>();
@@ -364,7 +364,7 @@ public class UserServiceImpl implements UserService {
             map2.put("arret", dateUtility.convertToDate(a/listEngin.size()));
             map2.put("date", dayView);
             map2.put("pause",statistic.getNbHourRepos()+" h");
-            map2.put("rendement",String.format("%.2f",perc/listEngin.size() )+" %" );
+            map2.put("rendement",String.format("%.2f",perc/listEngin.size() ) );
             list.add(map2);
             a=0;r=0;p=0;perc=0.0f;
             map2= new HashMap<>();
@@ -458,7 +458,7 @@ public class UserServiceImpl implements UserService {
             map2.put("arret", dateUtility.convertToDate(a/listEngin.size()));
             map2.put("date", dayView);
             map2.put("pause",statistic.getNbHourRepos()+" h");
-            map2.put("rendement",String.format("%.2f",perc/listEngin.size() )+" %" );
+            map2.put("rendement",String.format("%.2f",perc/listEngin.size() ) );
             list.add(map2);
             a=0;r=0;p=0;perc=0.0f;
             map2= new HashMap<>();
@@ -532,7 +532,7 @@ public class UserServiceImpl implements UserService {
             map2.put("arret", dateUtility.convertToDate(a/listEngin.size()));
             map2.put("date", dayView);
             map2.put("pause",statistic.getNbHourRepos()+" h");
-            map2.put("rendement",String.format("%.2f",perc/listEngin.size() )+" %" );
+            map2.put("rendement",String.format("%.2f",perc/listEngin.size()));
             list.add(map2);
             a=0;r=0;p=0;perc=0.2f;
             map2= new HashMap<>();
@@ -746,7 +746,7 @@ public class UserServiceImpl implements UserService {
             map2.put("arret", dateUtility.convertToDate(arret));
             map2.put("date", dayView);
             map2.put("pause",statistic.getNbHourRepos()+" h");
-            map2.put("rendement",String.format("%.2f", p_percent) +" %");
+            map2.put("rendement",String.format("%.2f", p_percent) );
             list.add(map2);
 
             dayFrom = stf.format(d2);
@@ -827,7 +827,7 @@ public class UserServiceImpl implements UserService {
             map2.put("arret", dateUtility.convertToDate(arret));
             map2.put("date", dayView);
             map2.put("pause",statistic.getNbHourRepos()+" h");
-            map2.put("rendement",String.format("%.2f", p_percent) +" %");
+            map2.put("rendement",String.format("%.2f", p_percent) );
             list.add(map2);
 
             dayFrom = stf.format(d2);
@@ -909,7 +909,7 @@ public class UserServiceImpl implements UserService {
             map2.put("arret", dateUtility.convertToDate(arret));
             map2.put("date", dayView);
             map2.put("pause",statistic.getNbHourRepos()+" h");
-            map2.put("rendement",String.format("%.2f", p_percent) +" %");
+            map2.put("rendement",String.format("%.2f", p_percent));
             list.add(map2);
 
             dayFrom = stf.format(d2);
@@ -963,7 +963,7 @@ public class UserServiceImpl implements UserService {
 			map2.put("arret", dateUtility.convertToDate(arret));
 			map2.put("date", dayView);
 			map2.put("pause",statistic.getNbHourRepos()+" h");
-			map2.put("rendement",String.format("%.2f", p_percent) +" %");
+			map2.put("rendement",String.format("%.2f", p_percent));
 			list.add(map2);
 
 			dayFrom = stf.format(d2);
@@ -1027,8 +1027,8 @@ public class UserServiceImpl implements UserService {
 			map2.put("production", dateUtility.convertToDate(map.get("production")));
 			map2.put("ralenti", dateUtility.convertToDate(map.get("ralenti")));
 			map2.put("arret", dateUtility.convertToDate(arret));
-			map2.put("date", hourFrom+ " -> " +hourTo);
-			map2.put("rendement",String.format("%.2f", p_percent) +" %");
+			map2.put("date", hourFrom.split(":")[0].toString()+"->"+hourTo.split(":")[0].toString());
+			map2.put("rendement",String.format("%.2f", p_percent) );
 			list.add(map2);
            hourFrom = stimef.format(new Date(y));
 
@@ -1101,8 +1101,8 @@ public class UserServiceImpl implements UserService {
 			map2.put("production",dateUtility.convertToDate(p/listEngin.size()));
 			map2.put("ralenti",dateUtility.convertToDate(r/listEngin.size()));
 			map2.put("arret", dateUtility.convertToDate(a/listEngin.size()));
-			map2.put("date", hourFrom+" -> "+ hourTo);
-			map2.put("rendement",String.format("%.2f",perc/listEngin.size() )+" %" );
+			map2.put("date", hourFrom.split(":")[0].toString()+"->"+hourTo.split(":")[0].toString());
+			map2.put("rendement",String.format("%.2f",perc/listEngin.size()) );
 			list.add(map2);
 			a=0;r=0;p=0;perc=0.0f;
 			map2= new HashMap<>();
