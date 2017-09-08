@@ -74,7 +74,7 @@
 			
 			<ul id="bars">
 				<li  th:each="statistica,iter : ${chantierStatistics}">
-					<div th:attr="data-percentage=${statistica.get('rendement') }" class="bar"></div>
+					<div th:attr="data-percentage=${iter.index+5}" class="bar"></div>
 					<span th:text="${statistica.get('date')}"></span>
 				</li>
 			</ul>
