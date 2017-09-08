@@ -57,8 +57,29 @@
 		<br>
 
 		<!-- Bar chart goes here -->
-
-
+		<div id="chart">
+			<ul id="numbers">
+				<li><span>100%</span></li>
+				<li><span>90%</span></li>
+				<li><span>80%</span></li>
+				<li><span>70%</span></li>
+				<li><span>60%</span></li>
+				<li><span>50%</span></li>
+				<li><span>40%</span></li>
+				<li><span>30%</span></li>
+				<li><span>20%</span></li>
+				<li><span>10%</span></li>
+				<li><span>0%</span></li>
+			</ul>
+			
+			<ul id="bars">
+				<li  th:each="statistica,iter : ${chantierStatistics}">
+					<div th:attr="data-percentage=${statistica.get('rendement') }" class="bar"></div>
+					<span th:text="${statistica.get('date')}"></span>
+				</li>
+			</ul>
+		</div>
+		<br><br><br>
 		<table class="table table-striped">
 			<tr>
 				<th>Le jour</th>
@@ -84,5 +105,6 @@
 
 </div>
 <div th:replace="fragments :: footer"></div>
+<div th:replace="fragments :: chart-plugin"></div>
 </body>
 </html>

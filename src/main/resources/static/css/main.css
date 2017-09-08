@@ -19,6 +19,80 @@ hr{
     margin: 0 !important;
     margin-bottom: 5px;
 }
+/*Bar Chart*/
+#chart {
+  width: 650px;
+  height: 300px;
+  margin: 30px auto 0;
+  display: block;
+}
+#chart #numbers {
+  width: 50px;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  float: left;
+}
+#chart #numbers li {
+  text-align: right;
+  padding-right: 1em;
+  list-style: none;
+  height: 29px;
+  position: relative;
+  bottom: 15px;
+}
+#chart #numbers li:last-child {
+  height: 30px;
+}
+#chart #numbers li span {
+  color: #000;
+  position: absolute;
+  bottom: 0;
+  right: 10px;
+}
+#chart #bars {
+  display: inline-block;
+  background: white;
+  width: 600px;
+  height: 300px;
+  padding: 0;
+  margin: 0;
+  box-shadow: 0 0 0 0.2px #444;
+}
+#chart #bars li {
+  display: table-cell;
+  width: 100px;
+  height: 300px;
+  margin: 0;
+  text-align: center;
+  position: relative;
+}
+#chart #bars li .bar {
+  display: block;
+  width: 70px;
+  margin-left: 15px;
+  background: #1ab394;
+  position: absolute;
+  bottom: 0;
+}
+#chart #bars li .bar:hover {
+  background: #5AE;
+  cursor: pointer;
+}
+#chart #bars li .bar:hover:before {
+  color: #000;
+  content: attr(data-percentage) '%';
+  position: relative;
+  bottom: 20px;
+}
+#chart #bars li span {
+  color: #000;
+  width: 100%;
+  position: absolute;
+  bottom: -2em;
+  left: 0;
+  text-align: center;}
 .shadow{
-    style=border: solid 0px #636363;box-shadow: 0 0 10px black;
+    border: solid 0px #636363;box-shadow: 0 0 10px black;
 }

@@ -49,13 +49,31 @@
 		</div>
 	</div>
 	<br><br>
-	<a class="btn btn-success btn-lg" th:href="@{'/user/chantier/'+${engin.chantier.id}}">
-		<i class="fa fa-arrow-left"></i> Retour à la liste des engins
-	</a>
-	<br><br>
 	<div th:replace="fragments :: statsForm"></div>
-
-	<br>
+	
+	<div id="chart">
+			<ul id="numbers">
+				<li><span>100%</span></li>
+				<li><span>90%</span></li>
+				<li><span>80%</span></li>
+				<li><span>70%</span></li>
+				<li><span>60%</span></li>
+				<li><span>50%</span></li>
+				<li><span>40%</span></li>
+				<li><span>30%</span></li>
+				<li><span>20%</span></li>
+				<li><span>10%</span></li>
+				<li><span>0%</span></li>
+			</ul>
+			
+			<ul id="bars">
+				<li  th:each="statistica,iter : ${enginStatistics}">
+					<div th:attr="data-percentage=${statistica.get('rendement') }" class="bar"></div>
+					<span th:text="${statistica.get('date')}"></span>
+				</li>
+			</ul>
+		</div>
+		<br><br><br>
 	<div th:if="${enginStatistics}">
 		<h2 th:if="${semaine}"> Statistiques de la semaine :</h2>
 		<h2 th:if="!${semaine}"> Resultat de l'inspection :</h2>
@@ -87,5 +105,6 @@
 	</div>
 </div>
 <div th:replace="fragments :: footer"></div>
+<div th:replace="fragments :: chart-plugin"></div>
 </body>
 </html>
