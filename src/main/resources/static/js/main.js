@@ -12,17 +12,24 @@ function showDiv() {
 
 
     $(function () {
-        $('#datetimepicker6').datetimepicker(({
-        	format: 'd/MM/YYYY, h:mm',
+        $('#datepicker1').datetimepicker(({
+        	format: 'D/MM/YYYY',
         }));
-        $('#datetimepicker7').datetimepicker({
-        	format: 'd/MM/YYYY, h:mm',
+        $('#datepicker2').datetimepicker({
+        	format: 'D/MM/YYYY',
             useCurrent: false //Important! See issue #1075
         });
-        $("#datetimepicker6").on("dp.change", function (e) {
-            $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+        $('#timepicker1').datetimepicker(({
+        	format: 'h:mm',
+        }));
+        $('#timepicker2').datetimepicker({
+        	format: 'h:mm'
         });
-        $("#datetimepicker7").on("dp.change", function (e) {
-            $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+        
+        $("#datepicker1").on("dp.change", function (e) {
+            $('#datepicker2').data("DateTimePicker").minDate(e.date);
+        });
+        $("#datepicker2").on("dp.change", function (e) {
+            $('#datepicker1').data("DateTimePicker").maxDate(e.date);
         });
     });

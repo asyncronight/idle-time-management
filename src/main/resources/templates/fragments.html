@@ -56,13 +56,14 @@
 				   th:value="${_csrf.token}"/>
 
 			<div class="row">
-			    <div class='col-md-6'>
+			    <!-- Date From -->
+				<div class='col-md-6'>
 			        <div th:class="${#fields.hasErrors('dayFrom')} ? 'form-group row has-danger' : 'form-group row'">
 			            <label class="col-sm-2 col-form-label stats-label" for="dayFrom">De:</label>
 						<div class="col-sm-10">
-				            <div class='input-group date' id='datetimepicker6'>
-				                <input id="dayFrom" type="text" class="form-control" th:field="*{dayFrom}"
-							   placeholder="dd/mm/aaaa" th:errorclass="form-control-danger"/>
+				            <div class='input-group date' id='datepicker1'>
+				               <input id="dayFrom" type="text" class="form-control" th:field="*{dayFrom}"
+								   placeholder="dd/mm/aaaa" th:errorclass="form-control-danger"/>
 								<div class="form-control-feedback" th:if="${#fields.hasErrors('dayFrom')}">
 									<ul>
 										<li th:each="err : ${#fields.errors('dayFrom')}" th:text="${err}"/>
@@ -77,10 +78,56 @@
 			    </div>
 			    <div class='col-md-6'>
 			        <div th:class="${#fields.hasErrors('dayFrom')} ? 'form-group row has-danger' : 'form-group row'">
-			            <label class="col-sm-2 col-form-label stats-label" for="dayFrom"> à :</label>
+			            <label class="col-sm-2 col-form-label stats-label" for="dayFrom">Jusqu'à:</label>
 						<div class="col-sm-10">
-				            <div class='input-group date' id='datetimepicker7'>
-				                <input type='text' class="form-control" />
+				            <div class='input-group date' id='datepicker2'>
+				                <input id="dayFrom" type="text" class="form-control" th:field="*{dayFrom}"
+							   placeholder="dd/mm/aaaa" th:errorclass="form-control-danger"/>
+								<div class="form-control-feedback" th:if="${#fields.hasErrors('dayFrom')}">
+									<ul>
+										<li th:each="err : ${#fields.errors('dayFrom')}" th:text="${err}"/>
+									</ul>
+								</div>
+				                <span class="input-group-addon">
+				                    <span class="fa fa-calendar"></span>
+				                </span>
+				            </div>
+				        </div>
+			        </div>
+			    </div>
+			    
+			    <div class='col-md-6'>
+			        <div th:class="${#fields.hasErrors('dayFrom')} ? 'form-group row has-danger' : 'form-group row'">
+			            <label class="col-sm-2 col-form-label stats-label" for="dayTo"> De:</label>
+						<div class="col-sm-10">
+				            <div class='input-group date' id='timepicker1'>
+				                
+								<input id="hourFrom" type="text" class="form-control" th:field="*{hourFrom}"
+									   placeholder="hh:mm" th:errorclass="form-control-danger"/>
+								<div class="form-control-feedback" th:if="${#fields.hasErrors('hourFrom')}">
+									<ul>
+										<li th:each="err : ${#fields.errors('hourFrom')}" th:text="${err}"/>
+									</ul>
+								</div>
+				                <span class="input-group-addon">
+				                    <span class="fa fa-calendar"></span>
+				                </span>
+				            </div>
+				        </div>
+			        </div>
+			    </div>
+			    <div class='col-md-6'>
+			        <div th:class="${#fields.hasErrors('dayFrom')} ? 'form-group row has-danger' : 'form-group row'">
+			            <label class="col-sm-2 col-form-label stats-label" for="dayTo"> Jusqu'à:</label>
+						<div class="col-sm-10">
+				            <div class='input-group date' id='timepicker2'>
+				                <input id="hourTo" type="text" class="form-control" th:field="*{hourTo}"
+								   placeholder="hh:mm" th:errorclass="form-control-danger"/>
+								<div class="form-control-feedback" th:if="${#fields.hasErrors('hourTo')}">
+									<ul>
+										<li th:each="err : ${#fields.errors('hourTo')}" th:text="${err}"/>
+									</ul>
+								</div>
 				                <span class="input-group-addon">
 				                    <span class="fa fa-calendar"></span>
 				                </span>
@@ -106,7 +153,11 @@
 				</div>
 				<hr>
 				<div class="col-md-8 col-md-offset-2">
-					<button type="submit" class="btn btn-primary btn-block ">Inspecter</button>
+					<button type="submit" class="btn btn-primary btn-block ">Voir les statistiques du chantier/Engin</button>
+				</div>
+				<br>
+				<div class="col-md-6 col-md-offset-3" style="margin-top : 1.5%">
+					<button  class="btn btn-success btn-block ">Voir la list des Engins</button>
 				</div>
 			</div>
 		</form>
