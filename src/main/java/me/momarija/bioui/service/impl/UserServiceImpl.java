@@ -1023,6 +1023,12 @@ public class UserServiceImpl implements UserService {
 			if(map.get("ralenti")<0) map.put("ralenti",0);
 
 			p_percent =(double) (map.get("production") * 100 / (z/1000) ) ;
+            if(p_percent >100){
+                p_percent=100;
+            }
+            if(map.get("production") >3600){
+                map.put("production",3600);
+            }
 
 			map2.put("production", dateUtility.convertToDate(map.get("production")));
 			map2.put("ralenti", dateUtility.convertToDate(map.get("ralenti")));
@@ -1126,11 +1132,16 @@ public class UserServiceImpl implements UserService {
 		float rendement = 0.0f;
 		List<Engin> listEngins = getEnginList(chantierId);
 		for (Engin e:listEngins) {
-			rendement = getEnginRendement(e.getId(),statistic);
-		}
+			rendement += getEnginRendement(e.getId(),statistic);
+        }
+        float x;
+        if(listEngins.size()==0){
+		    x=0.0f;
+		    return x;
+        }
+		 x = rendement/listEngins.size();
 
-		float x = rendement/listEngins.size();
-		return x;
+        return x;
 
 
 	}

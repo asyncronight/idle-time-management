@@ -177,5 +177,30 @@
 		<script th:src="@{/js/mainly/chart-plugins/chart-doughnut.js}"></script>
 		<script th:src="@{/js/mainly/chart-plugins/chart-bar.js}"></script>>
 	</div>
+
+	<div th:fragment="menu">
+		<!--
+		Add this fragment to a template and add
+		model.addAttribute("chantiers",adminChantierService.getChantierList());
+		to the controller which return that specific template (at the beginning of he every controller's method which return that templates {GET, POST ..} )
+
+		P.S : This fragment need some styling
+		-->
+
+		<ul>
+			<li>
+				<a href="/user/">Chantiers</a>
+				<ul th:each="chantier : ${chantiers}">
+					<a th:href="@{'/user/chantier/'+${chantier.id}}" th:text="${chantier.nom}"></a>
+					<li th:each="engin : ${chantier.engins}">
+						<a th:href="@{'/user/chantier/'+${chantier.id}+'/engin/'+${engin.id}}"
+						   th:text="'Engin N° '+${engin.id}"></a>
+					</li>
+				</ul>
+			</li>
+			<li><a href="#">Engins</a></li>
+			<li><a href="#">Chauffeurs</a></li>
+		</ul>
+	</div>
 </body>
 </html>
