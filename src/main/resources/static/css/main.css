@@ -8,9 +8,11 @@
     background-color: #FFF ;
     border-radius: 3px;
     padding: 2%;
-    margin:0% 20%;
+    margin: 2% 15% 0;
     box-shadow: 0 0 10px grey;
-
+}
+.stats-label{
+	margin-top: 2%;
 }
 hr{
     color: #2f4050;
