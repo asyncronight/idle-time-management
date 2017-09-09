@@ -75,10 +75,12 @@
 							<h5>rendement</h5>
 						</div>
 						<br>
-						<a class="btn btn-block"
+						<a class="btn btn-block btn btn-primary btn-block"
 						   th:href="@{'/user/chantier/'+${element.get('chantier').id}+'/statistic'}">
 							Voir les statistiques du chantier
 						</a>
+					
+						<a  class="btn btn-success btn-block " @{'/user/chantier/'+${element.get('chantier').id}}">Voir la list des Engins</a>
 					</div>
 				</div>
 				<br>
