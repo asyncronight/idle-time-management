@@ -7,6 +7,7 @@
 
 	<title th:text="${title}">BIOUI Analyser</title>
 	<link th:href="@{/css/mainly/bootstrap.min.css}" rel="stylesheet">
+	<link th:href="@{/css/mainly/bootstrap-datetimepicker.min.css}" rel="stylesheet">
     <link th:href="@{/css/mainly/font-awesome.css}" rel="stylesheet">
     <link th:href="@{/css/mainly/animate.css}" rel="stylesheet">
 	<link th:href="@{/css/chart-doughnut.css}" rel="stylesheet">
@@ -56,68 +57,54 @@
 				   th:value="${_csrf.token}"/>
 
 			<div class="row">
-				<div class="col-sm-6">
-					<div th:class="${#fields.hasErrors('dayFrom')} ? 'form-group row has-danger' : 'form-group row'">
-						<label class="col-sm-2 col-form-label" for="dayFrom">De:</label>
+			    <div class='col-md-6'>
+			        <div th:class="${#fields.hasErrors('dayFrom')} ? 'form-group row has-danger' : 'form-group row'">
+			            <label class="col-sm-2 col-form-label" for="dayFrom">De:</label>
 						<div class="col-sm-10">
-							<input id="dayFrom" type="text" class="form-control" th:field="*{dayFrom}"
-								   placeholder="dd/mm/aaaa" th:errorclass="form-control-danger"/>
-							<div class="form-control-feedback" th:if="${#fields.hasErrors('dayFrom')}">
-								<ul>
-									<li th:each="err : ${#fields.errors('dayFrom')}" th:text="${err}"/>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class=col-sm-6>
-					<div th:class="${#fields.hasErrors('dayTo')} ? 'form-group row has-danger' : 'form-group row'">
-						<label class="col-sm-2 col-form-label" for="dayTo">Jusqu'à:</label>
+				            <div class='input-group date' id='datetimepicker6'>
+				                <input id="dayFrom" type="text" class="form-control" th:field="*{dayFrom}"
+							   placeholder="dd/mm/aaaa" th:errorclass="form-control-danger"/>
+								<div class="form-control-feedback" th:if="${#fields.hasErrors('dayFrom')}">
+									<ul>
+										<li th:each="err : ${#fields.errors('dayFrom')}" th:text="${err}"/>
+									</ul>
+								</div>
+				                <span class="input-group-addon">
+				                    <span class="fa fa-calendar"></span>
+				                </span>
+				            </div>
+				        </div>
+			        </div>
+			    </div>
+			    <div class='col-md-6'>
+			        <div th:class="${#fields.hasErrors('dayFrom')} ? 'form-group row has-danger' : 'form-group row'">
+			            <label class="col-sm-2 col-form-label" for="dayFrom">De:</label>
 						<div class="col-sm-10">
-							<input id="dayTo" type="text" class="form-control" th:field="*{dayTo}"
-								   placeholder="dd/mm/aaaa" th:errorclass="form-control-danger"/>
-							<div class="form-control-feedback" th:if="${#fields.hasErrors('dayTo')}">
-								<ul>
-									<li th:each="err : ${#fields.errors('dayTo')}" th:text="${err}"/>
-								</ul>
-							</div>
+				            <div class='input-group date' id='datetimepicker7'>
+				                <input type='text' class="form-control" />
+				                <span class="input-group-addon">
+				                    <span class="fa fa-calendar"></span>
+				                </span>
+				            </div>
+				        </div>
+			        </div>
+			    </div>
+			</div>
+			<div class="col-sm-6">
+				<div th:class="${#fields.hasErrors('dayFrom')} ? 'form-group row has-danger' : 'form-group row'">
+					<label class="col-sm-2 col-form-label" for="dayFrom">De:</label>
+					<div class="col-sm-10">
+						<input id="dayFrom" type="text" class="form-control" th:field="*{dayFrom}"
+							   placeholder="dd/mm/aaaa" th:errorclass="form-control-danger"/>
+						<div class="form-control-feedback" th:if="${#fields.hasErrors('dayFrom')}">
+							<ul>
+								<li th:each="err : ${#fields.errors('dayFrom')}" th:text="${err}"/>
+							</ul>
 						</div>
 					</div>
 				</div>
 			</div>
 
-			<div class="row">
-				<div class="col-sm-6">
-					<div th:class="${#fields.hasErrors('hourFrom')} ? 'form-group row has-danger' : 'form-group row'">
-						<label class="col-sm-2 col-form-label" for="hourFrom">Entre:</label>
-						<div class="col-sm-10">
-							<input id="hourFrom" type="text" class="form-control" th:field="*{hourFrom}"
-								   placeholder="hh:mm" th:errorclass="form-control-danger"/>
-							<div class="form-control-feedback" th:if="${#fields.hasErrors('hourFrom')}">
-								<ul>
-									<li th:each="err : ${#fields.errors('hourFrom')}" th:text="${err}"/>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-6">
-					<div th:class="${#fields.hasErrors('hourTo')} ? 'form-group row has-danger' : 'form-group row'">
-						<label class="col-sm-2 col-form-label" for="hourTo">Et:</label>
-						<div class="col-sm-10">
-							<input id="hourTo" type="text" class="form-control" th:field="*{hourTo}"
-								   placeholder="hh:mm" th:errorclass="form-control-danger"/>
-							<div class="form-control-feedback" th:if="${#fields.hasErrors('hourTo')}">
-								<ul>
-									<li th:each="err : ${#fields.errors('hourTo')}" th:text="${err}"/>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="row">
 				<div class="col-sm-6 push-sm-3 pull-sm-3">
 					<div th:class="${#fields.hasErrors('nbHourRepos')} ? 'form-group row has-danger' : 'form-group row'">
 						<label class="col-sm-6 col-form-label mr-auto" for="nbHourRepos">Repos :</label>
@@ -139,7 +126,6 @@
 					</div>
 
 				</div>
-			</div>
 
 		</form>
 	</div>
@@ -149,6 +135,22 @@
 		<script th:src="@{/js/mainly/bootstrap.min.js}"></script>
 		<script th:src="@{/js/mainly/jquery.metisMenu.js}"></script>
 		<script th:src="@{/js/mainly/jquery.slimscroll.min.js}"></script>
+		<script th:src="@{/js/mainly//date-picker/moment.min.js}"></script>
+		<script th:src="@{/js/mainly//date-picker/bootstrap-datetimepicker.min.js}"></script>
+		<script type="text/javascript">
+		    $(function () {
+		        $('#datetimepicker6').datetimepicker();
+		        $('#datetimepicker7').datetimepicker({
+		            useCurrent: false //Important! See issue #1075
+		        });
+		        $("#datetimepicker6").on("dp.change", function (e) {
+		            $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+		        });
+		        $("#datetimepicker7").on("dp.change", function (e) {
+		            $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+		        });
+		    });
+		</script>
 	</div>
 	
 	<div th:fragment="chart-plugin">

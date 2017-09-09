@@ -42,26 +42,30 @@
 	<div th:if="${chantier.engins}" >
 		<div class="row text-center">
 			<div class="col-sm-6 col-md-4" th:each="engin : ${chantier.engins}">
-
-				<div class="card shadow" >
-					<div class="card-header">
-						<img class="card-img-top img-fluid" th:src="@{'/files/'+${engin.photo}}"
-							 th:alt="${engin.photo}"/>
-					</div>
-
-					<div class="card-header">
-						<h2 th:text="'Engin N° '+${engin.id}"></h2>
-					</div>
-					<div class="card-block">
-						<p th:text="'Chauffeur : '+${engin.chauffeur}"></p>
-						<p th:text="'Marque : '+${engin.marque}"></p>
-						<p th:text="'Année : '+${engin.annee}"></p>
+				<div class="ibox float-e-margins shadow" >
+					<div class="ibox-title">
+						<a class="label label-danger pull-right" data-toggle="modal" th:attr="data-target='#modal'+${engin.id}">
+							<i class="fa fa-remove"></i>Supprimer
+						</a>
+						<h5 th:text="'Engin N° '+${engin.id}"></h5>
 					</div>
 					<div class="ibox-content">
-						<button type="button" class="card-block btn btn-danger" data-toggle="modal" th:attr="data-target='#modal'+${engin.id}">
-							<i class="fa fa-remove"></i>Supprimer
-						</button>
+						<div class="row">
+							<div class="col-md-10">
+							<img class="card-img-top img-fluid" style="height: 200px;width: 330px;" 
+							th:src="@{'/files/'+${engin.photo}}" th:alt="${engin.photo}"/>					
+							</div>
+							<div class="col-md-6">
+							</div>
+						</div>
+						<div class="text-center">
+								<br>
+							<p th:text="'Chauffeur : '+${engin.chauffeur}"></p>
+							<p th:text="'Marque : '+${engin.marque}"></p>
+							<p th:text="'Année : '+${engin.annee}"></p>
+						</div>
 					</div>
+				</div>
 
 					<div class="modal fade" th:id="@{'modal'+${engin.id}}" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
 						<div class="modal-dialog" role="document">
@@ -89,7 +93,6 @@
 							</div>
 						</div>
 					</div>
-				</div>
 				<br>
 			</div>
 		</div>

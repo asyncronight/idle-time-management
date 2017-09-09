@@ -45,7 +45,6 @@
 			</div>
 		</div>
 	</div>
-	<br><br>
 	<div th:replace="fragments :: statsForm"></div>
 	<br>
 
@@ -57,22 +56,30 @@
 			<span id="list-size" th:text="${#lists.size(enginsRendement)}" style="display:none"></span>
 			<div class="col-sm-6 col-md-4" th:each="element,iter : ${enginsRendement}">
 
-				<div class="card shadow" >
-					<div class="card-header">
-						<img class="card-img-top img-fluid" th:src="@{'/files/'+${element.get('engin').photo}}"
-							 th:alt="${element.get('engin').photo}"/>					</div>
-
-					<div class="card-header">
-						<h2 th:text="'Engin N° '+${element.get('engin').id}"></h2>
+				<div class="ibox float-e-margins shadow" >
+					<div class="ibox-title">
+						<a class="label label-primary pull-right"
+						th:href="@{'/user/chantier/'+${element.get('engin').chantier.id}+'/engin/'+${element.get('engin').id}}">
+							statistic
+						</a>
+						<h5 th:text="'Engin N° '+${element.get('engin').id}"></h5>
 					</div>
-					<div class="card-block">
-						<p th:text="'Chauffeur : '+${element.get('engin').chauffeur}"></p>
-						<p th:text="'Marque : '+${element.get('engin').marque}"></p>
-						<p th:text="'Année : '+${element.get('engin').annee}"></p>
-
-
+					<div class="ibox-content">
+						<div class="row">
+							<div class="col-md-6">
+							<img class="card-img-top img-fluid" style="height:150px;width: 180px;" th:src="@{'/files/'+${element.get('engin').photo}}"
+								 th:alt="${element.get('engin').photo}"/>					
+						</div>
+						<div class="col-md-6">
+							<br>
+							<p th:text="'Chauffeur : '+${element.get('engin').chauffeur}"></p>
+							<p th:text="'Marque : '+${element.get('engin').marque}"></p>
+							<p th:text="'Année : '+${element.get('engin').annee}"></p>
+						</div>
+						</div>
 						<div class="text-center">
-							<div th:class="'progress-pie-chart pie-chart-'+${(iter.index)}" th:attr="data-percent=${element.get('rendement')}">
+							<div th:class="'progress-pie-chart pie-chart-'+${(iter.index)}"
+							 th:attr="data-percent=${element.get('rendement')}" style="margin-top: 0px;">
 								<div class="ppc-progress">
 									<div th:class="'ppc-progress-fill ppc-progress-fill-'+${(iter.index)}"></div>
 								</div>
@@ -84,13 +91,7 @@
 							</div>
 							<h5>rendement</h5>
 						</div>
-
 					</div>
-					<br>
-					<a class="btn btn-block "
-					   th:href="@{'/user/chantier/'+${element.get('engin').chantier.id}+'/engin/'+${element.get('engin').id}}">
-						Voir les statistics de l'engin
-					</a>
 				</div>
 				<br>
 			</div>

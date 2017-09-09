@@ -30,24 +30,31 @@
 	<br>
 	<div class="row">
 		<div class=" col-sm-6 col-md-4" th:each="engin : ${chantier.engins}">
-			<div class="card text-center shadow" >
-				<img class="card-img-top img-fluid" th:src="@{'/files/'+${engin.photo}}" th:alt="${engin.photo}">
-				<div class="card-block bg-faded">
-					<h4 class="card-title" th:text="'Engin N° '+${engin.id}"></h4>
-				</div>
-				<ul class="list-group list-group-flush">
-					<li class="list-group-item" th:text="'Marque : '+${engin.marque}"></li>
-					<li class="list-group-item bg-faded" th:text="'Chauffeur : '+${engin.chauffeur}"></li>
-					<li class="list-group-item" th:text="'Annee : '+${engin.annee}"></li>
-					<li class="list-group-item bg-faded" th:text="'Temps : '+${engin.temps}"></li>
-				</ul>
-				<div class="ibox-content">
-
-					<button type="button" class="card-block btn btn-primary" data-toggle="modal"
+			<div class="ibox float-e-margins shadow" >
+					<div class="ibox-title">
+						<a class="label label-primary pull-right" data-toggle="modal"
 						th:attr="data-target='#modal'+${engin.id}">
 						Transferer <i class="fa fa-reply"></i>
-					</button>
+						</a>
+						<h5 th:text="'Engin N° '+${engin.id}"></h5>
+					</div>
+					<div class="ibox-content">
+						<div class="row">
+							<div class="col-md-10">
+							<img class="card-img-top img-fluid" style="height: 200px;width: 330px;" th:src="@{'/files/'+${engin.photo}}" th:alt="${engin.photo}"/>					
+							</div>
+							<div class="col-md-6">
+							</div>
+						</div>
+						<div class="text-center">
+								<br>
+								<p th:text="'Chauffeur : '+${engin.chauffeur}"></p>
+								<p th:text="'Annee : '+${engin.annee}"></p>
+								<p th:text="'Temps : '+${engin.temps}"></p>
+						</div>
+					</div>
 				</div>
+				
 				<div class="modal fade" th:id="@{'modal'+${engin.id}}" tabindex="-1" role="dialog"
 					 aria-labelledby="modalLabel" aria-hidden="true">
 					<div class="modal-dialog" role="document">
@@ -81,7 +88,6 @@
 						</div>
 					</div>
 				</div>
-			</div>
 			<br>
 		</div>
 	</div>
