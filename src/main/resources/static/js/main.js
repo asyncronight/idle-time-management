@@ -11,25 +11,25 @@ function showDiv() {
 }
 
 
-    $(function () {
-        $('#datepicker1').datetimepicker(({
-        	format: 'D/MM/YYYY',
-        }));
-        $('#datepicker2').datetimepicker({
-        	format: 'D/MM/YYYY',
-            useCurrent: false //Important! See issue #1075
-        });
-        $('#timepicker1').datetimepicker(({
-        	format: 'h:mm',
-        }));
-        $('#timepicker2').datetimepicker({
-        	format: 'h:mm'
-        });
-        
-        $("#datepicker1").on("dp.change", function (e) {
-            $('#datepicker2').data("DateTimePicker").minDate(e.date);
-        });
-        $("#datepicker2").on("dp.change", function (e) {
-            $('#datepicker1').data("DateTimePicker").maxDate(e.date);
-        });
+$(function () {
+    $('#datepicker1').datetimepicker(({
+        format: 'DD/MM/YYYY'
+    }));
+    $('#datepicker2').datetimepicker({
+        format: 'DD/MM/YYYY',
+        useCurrent: false //Important! See issue #1075
     });
+    $('#timepicker1').datetimepicker(({
+        format: 'HH:mm'
+    }));
+    $('#timepicker2').datetimepicker({
+        format: 'HH:mm'
+    });
+
+    $("#datepicker1").on("dp.change", function (e) {
+        $('#datepicker2').data("DateTimePicker").minDate(e.date);
+    });
+    $("#datepicker2").on("dp.change", function (e) {
+        $('#datepicker1').data("DateTimePicker").maxDate(e.date);
+    });
+});

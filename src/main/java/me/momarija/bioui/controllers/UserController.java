@@ -39,8 +39,19 @@ public class UserController {
 	public String chantiersRendementList(Model model, @Valid Statistic statistic, BindingResult result) {
 		if (result.hasErrors()) {
 			model.addAttribute("title", "Erreur");
+			System.out.println(statistic.getDayTo()+"**");
+			System.out.println(statistic.getDayFrom());
+			System.out.println(statistic.getHourFrom());
+			System.out.println(statistic.getHourTo());
+
 			return "user/chantiers";
 		}
+
+		System.out.println(statistic.getDayTo());
+		System.out.println(statistic.getDayFrom());
+		System.out.println(statistic.getHourFrom());
+		System.out.println(statistic.getHourTo());
+
 		model.addAttribute("title", "Liste des chantiers");
 		model.addAttribute("chantiersRendement", userService.getChantiersRendement(statistic));
 		return "user/chantiers";

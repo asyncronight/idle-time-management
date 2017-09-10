@@ -6,8 +6,9 @@
 <div th:replace="fragments :: header"></div>
 
 <div class="container">
-	<hr>
-	<div class="row wrapper border-bottom white-bg page-heading">
+	<br>
+
+	<div class="row wrapper border-bottom  page-heading">
 		<div class="col-sm-6">
 			<br>
 			<ol class="breadcrumb">
@@ -72,7 +73,6 @@
 									</div>
 								</div>
 							</div>
-							<h5>rendement</h5>
 						</div>
 						<br>
 						<a class="btn btn-block btn btn-primary btn-block"
@@ -80,7 +80,7 @@
 							Voir les statistiques du chantier
 						</a>
 					
-						<a  class="btn btn-success btn-block " @{'/user/chantier/'+${element.get('chantier').id}}">Voir la list des Engins</a>
+						<a  class="btn btn-success btn-block " th:href="@{'/user/chantier/'+${element.get('chantier').id}}">Voir la liste des engins</a>
 					</div>
 				</div>
 				<br>

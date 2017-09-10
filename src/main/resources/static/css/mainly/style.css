@@ -3879,15 +3879,15 @@ img.circle-border {
   cursor: move;
 }
 .breadcrumb {
-  background-color: #ffffff;
+  background : none;
   padding: 0;
   margin-bottom: 0;
 }
 .breadcrumb > li a {
-  color: inherit;
+  color: white;
 }
 .breadcrumb > .active {
-  color: inherit;
+  color: green;
 }
 code {
   background-color: #F9F2F4;
@@ -4130,6 +4130,7 @@ table.table-mail tr td {
   font-size: inherit;
 }
 .jumbotron {
+  background-color:rgba(192,192,192,0.2);
   border-radius: 6px;
   padding: 40px;
 }
@@ -7888,7 +7889,7 @@ body.skin-2 {
 }
 .skin-2 .nav > li > a,
 .skin-2 .welcome-message {
-  color: #edf6ff;
+  color: black;
 }
 .skin-2 #top-search::-moz-placeholder {
   color: #edf6ff;
@@ -8157,7 +8158,7 @@ body.md-skin {
   color: #ffffff;
 }
 .md-skin .welcome-message {
-  color: #ffffff;
+  color: #000;
   font-weight: 300;
 }
 .md-skin #top-search::-moz-placeholder {
