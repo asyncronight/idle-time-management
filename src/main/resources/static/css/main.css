@@ -1,9 +1,31 @@
 body{
-    background-image:url("/img/backgrey.jpg");
+    background-image:url("/img/backGr.jpg");
+}
+
+.loginDiv{
+    width :70%;
+    margin-left:15%;
+    margin-top:10%;
+}
+
+.resultat{
+    color :White;
+}
+
+.chantierNom{
+
 }
 
 .login-logo{
     width:50%;
+}
+.TitleLogin{
+    color :white ;
+    font :bold;
+}
+
+.buttonLogin{
+    color: Black;
 }
 .navbar{
     border-bottom: 4.5px solid #1ab394;
@@ -15,6 +37,7 @@ body{
     padding: 2%;
     margin: 2% 15% 0;
     box-shadow: 0 0 10px grey;
+    display:none;
 }
 .stats-label{
 	margin-top: 2%;
@@ -92,7 +115,7 @@ hr{
   cursor: pointer;
 }
 #chart #bars li .bar:hover:before {
-  color: #000;
+  color: #fff;
   content: attr(data-percentage) '%';
   position: relative;
   bottom: 20px;

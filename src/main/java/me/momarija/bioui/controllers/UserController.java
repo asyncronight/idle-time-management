@@ -32,6 +32,9 @@ public class UserController {
 		model.addAttribute("title", "Liste des chantiers");
 		model.addAttribute("chantiersRendement",userService.getChantiersRendementWeek());
 		model.addAttribute("statistic",new Statistic());
+		model.addAttribute("par", true);
+
+
 		return "user/chantiers";
 	}
 
@@ -39,18 +42,10 @@ public class UserController {
 	public String chantiersRendementList(Model model, @Valid Statistic statistic, BindingResult result) {
 		if (result.hasErrors()) {
 			model.addAttribute("title", "Erreur");
-			System.out.println(statistic.getDayTo()+"**");
-			System.out.println(statistic.getDayFrom());
-			System.out.println(statistic.getHourFrom());
-			System.out.println(statistic.getHourTo());
 
 			return "user/chantiers";
 		}
 
-		System.out.println(statistic.getDayTo());
-		System.out.println(statistic.getDayFrom());
-		System.out.println(statistic.getHourFrom());
-		System.out.println(statistic.getHourTo());
 
 		model.addAttribute("title", "Liste des chantiers");
 		model.addAttribute("chantiersRendement", userService.getChantiersRendement(statistic));
@@ -89,6 +84,8 @@ public class UserController {
 		model.addAttribute("statistic",new Statistic());
 		model.addAttribute("enginsRendement",userService.getEnginsRendementWeek(id));
 		model.addAttribute("chantier", adminChantierService.getChantier(id));
+		model.addAttribute("par", true);
+
 		return "user/engins";
 	}
 
@@ -98,6 +95,7 @@ public class UserController {
 			model.addAttribute("title", "Erreur");
 			return "user/chantiers";
 		}
+
 		model.addAttribute("title", "Liste des engins");
 		model.addAttribute("chantier", adminChantierService.getChantier(id));
 		model.addAttribute("enginsRendement", userService.getEnginsRendement(id, statistic));
@@ -188,7 +186,7 @@ public class UserController {
 	public String enginStatisticWeek(Model model, @PathVariable int id,@PathVariable int idE){
 		model.addAttribute("title", "Statistique de l'engin " + id);
 		model.addAttribute("statistic",new Statistic());
-		model.addAttribute("semaine", true);
+		model.addAttribute("par", true);
 		model.addAttribute("enginStatistics", userService.getEnginStatisticsWeek(idE));
 		model.addAttribute("engin", adminEnginService.getEngin(idE));
 		return "user/enginStatistics";

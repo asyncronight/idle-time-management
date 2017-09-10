@@ -3932,13 +3932,25 @@ code {
   min-height: 48px;
 }
 .ibox-content {
-  background-color: #ffffff;
+  background-color:rgba(102,102,102,0.6);
   color: inherit;
-  padding: 15px 20px 20px 20px;
+  padding: 0px 20px 20px 20px;
   border-color: #e7eaec;
   border-image: none;
   border-style: solid solid none;
   border-width: 1px 0;
+}
+
+
+.ibox-contents{
+background-color:rgba(255,255,255,1);
+  color: inherit;
+  padding: 0px 20px 20px 20px;
+  border-color: #e7eaec;
+  border-image: none;
+  border-style: solid solid none;
+  border-width: 1px 0;
+
 }
 .ibox-footer {
   color: inherit;
@@ -4692,7 +4704,11 @@ body.mini-navbar.fixed-sidebar .logo-element {
   padding-top: 110px;
 }
 .loginscreen.middle-box {
-  width: 300px;
+   width: 400px;
+   box-shadow: 0 0 35px grey;
+   margin-top:3%;
+   padding-bottom :3%;
+
 }
 .loginColumns {
   max-width: 800px;
@@ -6798,6 +6814,7 @@ body.body-small .vote-icon {
   right: 0;
   z-index: 2000;
 }
+
 /*
  *
  *   INSPINIA Landing Page - Responsive Admin Theme
