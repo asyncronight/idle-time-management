@@ -27,26 +27,9 @@
 				</li>
 			</ol>
 		</div>
-		<div class="col-sm-6">
-			<br><br>
-			<div class="btn-group pull-right">
-				<a class="btn btn-secondary" th:href="@{'/user/chantier/'+${chantier.id}+'/statistic'}">
-					<i class="fa fa-bar-chart"></i> Semaine
-				</a>
-				<a class="btn btn-secondary" th:href="@{'/user/chantier/'+${chantier.id}+'/statistic/twoWeeks'}">
-					<i class="fa fa-bar-chart"></i> 15 Jours
-				</a>
-				<a class="btn btn-secondary" th:href="@{'/user/chantier/'+${chantier.id}+'/statistic/month'}">
-					<i class="fa fa-bar-chart"></i> Mois
-				</a>
-				<a class="btn btn-secondary" href="#" onclick="showDiv()">
-					<i class="fa fa-bar-chart"></i> Choisir
-				</a>
-
-			</div>
+			<div th:replace="fragments :: choisirChantierStatistic"></div>
 
 		</div>
-	</div>
 	<div th:replace="fragments :: statsForm"></div>
 	<br>
 

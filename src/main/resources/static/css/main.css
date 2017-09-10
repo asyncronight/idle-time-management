@@ -12,7 +12,10 @@ body{
     color :White;
 }
 
-.chantierNom{
+.titleEngin{
+        background-color:rgba(102,102,102,0.9);
+        box-shadow: 0 0 10px grey;
+        color:black;
 
 }
 
@@ -138,4 +141,22 @@ hr{
 .tabla{
     background : lightgrey;
     color : black;
+}
+
+.nonButton{
+
+    background : none;
+}
+.ouiButton{
+
+    background-color:rgba(102,102,102,0.3);
+    color: white;
+}
+
+.inspercterButt{
+    margin-left:30%;
+    width :60%;
+    background-color:rgba(1,1,1,0.3);
+    color: white;
+
 }

@@ -19,25 +19,9 @@
 				</li>
 			</ol>
 		</div>
-		<div class="col-sm-6">
-			<br>
-			<div class="btn-group pull-right ">
-				<a class="btn btn-secondary" href="/user/">
-					<i class="fa fa-bar-chart"></i> Semaine
-				</a>
-				<a class="btn btn-secondary" href="/user/twoWeeks">
-					<i class="fa fa-bar-chart"></i> 15 Jours
-				</a>
-				<a class="btn btn-secondary" href="/user/month">
-					<i class="fa fa-bar-chart"></i> Mois
-				</a>
+		<div th:replace="fragments :: choisirChantier"></div>
 
-				<a class="btn btn-secondary" href="#" onclick="showDiv()">
-					<i class="fa fa-bar-chart"></i> Choisir
-				</a>
 
-			</div>
-		</div>
 	</div>
 	<div th:replace="fragments :: statsForm"></div>
 	<br>
@@ -48,7 +32,7 @@
 		<div class="row text-center">
 			<span id="list-size" th:text="${#lists.size(chantiersRendement)}" style="display:none"></span>
 			<div class="col-sm-6 col-md-4" th:each="element,iter : ${chantiersRendement}">
-				<div class="ibox float-e-margins chantierX">
+				<div class="ibox float-e-margins animated">
 					<div class="ibox-title">
 						<h2 class="chantierNom" th:text="${element.get('chantier').nom}"></h2>
 					</div>

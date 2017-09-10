@@ -33,6 +33,8 @@ public class UserController {
 		model.addAttribute("chantiersRendement",userService.getChantiersRendementWeek());
 		model.addAttribute("statistic",new Statistic());
 		model.addAttribute("par", true);
+		model.addAttribute("choisir", 1);
+
 
 
 		return "user/chantiers";
@@ -46,7 +48,7 @@ public class UserController {
 			return "user/chantiers";
 		}
 
-
+		model.addAttribute("choisir", 4);
 		model.addAttribute("title", "Liste des chantiers");
 		model.addAttribute("chantiersRendement", userService.getChantiersRendement(statistic));
 		return "user/chantiers";
@@ -54,6 +56,7 @@ public class UserController {
 
 	@RequestMapping(value = "twoWeeks", method = RequestMethod.GET)
 	public String chantierTwoWeeks(Model model) {
+		model.addAttribute("choisir", 2);
 		model.addAttribute("title", "Liste des chantiers");
 		model.addAttribute("chantiersRendement", userService.getChantiersRendementTwoWeek());
 		model.addAttribute("statistic", new Statistic());
@@ -62,6 +65,7 @@ public class UserController {
 
 	@RequestMapping(value = "month", method = RequestMethod.GET)
 	public String chantierMonth(Model model) {
+		model.addAttribute("choisir", 3);
 		model.addAttribute("title", "Liste des chantiers");
 		model.addAttribute("chantiersRendement", userService.getChantiersRendementMonth());
 		model.addAttribute("statistic", new Statistic());
@@ -85,6 +89,7 @@ public class UserController {
 		model.addAttribute("enginsRendement",userService.getEnginsRendementWeek(id));
 		model.addAttribute("chantier", adminChantierService.getChantier(id));
 		model.addAttribute("par", true);
+		model.addAttribute("choisir", 1);
 
 		return "user/engins";
 	}
@@ -95,6 +100,7 @@ public class UserController {
 			model.addAttribute("title", "Erreur");
 			return "user/chantiers";
 		}
+		model.addAttribute("choisir", 4);
 
 		model.addAttribute("title", "Liste des engins");
 		model.addAttribute("chantier", adminChantierService.getChantier(id));
@@ -108,6 +114,8 @@ public class UserController {
 		model.addAttribute("statistic", new Statistic());
 		model.addAttribute("enginsRendement", userService.getEnginsRendementTwoWeek(id));
 		model.addAttribute("chantier", adminChantierService.getChantier(id));
+		model.addAttribute("choisir", 2);
+
 		return "user/engins";
 	}
 
@@ -117,6 +125,8 @@ public class UserController {
 		model.addAttribute("statistic", new Statistic());
 		model.addAttribute("enginsRendement", userService.getEnginsRendementMonth(id));
 		model.addAttribute("chantier", adminChantierService.getChantier(id));
+		model.addAttribute("choisir", 3);
+
 		return "user/engins";
 	}
 
@@ -137,6 +147,8 @@ public class UserController {
 		model.addAttribute("semaine", true);
 		model.addAttribute("chantierStatistics", userService.getChantierStatisticsWeek(id));
 		model.addAttribute("chantier", adminChantierService.getChantier(id));
+		model.addAttribute("choisir", 1);
+
 		return "user/chantierStatistics";
 	}
 
@@ -148,6 +160,8 @@ public class UserController {
 			return "user/chantierStatistics";
 		}
 		model.addAttribute("title", "Statistique du chantier");
+		model.addAttribute("choisir", 4);
+
 		model.addAttribute("chantierStatistics", userService.getChantierStatistics(id, statistic));
 		return "user/chantierStatistics";
 	}
@@ -157,6 +171,8 @@ public class UserController {
 		model.addAttribute("title", "Statistique du chantier");
 		model.addAttribute("statistic", new Statistic());
 		model.addAttribute("twoWeks", true);
+		model.addAttribute("choisir", 2);
+
 		model.addAttribute("chantierStatistics", userService.getChantierStatisticsTwoWeek(id));
 		model.addAttribute("chantier", adminChantierService.getChantier(id));
 		return "user/chantierStatistics";
@@ -167,6 +183,8 @@ public class UserController {
 		model.addAttribute("title", "Statistique du chantier");
 		model.addAttribute("statistic", new Statistic());
 		model.addAttribute("month", true);
+		model.addAttribute("choisir", 3);
+
 		model.addAttribute("chantierStatistics", userService.getChantierStatisticsMonth(id));
 		model.addAttribute("chantier", adminChantierService.getChantier(id));
 		return "user/chantierStatistics";
@@ -187,6 +205,8 @@ public class UserController {
 		model.addAttribute("title", "Statistique de l'engin " + id);
 		model.addAttribute("statistic",new Statistic());
 		model.addAttribute("par", true);
+		model.addAttribute("choisir", 1);
+
 		model.addAttribute("enginStatistics", userService.getEnginStatisticsWeek(idE));
 		model.addAttribute("engin", adminEnginService.getEngin(idE));
 		return "user/enginStatistics";
@@ -199,6 +219,8 @@ public class UserController {
 			model.addAttribute("title", "Erreur");
 			return "user/enginStatistics";
 		}
+		model.addAttribute("choisir", 4);
+
 		model.addAttribute("title", "Statistique de l'engin");
 		model.addAttribute("enginStatistics", userService.getEnginStatistic(idE,statistic));
 		return "user/enginStatistics";
@@ -210,6 +232,8 @@ public class UserController {
 		model.addAttribute("statistic", new Statistic());
 		model.addAttribute("enginStatistics", userService.getEnginStatisticsTwoWeek(idE));
 		model.addAttribute("engin", adminEnginService.getEngin(idE));
+		model.addAttribute("choisir", 2);
+
 		return "user/enginStatistics";
 	}
 
@@ -219,6 +243,9 @@ public class UserController {
 		model.addAttribute("statistic", new Statistic());
 		model.addAttribute("enginStatistics", userService.getEnginStatisticsMonth(idE));
 		model.addAttribute("engin", adminEnginService.getEngin(idE));
+		model.addAttribute("choisir", 3);
+
+
 		return "user/enginStatistics";
 	}
 
