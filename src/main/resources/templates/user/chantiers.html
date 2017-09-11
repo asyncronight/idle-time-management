@@ -50,7 +50,11 @@
 								</div>
 							</div>
 						</div>
-						<br>
+						<p class="card-text" style="color:white;padding: 5px 0">
+							Contient
+							<span class="text-warning" th:text="${#lists.size(element.get('chantier').engins)}">x</span>
+							engins
+						</p>
 						<a class="btn btn-block btn btn-primary btn-block"
 						   th:href="@{'/user/chantier/'+${element.get('chantier').id}+'/statistic'}">
 							Voir les statistiques du chantier
