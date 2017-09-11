@@ -45,7 +45,7 @@
 				<div class="ibox float-e-margins shadow animated" >
 					<div class="ibox-title  ">
 						<div class="ibox-title titleEngin">
-							<h2 class="chantierNom" th:text="'Engin N° '+${element.get('engin').id}"></h2>
+							<h2 class="chantierNom" th:text="${element.get('engin').chauffeur}"></h2>
 						</div>
 					</div>
 					<div class="ibox-contents">
@@ -56,7 +56,6 @@
 						</div>
 						<div class="col-md-6">
 							<br>
-							<p th:text="'Chauffeur : '+${element.get('engin').chauffeur}"></p>
 							<p th:text="'Marque : '+${element.get('engin').marque}"></p>
 							<p th:text="'Année : '+${element.get('engin').annee}"></p>
 						</div>

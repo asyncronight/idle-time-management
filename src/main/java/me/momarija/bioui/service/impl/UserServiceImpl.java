@@ -517,6 +517,7 @@ public class UserServiceImpl implements UserService {
                 }
                 if(map.get("ralenti")<0) map.put("ralenti",0);
 
+
                 p_percent =(double) (map.get("production") * 100 / (z/1000) ) ;
 
                 a+=arret;
@@ -1096,7 +1097,12 @@ public class UserServiceImpl implements UserService {
 				if(map.get("ralenti")<0) map.put("ralenti",0);
 
 				p_percent =(double) (map.get("production") * 100 / (z/1000) ) ;
-
+                if(p_percent >100){
+                    p_percent=100;
+                }
+                if(map.get("production") > 3600){
+                    map.put("production",3600);
+                }
 				a+=arret;
 				r+=map.get("ralenti");
 				p+=map.get("production");
