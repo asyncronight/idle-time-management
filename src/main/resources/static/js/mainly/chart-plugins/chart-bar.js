@@ -7,11 +7,11 @@ $(function() {
         'height' : percentage + '%'
         }, 1000);
 
-        if(percentage >=75){
+        if(percentage >60){
           $(this).css('background','green');
 
         }
-        else if(percentage >=40){
+        else if(percentage >40){
           $(this).css('background','orange');
         }else{
           $(this).css('background','red');

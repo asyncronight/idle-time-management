@@ -5,15 +5,15 @@ $(function(){
     var $ppc = $('.pie-chart-'+i),
     percent = $ppc.data('percent'),
     deg = 360*percent/100;
-    if (percent > 40 && percent < 75) {
+    if (percent > 40 && percent <= 60) {
       $ppc.addClass('gt-50');
       $('gt-50').css('background','orange');
     }
-    if (percent > 75 ) {
+    if (percent > 60 ) {
       $ppc.addClass('gt-50');
       $('gt-50').css('background','green');
     }
-    if (percent < 40 ) {
+    if (percent <= 40 ) {
       $('.ppc-progress-fill-'+i).css('background','red');
             $('.ppc-percents span').css('color','#FE9A2E');
 
