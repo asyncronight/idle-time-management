@@ -164,3 +164,16 @@ hr{
     color: white;
 
 }
+
+
+@import url(https://fonts.googleapis.com/css?family=Droid+Sans);
+.loader {
+   position: fixed;
+   	left: 0px;
+   	top: 0px;
+   	width: 100%;
+   	height: 100%;
+
+   	background: url('https://media.giphy.com/media/i3pHUtmHiLd28/giphy.gif') rgba(102,102,102,0.7);
+
+}

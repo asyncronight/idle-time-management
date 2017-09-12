@@ -2,10 +2,9 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments :: head"></head>
 <body class="gray-bg">
-<div class="container">
+<div th:replace="fragments :: loader"></div>
 
-</div>
-	<div th:replace="fragments :: header"></div>
+<div th:replace="fragments :: header"></div>
 
 	<div class="middle-box text-center loginscreen animated fadeInDown loog">
 		<div>
@@ -45,5 +44,6 @@
 	</div>
 
 	<head th:replace="fragments :: footer"></head>
+
 </body>
 </html>

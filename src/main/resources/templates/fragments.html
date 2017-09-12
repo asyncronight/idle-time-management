@@ -14,7 +14,15 @@
 	<link th:href="@{/css/mainly/style.css}" rel="stylesheet">
 	<link th:href="@{/css/main.css}" rel="stylesheet">
 
+	<script type="text/javascript"  src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
+
 	<link rel="stylesheet" th:href="@{/css/main.css}"/>
+	<script type="text/javascript">
+		$(window).load(function() {
+        $(".loader").fadeOut("slow");
+    });
+	</script>
+
 </head>
 
 <body class="gray-bg">
@@ -470,6 +478,9 @@
 		<script th:src="@{/js/mainly//date-picker/moment.min.js}"></script>
 		<script th:src="@{/js/mainly//date-picker/bootstrap-datetimepicker.min.js}"></script>
 		<script th:src="@{/js/main.js}"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+
 	</div>
 	
 	<div th:fragment="chart-plugin">
@@ -500,6 +511,10 @@
 			<li><a href="#">Engins</a></li>
 			<li><a href="#">Chauffeurs</a></li>
 		</ul>
+	</div>
+
+	<div th:fragment="loader">
+		<div class="loader"></div>
 	</div>
 </body>
 </html>
