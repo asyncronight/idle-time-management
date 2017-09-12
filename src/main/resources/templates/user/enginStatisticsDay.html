@@ -13,7 +13,7 @@
 		<div class="col-sm-6">
 			<div style="display: -webkit-inline-box;">
 				<a class="btn btn-success btn-rounded" th:href="@{'/user/chantier/'+${engin.chantier.id}}" style="margin-top:30%;"><i class="fa fa-reply"></i></a>
-				<h2 class="text-center" th:text="'Engin N° '+${engin.id}"></h2>
+				<h2 class="text-center" th:text="${engin.chauffeur}"></h2>
 			</div>
 			
 			<ol class="breadcrumb">
@@ -27,7 +27,7 @@
 					<a th:href="@{'/user/chantier/'+${engin.chantier.id}}" th:text="${engin.chantier.nom}"></a>
 				</li>
 				<li class="active">
-					<strong th:text="'Engin N° '+${engin.id}">Engin</strong>
+					<strong th:text="${engin.chauffeur}">Engin</strong>
 				</li>
 			</ol>
 		</div>

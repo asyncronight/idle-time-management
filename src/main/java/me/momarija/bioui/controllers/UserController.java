@@ -263,7 +263,7 @@ public class UserController {
 	public String statisticsByDate(@PathVariable int id,@PathVariable int idC, @PathVariable String d, @PathVariable String m, @PathVariable String y, Model model){
 		String date = m+"/"+d+"/"+y;
 		model.addAttribute("enginStatisticDay", userService.getEnginStatisticsDay(id,date));
-		model.addAttribute("date", date);
+		model.addAttribute("date", d+ "/" + m + "/" +y);
 		model.addAttribute("engin", adminEnginService.getEngin(id));
 		return "user/enginStatisticsDay";
 	}
@@ -272,7 +272,7 @@ public class UserController {
 	public String statsByDate(@PathVariable int idC, @PathVariable String d, @PathVariable String m, @PathVariable String y, Model model) {
 		String date = m + "/" + d + "/" + y;
 		model.addAttribute("chantierStatisticDay", userService.getChantierStatisticsDay(idC, date));
-		model.addAttribute("date", date);
+		model.addAttribute("date", d+ "/" + m + "/" +y);
 		model.addAttribute("chantier", adminChantierService.getChantier(idC));
 		return "user/chantierStatisticsDay";
 	}
