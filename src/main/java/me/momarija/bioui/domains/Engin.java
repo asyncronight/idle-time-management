@@ -3,14 +3,17 @@ package me.momarija.bioui.domains;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Engin {
 
     @Id
     @GeneratedValue
-    private int id;
+	private Integer id;
 
     @NotEmpty
     @Size(min = 3, max = 40)
@@ -42,12 +45,12 @@ public class Engin {
     @JoinColumn(name = "chantier_id")
     private Chantier chantier;
 
-    public int getId() {
-        return id;
+	public Integer getId() {
+		return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+	public void setId(Integer id) {
+		this.id = id;
     }
 
     public String getMarque() {

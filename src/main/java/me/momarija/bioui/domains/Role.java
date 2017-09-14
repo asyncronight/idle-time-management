@@ -11,19 +11,19 @@ public class Role {
 
     @Id
     @GeneratedValue
-    private int id;
+	private Integer id;
 
     private String role;
 
     @ManyToMany(mappedBy = "roles")
     private List<User> users;
 
-    public int getId() {
-        return id;
+	public Integer getId() {
+		return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+	public void setId(Integer id) {
+		this.id = id;
     }
 
     public String getRole() {

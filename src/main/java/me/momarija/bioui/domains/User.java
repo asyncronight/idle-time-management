@@ -11,7 +11,7 @@ public class User {
 
     @Id
     @GeneratedValue
-    private int id;
+	private Integer id;
 
     @NotEmpty
     @Length(min = 3, max = 20)
@@ -29,12 +29,12 @@ public class User {
     )
     private List<Role> roles;
 
-    public int getId() {
-        return id;
+	public Integer getId() {
+		return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+	public void setId(Integer id) {
+		this.id = id;
     }
 
     public String getUsername() {

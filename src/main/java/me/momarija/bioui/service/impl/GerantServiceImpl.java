@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Date;
 
 @Service
-@Transactional(rollbackFor = Exception.class)
+@Transactional
 public class GerantServiceImpl implements GerantService {
 
 	@Autowired

@@ -11,7 +11,7 @@ public class Chantier {
 
     @Id
     @GeneratedValue
-    private int id;
+    private Integer id;
 
     @NotEmpty
     @Size(min = 3,max = 20)
@@ -24,11 +24,11 @@ public class Chantier {
     @OneToMany(mappedBy = "chantier", cascade = CascadeType.ALL)
     private List<Engin> engins;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -1,8 +1,8 @@
 package me.momarija.bioui.domains;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.Date;
 
 @Entity
@@ -10,7 +10,7 @@ public class Donnee {
 
     @Id
     @GeneratedValue
-    private long id;
+	private Long id;
 
     private Date date;
 
@@ -20,12 +20,12 @@ public class Donnee {
 
     private int enginId;
 
-    public long getId() {
-        return id;
+	public Long getId() {
+		return id;
     }
 
-    public void setId(long id) {
-        this.id = id;
+	public void setId(Long id) {
+		this.id = id;
     }
 
     public Date getDate() {
