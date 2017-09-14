@@ -14,17 +14,6 @@
 	<link th:href="@{/css/mainly/style.css}" rel="stylesheet">
 	<link th:href="@{/css/main.css}" rel="stylesheet">
 
-	<script type="text/javascript"  src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
-
-	<link rel="stylesheet" th:href="@{/css/main.css}"/>
-	<script type="text/javascript">
-		$(window).load(function() {
-
-        $(".loader").fadeOut("slow");
-
-        document.getElementById('comp').style.display='block';
-    });
-	</script>
 
 </head>
 
@@ -34,9 +23,8 @@
 		<nav class="navbar navbar-static-top nav-bg" role="navigation" style="margin-bottom: 0;" sec:authorize="isAuthenticated()">
 			<div class="navbar-header ">
 
-				<img class="card-img-top img-fluid" src="/img/logo.png"
-					 th:alt="OPERO"/>
-
+				<img class="card-img-top logoTa3naHeader img-fluid" src="/img/bkg.png"
+					 th:alt="ok"/>
 			</div>
 			<ul class="nav navbar-top-links navbar-right">
 				<li>
@@ -478,11 +466,9 @@
 		<script th:src="@{/js/mainly/bootstrap.min.js}"></script>
 		<script th:src="@{/js/mainly/jquery.metisMenu.js}"></script>
 		<script th:src="@{/js/mainly/jquery.slimscroll.min.js}"></script>
-		<script th:src="@{/js/mainly//date-picker/moment.min.js}"></script>
-		<script th:src="@{/js/mainly//date-picker/bootstrap-datetimepicker.min.js}"></script>
+		<script th:src="@{/js/mainly/date-picker/moment.min.js}"></script>
+		<script th:src="@{/js/mainly/date-picker/bootstrap-datetimepicker.min.js}"></script>
 		<script th:src="@{/js/main.js}"></script>
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
-		<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
 
 	</div>
 	
@@ -516,8 +502,5 @@
 		</ul>
 	</div>
 
-	<div th:fragment="loader">
-		<div class="loader"></div>
-	</div>
 </body>
 </html>

@@ -22,7 +22,9 @@ body{
 .logoTa3na{
     margin-bottom:30px;
 }
-
+.logoTa3naHeader{
+    width : 60px;
+}
 .login-logo{
     width:50%;
 }
@@ -163,19 +165,4 @@ hr{
     background-color:rgba(1,1,1,0.3);
     color: white;
 
-}
-
-@import url(https://fonts.googleapis.com/css?family=Droid+Sans);
-.loader {
-	position: fixed;
-	left: 0px;
-	top: 0px;
-	width: 100%;
-	height: 100%;
-	z-index: 9999;
-	background: url('https://media.giphy.com/media/i3pHUtmHiLd28/giphy.gif') 50% 50% no-repeat rgb(249,249,249,0.6);
-}
-
-#comp{
-    display : none;
 }

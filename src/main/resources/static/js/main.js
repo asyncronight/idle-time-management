@@ -26,7 +26,7 @@ $(function () {
     }));
     $('#timepicker2').datetimepicker({
         format: 'HH:mm',
-        defaultDate:moment(new Date()).hours(19).minutes(0).seconds(0).milliseconds(0)
+        defaultDate:moment(new Date()).hours(18).minutes(0).seconds(0).milliseconds(0)
 
     });
 

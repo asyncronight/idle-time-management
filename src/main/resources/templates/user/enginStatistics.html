@@ -3,10 +3,6 @@
 <head th:replace="fragments :: head"></head>
 <body>
 
-<div th:replace="fragments :: loader"></div>
-
-<div id="comp">
-
 <div th:replace="fragments :: header"></div>
 <div class="container">
 	<br>
@@ -14,7 +10,7 @@
 		<div class="col-sm-6">
 			<div style="display: -webkit-inline-box;">
 				<a class="btn btn-success btn-rounded" th:href="@{'/user/chantier/'+${engin.chantier.id}}" style="margin-top:30%;"><i class="fa fa-reply"></i></a>
-				<h2 class="text-center" th:text="${engin.marque}"></h2>
+				<h2 class="text-center" th:text="${engin.chauffeur}"></h2>
 			</div>
 			
 			<ol class="breadcrumb">
@@ -98,6 +94,6 @@
 </div>
 <div th:replace="fragments :: footer"></div>
 <div th:replace="fragments :: chart-plugin"></div>
-</div>
+
 </body>
 </html>

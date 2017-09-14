@@ -3,9 +3,6 @@
 <head th:replace="fragments :: head"></head>
 <body>
 
-<div th:replace="fragments :: loader"></div>
-<div id="comp">
-
 <div th:replace="fragments :: header"></div>
 <div class="container">
 	<br>
@@ -27,9 +24,11 @@
 				<li>
 					<strong th:text="${chantier.nom}"></strong>
 				</li>
+
 				<li class="active">
 					<strong>Statistiques du jour <span th:text="${date}"></span></strong>
 				</li>
+
 			</ol>
 		</div>
 	</div>
@@ -80,6 +79,5 @@
 <div th:replace="fragments :: footer"></div>
 <div th:replace="fragments :: chart-plugin"></div>
 
-</div>
 </body>
 </html>
