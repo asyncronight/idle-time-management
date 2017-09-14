@@ -57,7 +57,7 @@ public class UserServiceImpl implements UserService {
 
         Date time_from = cal.getTime();
 
-        cal.set(Calendar.HOUR_OF_DAY,19);
+        cal.set(Calendar.HOUR_OF_DAY,18);
         cal.set(Calendar.MINUTE,00);
         cal.set(Calendar.SECOND,0);
         Date time_to = cal.getTime();
@@ -68,10 +68,11 @@ public class UserServiceImpl implements UserService {
         statistic.setHourTo(time_to);
         statistic.setNbHourRepos(1);
         Map<String,Object> mapChantierRendement = new HashMap<>();
-
+        float rendement;
         for (Chantier c:chantierRepo.findAll()) {
+            rendement =getChantierRendement(c.getId(),statistic);
             mapChantierRendement.put("chantier",c);
-            mapChantierRendement.put("rendement",String.format("%.2f", getChantierRendement(c.getId(),statistic)));
+            mapChantierRendement.put("rendement",String.format("%.2f", rendement));
             list.add(mapChantierRendement);
             mapChantierRendement=new HashMap<>();
         }
@@ -98,7 +99,7 @@ public class UserServiceImpl implements UserService {
 
         Date time_from = cal.getTime();
 
-        cal.set(Calendar.HOUR_OF_DAY,19);
+        cal.set(Calendar.HOUR_OF_DAY,18);
         cal.set(Calendar.MINUTE,00);
         cal.set(Calendar.SECOND,0);
         Date time_to = cal.getTime();
@@ -109,14 +110,14 @@ public class UserServiceImpl implements UserService {
         statistic.setHourTo(time_to);
         statistic.setNbHourRepos(1);
         Map<String,Object> mapChantierRendement = new HashMap<>();
+        float rendement;
         for (Chantier c:chantierRepo.findAll()) {
+            rendement =getChantierRendement(c.getId(),statistic);
             mapChantierRendement.put("chantier",c);
-            mapChantierRendement.put("rendement",String.format("%.2f", getChantierRendement(c.getId(),statistic)));
-
+            mapChantierRendement.put("rendement",String.format("%.2f", rendement));
             list.add(mapChantierRendement);
             mapChantierRendement=new HashMap<>();
         }
-
         return list;
     }
 
@@ -139,7 +140,7 @@ public class UserServiceImpl implements UserService {
 
         Date time_from = cal.getTime();
 
-        cal.set(Calendar.HOUR_OF_DAY,19);
+        cal.set(Calendar.HOUR_OF_DAY,18);
         cal.set(Calendar.MINUTE,00);
         cal.set(Calendar.SECOND,0);
         Date time_to = cal.getTime();
@@ -150,14 +151,14 @@ public class UserServiceImpl implements UserService {
         statistic.setHourTo(time_to);
         statistic.setNbHourRepos(1);
         Map<String,Object> mapChantierRendement = new HashMap<>();
-
+        float rendement ;
         for (Chantier c:chantierRepo.findAll()) {
+            rendement =getChantierRendement(c.getId(),statistic);
             mapChantierRendement.put("chantier",c);
-            mapChantierRendement.put("rendement",String.format("%.2f", getChantierRendement(c.getId(),statistic)));
+            mapChantierRendement.put("rendement",String.format("%.2f", rendement));
             list.add(mapChantierRendement);
             mapChantierRendement=new HashMap<>();
         }
-
         return list;
     }
 
@@ -171,10 +172,11 @@ public class UserServiceImpl implements UserService {
 		List<Map<String,Object>> list = new ArrayList<>();
 
 		Map<String,Object> mapChantierRendement = new HashMap<>();
-
+        float rendement ;
 		for (Chantier c:chantierRepo.findAll()) {
+            rendement =getChantierRendement(c.getId(),statistic);
 			mapChantierRendement.put("chantier",c);
-			mapChantierRendement.put("rendement",String.format("%.2f", getChantierRendement(c.getId(),statistic)));
+			mapChantierRendement.put("rendement",String.format("%.2f", rendement));
 			list.add(mapChantierRendement);
 			mapChantierRendement=new HashMap<>();
 		}
@@ -215,7 +217,7 @@ public class UserServiceImpl implements UserService {
 
         Date time_from = cal.getTime();
 
-        cal.set(Calendar.HOUR_OF_DAY,20);
+        cal.set(Calendar.HOUR_OF_DAY,18);
         cal.set(Calendar.MINUTE,00);
         cal.set(Calendar.SECOND,0);
         Date time_to = cal.getTime();
@@ -255,6 +257,7 @@ public class UserServiceImpl implements UserService {
                 if(map.get("ralenti")<0) map.put("ralenti",0);
 
                 p_percent =(double) (map.get("production") * 100 / (z/1000) ) ;
+                if(p_percent >100) p_percent = 100;
 
 
                 a+=arret;
@@ -310,7 +313,7 @@ public class UserServiceImpl implements UserService {
 
         Date time_from = cal.getTime();
 
-        cal.set(Calendar.HOUR_OF_DAY,20);
+        cal.set(Calendar.HOUR_OF_DAY,18);
         cal.set(Calendar.MINUTE,00);
         cal.set(Calendar.SECOND,0);
         Date time_to = cal.getTime();
@@ -350,6 +353,7 @@ public class UserServiceImpl implements UserService {
                 if(map.get("ralenti")<0) map.put("ralenti",0);
 
                 p_percent =(double) (map.get("production") * 100 / (z/1000) ) ;
+                if(p_percent >100) p_percent = 100;
 
                 a+=arret;
                 r+=map.get("ralenti");
@@ -404,7 +408,7 @@ public class UserServiceImpl implements UserService {
 
         Date time_from = cal.getTime();
 
-        cal.set(Calendar.HOUR_OF_DAY,20);
+        cal.set(Calendar.HOUR_OF_DAY,19);
         cal.set(Calendar.MINUTE,00);
         cal.set(Calendar.SECOND,0);
         Date time_to = cal.getTime();
@@ -444,6 +448,7 @@ public class UserServiceImpl implements UserService {
                 if(map.get("ralenti")<0) map.put("ralenti",0);
 
                 p_percent =(double) (map.get("production") * 100 / (z/1000) ) ;
+                if(p_percent >100) p_percent = 100;
 
                 a+=arret;
                 r+=map.get("ralenti");
@@ -519,7 +524,7 @@ public class UserServiceImpl implements UserService {
 
 
                 p_percent =(double) (map.get("production") * 100 / (z/1000) ) ;
-
+                if(p_percent >100) p_percent = 100;
                 a+=arret;
                 r+=map.get("ralenti");
                 p+=map.get("production");
@@ -563,7 +568,7 @@ public class UserServiceImpl implements UserService {
 
 		Date time_from = cal.getTime();
 
-		cal.set(Calendar.HOUR_OF_DAY,19);
+		cal.set(Calendar.HOUR_OF_DAY,18);
 		cal.set(Calendar.MINUTE,00);
 		cal.set(Calendar.SECOND,0);
 		Date time_to = cal.getTime();
@@ -573,9 +578,12 @@ public class UserServiceImpl implements UserService {
 		statistic.setHourFrom(time_from);
 		statistic.setHourTo(time_to);
 		statistic.setNbHourRepos(1);
+        float rendement;
 
 		Map<String,Object> mapEnginRendement = new HashMap<>();
 		for (Engin e:getEnginList(chantierId)) {
+            rendement = getEnginRendement(e.getId(),statistic);
+            if(rendement>100) rendement = 100;
 			mapEnginRendement.put("engin",e);
 			mapEnginRendement.put("rendement",String.format("%.2f",getEnginRendement(e.getId(),statistic)));
 
@@ -589,9 +597,12 @@ public class UserServiceImpl implements UserService {
 	public List<Map<String, Object>> getEnginsRendement(int chantierId, Statistic statistic) {
 		List<Map<String,Object>> list = new ArrayList<>();
 		Map<String,Object> mapEnginRendement = new HashMap<>();
+		float rendement;
 		for (Engin e:getEnginList(chantierId)) {
+            rendement = getEnginRendement(e.getId(),statistic);
+            if(rendement>100) rendement = 100;
 			mapEnginRendement.put("engin",e);
-			mapEnginRendement.put("rendement",String.format("%.2f",getEnginRendement(e.getId(),statistic)) );
+			mapEnginRendement.put("rendement",String.format("%.2f",rendement) );
 			list.add(mapEnginRendement);
 			mapEnginRendement=new HashMap<>();
 		}
@@ -613,7 +624,7 @@ public class UserServiceImpl implements UserService {
 
         Date time_from = cal.getTime();
 
-        cal.set(Calendar.HOUR_OF_DAY,19);
+        cal.set(Calendar.HOUR_OF_DAY,18);
         cal.set(Calendar.MINUTE,00);
         cal.set(Calendar.SECOND,0);
         Date time_to = cal.getTime();
@@ -623,11 +634,14 @@ public class UserServiceImpl implements UserService {
         statistic.setHourFrom(time_from);
         statistic.setHourTo(time_to);
         statistic.setNbHourRepos(1);
-
+        float rendement;
         Map<String,Object> mapEnginRendement = new HashMap<>();
         for (Engin e:getEnginList(chantierId)) {
+            rendement = getEnginRendement(e.getId(),statistic);
+            if(rendement>100) rendement = 100;
+
             mapEnginRendement.put("engin",e);
-            mapEnginRendement.put("rendement",String.format("%.2f",getEnginRendement(e.getId(),statistic)));
+            mapEnginRendement.put("rendement",String.format("%.2f",rendement));
             list.add(mapEnginRendement);
             mapEnginRendement=new HashMap<>();
         }
@@ -649,7 +663,7 @@ public class UserServiceImpl implements UserService {
 
         Date time_from = cal.getTime();
 
-        cal.set(Calendar.HOUR_OF_DAY,19);
+        cal.set(Calendar.HOUR_OF_DAY,18);
         cal.set(Calendar.MINUTE,00);
         cal.set(Calendar.SECOND,0);
         Date time_to = cal.getTime();
@@ -659,11 +673,13 @@ public class UserServiceImpl implements UserService {
         statistic.setHourFrom(time_from);
         statistic.setHourTo(time_to);
         statistic.setNbHourRepos(1);
-
+        float rendement;
         Map<String,Object> mapEnginRendement = new HashMap<>();
         for (Engin e:getEnginList(chantierId)) {
+            rendement = getEnginRendement(e.getId(),statistic);
+            if(rendement>100) rendement = 100;
             mapEnginRendement.put("engin",e);
-            mapEnginRendement.put("rendement",String.format("%.2f",getEnginRendement(e.getId(),statistic)));
+            mapEnginRendement.put("rendement",String.format("%.2f",rendement));
             list.add(mapEnginRendement);
             mapEnginRendement=new HashMap<>();
         }
@@ -700,7 +716,7 @@ public class UserServiceImpl implements UserService {
 
         Date time_from = cal.getTime();
 
-        cal.set(Calendar.HOUR_OF_DAY,19);
+        cal.set(Calendar.HOUR_OF_DAY,18);
         cal.set(Calendar.MINUTE,00);
         cal.set(Calendar.SECOND,0);
         Date time_to = cal.getTime();
@@ -739,6 +755,7 @@ public class UserServiceImpl implements UserService {
             if(map.get("ralenti")<0) map.put("ralenti",0);
 
             p_percent =(double) (map.get("production") * 100 / (z/1000) ) ;
+            if(p_percent>100) p_percent = 100;
 
             dayView = stfDay.format(d1);
 
@@ -781,7 +798,7 @@ public class UserServiceImpl implements UserService {
 
         Date time_from = cal.getTime();
 
-        cal.set(Calendar.HOUR_OF_DAY,19);
+        cal.set(Calendar.HOUR_OF_DAY,18);
         cal.set(Calendar.MINUTE,00);
         cal.set(Calendar.SECOND,0);
         Date time_to = cal.getTime();
@@ -820,6 +837,7 @@ public class UserServiceImpl implements UserService {
             if(map.get("ralenti")<0) map.put("ralenti",0);
 
             p_percent =(double) (map.get("production") * 100 / (z/1000) ) ;
+            if(p_percent>100) p_percent = 100;
 
             dayView = stfDay.format(d1);
 
@@ -861,7 +879,7 @@ public class UserServiceImpl implements UserService {
 
         Date time_from = cal.getTime();
 
-        cal.set(Calendar.HOUR_OF_DAY,19);
+        cal.set(Calendar.HOUR_OF_DAY,18);
         cal.set(Calendar.MINUTE,00);
         cal.set(Calendar.SECOND,0);
         Date time_to = cal.getTime();
@@ -902,6 +920,8 @@ public class UserServiceImpl implements UserService {
             if(map.get("ralenti")<0) map.put("ralenti",0);
 
             p_percent =(double) (map.get("production") * 100 / (z/1000) ) ;
+
+            if(p_percent>100) p_percent = 100;
 
             dayView = stfDay.format(d1);
 
