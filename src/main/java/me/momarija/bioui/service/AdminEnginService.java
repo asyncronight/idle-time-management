@@ -11,4 +11,6 @@ public interface AdminEnginService {
 	Engin getEngin(int enginId);
 
 	Engin updateEngin(Engin engin);
+
+	void changeState(int id);
 }

@@ -61,4 +61,13 @@ public class AdminEnginServiceImpl implements AdminEnginService {
 		engin.setPhoto(enginRepo.findOne(engin.getId()).getPhoto());
 		return enginRepo.save(engin);
 	}
+
+	@Override
+	public void changeState(int id) {
+		Engin engin = enginRepo.findOne(id);
+		if (engin == null)
+			throw new RuntimeException("Impossible de changer l'état, engins introuvable");
+		engin.setEnPanne(!engin.isEnPanne());
+		enginRepo.save(engin);
+	}
 }

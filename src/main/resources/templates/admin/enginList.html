@@ -69,6 +69,22 @@
 							<p th:text="'Année : '+${engin.annee}"></p>
 						</div>
 					</div>
+					<div th:if="${engin.enPanne}" class="ibox-contents bg-danger text-white">
+						<br>
+						<a class="btn btn-success btn-sm pull-right"
+						   th:href="@{'/admin/chantier/'+${engin.chantier.id}+'/changestate/'+${engin.id}}">
+							<i class="fa fa-exchange"></i> Mettre à marche
+						</a>
+						<p>Engin en panne</p>
+					</div>
+					<div th:if="!${engin.enPanne}" class="ibox-contents bg-primary text-white">
+						<br>
+						<a class="btn btn-success btn-sm pull-right"
+						   th:href="@{'/admin/chantier/'+${engin.chantier.id}+'/changestate/'+${engin.id}}">
+							<i class="fa fa-exchange"></i> Mettre en panne
+						</a>
+						<p>Engin à marche</p>
+					</div>
 				</div>
 
 					<div class="modal fade" th:id="@{'modal'+${engin.id}}" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">

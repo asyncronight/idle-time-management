@@ -97,4 +97,10 @@ public class AdminEnginController {
 		adminEnginService.updateEngin(engin);
 		return "redirect:/admin/chantier/" + idC;
 	}
+
+	@RequestMapping(value = "changestate/{id}", method = RequestMethod.GET)
+	public String changestate(@PathVariable int id, @PathVariable int idC) {
+		adminEnginService.changeState(id);
+		return "redirect:/admin/chantier/" + idC;
+	}
 }

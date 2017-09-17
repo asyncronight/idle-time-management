@@ -41,6 +41,8 @@ public class Engin {
     @Max(20)
     private int temps;
 
+	private boolean enPanne = false;
+
     @ManyToOne
     @JoinColumn(name = "chantier_id")
     private Chantier chantier;
@@ -108,6 +110,14 @@ public class Engin {
     public void setTemps(int temps) {
         this.temps = temps;
     }
+
+	public boolean isEnPanne() {
+		return enPanne;
+	}
+
+	public void setEnPanne(boolean enPanne) {
+		this.enPanne = enPanne;
+	}
 
     public Chantier getChantier() {
         return chantier;
