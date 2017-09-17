@@ -80,6 +80,14 @@
 						</a>
 
 					</div>
+					<div th:if="${element.get('engin').enPanne}" class="ibox-contents bg-danger text-white">
+						<br>
+						<p>Engin en panne</p>
+					</div>
+					<div th:if="!${element.get('engin').enPanne}" class="ibox-contents bg-primary text-white">
+						<br>
+						<p>Engin à marche</p>
+					</div>
 				</div>
 				<br>
 			</div>
