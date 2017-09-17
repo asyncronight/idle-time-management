@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="fragments :: head"></head>
+<body>
+
+<div th:replace="fragments :: header"></div>
+<div class="container">
+    <br>
+
+    <div class="row wrapper border-bottom  page-heading">
+        <div class="col-sm-6">
+            <br>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="/">Accueil</a>
+                </li>
+                <li class="active">
+                    <a href="/admin/users/"><strong>Utilisateurs</strong></a>
+                </li>
+            </ol>
+        </div>
+        <div class="col-md-6 pull-right">
+            <br>
+            <a class="btn btn-primary pull-right" th:href="@{'/admin/users/add'}"><i
+                    class="fa fa-plus"></i> Ajouter un utilisateur</a>
+        </div>
+    </div>
+    <br>
+    <br>
+    <div th:if="${users}">
+        <table class="table table-striped tabla">
+            <tr>
+                <th>Pseudo</th>
+                <th>Mot de passe</th>
+                <th>Roles</th>
+                <th>Supprimer</th>
+
+            </tr>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.username}"></td>
+                <td th:text="${user.password}"></td>
+                <td th:text="${user.roles}"></td>
+                <td>
+                    <a class="label label-danger" data-toggle="modal" th:attr="data-target='#modal'+${user.id}">
+                        <i class="fa fa-remove"></i>Supprimer
+                    </a>
+                </td>
+                <div class="modal fade" th:id="@{'modal'+${user.id}}" tabindex="-1" role="dialog"
+                     aria-labelledby="modalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalLabel">Confirmer la suppression</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <form method="post" th:action="@{'/admin/users/'+${user.id}+'/delete/'}">
+                                <input type="hidden"
+                                       th:name="${_csrf.parameterName}"
+                                       th:value="${_csrf.token}"/>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler
+                                    </button>
+                                    <input type="Submit" class="btn btn-danger" value="Supprimer"/>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </tr>
+        </table>
+
+
+    </div>
+
+</div>
+
+<div th:replace="fragments :: footer"></div>
+</body>
+
+</html>

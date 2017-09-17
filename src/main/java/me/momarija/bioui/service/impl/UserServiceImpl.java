@@ -71,6 +71,7 @@ public class UserServiceImpl implements UserService {
         float rendement;
         for (Chantier c:chantierRepo.findAll()) {
             rendement =getChantierRendement(c.getId(),statistic);
+            if (rendement > 100) rendement = 100;
             mapChantierRendement.put("chantier",c);
             mapChantierRendement.put("rendement",String.format("%.2f", rendement));
             list.add(mapChantierRendement);
@@ -113,6 +114,7 @@ public class UserServiceImpl implements UserService {
         float rendement;
         for (Chantier c:chantierRepo.findAll()) {
             rendement =getChantierRendement(c.getId(),statistic);
+            if (rendement > 100) rendement = 100;
             mapChantierRendement.put("chantier",c);
             mapChantierRendement.put("rendement",String.format("%.2f", rendement));
             list.add(mapChantierRendement);
@@ -154,6 +156,7 @@ public class UserServiceImpl implements UserService {
         float rendement ;
         for (Chantier c:chantierRepo.findAll()) {
             rendement =getChantierRendement(c.getId(),statistic);
+            if (rendement > 100) rendement = 100;
             mapChantierRendement.put("chantier",c);
             mapChantierRendement.put("rendement",String.format("%.2f", rendement));
             list.add(mapChantierRendement);
@@ -175,8 +178,9 @@ public class UserServiceImpl implements UserService {
         float rendement ;
 		for (Chantier c:chantierRepo.findAll()) {
             rendement =getChantierRendement(c.getId(),statistic);
-			mapChantierRendement.put("chantier",c);
-			mapChantierRendement.put("rendement",String.format("%.2f", rendement));
+            if (rendement > 100) rendement = 100;
+            mapChantierRendement.put("chantier", c);
+            mapChantierRendement.put("rendement",String.format("%.2f", rendement));
 			list.add(mapChantierRendement);
 			mapChantierRendement=new HashMap<>();
 		}

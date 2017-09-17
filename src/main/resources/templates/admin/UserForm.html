@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="fragments :: head"></head>
+<body>
+
+<div th:replace="fragments :: header"></div>
+<div class="container">
+    <br>
+
+    <div class="row wrapper border-bottom  page-heading">
+        <div class="col-sm-6">
+            <br>
+            <div style="display: -webkit-inline-box;">
+                <a class="btn btn-primary btn-rounded" th:href="@{'/admin/users/'}" style="margin-top:30%;"><i
+                        class="fa fa-reply"></i></a>
+            </div>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="/">Accueil</a>
+                </li>
+                <li class="active">
+                    <a href="/admin/users/"><strong>Utilisateurs</strong></a>
+                </li>
+            </ol>
+        </div>
+
+    </div>
+    <br>
+    <br>
+
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2 shadow">
+            <form class="form-horizontal" method="post" th:object="${user}" enctype="multipart/form-data"
+                  style="margin: 5%">
+
+                <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+                    <p th:text="#{formError}">Erreur</p>
+                </div>
+
+                <input type="hidden"
+                       th:name="${_csrf.parameterName}"
+                       th:value="${_csrf.token}"/>
+
+                <div th:class="${#fields.hasErrors('username')} ? 'form-group row has-danger' : 'form-group row'">
+                    <label class="col-sm-2 col-form-label" for="username">Username :</label>
+                    <div class="col-sm-10">
+                        <input id="username" type="text" class="form-control" th:field="*{username}"
+                               th:errorclass="form-control-danger"/>
+                        <div class="help-block" th:if="${#fields.hasErrors('username')}">
+                            <ul>
+                                <li th:each="err : ${#fields.errors('username')}" th:text="${err}"/>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div th:class="${#fields.hasErrors('password')} ? 'form-group row has-danger' : 'form-group row'">
+                    <label class="col-sm-2 col-form-label" for="password">Password :</label>
+                    <div class="col-sm-10">
+                        <input id="password" class="form-control" th:field="*{password}"
+                               th:errorclass="form-control-danger"/>
+                        <div class="help-block" th:if="${#fields.hasErrors('password')}">
+                            <ul>
+                                <li th:each="err : ${#fields.errors('password')}" th:text="${err}"/>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class=" form-group row">
+                    <label class="col-sm-2">Roles :</label>
+                    <div class="col-sm-10">
+                        <div class="form-check" th:each="role : ${roles}">
+                            <label class="form-check-label" th:inline="text">
+                                <input type="checkbox" name="roles" th:value="${role.id}" class="form-check-input"/>
+                                [[${role.role}]]
+                            </label>
+                        </div>
+                        <div class="help-block" th:if="${erreurRole}">
+                            <ul>
+                                <li>Vous devez choisir au moins un role !</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-10">
+                        <button type="submit" class="btn btn-primary btn-block">Ajouter</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+</div>
+
+<div th:replace="fragments :: footer"></div>
+</body>
+
+</html>
