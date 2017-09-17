@@ -47,9 +47,13 @@
 						<a class="label label-danger pull-right" data-toggle="modal" th:attr="data-target='#modal'+${engin.id}">
 							<i class="fa fa-remove"></i>Supprimer
 						</a>
+						<a class="label label-primary pull-right"
+						   th:href="@{'/admin/chantier/'+${engin.chantier.id}+'/edit/'+${engin.id}}">
+							<i class="fa fa-edit"></i>Modifier
+						</a>
 						<h5 th:text="'Engin N° '+${engin.id}"></h5>
 					</div>
-					<div class="ibox-content">
+					<div class="ibox-contents">
 						<div class="row">
 							<div class="col-md-10">
 							<img class="card-img-top img-fluid" style="height: 200px;width: 330px;" 

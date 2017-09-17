@@ -71,4 +71,30 @@ public class AdminEnginController {
 		adminEnginService.deleteEngin(id, deleteData);
 		return "redirect:/admin/chantier/"+idC;
 	}
+
+	@RequestMapping(value = "edit/{id}", method = RequestMethod.GET)
+	public String editEnginGet(@PathVariable int id, @PathVariable int idC, Model model) {
+		Chantier chantier = adminCantierService.getChantier(idC);
+		model.addAttribute("title", "Modifier un engin");
+		model.addAttribute("edit", true);
+		model.addAttribute("engin", adminEnginService.getEngin(id));
+		model.addAttribute("idC", idC);
+		model.addAttribute("chantier", chantier);
+		return "admin/enginForm";
+	}
+
+	@RequestMapping(value = "edit/{id}", method = RequestMethod.POST)
+	private String editEnjinPost(@PathVariable int idC, @PathVariable int id, Model model,
+								 @Valid Engin engin, BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+			model.addAttribute("title", "Erreur");
+			model.addAttribute("chantier", adminCantierService.getChantier(idC));
+			model.addAttribute("edit", true);
+			model.addAttribute("idC", idC);
+			return "admin/enginForm";
+		}
+		engin.setChantier(adminCantierService.getChantier(idC));
+		adminEnginService.updateEngin(engin);
+		return "redirect:/admin/chantier/" + idC;
+	}
 }

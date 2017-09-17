@@ -11,8 +11,10 @@
 		<div class="col-sm-6">
 			<br>
 			<div style="display: -webkit-inline-box;">
-				<a class="btn btn-primary btn-rounded" href="@{'/admin/chantier/'+${idC}}" style="margin-top:30%;"><i class="fa fa-reply"></i></a>
-				<h2 class="text-center" >Ajouter Engine à <span th:text="${chantier.nom}"></span></h2>
+				<a class="btn btn-primary btn-rounded" th:href="@{'/admin/chantier/'+${idC}}" style="margin-top:30%;"><i
+						class="fa fa-reply"></i></a>
+				<h2 class="text-center" th:if="!${edit}">Ajouter Engine à <span th:text="${chantier.nom}"></span></h2>
+				<h2 class="text-center" th:if="${edit}">Modifier Engine à <span th:text="${chantier.nom}"></span></h2>
 			</div>
 			<ol class="breadcrumb">
 				<li>
@@ -25,7 +27,8 @@
 					<a th:href="'/admin/chantier/'+${chantier.id}" th:text="${chantier.nom}"></a>
 				</li>
 				<li  class="active">
-					<a href="#">Ajouter un engin</a>
+					<a href="#" th:if="!${edit}">Ajouter un engin</a>
+					<a href="#" th:if="${edit}">Modifier un engin</a>
 				</li>
 			</ol>
 		</div>
@@ -47,7 +50,7 @@
 			<label class="col-sm-2 col-form-label" for="marque">La marque :</label>
 			<div class="col-sm-10">
 				<input id="marque" type="text" class="form-control" th:field="*{marque}" th:errorclass="form-control-danger"/>
-				<div class="form-control-feedback" th:if="${#fields.hasErrors('marque')}">
+				<div class="help-block" th:if="${#fields.hasErrors('marque')}">
 					<ul>
 						<li th:each="err : ${#fields.errors('marque')}" th:text="${err}" />
 					</ul>
@@ -59,7 +62,7 @@
 			<label class="col-sm-2 col-form-label" for="chauffeur">Le chauffeur:</label>
 			<div class="col-sm-10">
 				<input id="chauffeur" class="form-control" th:field="*{chauffeur}" th:errorclass="form-control-danger"/>
-				<div class="form-control-feedback" th:if="${#fields.hasErrors('chauffeur')}">
+				<div class="help-block" th:if="${#fields.hasErrors('chauffeur')}">
 					<ul>
 						<li th:each="err : ${#fields.errors('chauffeur')}" th:text="${err}" />
 					</ul>
@@ -71,7 +74,7 @@
 			<label class="col-sm-2 col-form-label" for="annee">L' année :</label>
 			<div class="col-sm-10">
 				<input id="annee" class="form-control" th:field="*{annee}" th:errorclass="form-control-danger"/>
-				<div class="form-control-feedback" th:if="${#fields.hasErrors('annee')}">
+				<div class="help-block" th:if="${#fields.hasErrors('annee')}">
 					<ul>
 						<li th:each="err : ${#fields.errors('annee')}" th:text="${err}" />
 					</ul>
@@ -83,7 +86,7 @@
 			<label class="col-sm-2 col-form-label" for="seuilP">Seuil de production:</label>
 			<div class="col-sm-10">
 				<input id="seuilP" class="form-control" th:field="*{seuilP}" th:errorclass="form-control-danger"/>
-				<div class="form-control-feedback" th:if="${#fields.hasErrors('seuilP')}">
+				<div class="help-block" th:if="${#fields.hasErrors('seuilP')}">
 					<ul>
 						<li th:each="err : ${#fields.errors('seuilP')}" th:text="${err}" />
 					</ul>
@@ -95,7 +98,7 @@
 			<label class="col-sm-2 col-form-label" for="seuilR">Seuil de ralentie :</label>
 			<div class="col-sm-10">
 				<input id="seuilR" class="form-control" th:field="*{seuilR}" th:errorclass="form-control-danger"/>
-				<div class="form-control-feedback" th:if="${#fields.hasErrors('seuilR')}">
+				<div class="help-block" th:if="${#fields.hasErrors('seuilR')}">
 					<ul>
 						<li th:each="err : ${#fields.errors('seuilR')}" th:text="${err}" />
 					</ul>
@@ -107,7 +110,7 @@
 			<label class="col-sm-2 col-form-label" for="temps">Le temps :</label>
 			<div class="col-sm-10">
 				<input id="temps" class="form-control" th:field="*{temps}" th:errorclass="form-control-danger"/>
-				<div class="form-control-feedback" th:if="${#fields.hasErrors('temps')}">
+				<div class="help-block" th:if="${#fields.hasErrors('temps')}">
 					<ul>
 						<li th:each="err : ${#fields.errors('temps')}" th:text="${err}" />
 					</ul>
@@ -115,14 +118,14 @@
 			</div>
 		</div>
 
-		<div th:class="${fileError} ? 'form-group row has-danger' : 'form-group row'">
+		<div th:if="!${edit}" th:class="${fileError} ? 'form-group row has-danger' : 'form-group row'">
 			<label class="col-sm-2 col-form-label" for="file">La photo :</label>
 			<div class="col-sm-10">
 				<label class="custom-file">
 					<input type="file" id="file" name="file" accept="image/*" class="custom-file-input">
 					<span class="custom-file-control"></span>
 				</label>
-				<div class="form-control-feedback" th:if="${fileError}">
+				<div class="help-block" th:if="${fileError}">
 					<p th:text="${fileError}"></p>
 				</div>
 			</div>
@@ -131,7 +134,8 @@
 		<div class="row">
 			<div class="col-sm-2"></div>
 			<div class="col-sm-10">
-				<button type="submit" class="btn btn-primary btn-block">Ajouter</button>
+				<button th:if="!${edit}" type="submit" class="btn btn-primary btn-block">Ajouter</button>
+				<button th:if="${edit}" type="submit" class="btn btn-primary btn-block">Modifier</button>
 			</div>
 		</div>
 	</form>

@@ -9,4 +9,6 @@ public interface AdminEnginService {
 	void deleteEngin(int enginId, boolean deleteData);
 
 	Engin getEngin(int enginId);
+
+	Engin updateEngin(Engin engin);
 }

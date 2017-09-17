@@ -55,4 +55,10 @@ public class AdminEnginServiceImpl implements AdminEnginService {
 			throw new RuntimeException("Suppression échouée, engins introuvable");
 		return enginRepo.findOne(enginId);
 	}
+
+	@Override
+	public Engin updateEngin(Engin engin) {
+		engin.setPhoto(enginRepo.findOne(engin.getId()).getPhoto());
+		return enginRepo.save(engin);
+	}
 }
