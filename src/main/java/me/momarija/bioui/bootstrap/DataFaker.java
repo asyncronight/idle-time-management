@@ -4,12 +4,11 @@ import me.momarija.bioui.domains.Donnee;
 import me.momarija.bioui.repos.DonneeRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.Random;
 
-@Component
+//@Component
 public class DataFaker {
 
 	private DonneeRepo donneeRepo;
