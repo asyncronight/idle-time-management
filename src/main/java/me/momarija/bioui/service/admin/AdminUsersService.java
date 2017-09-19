@@ -1,4 +1,4 @@
-package me.momarija.bioui.service;
+package me.momarija.bioui.service.admin;
 
 
 import me.momarija.bioui.domains.Role;

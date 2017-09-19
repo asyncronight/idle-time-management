@@ -1,12 +1,12 @@
-package me.momarija.bioui.service.impl;
+package me.momarija.bioui.service.admin.impl;
 
 import me.momarija.bioui.domains.Chantier;
 import me.momarija.bioui.domains.Engin;
 import me.momarija.bioui.repos.ChantierRepo;
 import me.momarija.bioui.repos.DonneeRepo;
 import me.momarija.bioui.repos.EnginRepo;
-import me.momarija.bioui.service.AdminEnginService;
 import me.momarija.bioui.service.StorageService;
+import me.momarija.bioui.service.admin.AdminEnginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -2,11 +2,13 @@ package me.momarija.bioui.domains;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 public class Statistic {
+
+	public static int WEEK = 0;
+	public static int TWOWEEKS = 1;
+	public static int MONTH = 2;
 
     @DateTimeFormat(pattern="dd/MM/yyyy")
 	@NotNull
@@ -16,19 +18,19 @@ public class Statistic {
 	@NotNull
 	private Date dayTo;
 
-    @DateTimeFormat(pattern="HH:mm")
-	@NotNull
-	private Date hourFrom;
-
-    @DateTimeFormat(pattern="HH:mm")
-	@NotNull
-	private Date hourTo;
-
-	@Min(0)
-	private int nbHourRepos;
-
-	public Statistic() {
-
+	public static Statistic getStatistic(int a) {
+		Statistic statistic = new Statistic();
+		Date date = new Date();
+		statistic.setDayTo(date);
+		if (a == 0)
+			date.setTime(date.getTime() - 1000 * 518400);
+		else if (a == 1)
+			date.setTime(date.getTime() - 1000 * 1814400);
+		else
+			date.setTime(date.getTime() - 1000 * 1814400 - 1000 * 604800 - 1000 * 302400);
+		statistic.setDayFrom(date);
+		statistic.addHour();
+		return statistic;
 	}
 
 	public Date getDayFrom() {
@@ -47,46 +49,10 @@ public class Statistic {
 		this.dayTo = dayTo;
 	}
 
-	public Date getHourFrom() {
-		return hourFrom;
+	public void addHour() {
+		this.dayFrom.setHours(0);
+		this.dayFrom.setMinutes(0);
+		this.dayTo.setHours(23);
+		this.dayTo.setMinutes(59);
 	}
-
-	public void setHourFrom(Date hourFrom) {
-		this.hourFrom = hourFrom;
-	}
-
-	public Date getHourTo() {
-		return hourTo;
-	}
-
-	public void setHourTo(Date hourTo) {
-		this.hourTo = hourTo;
-	}
-
-	public int getNbHourRepos() {
-		return nbHourRepos;
-	}
-
-	public void setNbHourRepos(int nbHourRepos) {
-		this.nbHourRepos = nbHourRepos;
-	}
-
-	public int calculNbJours(){
-        SimpleDateFormat stf = new SimpleDateFormat("MM/dd/yyyy");
-        SimpleDateFormat stimef = new SimpleDateFormat("HH:mm");
-
-        String dayFrom =stf.format(getDayFrom());
-        String hourFrom = stimef.format(getHourFrom());
-        String dayTo =stf.format(getDayTo());
-        String hourTo = stimef.format(getHourTo());
-
-        Date d1 = new Date(dayFrom+" "+hourFrom);
-        Date d2 = new Date(dayTo+" "+hourFrom);
-
-        long ms = d2.getTime() - d1.getTime() ;
-
-        int nbJours = (int)((ms /1000 )/3600)/24;
-        return nbJours;
-    }
-
 }

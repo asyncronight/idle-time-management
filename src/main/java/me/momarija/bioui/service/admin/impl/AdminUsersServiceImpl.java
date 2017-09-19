@@ -1,10 +1,10 @@
-package me.momarija.bioui.service.impl;
+package me.momarija.bioui.service.admin.impl;
 
 import me.momarija.bioui.domains.Role;
 import me.momarija.bioui.domains.User;
 import me.momarija.bioui.repos.RoleRepo;
 import me.momarija.bioui.repos.UserRepo;
-import me.momarija.bioui.service.AdminUsersService;
+import me.momarija.bioui.service.admin.AdminUsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

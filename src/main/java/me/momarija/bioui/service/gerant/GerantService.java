@@ -1,4 +1,4 @@
-package me.momarija.bioui.service;
+package me.momarija.bioui.service.gerant;
 
 public interface GerantService {
 

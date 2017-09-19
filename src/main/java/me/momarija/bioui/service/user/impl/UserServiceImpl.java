@@ -1,4 +1,4 @@
-package me.momarija.bioui.service.impl;
+package me.momarija.bioui.service.user.impl;
 
 import me.momarija.bioui.domains.Chantier;
 import me.momarija.bioui.domains.Donnee;
@@ -7,17 +7,14 @@ import me.momarija.bioui.domains.Statistic;
 import me.momarija.bioui.repos.ChantierRepo;
 import me.momarija.bioui.repos.DonneeRepo;
 import me.momarija.bioui.repos.EnginRepo;
-import me.momarija.bioui.service.UserService;
 import me.momarija.bioui.service.algo.DateUtility;
 import me.momarija.bioui.service.algo.TraitementService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-@Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl {
 
 	@Autowired
 	private ChantierRepo chantierRepo;
