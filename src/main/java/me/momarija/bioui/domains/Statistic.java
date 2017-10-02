@@ -20,15 +20,15 @@ public class Statistic {
 
 	public static Statistic getStatistic(int a) {
 		Statistic statistic = new Statistic();
-		Date date = new Date();
-		statistic.setDayTo(date);
+        statistic.setDayTo(new Date());
+        Date date = new Date();
 		if (a == 0)
 			date.setTime(date.getTime() - 1000 * 518400);
 		else if (a == 1)
 			date.setTime(date.getTime() - 1000 * 1814400);
 		else
-			date.setTime(date.getTime() - 1000 * 1814400 - 1000 * 604800 - 1000 * 302400);
-		statistic.setDayFrom(date);
+            date.setTime(date.getTime() - 1000 * 1814400 - 1000 * 604800 - 1000 * 302400 + 24 * 3600 * 1000);
+        statistic.setDayFrom(date);
 		statistic.addHour();
 		return statistic;
 	}
@@ -49,10 +49,17 @@ public class Statistic {
 		this.dayTo = dayTo;
 	}
 
-	public void addHour() {
-		this.dayFrom.setHours(0);
-		this.dayFrom.setMinutes(0);
-		this.dayTo.setHours(23);
-		this.dayTo.setMinutes(59);
-	}
+    public void addHour() {
+        this.dayFrom.setHours(0);
+        this.dayFrom.setMinutes(0);
+        this.dayFrom.setSeconds(0);
+        this.dayTo.setHours(23);
+        this.dayTo.setMinutes(59);
+        this.dayTo.setSeconds(0);
+    }
+
+    public int calculNbJour() {
+        int a = (int) ((dayTo.getTime() - dayFrom.getTime()) / (1000 * 3600 * 24));
+        return a;
+    }
 }

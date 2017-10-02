@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head th:replace="fragments :: head"></head>
 <body>
 
@@ -74,7 +74,6 @@
 				<th>Temps de production</th>
 				<th>Temps de ralenti</th>
 				<th>Temps d'arret</th>
-				<th>Pause</th>
 				<th>Rendement</th>
 			</tr>
 			<tr th:each="statistica : ${enginStatistics}">
@@ -86,7 +85,6 @@
 				<td th:text="${statistica.get('production')}"></td>
 				<td th:text="${statistica.get('ralenti')}"></td>
 				<td th:text="${statistica.get('arret') }"></td>
-				<td th:text="${statistica.get('pause') }"></td>
 				<td th:text="${statistica.get('rendement') }+' %'"></td>
 			</tr>
 		</table>

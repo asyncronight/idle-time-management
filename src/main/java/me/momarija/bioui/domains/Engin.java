@@ -43,6 +43,8 @@ public class Engin {
 
 	private boolean enPanne = false;
 
+    private int nbHeureRentabilite;
+
     @ManyToOne
     @JoinColumn(name = "chantier_id")
     private Chantier chantier;
@@ -118,6 +120,14 @@ public class Engin {
 	public void setEnPanne(boolean enPanne) {
 		this.enPanne = enPanne;
 	}
+
+    public int getNbHeureRentabilite() {
+        return nbHeureRentabilite;
+    }
+
+    public void setNbHeureRentabilite(int nbHeureRentabilite) {
+        this.nbHeureRentabilite = nbHeureRentabilite;
+    }
 
     public Chantier getChantier() {
         return chantier;
