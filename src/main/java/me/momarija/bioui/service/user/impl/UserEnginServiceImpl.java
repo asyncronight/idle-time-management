@@ -1,6 +1,6 @@
 package me.momarija.bioui.service.user.impl;
 
-import me.momarija.bioui.domains.Donnee;
+import me.momarija.bioui.domains.Calcul;
 import me.momarija.bioui.domains.Engin;
 import me.momarija.bioui.domains.Statistic;
 import me.momarija.bioui.repos.CalculRepo;
@@ -47,9 +47,9 @@ public class UserEnginServiceImpl implements UserEnginService {
 		List<Map<String, Object>> list = new ArrayList<>();
 		List<Integer> listIdEngins = new ArrayList<>();
 		chantierRepo.findOne(chantierId).getEngins().forEach(engin -> listIdEngins.add(engin.getId()));
-		List<Donnee> listDonnee = calculRepo.findByEnginIds(listIdEngins, statistic.getDayFrom(), statistic.getDayTo());
+		List<Calcul> listCalcul = calculRepo.findByEnginIds(listIdEngins, statistic.getDayFrom(), statistic.getDayTo());
 		for (Engin engin : chantierRepo.findOne(chantierId).getEngins()) {
-			map = traitementService.calcule(listDonnee.stream().filter(donnee -> donnee.getEnginId() == engin.getId()).collect(Collectors.toList()), engin.getTemps(), engin.getSeuilP(), engin.getSeuilR());
+			map = traitementService.calcul(listCalcul.stream().filter(calcul -> calcul.getEnginId() == engin.getId()).collect(Collectors.toList()));
 			float rendement = map.get("production") / (statistic.calculNbJour() * engin.getNbHeureRentabilite() * 36);
 			mapList.put("engin", engin);
 			mapList.put("rendement", rendement);
