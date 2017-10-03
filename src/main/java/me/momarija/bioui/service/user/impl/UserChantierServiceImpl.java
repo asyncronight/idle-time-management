@@ -35,14 +35,14 @@ public class UserChantierServiceImpl implements UserChantierService {
 		Map<String, Object> map = new HashMap<>();
 		List<Map<String, Object>> list, lista = new ArrayList<>();
 		for (Chantier c : chantierRepo.findAll()) {
-			float rendement = 0.00f;
+			float rendement = 0.02f;
 			list = userEnginService.getEnginsRendement(c.getId(), statistic);
 			for (Map<String, Object> map2 : list) {
-				rendement += (float) map2.get("rendement");
+				rendement += Float.parseFloat(map2.get("rendement").toString());
 			}
 			rendement /= list.size();
 			map.put("chantier", c);
-			map.put("rendement", rendement);
+			map.put("rendement", String.format("%.2f", rendement));
 			lista.add(map);
 		}
 		return lista;

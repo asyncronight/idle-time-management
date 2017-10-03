@@ -33,6 +33,9 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
     @Autowired
 	private RoleRepo roleRepo;
 
+    @Autowired
+    private CalculRepo calculRepo;
+
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
     	if(userRepo.findAll().isEmpty()) {
@@ -41,7 +44,8 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 			loadEngins();
 			loadDonnee();
 			loadUsers();
-			System.out.println("########## Finishing data loading #######");
+            loadCalcul();
+            System.out.println("########## Finishing data loading #######");
 		}
     }
 
@@ -157,7 +161,23 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 			}
 		});
 		userRepo.save(user3);
+    }
 
+    private void loadCalcul() {
+
+        Random random = new Random();
+        Date date;
+        for (int e = 0; e < 10; e++) {
+            date = new Date();
+            for (int i = 0; i < 10; i++) {
+                Calcul calcul = new Calcul();
+                calcul.setEnginId(e + 1);
+                calcul.setDate(date);
+                calcul.setTempsP(1000);
+                calcul.setTempsR(500);
+                calculRepo.save(calcul);
+            }
+        }
 
     }
 }

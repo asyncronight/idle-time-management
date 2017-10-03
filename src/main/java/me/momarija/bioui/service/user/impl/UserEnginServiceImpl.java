@@ -50,9 +50,9 @@ public class UserEnginServiceImpl implements UserEnginService {
 		List<Calcul> listCalcul = calculRepo.findByEnginIds(listIdEngins, statistic.getDayFrom(), statistic.getDayTo());
 		for (Engin engin : chantierRepo.findOne(chantierId).getEngins()) {
 			map = traitementService.calcul(listCalcul.stream().filter(calcul -> calcul.getEnginId() == engin.getId()).collect(Collectors.toList()));
-			float rendement = map.get("production") / (statistic.calculNbJour() * engin.getNbHeureRentabilite() * 36);
+			float rendement = (float) map.get("production") / ((1 + statistic.calculNbJour()) * engin.getNbHeureRentabilite() * 36);
 			mapList.put("engin", engin);
-			mapList.put("rendement", rendement);
+			mapList.put("rendement", String.format("%.2f", rendement));
 			list.add(mapList);
 			mapList = new HashMap<>();
 		}
